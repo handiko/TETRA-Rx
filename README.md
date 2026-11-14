@@ -1,6 +1,6 @@
 # Listening to a TETRA Cell with an RTL-SDR and (Mostly) Stock GNU Radio Blocks
 
-*A long, honest walkthrough of my TETRA downlink receiver: how a cheap dongle and a wall of stock GNU Radio blocks find the bursts in a 25 kHz TDMA carrier, undo four layers of coding, read the cell's identity and broadcast information, and (the newest part) pick out a single voice timeslot and hand it to the ETSI speech decoder.*
+*One carrier, four timeslots, and a base station that never stops announcing who it is. This is the build log of my TETRA receiver: stock GNU Radio blocks from the RTL-SDR all the way to the cell's broadcast messages, a little Python where nothing stock exists, and finally clear speech from a live call coming out of my laptop speaker. Plus the eight bugs that stood in the way.*
 
 ---
 
@@ -12,9 +12,9 @@ Inside those bars, though, there's a whole little world. Every cell keeps announ
 
 There are ready-made decoders for this (osmo-tetra's `tetra-rx` is the classic). I didn't want a black box. I wanted to build the receiver myself, on my Windows laptop, out of stock GNU Radio blocks wherever possible, so I could put a display on any stage and see what it does.
 
-That's this flowgraph, `tetra_rx_stock.grc`. Part 1 explains what a TETRA downlink actually is. Parts 2 to 5 walk through the receiver, antenna to console. Part 6 is the voice path, and Part 7 is the story of everything that was wrong with my first version of it.
+That's this flowgraph, `tetra_rx_stock.grc`. Part 1 explains what a TETRA downlink actually is. Parts 2 to 5 walk through the receiver, antenna to console. Part 6 is the voice path, and Part 7 is the story of everything that was wrong with my first version of it. And yes, in the end it works: on a live cell it decodes the broadcast channels at better than 99 % and plays clear calls from whichever timeslot is busy.
 
-**A word before I start.** TETRA carries other people's traffic, often public-safety traffic. Everything in Parts 1–5 is what the network *broadcasts to everyone*: identity, system information, access rules. The voice path I tested only with signals I generated myself. Listening to someone else's calls may be illegal where you live, so check before you point Part 6 at a real cell. And if the cell announces **air encryption** (my receiver prints it), the speech is encrypted and comes out as noise. That's how it's supposed to be.
+**A word before I start.** TETRA carries other people's traffic, often public-safety traffic. Everything in Parts 1–5 is what the network *broadcasts to everyone*: identity, system information, access rules. Part 6 plays actual calls, and listening to someone else's calls may be illegal where you live, so check before you point it at a real cell. Many networks encrypt their calls; an encrypted call comes out as noise, which is how it's supposed to be. (Careful, though: the "AIR ENCRYPTION" line my receiver prints doesn't mean every call is encrypted. More on that in Part 7.)
 
 As usual I use a handful of DSP words (correlator, soft bit, Viterbi, scrambler…). I explain each one the first time it shows up.
 
@@ -225,7 +225,7 @@ TETRA's way out: the **BSCH** (in the sync burst) is scrambled with a **fixed ke
 
 So my first Python block reads the SYNC, waits for **two identical CRC-good copies** (a 16-bit CRC on random correlator hits passes about once in 65,000, and I don't want a fluke reprogramming everything), builds the key and publishes it as a message. A stock **Message Pair to Var** block writes it into the `cell_key` variable. A GRC callback recalculates the scrambling vector and reprograms the SCH/HD descrambler, and from that moment SYSINFO and ACCESS-DEFINE pass their CRCs. The voice decoder gets the same key for its own 432-bit scrambler.
 
-My local network is MCC 510 (Indonesia), MNC 1945. My test generator uses colour code 1 with those, which gives key 0x1FE1E641; the console lines below are from that test signal.
+On the live cell I tested at 391.025 MHz, that's MCC 510 (Indonesia), MNC 1234, colour code 60: key 0x1FE134BC. As soon as two matching SYNCs are in, the voice block reports `armed for cell key 0x1FE134BC`, and SYSINFO starts passing its CRC.
 
 ### What the console tells me
 
@@ -233,7 +233,7 @@ Every 10 seconds, the first Python block prints a status panel:
 
 - **Network**: MCC, MNC, colour code.
 - **SYNC**: system version, carrier sharing mode, reserved frames, DTX, cell load, neighbour-cell broadcast, and TDMA time (TN, FN, MN) at the last SYNC.
-- **SYSINFO**: the **main carrier** and its downlink and uplink frequencies, location area, minimum receive level, mobile power limit, access parameters, and **services**: registration, voice, packet data, and **AIR ENCRYPTION** if it's on.
+- **SYSINFO**: the **main carrier** and its downlink and uplink frequencies, location area, minimum receive level, mobile power limit, access parameters, and **services**: registration, voice, circuit data, packet data, and **AIR ENCRYPTION** when the cell *offers* encryption (which is not the same as every call being encrypted; see Part 7).
 - **ACCESS-DEFINE**: the random-access rules.
 - **Tuning check**: the main carrier the cell announces, minus the frequency I'm tuned to. Within 1 kHz: "receiver calibrated". Within 12.5 kHz: "you're on the main carrier but N kHz off; add X ppm". Further away: "secondary carrier".
 - **Decoder**: how many bursts were cut and how many passed CRC. A low ratio on half-slot cuts is normal, because they include the correlator's false hits.
@@ -290,14 +290,21 @@ A **"Voice timeslot"** chooser on the GUI:
 | **TN1 … TN4** | Plays only that timeslot. |
 | **all** | The old behaviour: everything mixed. For debugging only. |
 
-Frame 18 is always skipped (no speech there). Every 200 bursts the console prints a line like this:
+Frame 18 is always skipped (no speech there). Every 200 bursts the console prints a line like this one, from about 18 minutes on the live cell:
 
 ```
-[TCH/S] NTS1 bursts 200: TN1 0/0/0  TN2 0/0/0  TN3 183/183/178  TN4 0/0/0  unknownTN 1/1/0  (seen/good/played)
-        dropped: off-grid 6, FN18 10, no SYNC ref 1, bad len 0
+[TCH/S] NTS1 bursts 14802: TN1 610/38/33  TN2 6630/6555/4047  TN3 4119/4048/2943  TN4 3209/3178/1755  unknownTN 0/0/0  (seen/good/played)
+        dropped: off-grid 90, FN18 144, no SYNC ref 0, bad len 0
 ```
 
-That one is from my test signal, where full-slot bursts only exist on TN3. "Played" is a little lower than "good" because auto mode needs 6 good frames before it commits.
+I love how much that one line says:
+
+- **TN2, TN3 and TN4 carried calls**, often at the same time. 98–99 % of their frames passed the speech channel decoder's CRC.
+- **TN1 is the control timeslot.** Its full-slot bursts are signalling, not speech, so only 6 % "pass", by accident. Auto mode never picked it, exactly as it shouldn't.
+- **"Played" is lower than "good"** because only one timeslot plays at a time. When three calls overlap, two of them are decoded, scored and not played.
+- **Not one burst had an unknown timeslot**, and only 0.6 % were thrown out as off-grid false hits.
+
+While calls come and go, the console also narrates the auto selector: `auto: playing TN 2`, `auto: no call heard`, `auto: playing TN 3`… A pause in a push-to-talk conversation longer than about 2 seconds drops the score below 6 and prints "no call heard"; the next words bring it straight back.
 
 ---
 
@@ -305,7 +312,7 @@ That one is from my test signal, where full-slot bursts only exist on TN3. "Play
 
 ![The bug hunt: eight problems and their fixes](tetra_pe_bugs.svg)
 
-The cell-info half of this receiver worked early on: it had already decoded my local cells at 393.075 MHz (location area 105) and 393.300 MHz (location area 102). The voice add-on was another matter. Here's what was wrong with my first version, in the order I found it.
+The cell-info half of this receiver worked early on: it had already decoded cells of MNC 1945 at 393.075 MHz (location area 105) and 393.300 MHz (location area 102). The voice add-on was another matter. Here's what was wrong with my first version, in the order I found it.
 
 ### 1. Listening to the wrong training sequence
 
@@ -353,15 +360,50 @@ The voice block filled every gap with silence the instant its buffer ran empty. 
 
 When a new cell key arrived, the `cell_key` setter reset the ETSI decoder from one thread while the message handler might be in the middle of decoding a frame in another. The ETSI code keeps global state and wasn't written for that. One lock around every call into the DLL fixed it.
 
+### Two more lessons from the first live run
+
+**The "AIR ENCRYPTION" line that didn't mean what I thought.** My live cell's SYSINFO said, every single time, `Services: … voice, circuit data, AIR ENCRYPTION`. I had written (in an earlier draft of this very document) that such a cell would give me nothing but noise. Then the calls came out clear.
+
+The flag is one bit in SYSINFO's "BS service details", and what it really says is "air-interface encryption is *available* on this cell". Whether a particular call is encrypted is decided call by call. So the flag tells you encryption is possible; only listening tells you whether this call uses it. And a warning for anyone reading the counters: encryption is applied *before* the channel coding, so an encrypted call still passes the channel decoder's CRC. Its frames show up as "good" and still sound like noise. Lesson: **read the spec's wording, not the field's name.** My status panel's label is shorter than the truth.
+
+**The error lines that weren't errors.** Every minute or so the live console printed something like:
+
+```
+tags_to_pdu :error: SOB tag received during burst 13332 at offset 34300000, previous burst dropped (1 tags total)
+```
+
+That's the new full-slot cutter. A correlator false hit (or a second real tag) arrived while it was still collecting its 484 bits, so it dropped that cut and started again. My flowgraph already has a little snippet that silences exactly this message from the three original cutters, because it's harmless; I simply forgot to add the fourth one. In the six minutes of log I kept, it happened 19 times, against more than 4,000 good full-slot bursts. Lesson: **when you add a block, check whether its siblings had special treatment.**
+
 ---
 
 ## Results
 
-What I could test, and how:
+### On air: a live cell, RTL-SDR, about 18 minutes
+
+The real test. RTL-SDR on the Soapy source, with `tetra_freq` set to the cell's main carrier, **391.025 MHz**:
+
+| What | Result |
+|---|---|
+| **Cell** | MCC 510, MNC 1234, colour code 60, location area 1005, EN 300 392-2 V3.1.1+ system, continuous transmission |
+| **Main carrier announced** | 391.025 MHz down, 381.025 MHz up. Tuning check: **+0.0 kHz, "receiver calibrated"** |
+| **SYNC (BSCH)** | 33,616 of 33,633 cuts passed CRC: **99.95 %** |
+| **Half-slot signalling** | 87,729 of 88,266 cuts passed CRC: **99.4 %** (and that includes the correlator's false hits). 60,508 SYSINFO, 27,025 MAC-RESOURCE, 196 MAC-FRAG/END |
+| **Voice timeslots** | TN2: 6,555 of 6,630 good (98.9 %). TN3: 4,048 of 4,119 (98.3 %). TN4: 3,178 of 3,209 (99.0 %) |
+| **Control timeslot** | TN1: 38 of 610 "good" (6 %): signalling, correctly never played |
+| **Timeslot tracking** | 0 bursts with an unknown timeslot; 90 of 14,802 (0.6 %) dropped as off-grid false hits; frame 18 skipped |
+| **Speech** | **Clear calls**, following whichever timeslot was busy |
+
+Those 98–99 % "good" figures also answer the two questions I'd left open before going on air:
+
+- **The soft-bit sign for the ETSI decoder** (`polarity = −1`) is right. With the wrong sign, almost nothing would pass the speech channel decoder's CRC.
+- **Auto mode works.** It runs the channel decoder on every timeslot to score them, which assumed the decoder keeps no memory between frames that matters. With three timeslots carrying calls at once and all three scoring 98–99 %, the assumption holds in practice.
+
+### At my desk: synthetic signals
+
+Before going on air I tested everything I could with signals I generated myself:
 
 | Test | Result |
 |---|---|
-| **Live, earlier version** (cell info only) | My local cells decoded: MCC 510, MNC 1945, at 393.075 MHz (LA 105) and 393.300 MHz (LA 102) |
 | **Compile** in GNU Radio 3.10.9 (`grcc`) | Clean, including the Soapy RTL-SDR source |
 | **Synthetic cell** from `tetra_testgen.py`: 18 dB Es/N0, +400 Hz offset, replayed twice: like my gqrx recording (channel at +25 kHz), and like the live dongle (channel at +150 kHz) | Both: cell, SYSINFO and ACCESS-DEFINE decoded. First run: 176 of 177 BSCH cuts passed CRC |
 | **Timeslot tracking** on the same signal (full-slot bursts exist only on TN3) | All placed on TN3 (183 of 183, and 184 of 184 in the second layout); frame 18 bursts dropped (10 of 193, about 1 in 18 as expected); false hits rejected as off-grid |
@@ -369,14 +411,9 @@ What I could test, and how:
 | **Jitter buffer** | Silent until 180 ms queued, then plays continuously |
 | **`.to_long()` crash** | Reproduced on a real install, then gone |
 
-For the voice tests I used a stand-in DLL with the same functions as `tetra_dec.dll` (every frame "good", output a 400 Hz tone). That exercises the whole Python and `ctypes` path, but not the real speech decoder.
+For those desk tests I used a stand-in DLL with the same functions as `tetra_dec.dll` (every frame "good", output a 400 Hz tone). It exercised the whole Python and `ctypes` path; the live run then proved the real speech decoder.
 
-What's **not** verified yet:
-
-- **Real speech.** The test generator doesn't make real coded speech, and I haven't run the new voice path on air.
-- **The soft-bit sign the ETSI decoder expects** (`polarity = −1`). I'm about 50 % sure. One frame from the ETSI channel coder, played through `tetra_testgen.py`, would settle it: "good" near 100 % means right.
-- **Auto mode's assumption** that the ETSI channel decoder keeps no memory between frames, since auto runs it on every slot to score them. I'm about 70 % sure. If it's wrong, choose the timeslot by hand.
-- **The dongle itself**, on this version. The Soapy source compiles; the hardware wasn't connected here.
+Earlier, before any of the voice work, the cell-info half had also decoded cells of MCC 510 / MNC 1945 at 393.075 MHz (LA 105) and 393.300 MHz (LA 102).
 
 ---
 
@@ -388,13 +425,18 @@ What's **not** verified yet:
    - `tetra_freq`: the cell you want, in Hz (default 390.625e6). `lo_offset` = 150e3 keeps the dongle's spike out of the way.
    - `ppm`: your dongle's crystal error. 35 for mine; about 0 for a TCXO dongle (RTL-SDR Blog v3/v4).
 4. Run. Start the RF gain around 25 dB and back off if the spectrum floor rises.
-5. Watch the console. Within a few seconds you should see something like this (these lines are from my test signal):
+5. Watch the console. Within a few seconds you get a `CELL` line and `[TCH/S] armed for cell key …`, then SYSINFO, and every 10 seconds a status panel. Here's a piece of one from my live run:
 
 ```
-[TETRA 13:35:35] CELL  MCC 510  MNC 1945  colour code 1   (EN 300 392-2 V2.3.2+, continuous transmission, cell load low)  -> SCH/HD descrambler set
-[TCH/S] armed for cell key 0x1FE1E641
-[TETRA 13:35:35] SYSINFO
-    Main carrier : ...
+ Tuned        : 391.0250 MHz
+ Network      : MCC 510  MNC 1234 (0x04D2)  colour code 60   [MCC 510 = Indonesia]
+ SYNC         : EN 300 392-2 V3.1.1+; continuous transmission; 1 reserved frame(s); U-plane DTX no; frame-18 ext no
+ TDMA time    : TN 4  FN 12  MN 54 (at last SYNC)
+ TCH/S ref    : TN 4 FN 12 at bit 26300414, 0 s ago
+ Main carrier : 3641  band 3  offset +0.00 kHz  ->  DL 391.0250 MHz   UL 381.0250 MHz
+ Location area: 1005   subscriber classes 1111111111111111   secondary CCHs 0
+ Tuning check : announced main carrier minus tuned frequency = +0.0 kHz  (you are on the main carrier, receiver calibrated)
+ Decoder      : BSCH cuts 22066 (CRC ok 22055)   half-slot cuts 59559 (CRC ok 59193)
 ```
 
 6. **Calibrate**: adjust `ppm` by the "ppm to add" readout until the carrier offset is under about 300 Hz. Then the Tuning check should say "receiver calibrated".
@@ -412,7 +454,9 @@ A few notes:
 - **To play a recording**: disable the RTL-SDR source, enable File Source, Rational Resampler and Throttle, and set `rf_fc` to the recording's centre (for my gqrx file, 390.6e6).
 - **"No SYNC decoded yet"**: check frequency, ppm, gain, and the polarity chooser, in that order.
 - **SYNC fine but no SYSINFO for a long time**: the cell key isn't confirmed yet (it needs two identical copies), or you're tuned to a secondary carrier that carries little broadcast traffic.
-- **Voice "good" stays near 0 % during a call**: try the other `polarity`, and check the Services line for AIR ENCRYPTION.
+- **Voice "good" stays near 0 % on every timeslot**: something is wrong before the speech decoder. Check the TCH/S ref line has a recent reference, then try the other `polarity` on the voice block. (On my live cell, the default `polarity = −1` gave 98–99 %.)
+- **Voice "good" near 100 % but it sounds like noise**: that call is almost certainly encrypted. Encryption happens before the channel coding, so the CRC still passes. Nothing to fix.
+- **`tags_to_pdu :error: SOB tag received during burst`** now and then: harmless (Part 7). Add `self.cut_tch` to the `quiet_cutters` snippet to silence it.
 
 ---
 
@@ -420,7 +464,10 @@ A few notes:
 
 There's a lot of room for improvement!
 
-- **Settle the polarity** with one real ETSI-coded frame through `tetra_testgen.py`, and add a TCH test mode to the generator.
+- **Silence the fourth cutter**: add `self.cut_tch` to the `quiet_cutters` snippet.
+- **Tell clear calls from encrypted ones**: MAC-RESOURCE messages carry an encryption-mode field for the signalling inside them. Whether that's a reliable hint about the voice in the same call is worth finding out; if it is, the console could flag an encrypted timeslot before I even listen.
+- **Gentler auto switching**: a 2-second pause in a conversation currently prints "no call heard" and may hop to another busy timeslot. A little hold time on the current slot would make it follow one conversation better.
+- **A TCH test mode in `tetra_testgen.py`**, using real ETSI-coded frames, so the voice path can be regression-tested at my desk.
 - **Follow calls properly**: read the channel assignments in MAC-RESOURCE / D-SETUP messages instead of guessing by "good frame" score. That would also handle calls on secondary carriers.
 - **Show more of the signalling**: neighbour-cell lists, D-NWRK-BROADCAST, and SDS messages that aren't encrypted.
 - **Stealing**: during a call, the network can "steal" half or all of a traffic slot for signalling (STCH). A stolen slot is sent with NTS2, so my voice path never sees it, and that 60 ms is simply missing. Telling the ETSI decoder about the gap (so it can conceal it) would sound better.

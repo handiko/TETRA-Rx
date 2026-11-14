@@ -66,5 +66,5 @@
 <text x="30.0" y="477.0" font-size="11" fill="#6b6b66" font-weight="400" text-anchor="start" dominant-baseline="central">• Bursts in frame 18 are skipped (no speech there). A reference older than 30 s is not trusted (the bit count could have slipped).</text>
 <text x="30.0" y="498.0" font-size="11" fill="#6b6b66" font-weight="400" text-anchor="start" dominant-baseline="central">• The decoded SYNC and its raw cut travel different paths into EPB 1, so it pairs them by sequence number: the BSCH chain is strictly</text>
 <text x="30.0" y="519.0" font-size="11" fill="#6b6b66" font-weight="400" text-anchor="start" dominant-baseline="central">   one PDU in, one PDU out, in order. The n-th raw cut belongs to the n-th decoded SYNC.</text>
-<text x="30.0" y="560.0" font-size="11" fill="#15803d" font-weight="700" text-anchor="start" dominant-baseline="central">Tested on tetra_testgen.py (NTS1 bursts only on TN3): 183 of 183 placed on TN3, frame-18 bursts dropped (10 of 193), false hits rejected.</text>
+<text x="30.0" y="560.0" font-size="11" fill="#15803d" font-weight="700" text-anchor="start" dominant-baseline="central">Test signal: 183 of 183 placed on TN3.   Live cell, ~18 min: 14,802 full-slot bursts, none with an unknown timeslot, 0.6 % off-grid.</text>
 </svg>
