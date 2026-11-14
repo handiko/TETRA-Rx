@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" width="1100" height="500" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif" role="img" aria-label="The 4th-power derotator: removing leftover carrier rotation from pi/4-DQPSK phase steps">
+<title>The 4th-power derotator: removing leftover carrier rotation from pi/4-DQPSK phase steps</title>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3d3d3a"/></marker><marker id="ahc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#A32D2D"/></marker><marker id="aht" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0F6E56"/></marker><marker id="ahb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1d4ed8"/></marker><marker id="aha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#B45309"/></marker><marker id="ahg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#15803d"/></marker><marker id="ahr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#B91C1C"/></marker><marker id="ahm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6b6b66"/></marker><marker id="ahp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6D28D9"/></marker></defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="30.0" y="22.0" font-size="15" fill="#2b2b29" font-weight="700" text-anchor="start" dominant-baseline="central">The 4th-power trick: one rotation, four symbols, no loop</text>
+<text x="170.0" y="62.0" font-size="12" fill="#2b2b29" font-weight="700" text-anchor="middle" dominant-baseline="central">The four phase steps (ideal)</text>
+<circle cx="170.0" cy="230.0" r="105.0" fill="none" stroke="#c9c9c4" stroke-width="1.0"/>
+<path d="M51.0 230.0 L289.0 230.0" fill="none" stroke="#d6d6d1" stroke-width="1"/>
+<path d="M170.0 111.0 L170.0 349.0" fill="none" stroke="#d6d6d1" stroke-width="1"/>
+<circle cx="244.2" cy="155.8" r="7.0" fill="#0F6E56" stroke="#0F6E56" stroke-width="1.2"/>
+<text x="244.2" y="141.8" font-size="11" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">+45° = 00</text>
+<circle cx="95.8" cy="155.8" r="7.0" fill="#0F6E56" stroke="#0F6E56" stroke-width="1.2"/>
+<text x="95.8" y="141.8" font-size="11" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">+135° = 01</text>
+<circle cx="244.2" cy="304.2" r="7.0" fill="#0F6E56" stroke="#0F6E56" stroke-width="1.2"/>
+<text x="244.2" y="290.2" font-size="11" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">−45° = 10</text>
+<circle cx="95.8" cy="304.2" r="7.0" fill="#0F6E56" stroke="#0F6E56" stroke-width="1.2"/>
+<text x="95.8" y="290.2" font-size="11" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">−135° = 11</text>
+<text x="170.0" y="369.0" font-size="11" fill="#6b6b66" font-weight="400" text-anchor="middle" dominant-baseline="central">each symbol turns the phase by one of these</text>
+<text x="170.0" y="386.0" font-size="11" fill="#6b6b66" font-weight="400" text-anchor="middle" dominant-baseline="central">two bits per symbol</text>
+<text x="450.0" y="62.0" font-size="12" fill="#2b2b29" font-weight="700" text-anchor="middle" dominant-baseline="central">With a leftover tuning error</text>
+<circle cx="450.0" cy="230.0" r="105.0" fill="none" stroke="#c9c9c4" stroke-width="1.0"/>
+<path d="M331.0 230.0 L569.0 230.0" fill="none" stroke="#d6d6d1" stroke-width="1"/>
+<path d="M450.0 111.0 L450.0 349.0" fill="none" stroke="#d6d6d1" stroke-width="1"/>
+<circle cx="507.2" cy="141.9" r="7.0" fill="#B91C1C" stroke="#B91C1C" stroke-width="1.2"/>
+<circle cx="361.9" cy="172.8" r="7.0" fill="#B91C1C" stroke="#B91C1C" stroke-width="1.2"/>
+<circle cx="538.1" cy="287.2" r="7.0" fill="#B91C1C" stroke="#B91C1C" stroke-width="1.2"/>
+<circle cx="392.8" cy="318.1" r="7.0" fill="#B91C1C" stroke="#B91C1C" stroke-width="1.2"/>
+<text x="450.0" y="369.0" font-size="11" fill="#6b6b66" font-weight="400" text-anchor="middle" dominant-baseline="central">every step is turned by the same extra θ</text>
+<text x="450.0" y="386.0" font-size="11" fill="#6b6b66" font-weight="400" text-anchor="middle" dominant-baseline="central">(here θ = 12°: about 600 Hz at 18 kBd)</text>
+<text x="730.0" y="62.0" font-size="12" fill="#2b2b29" font-weight="700" text-anchor="middle" dominant-baseline="central">Raise every step to the 4th power</text>
+<circle cx="730.0" cy="230.0" r="105.0" fill="none" stroke="#c9c9c4" stroke-width="1.0"/>
+<path d="M611.0 230.0 L849.0 230.0" fill="none" stroke="#d6d6d1" stroke-width="1"/>
+<path d="M730.0 111.0 L730.0 349.0" fill="none" stroke="#d6d6d1" stroke-width="1"/>
+<circle cx="659.7" cy="308.0" r="7.0" fill="#B91C1C" stroke="#B91C1C" stroke-width="1.2"/>
+<text x="649.7" y="294.0" font-size="11" fill="#B91C1C" font-weight="700" text-anchor="middle" dominant-baseline="central">180° + 4θ</text>
+<circle cx="625.0" cy="230.0" r="7.0" fill="#0F6E56" stroke="#0F6E56" stroke-width="1.2"/>
+<text x="619.0" y="216.0" font-size="11" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">−1</text>
+<text x="730.0" y="369.0" font-size="11" fill="#6b6b66" font-weight="400" text-anchor="middle" dominant-baseline="central">4 × (±45°, ±135°) = ±180°: data vanishes</text>
+<text x="730.0" y="386.0" font-size="11" fill="#6b6b66" font-weight="400" text-anchor="middle" dominant-baseline="central">what is left is 4θ, the same for all</text>
+<path d="M285.0 230.0 L335.0 230.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
+<path d="M565.0 230.0 L615.0 230.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
+<rect x="880.0" y="52.0" width="195.0" height="48.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
+<text x="977.5" y="68.0" font-size="12" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">Multiply ×4</text>
+<text x="977.5" y="84.0" font-size="10" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">z⁴</text>
+<rect x="880.0" y="114.0" width="195.0" height="48.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
+<text x="977.5" y="130.0" font-size="12" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">Moving Average 128</text>
+<text x="977.5" y="146.0" font-size="10" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">average of −z⁴, 7 ms</text>
+<path d="M977.0 100.0 L977.0 112.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
+<rect x="880.0" y="176.0" width="195.0" height="48.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
+<text x="977.5" y="192.0" font-size="12" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">Complex to Arg</text>
+<text x="977.5" y="208.0" font-size="10" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">= 4θ</text>
+<path d="M977.0 162.0 L977.0 174.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
+<rect x="880.0" y="238.0" width="195.0" height="48.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
+<text x="977.5" y="254.0" font-size="12" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">Multiply Const −¼</text>
+<text x="977.5" y="270.0" font-size="10" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">→ −θ</text>
+<path d="M977.0 224.0 L977.0 236.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
+<rect x="880.0" y="300.0" width="195.0" height="48.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
+<text x="977.5" y="316.0" font-size="12" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">Phase Mod</text>
+<text x="977.5" y="332.0" font-size="10" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">e^(−jθ)</text>
+<path d="M977.0 286.0 L977.0 298.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
+<rect x="880.0" y="362.0" width="195.0" height="48.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
+<text x="977.5" y="378.0" font-size="12" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">Multiply</text>
+<text x="977.5" y="394.0" font-size="10" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">steps × e^(−jθ)</text>
+<path d="M977.0 348.0 L977.0 360.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
+<text x="30.0" y="448.0" font-size="11" fill="#6b6b66" font-weight="400" text-anchor="start" dominant-baseline="central">Why not a Costas loop? A loop can lock a quarter-turn wrong and stay there. This is feed-forward: it simply measures and corrects,</text>
+<text x="30.0" y="467.0" font-size="11" fill="#6b6b66" font-weight="400" text-anchor="start" dominant-baseline="central">every symbol. Its limit: the leftover must stay under ±45° per symbol (±2.25 kHz), which is the FLL's job. Beyond that it picks the wrong quadrant.</text>
+</svg>

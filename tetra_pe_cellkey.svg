@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 470" width="1100" height="470" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif" role="img" aria-label="The cell key loop: the cell broadcasts the key that unlocks the rest of its channels">
+<title>The cell key loop: the cell broadcasts the key that unlocks the rest of its channels</title>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3d3d3a"/></marker><marker id="ahc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#A32D2D"/></marker><marker id="aht" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0F6E56"/></marker><marker id="ahb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1d4ed8"/></marker><marker id="aha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#B45309"/></marker><marker id="ahg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#15803d"/></marker><marker id="ahr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#B91C1C"/></marker><marker id="ahm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6b6b66"/></marker><marker id="ahp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6D28D9"/></marker></defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="30.0" y="22.0" font-size="15" fill="#2b2b29" font-weight="700" text-anchor="start" dominant-baseline="central">The cell tells me its own key</text>
+<rect x="30.0" y="60.0" width="220.0" height="84.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
+<text x="140.0" y="86.0" font-size="13" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">BSCH chain</text>
+<text x="140.0" y="103.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">scrambled with a FIXED key (0)</text>
+<text x="140.0" y="118.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">so anyone can read it</text>
+<rect x="300.0" y="60.0" width="230.0" height="84.0" rx="8" fill="#F8E6E4" stroke="#A32D2D" stroke-width="1.3"/>
+<text x="415.0" y="86.0" font-size="13" fill="#A32D2D" font-weight="700" text-anchor="middle" dominant-baseline="central">EPB 1: SYNC PDU</text>
+<text x="415.0" y="103.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">e.g. MCC 510 · MNC 1945 · CC 1</text>
+<text x="415.0" y="118.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">two identical CRC-good copies</text>
+<rect x="580.0" y="60.0" width="230.0" height="84.0" rx="8" fill="#ffffff" stroke="#6b6b66" stroke-width="1.3"/>
+<text x="695.0" y="86.0" font-size="13" fill="#6b6b66" font-weight="700" text-anchor="middle" dominant-baseline="central">Cell key (30 bits)</text>
+<text x="695.0" y="103.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">MCC&lt;&lt;20 | MNC&lt;&lt;6 | CC</text>
+<text x="695.0" y="118.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">(CC 1 → 0x1FE1E641)</text>
+<rect x="860.0" y="60.0" width="210.0" height="84.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
+<text x="965.0" y="93.5" font-size="13" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">Message Pair to Var</text>
+<text x="965.0" y="110.5" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">writes variable cell_key</text>
+<path d="M250.0 102.0 L298.0 102.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
+<path d="M530.0 102.0 L578.0 102.0" fill="none" stroke="#A32D2D" stroke-width="1.6" stroke-dasharray="6 4" marker-end="url(#ahc)"/>
+<path d="M810.0 102.0 L858.0 102.0" fill="none" stroke="#A32D2D" stroke-width="1.6" stroke-dasharray="6 4" marker-end="url(#ahc)"/>
+<rect x="700.0" y="220.0" width="300.0" height="70.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
+<text x="850.0" y="246.5" font-size="12" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">hd_scr = scr_pm(cell_key, 216)</text>
+<text x="850.0" y="263.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">GRC callback re-programs Multiply Const</text>
+<path d="M965.0 144.0 L965.0 218.0" fill="none" stroke="#0F6E56" stroke-width="1.4" marker-end="url(#aht)"/>
+<rect x="370.0" y="220.0" width="270.0" height="70.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
+<text x="505.0" y="246.5" font-size="13" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">SCH/HD descrambler</text>
+<text x="505.0" y="263.5" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">now matches this cell</text>
+<path d="M700.0 255.0 L642.0 255.0" fill="none" stroke="#0F6E56" stroke-width="1.4" marker-end="url(#aht)"/>
+<rect x="30.0" y="220.0" width="280.0" height="70.0" rx="8" fill="#F8E6E4" stroke="#A32D2D" stroke-width="1.3"/>
+<text x="170.0" y="246.5" font-size="13" fill="#A32D2D" font-weight="700" text-anchor="middle" dominant-baseline="central">SYSINFO, ACCESS-DEFINE</text>
+<text x="170.0" y="263.5" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">finally pass their CRC</text>
+<path d="M370.0 255.0 L312.0 255.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
+<rect x="700.0" y="340.0" width="300.0" height="64.0" rx="8" fill="#F8E6E4" stroke="#A32D2D" stroke-width="1.3"/>
+<text x="850.0" y="363.5" font-size="13" fill="#A32D2D" font-weight="700" text-anchor="middle" dominant-baseline="central">EPB 2: TCH/S decoder</text>
+<text x="850.0" y="380.5" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">own 432-bit scrambler, same key</text>
+<path d="M1030.0 144.0 L1030.0 372.0 L1002.0 372.0" fill="none" stroke="#0F6E56" stroke-width="1.4" marker-end="url(#aht)"/>
+<text x="30.0" y="340.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">• Before the first SYNC: cell_key = 0, the SCH/HD chain decodes garbage and the CRC rejects it. That is normal.</text>
+<text x="30.0" y="362.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">• The two-copy rule matters: a 16-bit CRC on random correlator hits passes about once in 65,000.</text>
+<text x="30.0" y="384.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central"></text>
+<text x="30.0" y="384.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">• Retuning (tetra_freq or fine_hz) resets the cell picture, so a new cell gets a new key.</text>
+<text x="30.0" y="440.0" font-size="11" fill="#6b6b66" font-weight="400" text-anchor="start" dominant-baseline="central" font-style="italic">Scrambler: 32-bit LFSR, taps 32 26 23 22 16 12 11 10 8 7 5 4 2 1, loaded with (key &lt;&lt; 2) | 3 (EN 300 392-2 cl. 8.2.5).</text>
+</svg>

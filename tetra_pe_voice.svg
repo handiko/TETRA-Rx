@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 560" width="1100" height="560" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif" role="img" aria-label="TETRA TCH/S voice path: full-slot cut, timeslot gate, ETSI channel decoder and ACELP, jitter buffer, audio">
+<title>TETRA TCH/S voice path: full-slot cut, timeslot gate, ETSI channel decoder and ACELP, jitter buffer, audio</title>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3d3d3a"/></marker><marker id="ahc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#A32D2D"/></marker><marker id="aht" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0F6E56"/></marker><marker id="ahb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1d4ed8"/></marker><marker id="aha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#B45309"/></marker><marker id="ahg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#15803d"/></marker><marker id="ahr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#B91C1C"/></marker><marker id="ahm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6b6b66"/></marker><marker id="ahp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6D28D9"/></marker></defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="30.0" y="22.0" font-size="15" fill="#2b2b29" font-weight="700" text-anchor="start" dominant-baseline="central">From a full slot to 60 ms of speech</text>
+<rect x="30.0" y="60.0" width="180.0" height="82.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
+<text x="120.0" y="85.0" font-size="13" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">Tags To PDU</text>
+<text x="120.0" y="102.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">484 soft bits</text>
+<text x="120.0" y="117.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">+ rx_time</text>
+<rect x="242.0" y="60.0" width="180.0" height="82.0" rx="8" fill="#F8E6E4" stroke="#A32D2D" stroke-width="1.3"/>
+<text x="332.0" y="85.0" font-size="13" fill="#A32D2D" font-weight="700" text-anchor="middle" dominant-baseline="central">Where is it?</text>
+<text x="332.0" y="102.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">TN, FN from</text>
+<text x="332.0" y="117.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">the TDMA reference</text>
+<path d="M210.0 101.0 L240.0 101.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
+<rect x="454.0" y="60.0" width="180.0" height="82.0" rx="8" fill="#F8E6E4" stroke="#A32D2D" stroke-width="1.3"/>
+<text x="544.0" y="85.0" font-size="13" fill="#A32D2D" font-weight="700" text-anchor="middle" dominant-baseline="central">Play this slot?</text>
+<text x="544.0" y="102.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">auto / TN1–4 / all</text>
+<text x="544.0" y="117.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">drop FN 18, off-grid</text>
+<path d="M422.0 101.0 L452.0 101.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
+<rect x="666.0" y="60.0" width="180.0" height="82.0" rx="8" fill="#F8E6E4" stroke="#A32D2D" stroke-width="1.3"/>
+<text x="756.0" y="85.0" font-size="13" fill="#A32D2D" font-weight="700" text-anchor="middle" dominant-baseline="central">Re-join halves</text>
+<text x="756.0" y="102.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">[0:216] + [268:484]</text>
+<text x="756.0" y="117.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">= 432 coded bits</text>
+<path d="M634.0 101.0 L664.0 101.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
+<rect x="878.0" y="60.0" width="180.0" height="82.0" rx="8" fill="#F8E6E4" stroke="#A32D2D" stroke-width="1.3"/>
+<text x="968.0" y="85.0" font-size="13" fill="#A32D2D" font-weight="700" text-anchor="middle" dominant-baseline="central">Descramble</text>
+<text x="968.0" y="102.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">× cell scrambler (432)</text>
+<text x="968.0" y="117.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">× −127 → int16</text>
+<path d="M846.0 101.0 L876.0 101.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
+<rect x="30.0" y="210.0" width="180.0" height="82.0" rx="8" fill="#EEE8F8" stroke="#6D28D9" stroke-width="1.3"/>
+<text x="120.0" y="235.0" font-size="13" fill="#6D28D9" font-weight="700" text-anchor="middle" dominant-baseline="central">tetra_cd_frame</text>
+<text x="120.0" y="252.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">ETSI channel decoder</text>
+<text x="120.0" y="267.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">(tetra_dec.dll)</text>
+<rect x="242.0" y="210.0" width="180.0" height="82.0" rx="8" fill="#EEE8F8" stroke="#6D28D9" stroke-width="1.3"/>
+<text x="332.0" y="235.0" font-size="13" fill="#6D28D9" font-weight="700" text-anchor="middle" dominant-baseline="central">BFI + 2 × 137 bits</text>
+<text x="332.0" y="252.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">two 30 ms speech</text>
+<text x="332.0" y="267.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">frames, error flag</text>
+<path d="M210.0 251.0 L240.0 251.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
+<rect x="454.0" y="210.0" width="180.0" height="82.0" rx="8" fill="#EEE8F8" stroke="#6D28D9" stroke-width="1.3"/>
+<text x="544.0" y="235.0" font-size="13" fill="#6D28D9" font-weight="700" text-anchor="middle" dominant-baseline="central">tetra_dec_frame ×2</text>
+<text x="544.0" y="252.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">ETSI ACELP</text>
+<text x="544.0" y="267.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">synthesis</text>
+<path d="M422.0 251.0 L452.0 251.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
+<rect x="666.0" y="210.0" width="180.0" height="82.0" rx="8" fill="#F8E6E4" stroke="#A32D2D" stroke-width="1.3"/>
+<text x="756.0" y="235.0" font-size="13" fill="#A32D2D" font-weight="700" text-anchor="middle" dominant-baseline="central">Jitter buffer</text>
+<text x="756.0" y="252.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">starts when 180 ms</text>
+<text x="756.0" y="267.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">is queued</text>
+<path d="M634.0 251.0 L664.0 251.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
+<rect x="878.0" y="210.0" width="180.0" height="82.0" rx="8" fill="#FDF0DC" stroke="#B45309" stroke-width="1.3"/>
+<text x="968.0" y="235.0" font-size="13" fill="#B45309" font-weight="700" text-anchor="middle" dominant-baseline="central">Audio Sink</text>
+<text x="968.0" y="252.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">8 kHz, 480 samples</text>
+<text x="968.0" y="267.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">per slot = 60 ms</text>
+<path d="M846.0 251.0 L876.0 251.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
+<path d="M940.0 142.0 L940.0 176.0 L120.0 176.0 L120.0 208.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
+<rect x="30.0" y="330.0" width="500.0" height="150.0" rx="8" fill="#ffffff" stroke="#6b6b66" stroke-width="1.3"/>
+<text x="50.0" y="350.0" font-size="13" fill="#6b6b66" font-weight="700" text-anchor="start" dominant-baseline="central">Voice timeslot chooser (target_tn)</text>
+<text x="50.0" y="376.0" font-size="11" fill="#A32D2D" font-weight="700" text-anchor="start" dominant-baseline="central">auto</text>
+<text x="140.0" y="376.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">channel-decode every slot, keep a score: good (non-BFI)</text>
+<text x="50.0" y="396.0" font-size="11" fill="#A32D2D" font-weight="700" text-anchor="start" dominant-baseline="central"></text>
+<text x="140.0" y="396.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">frames in the last 2 s. Play the best slot once it has ≥ 6.</text>
+<text x="50.0" y="416.0" font-size="11" fill="#A32D2D" font-weight="700" text-anchor="start" dominant-baseline="central"></text>
+<text x="140.0" y="416.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">A new choice resets the speech decoder.</text>
+<text x="50.0" y="436.0" font-size="11" fill="#A32D2D" font-weight="700" text-anchor="start" dominant-baseline="central">TN1 … TN4</text>
+<text x="140.0" y="436.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">play only that timeslot</text>
+<text x="50.0" y="456.0" font-size="11" fill="#A32D2D" font-weight="700" text-anchor="start" dominant-baseline="central">all</text>
+<text x="140.0" y="456.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">old behaviour, mixes every slot: debugging only</text>
+<rect x="560.0" y="330.0" width="510.0" height="150.0" rx="8" fill="#ffffff" stroke="#6b6b66" stroke-width="1.3"/>
+<text x="580.0" y="350.0" font-size="13" fill="#6b6b66" font-weight="700" text-anchor="start" dominant-baseline="central">What the console tells me (every 200 bursts)</text>
+<text x="580.0" y="378.0" font-size="10" fill="#2b2b29" font-weight="600" text-anchor="start" dominant-baseline="central">[TCH/S] NTS1 bursts 200: TN1 0/0/0  TN2 0/0/0  TN3 183/183/178</text>
+<text x="580.0" y="394.0" font-size="10" fill="#2b2b29" font-weight="600" text-anchor="start" dominant-baseline="central">        TN4 0/0/0 (seen/good/played)  dropped: off-grid 6, FN18 10</text>
+<text x="580.0" y="420.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">seen = full-slot bursts on that timeslot</text>
+<text x="580.0" y="439.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">good = the channel decoder's CRC passed (no BFI)</text>
+<text x="580.0" y="458.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">played = sent to the loudspeaker</text>
+<rect x="30.0" y="502.0" width="22.0" height="16.0" rx="4" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.2"/>
+<text x="58.0" y="510.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">stock block</text>
+<rect x="280.0" y="502.0" width="22.0" height="16.0" rx="4" fill="#F8E6E4" stroke="#A32D2D" stroke-width="1.2"/>
+<text x="308.0" y="510.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">my Python (EPB 2)</text>
+<rect x="530.0" y="502.0" width="22.0" height="16.0" rx="4" fill="#EEE8F8" stroke="#6D28D9" stroke-width="1.2"/>
+<text x="558.0" y="510.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">ETSI reference code in a DLL</text>
+<rect x="780.0" y="502.0" width="22.0" height="16.0" rx="4" fill="#FDF0DC" stroke="#B45309" stroke-width="1.2"/>
+<text x="808.0" y="510.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">output</text>
+<text x="30.0" y="540.0" font-size="11" fill="#6b6b66" font-weight="400" text-anchor="start" dominant-baseline="central" font-style="italic">Why a DLL: ACELP is a few thousand lines of fixed-point ETSI C. Re-writing it in Python would be slow and never bit-exact.</text>
+</svg>

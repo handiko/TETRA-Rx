@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 470" width="1100" height="470" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif" role="img" aria-label="TETRA front end: from RTL-SDR samples to soft bits">
+<title>TETRA front end: from RTL-SDR samples to soft bits</title>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3d3d3a"/></marker><marker id="ahc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#A32D2D"/></marker><marker id="aht" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0F6E56"/></marker><marker id="ahb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1d4ed8"/></marker><marker id="aha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#B45309"/></marker><marker id="ahg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#15803d"/></marker><marker id="ahr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#B91C1C"/></marker><marker id="ahm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6b6b66"/></marker><marker id="ahp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6D28D9"/></marker></defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="30.0" y="22.0" font-size="15" fill="#2b2b29" font-weight="700" text-anchor="start" dominant-baseline="central">The front end: every step a stock block</text>
+<rect x="30.0" y="60.0" width="180.0" height="80.0" rx="8" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.3"/>
+<text x="120.0" y="84.0" font-size="13" fill="#1d4ed8" font-weight="700" text-anchor="middle" dominant-baseline="central">RTL-SDR</text>
+<text x="120.0" y="101.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">1.152 MS/s</text>
+<text x="120.0" y="116.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">= 64 × 18 kBd</text>
+<rect x="242.0" y="60.0" width="180.0" height="80.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
+<text x="332.0" y="84.0" font-size="13" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">Xlating FIR</text>
+<text x="332.0" y="101.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">+150 kHz → 0 Hz</text>
+<text x="332.0" y="116.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">÷16 → 72 kS/s</text>
+<path d="M210.0 100.0 L240.0 100.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
+<rect x="454.0" y="60.0" width="180.0" height="80.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
+<text x="544.0" y="84.0" font-size="13" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">Channel LPF</text>
+<text x="544.0" y="101.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">−6 dB at 13.5 kHz</text>
+<text x="544.0" y="116.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">neighbours out</text>
+<path d="M422.0 100.0 L452.0 100.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
+<rect x="666.0" y="60.0" width="180.0" height="80.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
+<text x="756.0" y="84.0" font-size="13" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">AGC</text>
+<text x="756.0" y="101.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">steady level</text>
+<text x="756.0" y="116.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">for the loops</text>
+<path d="M634.0 100.0 L664.0 100.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
+<rect x="878.0" y="60.0" width="180.0" height="80.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
+<text x="968.0" y="84.0" font-size="13" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">FLL Band-Edge</text>
+<text x="968.0" y="101.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">finds the carrier</text>
+<text x="968.0" y="116.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">from its edges</text>
+<path d="M846.0 100.0 L876.0 100.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
+<rect x="30.0" y="230.0" width="180.0" height="80.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
+<text x="120.0" y="254.0" font-size="13" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">Clock Sync</text>
+<text x="120.0" y="271.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">matched RRC</text>
+<text x="120.0" y="286.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">picks symbol moment</text>
+<rect x="242.0" y="230.0" width="180.0" height="80.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
+<text x="332.0" y="254.0" font-size="13" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">CMA Equaliser</text>
+<text x="332.0" y="271.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">flattens the</text>
+<text x="332.0" y="286.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">channel</text>
+<path d="M210.0 270.0 L240.0 270.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
+<rect x="454.0" y="230.0" width="180.0" height="80.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
+<text x="544.0" y="254.0" font-size="13" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">Diff Phasor</text>
+<text x="544.0" y="271.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">x[n]·conj(x[n−1])</text>
+<text x="544.0" y="286.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">= phase step</text>
+<path d="M422.0 270.0 L452.0 270.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
+<rect x="666.0" y="230.0" width="180.0" height="80.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
+<text x="756.0" y="254.0" font-size="13" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">Derotator</text>
+<text x="756.0" y="271.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">4th-power trick</text>
+<text x="756.0" y="286.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">(next picture)</text>
+<path d="M634.0 270.0 L664.0 270.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
+<rect x="878.0" y="230.0" width="180.0" height="80.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
+<text x="968.0" y="254.0" font-size="13" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">Soft Decoder</text>
+<text x="968.0" y="271.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">step → 2 bits</text>
+<text x="968.0" y="286.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">with confidence</text>
+<path d="M846.0 270.0 L876.0 270.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
+<path d="M940.0 140.0 L940.0 185.0 L120.0 185.0 L120.0 228.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
+<text x="530.0" y="175.0" font-size="11" fill="#6b6b66" font-weight="600" text-anchor="middle" dominant-baseline="central">still 72 kS/s, 4 samples per symbol</text>
+<text x="120.0" y="322.0" font-size="10" fill="#6b6b66" font-weight="600" text-anchor="middle" dominant-baseline="central">18,000 symbols/s from here on</text>
+<text x="968.0" y="322.0" font-size="10" fill="#6b6b66" font-weight="600" text-anchor="middle" dominant-baseline="central">36,000 soft bits/s</text>
+<text x="30.0" y="352.0" font-size="11" fill="#0F6E56" font-weight="700" text-anchor="start" dominant-baseline="central">Why 150 kHz below?</text>
+<text x="190.0" y="352.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">every RTL-SDR has a spike at its own tuning frequency; I keep it out of the channel</text>
+<text x="30.0" y="378.0" font-size="11" fill="#0F6E56" font-weight="700" text-anchor="start" dominant-baseline="central">Why 1.152 MS/s?</text>
+<text x="190.0" y="378.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">1.152 MHz ÷ 16 = 72 kHz = exactly 4 samples per 18 kBd symbol: no fractional resampler</text>
+<text x="30.0" y="404.0" font-size="11" fill="#0F6E56" font-weight="700" text-anchor="start" dominant-baseline="central">Why the tight LPF?</text>
+<text x="190.0" y="404.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">a neighbour 25 kHz away, 9 dB stronger, dragged the FLL about 2 kHz off before I added it</text>
+<text x="30.0" y="430.0" font-size="11" fill="#0F6E56" font-weight="700" text-anchor="start" dominant-baseline="central">Why phase steps?</text>
+<text x="190.0" y="430.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">π/4-DQPSK carries data in the CHANGE of phase, so I never need the absolute carrier phase</text>
+</svg>

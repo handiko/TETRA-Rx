@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 600" width="1100" height="600" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif" role="img" aria-label="TETRA downlink bursts: sync burst, normal burst with NTS2, normal burst with NTS1">
+<title>TETRA downlink bursts: sync burst, normal burst with NTS2, normal burst with NTS1</title>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3d3d3a"/></marker><marker id="ahc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#A32D2D"/></marker><marker id="aht" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0F6E56"/></marker><marker id="ahb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1d4ed8"/></marker><marker id="aha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#B45309"/></marker><marker id="ahg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#15803d"/></marker><marker id="ahr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#B91C1C"/></marker><marker id="ahm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6b6b66"/></marker><marker id="ahp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6D28D9"/></marker></defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="30.0" y="22.0" font-size="15" fill="#2b2b29" font-weight="700" text-anchor="start" dominant-baseline="central">Three kinds of burst, and where my correlators fire</text>
+<text x="50.0" y="52.0" font-size="12" fill="#2b2b29" font-weight="700" text-anchor="start" dominant-baseline="central">Sync burst (in frame 18): carries SYNC, the cell's identity</text>
+<rect x="50.0" y="70.0" width="27.5" height="46.0" rx="2" fill="#F1F1EE" stroke="#6b6b66" stroke-width="1.0"/>
+<rect x="77.5" y="70.0" width="156.9" height="46.0" rx="2" fill="#F1F1EE" stroke="#6b6b66" stroke-width="1.0"/>
+<text x="155.9" y="93.0" font-size="10" fill="#2b2b29" font-weight="600" text-anchor="middle" dominant-baseline="central">frequency correction (80)</text>
+<rect x="234.3" y="70.0" width="235.3" height="46.0" rx="2" fill="#F8E6E4" stroke="#A32D2D" stroke-width="1.0"/>
+<text x="352.0" y="93.0" font-size="10" fill="#2b2b29" font-weight="600" text-anchor="middle" dominant-baseline="central">BSCH: SYNC PDU (120)</text>
+<rect x="469.6" y="70.0" width="74.5" height="46.0" rx="2" fill="#FDF0DC" stroke="#B45309" stroke-width="1.0"/>
+<text x="506.9" y="93.0" font-size="9" fill="#2b2b29" font-weight="600" text-anchor="middle" dominant-baseline="central">y (38)</text>
+<rect x="544.1" y="70.0" width="58.8" height="46.0" rx="2" fill="#F1F1EE" stroke="#6b6b66" stroke-width="1.0"/>
+<text x="573.5" y="93.0" font-size="9" fill="#2b2b29" font-weight="600" text-anchor="middle" dominant-baseline="central">AACH</text>
+<rect x="602.9" y="70.0" width="423.5" height="46.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
+<text x="814.7" y="93.0" font-size="10" fill="#2b2b29" font-weight="600" text-anchor="middle" dominant-baseline="central">block 2: SYSINFO etc. (216)</text>
+<rect x="1026.5" y="70.0" width="23.5" height="46.0" rx="2" fill="#F1F1EE" stroke="#6b6b66" stroke-width="1.0"/>
+<text x="50.0" y="126.0" font-size="9" fill="#6b6b66" font-weight="400" text-anchor="middle" dominant-baseline="central">0</text>
+<text x="234.3" y="126.0" font-size="9" fill="#6b6b66" font-weight="400" text-anchor="middle" dominant-baseline="central">94</text>
+<text x="469.6" y="126.0" font-size="9" fill="#6b6b66" font-weight="400" text-anchor="middle" dominant-baseline="central">214</text>
+<text x="602.9" y="126.0" font-size="9" fill="#6b6b66" font-weight="400" text-anchor="middle" dominant-baseline="central">282</text>
+<text x="1026.5" y="126.0" font-size="9" fill="#6b6b66" font-weight="400" text-anchor="middle" dominant-baseline="central">498</text>
+<text x="1050.0" y="126.0" font-size="9" fill="#6b6b66" font-weight="400" text-anchor="middle" dominant-baseline="central">510</text>
+<polygon points="544.1,134.0 538.1,146.0 550.1,146.0" fill="#B91C1C" fill-opacity="1.0" stroke="none"/>
+<text x="554.1" y="142.0" font-size="10" fill="#B91C1C" font-weight="700" text-anchor="start" dominant-baseline="central">y tag lands on bit 252 (first bit after the training sequence)</text>
+<text x="50.0" y="202.0" font-size="12" fill="#2b2b29" font-weight="700" text-anchor="start" dominant-baseline="central">Normal burst, training sequence 2 (NTS2): two separate half-slot blocks</text>
+<rect x="50.0" y="220.0" width="27.5" height="46.0" rx="2" fill="#F1F1EE" stroke="#6b6b66" stroke-width="1.0"/>
+<rect x="77.5" y="220.0" width="423.5" height="46.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
+<text x="289.2" y="243.0" font-size="10" fill="#2b2b29" font-weight="600" text-anchor="middle" dominant-baseline="central">block 1: half slot (216)</text>
+<rect x="501.0" y="220.0" width="27.5" height="46.0" rx="2" fill="#F1F1EE" stroke="#6b6b66" stroke-width="1.0"/>
+<rect x="528.4" y="220.0" width="43.1" height="46.0" rx="2" fill="#FDF0DC" stroke="#B45309" stroke-width="1.0"/>
+<text x="550.0" y="243.0" font-size="9" fill="#2b2b29" font-weight="600" text-anchor="middle" dominant-baseline="central">NTS2</text>
+<rect x="571.6" y="220.0" width="31.4" height="46.0" rx="2" fill="#F1F1EE" stroke="#6b6b66" stroke-width="1.0"/>
+<rect x="602.9" y="220.0" width="423.5" height="46.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
+<text x="814.7" y="243.0" font-size="10" fill="#2b2b29" font-weight="600" text-anchor="middle" dominant-baseline="central">block 2: half slot (216)</text>
+<rect x="1026.5" y="220.0" width="23.5" height="46.0" rx="2" fill="#F1F1EE" stroke="#6b6b66" stroke-width="1.0"/>
+<text x="77.5" y="276.0" font-size="9" fill="#6b6b66" font-weight="400" text-anchor="middle" dominant-baseline="central">14</text>
+<text x="501.0" y="276.0" font-size="9" fill="#6b6b66" font-weight="400" text-anchor="middle" dominant-baseline="central">230</text>
+<text x="528.4" y="276.0" font-size="9" fill="#6b6b66" font-weight="400" text-anchor="middle" dominant-baseline="central">244</text>
+<text x="602.9" y="276.0" font-size="9" fill="#6b6b66" font-weight="400" text-anchor="middle" dominant-baseline="central">282</text>
+<text x="1026.5" y="276.0" font-size="9" fill="#6b6b66" font-weight="400" text-anchor="middle" dominant-baseline="central">498</text>
+<polygon points="571.6,284.0 565.6,296.0 577.6,296.0" fill="#B91C1C" fill-opacity="1.0" stroke="none"/>
+<text x="581.6" y="292.0" font-size="10" fill="#B91C1C" font-weight="700" text-anchor="start" dominant-baseline="central">NTS2 tag lands on bit 266 (first bit after the training sequence)</text>
+<text x="50.0" y="352.0" font-size="12" fill="#2b2b29" font-weight="700" text-anchor="start" dominant-baseline="central">Normal burst, training sequence 1 (NTS1): one full slot, voice (TCH) or SCH/F signalling</text>
+<rect x="50.0" y="370.0" width="27.5" height="46.0" rx="2" fill="#F1F1EE" stroke="#6b6b66" stroke-width="1.0"/>
+<rect x="77.5" y="370.0" width="423.5" height="46.0" rx="2" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.0"/>
+<text x="289.2" y="393.0" font-size="10" fill="#2b2b29" font-weight="600" text-anchor="middle" dominant-baseline="central">full slot, first half</text>
+<rect x="501.0" y="370.0" width="27.5" height="46.0" rx="2" fill="#F1F1EE" stroke="#6b6b66" stroke-width="1.0"/>
+<rect x="528.4" y="370.0" width="43.1" height="46.0" rx="2" fill="#FDF0DC" stroke="#B45309" stroke-width="1.0"/>
+<text x="550.0" y="393.0" font-size="9" fill="#2b2b29" font-weight="600" text-anchor="middle" dominant-baseline="central">NTS1</text>
+<rect x="571.6" y="370.0" width="31.4" height="46.0" rx="2" fill="#F1F1EE" stroke="#6b6b66" stroke-width="1.0"/>
+<rect x="602.9" y="370.0" width="423.5" height="46.0" rx="2" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.0"/>
+<text x="814.7" y="393.0" font-size="10" fill="#2b2b29" font-weight="600" text-anchor="middle" dominant-baseline="central">full slot, second half</text>
+<rect x="1026.5" y="370.0" width="23.5" height="46.0" rx="2" fill="#F1F1EE" stroke="#6b6b66" stroke-width="1.0"/>
+<text x="77.5" y="426.0" font-size="9" fill="#6b6b66" font-weight="400" text-anchor="middle" dominant-baseline="central">14</text>
+<text x="501.0" y="426.0" font-size="9" fill="#6b6b66" font-weight="400" text-anchor="middle" dominant-baseline="central">230</text>
+<text x="528.4" y="426.0" font-size="9" fill="#6b6b66" font-weight="400" text-anchor="middle" dominant-baseline="central">244</text>
+<text x="602.9" y="426.0" font-size="9" fill="#6b6b66" font-weight="400" text-anchor="middle" dominant-baseline="central">282</text>
+<text x="1026.5" y="426.0" font-size="9" fill="#6b6b66" font-weight="400" text-anchor="middle" dominant-baseline="central">498</text>
+<polygon points="571.6,434.0 565.6,446.0 577.6,446.0" fill="#B91C1C" fill-opacity="1.0" stroke="none"/>
+<text x="581.6" y="442.0" font-size="10" fill="#B91C1C" font-weight="700" text-anchor="start" dominant-baseline="central">NTS1 tag lands on bit 266 (first bit after the training sequence)</text>
+<text x="50.0" y="470.0" font-size="12" fill="#2b2b29" font-weight="700" text-anchor="start" dominant-baseline="central">What I cut out of each:</text>
+<text x="50.0" y="498.0" font-size="11" fill="#2b2b29" font-weight="700" text-anchor="start" dominant-baseline="central">sync burst</text>
+<text x="160.0" y="498.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">BSCH bits 94–213 (120)  and  block 2 bits 282–497 (216)</text>
+<text x="750.0" y="498.0" font-size="11" fill="#6b6b66" font-weight="600" text-anchor="start" dominant-baseline="central">→ cell identity, then SYSINFO</text>
+<text x="50.0" y="524.0" font-size="11" fill="#2b2b29" font-weight="700" text-anchor="start" dominant-baseline="central">NTS2 burst</text>
+<text x="160.0" y="524.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">block 1 bits 14–229  and  block 2 bits 282–497, decoded separately</text>
+<text x="750.0" y="524.0" font-size="11" fill="#6b6b66" font-weight="600" text-anchor="start" dominant-baseline="central">→ signalling: SYSINFO, MAC-RESOURCE…</text>
+<text x="50.0" y="550.0" font-size="11" fill="#2b2b29" font-weight="700" text-anchor="start" dominant-baseline="central">NTS1 burst</text>
+<text x="160.0" y="550.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">bits 14–497 in one piece (484), training in the middle thrown away</text>
+<text x="750.0" y="550.0" font-size="11" fill="#6b6b66" font-weight="600" text-anchor="start" dominant-baseline="central">→ speech: 432 coded bits</text>
+<text x="50.0" y="580.0" font-size="11" fill="#6b6b66" font-weight="400" text-anchor="start" dominant-baseline="central" font-style="italic">Both normal bursts put their training sequence in exactly the same place; only its 22-bit pattern tells them apart.</text>
+</svg>

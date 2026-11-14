@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 800" width="1160" height="800" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif" role="img" aria-label="TETRA receiver: the whole flowgraph">
+<title>TETRA receiver: the whole flowgraph</title>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3d3d3a"/></marker><marker id="ahc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#A32D2D"/></marker><marker id="aht" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0F6E56"/></marker><marker id="ahb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1d4ed8"/></marker><marker id="aha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#B45309"/></marker><marker id="ahg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#15803d"/></marker><marker id="ahr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#B91C1C"/></marker><marker id="ahm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6b6b66"/></marker><marker id="ahp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6D28D9"/></marker></defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="30.0" y="22.0" font-size="15" fill="#2b2b29" font-weight="700" text-anchor="start" dominant-baseline="central">The whole receiver: antenna to console and loudspeaker</text>
+<rect x="30.0" y="50.0" width="190.0" height="84.0" rx="8" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.3"/>
+<text x="125.0" y="68.5" font-size="13" fill="#1d4ed8" font-weight="700" text-anchor="middle" dominant-baseline="central">RTL-SDR dongle</text>
+<text x="125.0" y="85.5" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">Soapy RTLSDR Source</text>
+<text x="125.0" y="100.5" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">tuned 150 kHz below the cell</text>
+<text x="125.0" y="115.5" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">1,152,000 samples/s</text>
+<rect x="260.0" y="50.0" width="220.0" height="84.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
+<text x="370.0" y="68.5" font-size="13" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">Frequency Xlating FIR</text>
+<text x="370.0" y="85.5" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">slide +150 kHz → 0 Hz</text>
+<text x="370.0" y="100.5" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">keep ±16 kHz, keep 1 in 16</text>
+<text x="370.0" y="115.5" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">→ 72,000 samples/s</text>
+<rect x="520.0" y="50.0" width="190.0" height="84.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
+<text x="615.0" y="76.0" font-size="13" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">Channel LPF + AGC</text>
+<text x="615.0" y="93.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">cut the 25 kHz neighbours</text>
+<text x="615.0" y="108.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">steady level</text>
+<rect x="750.0" y="50.0" width="190.0" height="84.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
+<text x="845.0" y="76.0" font-size="13" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">FLL Band-Edge</text>
+<text x="845.0" y="93.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">pull out the</text>
+<text x="845.0" y="108.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">tuning error</text>
+<path d="M220.0 92.0 L258.0 92.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
+<path d="M480.0 92.0 L518.0 92.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
+<path d="M710.0 92.0 L748.0 92.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
+<rect x="260.0" y="158.0" width="220.0" height="44.0" rx="8" fill="#F1F1EE" stroke="#6b6b66" stroke-width="1.3"/>
+<text x="370.0" y="172.0" font-size="12" fill="#6b6b66" font-weight="700" text-anchor="middle" dominant-baseline="central">Spectrum</text>
+<text x="370.0" y="188.0" font-size="10" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">72 kHz around the channel</text>
+<path d="M370.0 134.0 L370.0 156.0" fill="none" stroke="#6b6b66" stroke-width="1.4" marker-end="url(#ahm)"/>
+<rect x="975.0" y="70.0" width="160.0" height="44.0" rx="8" fill="#F1F1EE" stroke="#6b6b66" stroke-width="1.3"/>
+<text x="1055.0" y="84.0" font-size="12" fill="#6b6b66" font-weight="700" text-anchor="middle" dominant-baseline="central">Number display</text>
+<text x="1055.0" y="100.0" font-size="10" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">carrier offset, ppm to add</text>
+<path d="M940.0 92.0 L973.0 92.0" fill="none" stroke="#6b6b66" stroke-width="1.4" marker-end="url(#ahm)"/>
+<path d="M845.0 134.0 L845.0 222.0 L117.0 222.0 L117.0 244.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
+<text x="480.0" y="212.0" font-size="11" fill="#6b6b66" font-weight="600" text-anchor="middle" dominant-baseline="central">one complex sample stream, 4 samples per symbol</text>
+<rect x="30.0" y="246.0" width="175.0" height="84.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
+<text x="117.5" y="272.0" font-size="13" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">Polyphase Clock Sync</text>
+<text x="117.5" y="289.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">matched RRC filter</text>
+<text x="117.5" y="304.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">4 → 1 sample per symbol</text>
+<rect x="235.0" y="246.0" width="160.0" height="84.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
+<text x="315.0" y="272.0" font-size="13" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">CMA Equaliser</text>
+<text x="315.0" y="289.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">16 taps, cleans</text>
+<text x="315.0" y="304.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">echoes &amp; filter ripple</text>
+<rect x="425.0" y="246.0" width="160.0" height="84.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
+<text x="505.0" y="272.0" font-size="13" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">Diff Phasor</text>
+<text x="505.0" y="289.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">phase CHANGE</text>
+<text x="505.0" y="304.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">symbol to symbol</text>
+<rect x="615.0" y="246.0" width="210.0" height="84.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
+<text x="720.0" y="272.0" font-size="13" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">4th-power derotator</text>
+<text x="720.0" y="289.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">6 stock blocks, no loop:</text>
+<text x="720.0" y="304.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">removes leftover rotation</text>
+<rect x="855.0" y="246.0" width="190.0" height="84.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
+<text x="950.0" y="272.0" font-size="13" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">Soft Decoder</text>
+<text x="950.0" y="289.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">phase step → 2 soft bits</text>
+<text x="950.0" y="304.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">36,000 bits/s</text>
+<path d="M205.0 288.0 L233.0 288.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
+<path d="M395.0 288.0 L423.0 288.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
+<path d="M585.0 288.0 L613.0 288.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
+<path d="M825.0 288.0 L853.0 288.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
+<rect x="615.0" y="352.0" width="210.0" height="44.0" rx="8" fill="#F1F1EE" stroke="#6b6b66" stroke-width="1.3"/>
+<text x="720.0" y="366.0" font-size="12" fill="#6b6b66" font-weight="700" text-anchor="middle" dominant-baseline="central">Constellation</text>
+<text x="720.0" y="382.0" font-size="10" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">4 tight clusters = healthy</text>
+<path d="M720.0 330.0 L720.0 350.0" fill="none" stroke="#6b6b66" stroke-width="1.4" marker-end="url(#ahm)"/>
+<path d="M950.0 330.0 L950.0 420.0 L145.0 420.0 L145.0 442.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
+<path d="M405.0 420.0 L405.0 442.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
+<path d="M665.0 420.0 L665.0 442.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
+<text x="1000.0" y="382.0" font-size="11" fill="#6b6b66" font-weight="600" text-anchor="middle" dominant-baseline="central">soft bits</text>
+<rect x="30.0" y="444.0" width="230.0" height="84.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
+<text x="145.0" y="462.5" font-size="12" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">Find sync bursts</text>
+<text x="145.0" y="479.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">correlator on y (38 bits)</text>
+<text x="145.0" y="494.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">Delay / ×0 / Add tag shift</text>
+<text x="145.0" y="509.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">Tags To PDU: BSCH + block 2</text>
+<rect x="290.0" y="444.0" width="230.0" height="84.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
+<text x="405.0" y="462.5" font-size="12" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">Find half-slot bursts</text>
+<text x="405.0" y="479.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">correlator on NTS2 (22 bits)</text>
+<text x="405.0" y="494.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">Delay / ×0 / Add tag shift</text>
+<text x="405.0" y="509.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">Tags To PDU: block 1, block 2</text>
+<rect x="550.0" y="444.0" width="230.0" height="84.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
+<text x="665.0" y="462.5" font-size="12" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">Find full-slot bursts</text>
+<text x="665.0" y="479.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">correlator on NTS1 (22 bits)</text>
+<text x="665.0" y="494.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">Delay / ×0 / Add tag shift</text>
+<text x="665.0" y="509.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">Tags To PDU: 484-bit full slot</text>
+<rect x="30.0" y="584.0" width="230.0" height="76.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
+<text x="145.0" y="606.0" font-size="12" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">BSCH chain</text>
+<text x="145.0" y="622.5" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">descramble · de-interleave</text>
+<text x="145.0" y="637.5" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">de-puncture · Viterbi</text>
+<rect x="290.0" y="584.0" width="230.0" height="76.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
+<text x="405.0" y="606.0" font-size="12" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">SCH/HD chain</text>
+<text x="405.0" y="622.5" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">descramble · de-interleave</text>
+<text x="405.0" y="637.5" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">de-puncture · Viterbi</text>
+<rect x="550.0" y="584.0" width="230.0" height="76.0" rx="8" fill="#F8E6E4" stroke="#A32D2D" stroke-width="1.3"/>
+<text x="665.0" y="606.0" font-size="13" fill="#A32D2D" font-weight="700" text-anchor="middle" dominant-baseline="central">EPB 2 · TCH/S voice</text>
+<text x="665.0" y="623.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">timeslot from rx_time</text>
+<text x="665.0" y="638.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">tetra_dec.dll: ETSI ACELP</text>
+<path d="M145.0 528.0 L145.0 582.0" fill="none" stroke="#A32D2D" stroke-width="1.6" stroke-dasharray="6 4" marker-end="url(#ahc)"/>
+<path d="M405.0 528.0 L405.0 582.0" fill="none" stroke="#A32D2D" stroke-width="1.6" stroke-dasharray="6 4" marker-end="url(#ahc)"/>
+<path d="M665.0 528.0 L665.0 582.0" fill="none" stroke="#A32D2D" stroke-width="1.6" stroke-dasharray="6 4" marker-end="url(#ahc)"/>
+<path d="M260.0 486.0 L272.0 486.0 L272.0 564.0 L380.0 564.0 L380.0 582.0" fill="none" stroke="#A32D2D" stroke-width="1.6" stroke-dasharray="6 4" marker-end="url(#ahc)"/>
+<text x="276.0" y="548.0" font-size="10" fill="#A32D2D" font-weight="600" text-anchor="start" dominant-baseline="central">block 2 of sync bursts</text>
+<rect x="850.0" y="560.0" width="290.0" height="90.0" rx="8" fill="#F8E6E4" stroke="#A32D2D" stroke-width="1.3"/>
+<text x="995.0" y="581.5" font-size="13" fill="#A32D2D" font-weight="700" text-anchor="middle" dominant-baseline="central">EPB 1 · CRC + Cell Info</text>
+<text x="995.0" y="598.5" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">CRC-16 · SYNC · SYSINFO · ACCESS-DEFINE</text>
+<text x="995.0" y="613.5" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">status panel every 10 s</text>
+<text x="995.0" y="628.5" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">publishes cell key + TDMA reference</text>
+<path d="M145.0 660.0 L145.0 684.0 L870.0 684.0 L870.0 652.0" fill="none" stroke="#A32D2D" stroke-width="1.6" stroke-dasharray="6 4" marker-end="url(#ahc)"/>
+<path d="M405.0 660.0 L405.0 676.0 L900.0 676.0 L900.0 652.0" fill="none" stroke="#A32D2D" stroke-width="1.6" stroke-dasharray="6 4" marker-end="url(#ahc)"/>
+<rect x="850.0" y="444.0" width="290.0" height="64.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
+<text x="995.0" y="467.5" font-size="12" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">Message Pair to Var</text>
+<text x="995.0" y="484.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">sets cell_key → descramblers</text>
+<path d="M995.0 560.0 L995.0 510.0" fill="none" stroke="#A32D2D" stroke-width="1.6" stroke-dasharray="6 4" marker-end="url(#ahc)"/>
+<text x="1002.0" y="535.0" font-size="10" fill="#A32D2D" font-weight="600" text-anchor="start" dominant-baseline="central">cell key</text>
+<path d="M850.0 476.0 L812.0 476.0 L812.0 400.0 L540.0 400.0 L540.0 608.0 L522.0 608.0" fill="none" stroke="#A32D2D" stroke-width="1.6" stroke-dasharray="6 4" marker-end="url(#ahc)"/>
+<path d="M812.0 476.0 L812.0 600.0 L782.0 600.0" fill="none" stroke="#A32D2D" stroke-width="1.6" stroke-dasharray="6 4" marker-end="url(#ahc)"/>
+<path d="M850.0 640.0 L782.0 640.0" fill="none" stroke="#A32D2D" stroke-width="1.6" stroke-dasharray="6 4" marker-end="url(#ahc)"/>
+<text x="816.0" y="630.0" font-size="10" fill="#A32D2D" font-weight="600" text-anchor="middle" dominant-baseline="central">TDMA ref</text>
+<rect x="550.0" y="700.0" width="230.0" height="46.0" rx="8" fill="#FDF0DC" stroke="#B45309" stroke-width="1.3"/>
+<text x="665.0" y="715.0" font-size="12" fill="#B45309" font-weight="700" text-anchor="middle" dominant-baseline="central">Audio Sink</text>
+<text x="665.0" y="731.0" font-size="10" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">8 kHz speech</text>
+<path d="M665.0 660.0 L665.0 698.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
+<rect x="850.0" y="700.0" width="290.0" height="46.0" rx="8" fill="#FDF0DC" stroke="#B45309" stroke-width="1.3"/>
+<text x="995.0" y="715.0" font-size="12" fill="#B45309" font-weight="700" text-anchor="middle" dominant-baseline="central">Console</text>
+<text x="995.0" y="731.0" font-size="10" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">cell picture, SYSINFO, voice stats</text>
+<path d="M995.0 650.0 L995.0 698.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
+<rect x="30.0" y="710.0" width="22.0" height="16.0" rx="4" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.2"/>
+<text x="58.0" y="718.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">hardware</text>
+<rect x="260.0" y="710.0" width="22.0" height="16.0" rx="4" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.2"/>
+<text x="288.0" y="718.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">stock GNU Radio block</text>
+<rect x="30.0" y="732.0" width="22.0" height="16.0" rx="4" fill="#F8E6E4" stroke="#A32D2D" stroke-width="1.2"/>
+<text x="58.0" y="740.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">Embedded Python Block</text>
+<rect x="260.0" y="732.0" width="22.0" height="16.0" rx="4" fill="#F1F1EE" stroke="#6b6b66" stroke-width="1.2"/>
+<text x="288.0" y="740.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">display</text>
+<path d="M30.0 764.0 L66.0 764.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
+<text x="74.0" y="764.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">sample stream</text>
+<path d="M260.0 764.0 L296.0 764.0" fill="none" stroke="#A32D2D" stroke-width="1.6" stroke-dasharray="6 4" marker-end="url(#ahc)"/>
+<text x="304.0" y="764.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">message (PDU)</text>
+</svg>
