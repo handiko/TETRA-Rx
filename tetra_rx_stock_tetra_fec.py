@@ -94,3 +94,8 @@ for _o in range(16):
 # trellis steps per block = type-2 bits = info + 16 CRC + 4 tail
 BSCH_STEPS = 60 + 16 + 4      # 80  -> 120 sent bits
 HD_STEPS = 124 + 16 + 4       # 144 -> 216 sent bits
+
+# ---------------------------------------------------------------- SCH/F (full-slot signalling)
+# 268 info + 16 CRC + 4 tail = 288 type-2 bits -> 432 sent bits; interleaver a = 103
+DEINT_432 = deint_table(432, 103)
+F_STEPS = 268 + 16 + 4

@@ -140,6 +140,18 @@ blocks:
     coordinate: [760, 92]
     rotation: 0
     state: enabled
+- name: f_scr
+  id: variable
+  parameters:
+    comment: SCH/F descrambling vector (+-1), 432 bits, follows cell_key
+    value: tetra_fec.scr_pm(cell_key, 432)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1720, 172]
+    rotation: 0
+    state: enabled
 - name: fine_hz
   id: variable_qtgui_range
   parameters:
@@ -534,7 +546,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [800, 1344.0]
+    coordinate: [792, 1552.0]
     rotation: 0
     state: enabled
 - name: bsch_descr
@@ -554,7 +566,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [432, 1352.0]
+    coordinate: [424, 1560.0]
     rotation: 0
     state: enabled
 - name: bsch_dp3
@@ -573,7 +585,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1032, 1352.0]
+    coordinate: [1024, 1560.0]
     rotation: 0
     state: enabled
 - name: bsch_dp8
@@ -594,7 +606,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1200, 1344.0]
+    coordinate: [1192, 1552.0]
     rotation: 0
     state: enabled
 - name: bsch_erase
@@ -615,7 +627,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1040, 1440.0]
+    coordinate: [1032, 1648.0]
     rotation: 0
     state: enabled
 - name: bsch_p2s
@@ -632,7 +644,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [56, 1344.0]
+    coordinate: [48, 1552.0]
     rotation: 0
     state: enabled
 - name: bsch_s2t
@@ -651,7 +663,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1632, 1352.0]
+    coordinate: [1624, 1560.0]
     rotation: 0
     state: enabled
 - name: bsch_s2v
@@ -669,7 +681,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [272, 1352.0]
+    coordinate: [264, 1560.0]
     rotation: 0
     state: enabled
 - name: bsch_t2p
@@ -686,7 +698,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1840, 1352.0]
+    coordinate: [1832, 1560.0]
     rotation: 0
     state: enabled
 - name: bsch_v2s
@@ -704,7 +716,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [640, 1352.0]
+    coordinate: [632, 1560.0]
     rotation: 0
     state: enabled
 - name: bsch_vit
@@ -729,7 +741,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1376, 1344.0]
+    coordinate: [1368, 1552.0]
     rotation: 0
     state: enabled
 - name: cell_to_var
@@ -743,7 +755,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [2328, 1424.0]
+    coordinate: [2320, 1632.0]
     rotation: 0
     state: enabled
 - name: chan_lpf
@@ -797,7 +809,7 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    alpha1: '1.0'
+    alpha1: '0.25'
     alpha10: '1.0'
     alpha2: '1.0'
     alpha3: '1.0'
@@ -885,7 +897,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [2024, 448.0]
+    coordinate: [1816, 472.0]
     rotation: 0
     state: enabled
 - name: corr_n
@@ -1419,8 +1431,8 @@ blocks:
   states:
     _io_cache: '(''TETRA TCH/S ACELP decoder'', ''blk'', [(''dll_path'', "''''"),
       (''cell_key'', ''0''), (''gain_db'', ''0.0''), (''polarity'', ''-1.0''), (''target_tn'',
-      ''0''), (''skip_fn18'', ''True''), (''prefill_ms'', ''180.0'')], [(''tdma'',
-      ''message'', 1), (''tch'', ''message'', 1)], [(''0'', ''float'', 1)], ''TETRA
+      ''0''), (''skip_fn18'', ''True''), (''prefill_ms'', ''180.0'')], [(''tch'',
+      ''message'', 1), (''tdma'', ''message'', 1)], [(''0'', ''float'', 1)], ''TETRA
       TCH/S decoder: timeslot-aware, ETSI ACELP via tetra_dec.dll'', [''cell_key'',
       ''polarity'', ''skip_fn18'', ''target_tn''])'
     bus_sink: false
@@ -1549,7 +1561,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [800, 1504.0]
+    coordinate: [792, 1712.0]
     rotation: 0
     state: enabled
 - name: hd_descr
@@ -1569,7 +1581,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [432, 1512.0]
+    coordinate: [424, 1720.0]
     rotation: 0
     state: enabled
 - name: hd_dp3
@@ -1588,7 +1600,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1032, 1512.0]
+    coordinate: [1024, 1720.0]
     rotation: 0
     state: enabled
 - name: hd_dp8
@@ -1609,7 +1621,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1200, 1504.0]
+    coordinate: [1192, 1712.0]
     rotation: 0
     state: enabled
 - name: hd_erase
@@ -1630,7 +1642,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1040, 1600.0]
+    coordinate: [1032, 1808.0]
     rotation: 0
     state: enabled
 - name: hd_p2s
@@ -1647,7 +1659,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [56, 1504.0]
+    coordinate: [48, 1712.0]
     rotation: 0
     state: enabled
 - name: hd_s2t
@@ -1666,7 +1678,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1632, 1512.0]
+    coordinate: [1624, 1720.0]
     rotation: 0
     state: enabled
 - name: hd_s2v
@@ -1684,7 +1696,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [272, 1512.0]
+    coordinate: [264, 1720.0]
     rotation: 0
     state: enabled
 - name: hd_t2p
@@ -1701,7 +1713,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1840, 1512.0]
+    coordinate: [1832, 1720.0]
     rotation: 0
     state: enabled
 - name: hd_v2s
@@ -1719,7 +1731,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [640, 1512.0]
+    coordinate: [632, 1720.0]
     rotation: 0
     state: enabled
 - name: hd_vit
@@ -1744,7 +1756,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1376, 1504.0]
+    coordinate: [1368, 1712.0]
     rotation: 0
     state: enabled
 - name: import_0
@@ -1995,7 +2007,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [2264, 200]
+    coordinate: [2128, 304.0]
     rotation: 0
     state: enabled
 - name: rtlsdr_source
@@ -2027,7 +2039,238 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [32, 280.0]
+    coordinate: [32, 432.0]
+    rotation: 0
+    state: enabled
+- name: schf_deint
+  id: trellis_permutation
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: SOFT DE-INTERLEAVE, K = 432, a = 103
+    interleaver_size: '432'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    syms_per_block: '1'
+    table: tetra_fec.DEINT_432
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [760, 1380]
+    rotation: 0
+    state: enabled
+- name: schf_descr
+  id: blocks_multiply_const_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: SOFT DESCRAMBLE with the 432-bit cell sequence
+    const: f_scr
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: '432'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [392, 1380]
+    rotation: 0
+    state: enabled
+- name: schf_dp3
+  id: blocks_deinterleave
+  parameters:
+    affinity: ''
+    alias: ''
+    blocksize: '1'
+    comment: DE-PUNCTURE (1/2)
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '3'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [992, 1380]
+    rotation: 0
+    state: enabled
+- name: schf_dp8
+  id: blocks_interleave
+  parameters:
+    affinity: ''
+    alias: ''
+    blocksize: '1'
+    comment: DE-PUNCTURE (2/2), 0.0 = erasure
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '8'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1160, 1380]
+    rotation: 0
+    state: enabled
+- name: schf_erase
+  id: blocks_null_source
+  parameters:
+    affinity: ''
+    alias: ''
+    bus_structure_source: '[[0,],]'
+    comment: Erasures for the SCH/F chain
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_outputs: '1'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1000, 1476]
+    rotation: 0
+    state: enabled
+- name: schf_join
+  id: pdu_pdu_lambda
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: 'Full slot: drop the 52 bits around the training
+
+      sequence -> 432 coded bits (wrong-length cuts become zeros, CRC rejects them,
+
+      and the stream below stays block-aligned)'
+    fn: 'lambda x: np.concatenate((x[:216], x[268:484])) if len(x) == 484 else np.zeros(432,
+      np.float32)'
+    key: pmt.intern("key")
+    maxoutbuf: '0'
+    metadict: Uniform Vector
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [32, 1280.0]
+    rotation: 0
+    state: enabled
+- name: schf_p2s
+  id: pdu_pdu_to_tagged_stream
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: SCH/F cuts -> stream (whole blocks only)
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    tag: packet_len
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [16, 1380]
+    rotation: 0
+    state: enabled
+- name: schf_s2t
+  id: blocks_stream_to_tagged_stream
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    len_tag_key: '"blk"'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    packet_len: tetra_fec.F_STEPS
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1592, 1380]
+    rotation: 0
+    state: enabled
+- name: schf_s2v
+  id: blocks_stream_to_vector
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: '432'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [232, 1380]
+    rotation: 0
+    state: enabled
+- name: schf_t2p
+  id: pdu_tagged_stream_to_pdu
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    tag: blk
+    type: byte
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1800, 1380]
+    rotation: 0
+    state: enabled
+- name: schf_v2s
+  id: blocks_vector_to_stream
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: '432'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [600, 1380]
+    rotation: 0
+    state: enabled
+- name: schf_vit
+  id: trellis_viterbi_combined_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    block_size: tetra_fec.F_STEPS
+    comment: 'SOFT VITERBI: 288 steps per full slot'
+    dim: '4'
+    final_state: '0'
+    fsm_args: 2, 16, 16, tetra_fec.NS, tetra_fec.OS
+    init_state: '0'
+    maxoutbuf: '0'
+    metric_type: digital.TRELLIS_EUCLIDEAN
+    minoutbuf: '0'
+    out_type: b
+    table: tetra_fec.VIT_TABLE
+    type: f
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1336, 1380]
     rotation: 0
     state: enabled
 - name: soft_0
@@ -2065,27 +2308,33 @@ blocks:
       \ * publishing the cell's scrambling key (message pair 'cell_key') so that a\
       \ stock\n    Message Pair to Var block re-programs the SCH/HD descrambler for\
       \ this cell\n  * publishing a TDMA time reference ('tdma') for the TCH/S decoder's\
-      \ timeslot tracking\n\nInputs  (message): 'bsch'     - u8 PDUs of 80 decoded\
-      \ bits  (60 info + 16 CRC + 4 tail)\n                   'hd'       - u8 PDUs\
-      \ of 144 decoded bits (124 info + 16 CRC + 4 tail)\n                   'bsch_raw'\
-      \ - the raw 120-soft-bit PDUs straight from cut_bsch. Only their\n         \
-      \                       rx_time is used: it gives the absolute bit position\
-      \ of each sync\n                                burst. The BSCH chain is strictly\
-      \ 1 PDU in -> 1 PDU out, in order,\n                                so the n-th\
-      \ raw PDU belongs to the n-th decoded one.\nOutputs (message): 'cell' - pair\
-      \ ('cell_key', MCC<<20 | MNC<<6 | CC) when the cell changes\n              \
-      \     'tdma' - dict {tn, fn, mn, slot_bit, key} for every CRC-good SYNC of the\n\
-      \                            confirmed cell; slot_bit = absolute soft-bit index\
-      \ of that slot's bit 0\n                   'out'  - u8 PDU per printed line\
-      \ (optional)\nA new cell identity or SYSINFO is only accepted after two identical\
-      \ CRC-good copies,\nso a rare false CRC pass (16-bit CRC on correlator false\
-      \ hits) never reaches the display.\n\"\"\"\nimport sys\nimport time\nimport\
-      \ threading\nimport numpy as np\nimport pmt\nfrom gnuradio import gr\n\nSYNC_TAG\
-      \ = 252          # y tag position in the slot (tetra_fec.Y_TAG): slot start\
-      \ = tag bit - 252\n\nSYS_CODE = {0: 'EN 300 392-2 V1', 1: 'EN 300 392-2 V2.3.2+',\
-      \ 2: 'EN 300 392-2 V3.1.1+'}\nSHARING = {0: 'continuous transmission', 1: 'carrier\
-      \ sharing', 2: 'MCCH sharing', 3: 'traffic carrier sharing'}\nRES_FRAMES = (1,\
-      \ 2, 3, 4, 6, 9, 12, 18)\nCELL_LOAD = {0: 'unknown', 1: 'low', 2: 'medium',\
+      \ timeslot tracking\n  * the MCCH neighbour-cell list: MAC-RESOURCE / MAC-FRAG\
+      \ / MAC-END (with fragment\n    reassembly per timeslot), basic-link LLC, and\
+      \ the MLE PDU D-NWRK-BROADCAST.\n    Only MLE broadcast information is decoded;\
+      \ PDUs of every other protocol (MM, CMCE,\n    SNDCP) are counted and skipped,\
+      \ never parsed.\n\nInputs  (message): 'bsch'     - u8 PDUs of 80 decoded bits\
+      \  (60 info + 16 CRC + 4 tail)\n                   'hd'       - u8 PDUs of 144\
+      \ decoded bits (124 info + 16 CRC + 4 tail)\n                   'schf'     -\
+      \ u8 PDUs of 288 decoded bits (268 info + 16 CRC + 4 tail),\n              \
+      \                  full-slot signalling (SCH/F) from NTS1 bursts\n         \
+      \          'bsch_raw' - the raw 120-soft-bit PDUs straight from cut_bsch. Only\
+      \ their\n                                rx_time is used: it gives the absolute\
+      \ bit position of each sync\n                                burst. The BSCH\
+      \ chain is strictly 1 PDU in -> 1 PDU out, in order,\n                     \
+      \           so the n-th raw PDU belongs to the n-th decoded one.\nOutputs (message):\
+      \ 'cell' - pair ('cell_key', MCC<<20 | MNC<<6 | CC) when the cell changes\n\
+      \                   'tdma' - dict {tn, fn, mn, slot_bit, key} for every CRC-good\
+      \ SYNC of the\n                            confirmed cell; slot_bit = absolute\
+      \ soft-bit index of that slot's bit 0\n                   'out'  - u8 PDU per\
+      \ printed line (optional)\nA new cell identity or SYSINFO is only accepted after\
+      \ two identical CRC-good copies,\nso a rare false CRC pass (16-bit CRC on correlator\
+      \ false hits) never reaches the display.\n\"\"\"\nimport sys\nimport time\n\
+      import threading\nimport numpy as np\nimport pmt\nfrom gnuradio import gr\n\n\
+      SYNC_TAG = 252          # y tag position in the slot (tetra_fec.Y_TAG): slot\
+      \ start = tag bit - 252\n\nSYS_CODE = {0: 'EN 300 392-2 V1', 1: 'EN 300 392-2\
+      \ V2.3.2+', 2: 'EN 300 392-2 V3.1.1+'}\nSHARING = {0: 'continuous transmission',\
+      \ 1: 'carrier sharing', 2: 'MCCH sharing', 3: 'traffic carrier sharing'}\nRES_FRAMES\
+      \ = (1, 2, 3, 4, 6, 9, 12, 18)\nCELL_LOAD = {0: 'unknown', 1: 'low', 2: 'medium',\
       \ 3: 'high'}\nNEIGH_BCAST = {0: 'not supported', 1: 'on MCCH, not in idle',\
       \ 2: 'on MCCH, supported in idle', 3: 'reserved'}\nOFFSET_HZ = (0, 6250, -6250,\
       \ 12500)\nDUPLEX_KHZ = {\n    0: {1: 1600, 2: 10000, 3: 10000, 4: 10000, 5:\
@@ -2099,34 +2348,98 @@ blocks:
       \ link'))\nOPT_FIELD = {0: 'even-multiframe TS_COMMON_FRAMES', 1: 'odd-multiframe\
       \ TS_COMMON_FRAMES',\n             2: 'default access code A', 3: 'extended\
       \ services broadcast'}\nMAC_TYPE = {0: 'MAC-RESOURCE', 1: 'MAC-FRAG/END', 2:\
-      \ 'broadcast', 3: 'MAC-U-SIGNAL/D-BLCK'}\n\n\ndef crc_ok(bits):\n    \"\"\"\
-      CRC-ITU-T over info+CRC; a correct block leaves the residue 0x1D0F\"\"\"\n \
-      \   crc = 0xFFFF\n    for b in bits:\n        crc ^= int(b) << 15\n        crc\
-      \ = ((crc << 1) ^ 0x1021) & 0xFFFF if crc & 0x8000 else (crc << 1) & 0xFFFF\n\
-      \    return crc == 0x1D0F\n\n\ndef bits_uint(bits, start, n):\n    v = 0\n \
-      \   for b in bits[start:start + n]:\n        v = (v << 1) | int(b)\n    return\
-      \ v\n\n\ndef parse_sync(b):\n    return {\n        'syscode': bits_uint(b, 0,\
-      \ 4), 'cc': bits_uint(b, 4, 6),\n        'tn': bits_uint(b, 10, 2) + 1, 'fn':\
-      \ bits_uint(b, 12, 5), 'mn': bits_uint(b, 17, 6),\n        'sharing': bits_uint(b,\
-      \ 23, 2), 'resv': bits_uint(b, 25, 3), 'dtx': bits_uint(b, 28, 1),\n       \
-      \ 'f18ext': bits_uint(b, 29, 1),\n        'mcc': bits_uint(b, 31, 10), 'mnc':\
-      \ bits_uint(b, 41, 14),\n        'nbcast': bits_uint(b, 55, 2), 'load': bits_uint(b,\
-      \ 57, 2), 'late': bits_uint(b, 59, 1)}\n\n\ndef parse_sysinfo(b):\n    d = {'carrier':\
-      \ bits_uint(b, 4, 12), 'band': bits_uint(b, 16, 4), 'offset': bits_uint(b, 20,\
-      \ 2),\n         'duplex': bits_uint(b, 22, 3), 'reverse': bits_uint(b, 25, 1),\
-      \ 'n_scch': bits_uint(b, 26, 2),\n         'txpwr': bits_uint(b, 28, 3), 'rxlev_min':\
-      \ bits_uint(b, 31, 4), 'acc_par': bits_uint(b, 35, 4),\n         'dl_timeout':\
-      \ bits_uint(b, 39, 4), 'cck_flag': bits_uint(b, 43, 1), 'hf_or_cck': bits_uint(b,\
-      \ 44, 16),\n         'opt': bits_uint(b, 60, 2), 'opt_val': bits_uint(b, 62,\
-      \ 20),\n         'la': bits_uint(b, 82, 14), 'subscr': bits_uint(b, 96, 16),\
-      \ 'service': bits_uint(b, 112, 12)}\n    d['dl_hz'] = d['band'] * 100e6 + d['carrier']\
-      \ * 25e3 + OFFSET_HZ[d['offset']]\n    dup = DUPLEX_KHZ.get(d['duplex'], {}).get(d['band'])\n\
-      \    d['ul_hz'] = None if dup is None else d['dl_hz'] + (1 if d['reverse'] else\
-      \ -1) * dup * 1e3\n    return d\n\n\ndef fmt_sysinfo(d):\n    srv = [name for\
-      \ bit, name in SERVICES if d['service'] >> bit & 1]\n    ul = ('%.4f MHz' %\
-      \ (d['ul_hz'] / 1e6)) if d['ul_hz'] is not None else 'n/a (reserved duplex code)'\n\
-      \    return [\n        'Main carrier : %d  band %d  offset %+.2f kHz  ->  DL\
-      \ %.4f MHz   UL %s' % (\n            d['carrier'], d['band'], OFFSET_HZ[d['offset']]\
+      \ 'broadcast', 3: 'MAC-U-SIGNAL/D-BLCK'}\n\n# ----------------------------------------------------------------\
+      \ MAC / LLC / MLE (EN 300 392-2)\n# Field layouts cross-checked against osmo-tetra\
+      \ (MAC-RESOURCE, MAC-FRAG/END, LLC) and the\n# sq5bpf fork (D-NWRK-BROADCAST,\
+      \ neighbour cell information).\nCC_TAG = 266                               \
+      \    # NTS1 / NTS2 tag position in the slot\nADDR_LEN = {1: 24, 2: 10, 3: 24,\
+      \ 4: 24, 5: 34, 6: 30, 7: 34}     # MAC address type -> bits\nLLC_HDR = {0:\
+      \ 6, 1: 5, 2: 4, 3: 5, 4: 6, 5: 5, 6: 4, 7: 5}       # basic-link PDU types\
+      \ -> header bits\nLLC_NAME = {0: 'BL-ADATA', 1: 'BL-DATA', 2: 'BL-UDATA', 3:\
+      \ 'BL-ACK'}\nMLE_PD = {1: 'MM', 2: 'CMCE', 4: 'SNDCP', 5: 'MLE', 6: 'management',\
+      \ 7: 'test'}\nMLE_PDUT = {0: 'D-NEW-CELL', 1: 'D-PREPARE-FAIL', 2: 'D-NWRK-BROADCAST',\
+      \ 3: 'D-NWRK-BROADCAST-EXT',\n            4: 'D-RESTORE-ACK', 5: 'D-RESTORE-FAIL',\
+      \ 6: 'D-CHANNEL-RESPONSE'}\nFRAG_MAX_AGE = 2.0                             #\
+      \ s: an unfinished fragment chain is dropped after this\nNB_EXPIRE = 600.0 \
+      \                             # s: a neighbour not re-announced for this long\
+      \ is dropped\n\n\ndef mac_len(ind):\n    \"\"\"MAC length indication -> octets,\
+      \ or 'frag' / 'stolen', or None (reserved)\"\"\"\n    if ind in (0, 0x3b, 0x3c,\
+      \ 0x3d):\n        return None\n    if ind <= 0x3a:\n        return ind     \
+      \                        # pi/4-DQPSK: Y2 = Z2 = 1 octet\n    return 'stolen'\
+      \ if ind == 0x3e else 'frag'\n\n\ndef strip_fill(b, start, end):\n    \"\"\"\
+      Fill bits are a 1 followed by 0s at the end of a PDU: return the end without\
+      \ them\"\"\"\n    i = end - 1\n    while i > start and b[i] == 0:\n        i\
+      \ -= 1\n    return i if i > start and b[i] == 1 else end\n\n\ndef chan_alloc_len(b,\
+      \ q):\n    \"\"\"Length of a channel allocation element (only needed to find\
+      \ where the TM-SDU starts)\"\"\"\n    p = q\n    p += 2 + 4                \
+      \                 # allocation type, timeslot\n    ul_dl = bits_uint(b, p, 2);\
+      \ p += 2\n    p += 1 + 1 + 12                            # CLCH permission,\
+      \ cell change, carrier number\n    if b[p]:\n        p += 1 + 10           \
+      \                 # extended carrier numbering\n    else:\n        p += 1\n\
+      \    mon = bits_uint(b, p, 2); p += 2\n    if mon == 0:\n        p += 2\n  \
+      \  if ul_dl == 0:                             # augmented channel allocation\n\
+      \        p += 2 + 3 + 3 + 3 + 3 + 3 + 4 + 5\n        nap = bits_uint(b, p, 2);\
+      \ p += 2\n        if nap == 1:\n            p += 11\n        p += 4\n      \
+      \  for _ in range(2):\n            p += 1 + (16 if b[p] else 0)\n        p +=\
+      \ 1\n    return p - q\n\n\ndef llc_fcs(bits):\n    crc = 0xFFFFFFFF\n    if\
+      \ len(bits) < 32:\n        crc = (crc << (32 - len(bits))) & 0xFFFFFFFF\n  \
+      \  for x in bits:\n        bit = (int(x) ^ (crc >> 31)) & 1\n        crc = (crc\
+      \ << 1) & 0xFFFFFFFF\n        if bit:\n            crc ^= 0x04C11DB7\n    return\
+      \ (~crc) & 0xFFFFFFFF\n\n\ndef carrier_hz(band, carrier, offset):\n    return\
+      \ band * 100e6 + carrier * 25e3 + OFFSET_HZ[offset]\n\n\ndef parse_nwrk(b):\n\
+      \    \"\"\"D-NWRK-BROADCAST (after the 3-bit PD and 3-bit PDU type). Raises\
+      \ IndexError if short.\"\"\"\n    p = 6\n    d = {'resel': bits_uint(b, p, 16),\
+      \ 'load': bits_uint(b, p + 16, 2), 'time': False, 'cells': []}\n    p += 18\n\
+      \    if b[p]:                                   # O-bit: optional elements follow\n\
+      \        p += 1\n        if b[p]:                               # TETRA network\
+      \ time present\n            p += 1 + 48\n            d['time'] = True\n    \
+      \    else:\n            p += 1\n        if b[p]:                           \
+      \    # neighbour cells present\n            p += 1\n            n = bits_uint(b,\
+      \ p, 3); p += 3\n            for _ in range(n):\n                c, used = parse_nci(b,\
+      \ p)\n                p += used\n                d['cells'].append(c)\n    \
+      \    else:\n            p += 1\n    if p > len(b):\n        raise IndexError('D-NWRK-BROADCAST\
+      \ longer than its TL-SDU')\n    return d\n\n\ndef parse_nci(b, q):\n    \"\"\
+      \"One 'neighbour cell information for CA' element -> (dict, bits used)\"\"\"\
+      \n    p = q\n    c = {'id': bits_uint(b, p, 5), 'resel_types': bits_uint(b,\
+      \ p + 5, 2), 'synced': b[p + 7],\n         'load': bits_uint(b, p + 8, 2), 'carrier':\
+      \ bits_uint(b, p + 10, 12)}\n    p += 22\n    if b[p]:                     \
+      \              # O-bit\n        p += 1\n        for name, width in (('ext',\
+      \ 10), ('mcc', 10), ('mnc', 14), ('la', 14), ('txpwr', 3),\n               \
+      \             ('rxlev', 4), ('subscr', 16), ('service', 12), ('timeshare', 5),\n\
+      \                            ('fn_offset', 6)):\n            if b[p]:\n    \
+      \            v = bits_uint(b, p + 1, width)\n                if name == 'ext':\n\
+      \                    c['band'], c['offset'] = v >> 6, (v >> 4) & 3\n       \
+      \             c['duplex'], c['reverse'] = (v >> 1) & 7, v & 1\n            \
+      \    else:\n                    c[name] = v\n                p += 1 + width\n\
+      \            else:\n                p += 1\n    else:\n        p += 1\n    return\
+      \ c, p - q\n\n\ndef crc_ok(bits):\n    \"\"\"CRC-ITU-T over info+CRC; a correct\
+      \ block leaves the residue 0x1D0F\"\"\"\n    crc = 0xFFFF\n    for b in bits:\n\
+      \        crc ^= int(b) << 15\n        crc = ((crc << 1) ^ 0x1021) & 0xFFFF if\
+      \ crc & 0x8000 else (crc << 1) & 0xFFFF\n    return crc == 0x1D0F\n\n\ndef bits_uint(bits,\
+      \ start, n):\n    v = 0\n    for b in bits[start:start + n]:\n        v = (v\
+      \ << 1) | int(b)\n    return v\n\n\ndef parse_sync(b):\n    return {\n     \
+      \   'syscode': bits_uint(b, 0, 4), 'cc': bits_uint(b, 4, 6),\n        'tn':\
+      \ bits_uint(b, 10, 2) + 1, 'fn': bits_uint(b, 12, 5), 'mn': bits_uint(b, 17,\
+      \ 6),\n        'sharing': bits_uint(b, 23, 2), 'resv': bits_uint(b, 25, 3),\
+      \ 'dtx': bits_uint(b, 28, 1),\n        'f18ext': bits_uint(b, 29, 1),\n    \
+      \    'mcc': bits_uint(b, 31, 10), 'mnc': bits_uint(b, 41, 14),\n        'nbcast':\
+      \ bits_uint(b, 55, 2), 'load': bits_uint(b, 57, 2), 'late': bits_uint(b, 59,\
+      \ 1)}\n\n\ndef parse_sysinfo(b):\n    d = {'carrier': bits_uint(b, 4, 12), 'band':\
+      \ bits_uint(b, 16, 4), 'offset': bits_uint(b, 20, 2),\n         'duplex': bits_uint(b,\
+      \ 22, 3), 'reverse': bits_uint(b, 25, 1), 'n_scch': bits_uint(b, 26, 2),\n \
+      \        'txpwr': bits_uint(b, 28, 3), 'rxlev_min': bits_uint(b, 31, 4), 'acc_par':\
+      \ bits_uint(b, 35, 4),\n         'dl_timeout': bits_uint(b, 39, 4), 'cck_flag':\
+      \ bits_uint(b, 43, 1), 'hf_or_cck': bits_uint(b, 44, 16),\n         'opt': bits_uint(b,\
+      \ 60, 2), 'opt_val': bits_uint(b, 62, 20),\n         'la': bits_uint(b, 82,\
+      \ 14), 'subscr': bits_uint(b, 96, 16), 'service': bits_uint(b, 112, 12)}\n \
+      \   d['dl_hz'] = d['band'] * 100e6 + d['carrier'] * 25e3 + OFFSET_HZ[d['offset']]\n\
+      \    dup = DUPLEX_KHZ.get(d['duplex'], {}).get(d['band'])\n    d['ul_hz'] =\
+      \ None if dup is None else d['dl_hz'] + (1 if d['reverse'] else -1) * dup *\
+      \ 1e3\n    return d\n\n\ndef fmt_sysinfo(d):\n    srv = [name for bit, name\
+      \ in SERVICES if d['service'] >> bit & 1]\n    ul = ('%.4f MHz' % (d['ul_hz']\
+      \ / 1e6)) if d['ul_hz'] is not None else 'n/a (reserved duplex code)'\n    return\
+      \ [\n        'Main carrier : %d  band %d  offset %+.2f kHz  ->  DL %.4f MHz\
+      \   UL %s' % (\n            d['carrier'], d['band'], OFFSET_HZ[d['offset']]\
       \ / 1e3, d['dl_hz'] / 1e6, ul),\n        'Location area: %d   subscriber classes\
       \ %s   secondary CCHs %d' % (\n            d['la'], format(d['subscr'], '016b'),\
       \ d['n_scch']),\n        'Access       : MS max %s   RXLEV_ACCESS_MIN %d dBm\
@@ -2144,27 +2457,37 @@ blocks:
       \        gr.basic_block.__init__(self, name='TETRA CRC + Cell Info', in_sig=None,\
       \ out_sig=None)\n        self.message_port_register_in(pmt.intern('bsch'))\n\
       \        self.message_port_register_in(pmt.intern('hd'))\n        self.message_port_register_in(pmt.intern('bsch_raw'))\n\
-      \        self.message_port_register_out(pmt.intern('cell'))\n        self.message_port_register_out(pmt.intern('tdma'))\n\
-      \        self.message_port_register_out(pmt.intern('out'))\n        self.set_msg_handler(pmt.intern('bsch'),\
-      \ self._on_bsch)\n        self.set_msg_handler(pmt.intern('hd'), self._on_hd)\n\
-      \        self.set_msg_handler(pmt.intern('bsch_raw'), self._on_bsch_raw)\n \
-      \       # raw <-> decoded BSCH matching by sequence number (never reset: the\
-      \ chain stays 1:1)\n        self._n_raw = 0\n        self._n_dec = 0\n     \
-      \   self._raw_bit = {}      # seq -> absolute tag bit, raw PDU seen first (the\
-      \ normal case)\n        self._pend = {}         # seq -> SYNC dict, decoded\
-      \ PDU seen first (rare thread race)\n        self.tdma_ref = None    # (tn,\
-      \ fn, slot_bit, wall time) of the last published reference\n        self.rf_hz\
-      \ = float(rf_hz)\n        self.stats_every = float(stats_every)\n        self.show_pdus\
-      \ = bool(show_pdus)\n        self._rf_seen = self.rf_hz\n        self._mtx =\
-      \ threading.Lock()\n        self._stop_ev = threading.Event()\n        self._thr\
-      \ = None\n        self._reset()\n\n    def _reset(self):\n        self.cell\
-      \ = None            # last good SYNC dict\n        self.key = None         \
-      \    # confirmed cell key\n        self.key_cand = None        # (key, count)\
-      \ waiting for a second identical copy\n        self.si = None\n        self.si_lines\
-      \ = None\n        self.si_cand = None\n        self.acc_def = {}\n        self.mac_cnt\
-      \ = {}\n        self.n = dict(bsch=0, bsch_ok=0, hd=0, hd_ok=0)\n        self.t0\
-      \ = time.time()\n\n    # ------------------------------------------------------------\
-      \ helpers\n    def _emit(self, text):\n        _say(text)\n        b = np.frombuffer((text\
+      \        self.message_port_register_in(pmt.intern('schf'))\n        self.message_port_register_out(pmt.intern('cell'))\n\
+      \        self.message_port_register_out(pmt.intern('tdma'))\n        self.message_port_register_out(pmt.intern('out'))\n\
+      \        self.set_msg_handler(pmt.intern('bsch'), self._on_bsch)\n        self.set_msg_handler(pmt.intern('hd'),\
+      \ self._on_hd)\n        self.set_msg_handler(pmt.intern('bsch_raw'), self._on_bsch_raw)\n\
+      \        self.set_msg_handler(pmt.intern('schf'), self._on_schf)\n        #\
+      \ raw <-> decoded BSCH matching by sequence number (never reset: the chain stays\
+      \ 1:1)\n        self._n_raw = 0\n        self._n_dec = 0\n        self._raw_bit\
+      \ = {}      # seq -> absolute tag bit, raw PDU seen first (the normal case)\n\
+      \        self._pend = {}         # seq -> SYNC dict, decoded PDU seen first\
+      \ (rare thread race)\n        self.tdma_ref = None    # (tn, fn, slot_bit, wall\
+      \ time) of the last published reference\n        self.rf_hz = float(rf_hz)\n\
+      \        self.stats_every = float(stats_every)\n        self.show_pdus = bool(show_pdus)\n\
+      \        self._rf_seen = self.rf_hz\n        self._mtx = threading.Lock()\n\
+      \        self._stop_ev = threading.Event()\n        self._thr = None\n     \
+      \   self._reset()\n\n    def _reset(self):\n        self.cell = None       \
+      \     # last good SYNC dict\n        self.key = None             # confirmed\
+      \ cell key\n        self.key_cand = None        # (key, count) waiting for a\
+      \ second identical copy\n        self.si = None\n        self.si_lines = None\n\
+      \        self.si_cand = None\n        self.acc_def = {}\n        self.mac_cnt\
+      \ = {}\n        self.n = dict(bsch=0, bsch_ok=0, hd=0, hd_ok=0, f=0, f_ok=0,\
+      \ fcs_bad=0, frag_lost=0, nwrk_bad=0)\n        self.frag = {}              #\
+      \ timeslot -> {'bits': [...], 't': wall time}\n        self.pd_cnt = {}    \
+      \        # TL-SDU protocol counts (only MLE is parsed)\n        self.nwrk =\
+      \ None            # serving-cell part of the last D-NWRK-BROADCAST\n       \
+      \ self.nwrk_n = 0\n        self.nwrk_t = None\n        self.nb = {}        \
+      \        # neighbour cell id -> (entry dict, last seen)\n        self.nb_cand\
+      \ = {}           # neighbour cell id -> entry waiting for a second identical\
+      \ copy\n        self._mq = []               # MAC blocks waiting to be put back\
+      \ in time order\n        self._mq_newest = None\n        self.t0 = time.time()\n\
+      \n    # ------------------------------------------------------------ helpers\n\
+      \    def _emit(self, text):\n        _say(text)\n        b = np.frombuffer((text\
       \ + '\\n').encode('ascii', 'replace'), dtype=np.uint8)\n        self.message_port_pub(pmt.intern('out'),\
       \ pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(b), b.tolist())))\n\n    @staticmethod\n\
       \    def _stamp():\n        return '[TETRA %s]' % time.strftime('%H:%M:%S')\n\
@@ -2221,8 +2544,9 @@ blocks:
       \     self.n['hd'] += 1\n            if self.key is None or len(b) < 140 or\
       \ not crc_ok(b[:140]):\n                return\n            self.n['hd_ok']\
       \ += 1\n            b = b[:124]\n            mt = bits_uint(b, 0, 2)\n     \
-      \       name = MAC_TYPE[mt]\n            if mt == 2:\n                bt = bits_uint(b,\
-      \ 2, 2)\n                name = {0: 'SYSINFO', 1: 'ACCESS-DEFINE'}.get(bt, 'broadcast\
+      \       name = MAC_TYPE[mt]\n            if mt in (0, 1):\n                self._mac_queue(pmt.car(msg),\
+      \ b, 124)\n            if mt == 2:\n                bt = bits_uint(b, 2, 2)\n\
+      \                name = {0: 'SYSINFO', 1: 'ACCESS-DEFINE'}.get(bt, 'broadcast\
       \ type %d' % bt)\n                if bt == 0:\n                    d = parse_sysinfo(b)\n\
       \                    lines = fmt_sysinfo(d)\n                    stable = lines[:-1]\
       \                # hyperframe counter changes every minute\n               \
@@ -2243,63 +2567,183 @@ blocks:
       \ 0) + 1\n            if self.show_pdus and name not in ('SYSINFO', 'ACCESS-DEFINE'):\n\
       \                self._emit('%s %s %s' % (self._stamp(), name, ''.join(str(x)\
       \ for x in b[:40])))\n\n    # ------------------------------------------------------------\
+      \ SCH/F (full-slot signalling)\n    def _on_schf(self, msg):\n        with self._mtx:\n\
+      \            self._check_retune()\n            b = self._bits(msg)\n       \
+      \     self.n['f'] += 1\n            if self.key is None or len(b) < 284 or not\
+      \ crc_ok(b[:284]):\n                return                         # voice bursts\
+      \ land here too and fail the CRC\n            self.n['f_ok'] += 1\n        \
+      \    b = b[:268]\n            mt = bits_uint(b, 0, 2)\n            name = 'SCH/F\
+      \ ' + MAC_TYPE[mt]\n            self.mac_cnt[name] = self.mac_cnt.get(name,\
+      \ 0) + 1\n            if mt in (0, 1):\n                self._mac_queue(pmt.car(msg),\
+      \ b, 268)\n\n    def _mac_queue(self, meta, b, end):\n        \"\"\"Blocks 1\
+      \ and 2 of a burst come from two cutters 16 bits apart and can arrive swapped.\n\
+      \        Their rx_time says where they really were, so hold each block for one\
+      \ slot and hand\n        them to the MAC layer in true time order (a MAC-END\
+      \ must follow its MAC-RESOURCE).\"\"\"\n        bit = self._abs_bit(meta)\n\
+      \        if bit is None:\n            self._mac_block(b, end, 0)\n         \
+      \   return\n        self._mq.append((bit, end, b, time.time()))\n        self._mq_newest\
+      \ = bit if self._mq_newest is None else max(self._mq_newest, bit)\n        self._mq_flush(False)\n\
+      \n    def _mq_flush(self, by_age):\n        self._mq.sort(key=lambda e: e[0])\n\
+      \        now = time.time()\n        while self._mq and (self._mq[0][0] <= self._mq_newest\
+      \ - 300 or (by_age and now - self._mq[0][3] > 0.5)):\n            bit, end,\
+      \ b, _ = self._mq.pop(0)\n            self._mac_block(b, end, self._slot_from_bit(bit))\n\
+      \n    def _slot_of(self, meta):\n        \"\"\"Timeslot of a decoded block,\
+      \ from the rx_time its cutter stamped (0 = unknown)\"\"\"\n        return self._slot_from_bit(self._abs_bit(meta))\n\
+      \n    def _slot_from_bit(self, bit):\n        ref = self.tdma_ref\n        if\
+      \ bit is None or ref is None:\n            return 0\n        k = int(round((bit\
+      \ - CC_TAG - ref[2]) / 510.0))\n        return (ref[0] - 1 + k) % 4 + 1\n\n\
+      \    # ------------------------------------------------------------ MAC layer\n\
+      \    def _mac_block(self, b, end, slot):\n        \"\"\"Walk the MAC PDUs of\
+      \ one decoded block (124 or 268 bits)\"\"\"\n        now = time.time()\n   \
+      \     for s in [s for s, f in self.frag.items() if now - f['t'] > FRAG_MAX_AGE]:\n\
+      \            del self.frag[s]\n            self.n['frag_lost'] += 1\n      \
+      \  p = 0\n        try:\n            while p + 16 <= end:\n                mt\
+      \ = bits_uint(b, p, 2)\n                if mt == 0:\n                    p =\
+      \ self._mac_resource(b, p, end, slot, now)\n                elif mt == 1:\n\
+      \                    p = self._mac_frag_end(b, p, end, slot, now)\n        \
+      \        else:\n                    return                     # broadcast /\
+      \ U-SIGNAL: handled elsewhere or ignored\n                if p is None:\n  \
+      \                  return\n        except IndexError:\n            return\n\n\
+      \    def _mac_resource(self, b, p, end, slot, now):\n        q = p + 2\n   \
+      \     fill = b[q]; q += 2                    # fill-bit flag, position of grant\n\
+      \        enc = bits_uint(b, q, 2); q += 3       # encryption mode, random-access\
+      \ flag\n        ln = mac_len(bits_uint(b, q, 6)); q += 6\n        atype = bits_uint(b,\
+      \ q, 3); q += 3\n        if atype == 0 or ln is None:\n            return None\
+      \                        # null PDU: nothing more in this block\n        q +=\
+      \ ADDR_LEN[atype]\n        q += 1 + (4 if b[q] else 0)            # power control\n\
+      \        q += 1 + (8 if b[q] else 0)            # slot granting\n        if\
+      \ b[q]:                               # channel allocation\n            if enc:\n\
+      \                return None\n            q += 1 + chan_alloc_len(b, q + 1)\n\
+      \        else:\n            q += 1\n        stop = end if ln in ('frag', 'stolen')\
+      \ else min(end, p + 8 * ln)\n        if fill:\n            stop = strip_fill(b,\
+      \ q, stop)\n        if not enc and stop > q:\n            sdu = list(b[q:stop])\n\
+      \            if ln == 'frag':\n                self.frag[slot] = {'bits': sdu,\
+      \ 't': now}\n            else:\n                self._llc(sdu)\n        return\
+      \ None if ln in ('frag', 'stolen') else p + 8 * ln\n\n    def _mac_frag_end(self,\
+      \ b, p, end, slot, now):\n        is_end = b[p + 2]\n        fill = b[p + 3]\n\
+      \        if not is_end:                         # MAC-FRAG fills the rest of\
+      \ the block\n            stop = strip_fill(b, p + 4, end) if fill else end\n\
+      \            f = self.frag.get(slot)\n            if f is not None:\n      \
+      \          f['bits'] += list(b[p + 4:stop]); f['t'] = now\n            return\
+      \ None\n        q = p + 5                              # header, fill flag,\
+      \ position of grant\n        ln = mac_len(bits_uint(b, q, 6)); q += 6\n    \
+      \    if not isinstance(ln, int):\n            return None\n        q += 1 +\
+      \ (8 if b[q] else 0)            # slot granting\n        if b[q]:\n        \
+      \    q += 1 + chan_alloc_len(b, q + 1)\n        else:\n            q += 1\n\
+      \        stop = min(end, p + 8 * ln)\n        if fill:\n            stop = strip_fill(b,\
+      \ q, stop)\n        f = self.frag.pop(slot, None)\n        if f is not None:\n\
+      \            self._llc(f['bits'] + list(b[q:stop]))\n        return p + 8 *\
+      \ ln\n\n    # ------------------------------------------------------------ LLC\
+      \ and MLE\n    def _llc(self, sdu):\n        if len(sdu) < 4:\n            return\n\
+      \        t = bits_uint(sdu, 0, 4)\n        hdr = LLC_HDR.get(t)\n        if\
+      \ hdr is None:                        # advanced-link types: not used for broadcasts\n\
+      \            return\n        tl = sdu[hdr:]\n        if t >= 4:            \
+      \                 # basic link with FCS\n            if len(tl) < 32:\n    \
+      \            return\n            fcs, tl = bits_uint(tl, len(tl) - 32, 32),\
+      \ tl[:-32]\n            if fcs != llc_fcs(tl):\n                self.n['fcs_bad']\
+      \ += 1\n                return\n        if len(tl) < 6:\n            return\n\
+      \        pd = bits_uint(tl, 0, 3)\n        name = MLE_PD.get(pd, 'PD %d' % pd)\n\
+      \        if pd == 5:\n            name = MLE_PDUT.get(bits_uint(tl, 3, 3), 'MLE\
+      \ type %d' % bits_uint(tl, 3, 3))\n        self.pd_cnt[name] = self.pd_cnt.get(name,\
+      \ 0) + 1\n        if pd == 5 and bits_uint(tl, 3, 3) == 2:\n            self._nwrk(tl)\n\
+      \        # every other protocol (MM, CMCE, SNDCP, ...) is only counted, never\
+      \ parsed\n\n    def _nwrk(self, tl):\n        try:\n            d = parse_nwrk(tl)\n\
+      \        except IndexError:\n            self.n['nwrk_bad'] += 1\n         \
+      \   return\n        now = time.time()\n        self.nwrk, self.nwrk_t = d, now\n\
+      \        self.nwrk_n += 1\n        for c in d['cells']:\n            entry =\
+      \ tuple(sorted(c.items()))\n            known = self.nb.get(c['id'])\n     \
+      \       if known is not None and known[0] == entry:\n                self.nb[c['id']]\
+      \ = (entry, now)\n            elif self.nb_cand.get(c['id']) == entry:   # second\
+      \ identical copy: accept\n                del self.nb_cand[c['id']]\n      \
+      \          self.nb[c['id']] = (entry, now)\n                self._emit('%s NEIGHBOUR\
+      \ %s' % (self._stamp(), self._fmt_nb(dict(entry))))\n            else:\n   \
+      \             self.nb_cand[c['id']] = entry\n\n    def _fmt_nb(self, c):\n \
+      \       if 'band' in c:\n            band, off = c['band'], c['offset']\n  \
+      \      elif self.si:\n            band, off = self.si['band'], self.si['offset']\n\
+      \        else:\n            band = off = None\n        dl = carrier_hz(band,\
+      \ c['carrier'], off) if band is not None else None\n        s = 'cell %2d: carrier\
+      \ %4d' % (c['id'], c['carrier'])\n        s += ('  DL %.4f MHz' % (dl / 1e6))\
+      \ if dl else '  DL ? (no SYSINFO yet)'\n        if 'duplex' in c and dl:\n \
+      \           dup = DUPLEX_KHZ.get(c['duplex'], {}).get(band)\n            if\
+      \ dup is not None:\n                s += '  UL %.4f MHz' % ((dl + (1 if c['reverse']\
+      \ else -1) * dup * 1e3) / 1e6)\n        if 'mcc' in c or 'mnc' in c:\n     \
+      \       s += '  MCC %s MNC %s' % (c.get('mcc', '-'), c.get('mnc', '-'))\n  \
+      \      if 'la' in c:\n            s += '  LA %d' % c['la']\n        s += ' \
+      \ load %s  synchronised %s' % (CELL_LOAD[c['load']], 'yes' if c['synced'] else\
+      \ 'no')\n        if 'rxlev' in c:\n            s += '  RXLEV_ACCESS_MIN %d dBm'\
+      \ % (-125 + 5 * c['rxlev'])\n        return s\n\n    # ------------------------------------------------------------\
       \ status panel (own thread)\n    def start(self):\n        self._stop_ev.clear()\n\
       \        if self.stats_every > 0:\n            self._thr = threading.Thread(target=self._panel_loop,\
       \ daemon=True)\n            self._thr.start()\n        return True\n\n    def\
       \ stop(self):\n        self._stop_ev.set()\n        return True\n\n    def _panel_loop(self):\n\
       \        while not self._stop_ev.wait(self.stats_every):\n            with self._mtx:\n\
-      \                self._check_retune()\n                txt = self._status(time.time())\n\
-      \            _say(txt)\n\n    def _status(self, now):\n        bar = '=' * 76\n\
-      \        L = [bar, ' TETRA cell status   %s   (running %d s)' % (time.strftime('%H:%M:%S'),\
-      \ now - self.t0), bar]\n        if self.rf_hz > 0:\n            L.append(' Tuned\
-      \        : %.4f MHz' % (self.rf_hz / 1e6))\n        c = self.cell\n        if\
-      \ c is None:\n            L.append(' No SYNC decoded yet: check frequency /\
-      \ ppm / gain, the polarity chooser and the plots.')\n        else:\n       \
-      \     L.append(' Network      : MCC %d  MNC %d (0x%04X)  colour code %d%s' %\
-      \ (\n                c['mcc'], c['mnc'], c['mnc'], c['cc'], '   [MCC 510 = Indonesia]'\
-      \ if c['mcc'] == 510 else ''))\n            L.append(' SYNC         : %s; %s;\
-      \ %d reserved frame(s); U-plane DTX %s; frame-18 ext %s' % (\n             \
-      \   SYS_CODE.get(c['syscode'], 'system code %d' % c['syscode']), SHARING[c['sharing']],\n\
-      \                RES_FRAMES[c['resv']], 'yes' if c['dtx'] else 'no', 'yes' if\
-      \ c['f18ext'] else 'no'))\n            L.append(' MLE          : cell load %s;\
-      \ neighbour-cell broadcast %s; late entry %s' % (\n                CELL_LOAD[c['load']],\
-      \ NEIGH_BCAST[c['nbcast']], 'yes' if c['late'] else 'no'))\n            L.append('\
-      \ TDMA time    : TN %d  FN %2d  MN %2d (at last SYNC)' % (c['tn'], c['fn'],\
-      \ c['mn']))\n            r = self.tdma_ref\n            L.append(' TCH/S ref\
-      \    : %s' % ('none yet (needs a CRC-good SYNC of the confirmed cell)' if r\
-      \ is None else\n                                          'TN %d FN %d at bit\
-      \ %d, %.0f s ago' % (r[0], r[1], r[2], now - r[3])))\n        if self.si_lines:\n\
-      \            for ln in self.si_lines:\n                L.append(' ' + ln)\n\
-      \            if self.rf_hz > 0 and self.si:\n                dif = self.si['dl_hz']\
-      \ - self.rf_hz\n                if abs(dif) < 1e3:\n                    note\
-      \ = '  (you are on the main carrier, receiver calibrated)'\n               \
-      \ elif abs(dif) < 12.5e3:\n                    note = ('\\n                You\
-      \ ARE on the main carrier; the receiver is %+.1f kHz off.'\n               \
-      \             '\\n                Add %+.1f ppm to Freq corr and set tetra_freq\
-      \ to %.4f MHz'\n                            ' (if it gets worse, the sign is\
-      \ the other way)' % (\n                                -dif / 1e3, dif / self.rf_hz\
-      \ * 1e6, self.si['dl_hz'] / 1e6))\n                else:\n                 \
-      \   note = '  (secondary carrier: the main carrier is elsewhere)'\n        \
-      \        L.append(' Tuning check : announced main carrier minus tuned frequency\
-      \ = %+.1f kHz%s' % (dif / 1e3, note))\n        elif c is not None:\n       \
-      \     L.append(' SYSINFO      : not decoded yet (needs two identical copies;\
-      \ a few seconds)')\n        for v in self.acc_def.values():\n            L.append('\
-      \ Access def.  : ' + v)\n        if self.mac_cnt:\n            L.append(' Half-slot\
-      \ PDUs: ' + ', '.join('%s %d' % kv for kv in sorted(self.mac_cnt.items(), key=lambda\
-      \ kv: -kv[1])))\n        L.append(' Decoder      : BSCH cuts %d (CRC ok %d)\
-      \   half-slot cuts %d (CRC ok %d)' % (\n            self.n['bsch'], self.n['bsch_ok'],\
-      \ self.n['hd'], self.n['hd_ok']))\n        if self.n['bsch'] == 0:\n       \
-      \     L.append(' NOTE         : no sync training sequence seen - not TETRA,\
-      \ not locked, too weak, or wrong polarity')\n        elif self.n['bsch_ok']\
+      \                self._check_retune()\n                self._mq_flush(True)\n\
+      \                txt = self._status(time.time())\n            _say(txt)\n\n\
+      \    def _status(self, now):\n        bar = '=' * 76\n        L = [bar, ' TETRA\
+      \ cell status   %s   (running %d s)' % (time.strftime('%H:%M:%S'), now - self.t0),\
+      \ bar]\n        if self.rf_hz > 0:\n            L.append(' Tuned        : %.4f\
+      \ MHz' % (self.rf_hz / 1e6))\n        c = self.cell\n        if c is None:\n\
+      \            L.append(' No SYNC decoded yet: check frequency / ppm / gain, the\
+      \ polarity chooser and the plots.')\n        else:\n            L.append(' Network\
+      \      : MCC %d  MNC %d (0x%04X)  colour code %d%s' % (\n                c['mcc'],\
+      \ c['mnc'], c['mnc'], c['cc'], '   [MCC 510 = Indonesia]' if c['mcc'] == 510\
+      \ else ''))\n            L.append(' SYNC         : %s; %s; %d reserved frame(s);\
+      \ U-plane DTX %s; frame-18 ext %s' % (\n                SYS_CODE.get(c['syscode'],\
+      \ 'system code %d' % c['syscode']), SHARING[c['sharing']],\n               \
+      \ RES_FRAMES[c['resv']], 'yes' if c['dtx'] else 'no', 'yes' if c['f18ext'] else\
+      \ 'no'))\n            L.append(' MLE          : cell load %s; neighbour-cell\
+      \ broadcast %s; late entry %s' % (\n                CELL_LOAD[c['load']], NEIGH_BCAST[c['nbcast']],\
+      \ 'yes' if c['late'] else 'no'))\n            L.append(' TDMA time    : TN %d\
+      \  FN %2d  MN %2d (at last SYNC)' % (c['tn'], c['fn'], c['mn']))\n         \
+      \   r = self.tdma_ref\n            L.append(' TCH/S ref    : %s' % ('none yet\
+      \ (needs a CRC-good SYNC of the confirmed cell)' if r is None else\n       \
+      \                                   'TN %d FN %d at bit %d, %.0f s ago' % (r[0],\
+      \ r[1], r[2], now - r[3])))\n        if self.si_lines:\n            for ln in\
+      \ self.si_lines:\n                L.append(' ' + ln)\n            if self.rf_hz\
+      \ > 0 and self.si:\n                dif = self.si['dl_hz'] - self.rf_hz\n  \
+      \              if abs(dif) < 1e3:\n                    note = '  (you are on\
+      \ the main carrier, receiver calibrated)'\n                elif abs(dif) < 12.5e3:\n\
+      \                    note = ('\\n                You ARE on the main carrier;\
+      \ the receiver is %+.1f kHz off.'\n                            '\\n        \
+      \        Add %+.1f ppm to Freq corr and set tetra_freq to %.4f MHz'\n      \
+      \                      ' (if it gets worse, the sign is the other way)' % (\n\
+      \                                -dif / 1e3, dif / self.rf_hz * 1e6, self.si['dl_hz']\
+      \ / 1e6))\n                else:\n                    note = '  (secondary carrier:\
+      \ the main carrier is elsewhere)'\n                L.append(' Tuning check :\
+      \ announced main carrier minus tuned frequency = %+.1f kHz%s' % (dif / 1e3,\
+      \ note))\n        elif c is not None:\n            L.append(' SYSINFO      :\
+      \ not decoded yet (needs two identical copies; a few seconds)')\n        for\
+      \ v in self.acc_def.values():\n            L.append(' Access def.  : ' + v)\n\
+      \        if self.mac_cnt:\n            L.append(' MAC PDUs     : ' + ', '.join('%s\
+      \ %d' % kv for kv in sorted(self.mac_cnt.items(), key=lambda kv: -kv[1])))\n\
+      \        if self.pd_cnt:\n            L.append(' Signalling   : ' + ', '.join('%s\
+      \ %d' % kv for kv in sorted(self.pd_cnt.items(), key=lambda kv: -kv[1]))\n \
+      \                    + '   (only MLE broadcasts are decoded)')\n        for\
+      \ cid in [i for i, (e, t) in self.nb.items() if now - t > NB_EXPIRE]:\n    \
+      \        del self.nb[cid]\n        if self.nwrk is not None:\n            L.append('\
+      \ Neighbours   : %d cell(s) from %d D-NWRK-BROADCAST, last %.0f s ago; serving\
+      \ cell: '\n                     'reselect params 0x%04X, load %s' % (len(self.nb),\
+      \ self.nwrk_n, now - self.nwrk_t,\n                                        \
+      \                  self.nwrk['resel'], CELL_LOAD[self.nwrk['load']]))\n    \
+      \        for cid in sorted(self.nb):\n                L.append('           \
+      \     ' + self._fmt_nb(dict(self.nb[cid][0])))\n        elif c is not None:\n\
+      \            L.append(' Neighbours   : no D-NWRK-BROADCAST heard yet (the cell\
+      \ sends it every so often on the MCCH)')\n        L.append(' Decoder      :\
+      \ BSCH cuts %d (CRC ok %d)   half-slot cuts %d (CRC ok %d)   full-slot cuts\
+      \ %d (CRC ok %d)' % (\n            self.n['bsch'], self.n['bsch_ok'], self.n['hd'],\
+      \ self.n['hd_ok'], self.n['f'], self.n['f_ok']))\n        if self.n['bsch']\
+      \ == 0:\n            L.append(' NOTE         : no sync training sequence seen\
+      \ - not TETRA, not locked, too weak, or wrong polarity')\n        elif self.n['bsch_ok']\
       \ == 0:\n            L.append(' NOTE         : y seen but no BSCH passes CRC\
-      \ - SNR too low, ppm far off, or wrong polarity')\n        L.append(' (half-slot\
-      \ cuts include correlator false hits on random data; a low CRC-ok ratio there\
-      \ is normal)')\n        L.append(bar)\n        return '\\n'.join(L)\n"
+      \ - SNR too low, ppm far off, or wrong polarity')\n        L.append(' (cuts\
+      \ include correlator false hits and, for full slots, every voice burst: a low\
+      \ CRC-ok ratio there is normal)')\n        L.append(bar)\n        return '\\\
+      n'.join(L)\n"
     affinity: ''
     alias: ''
-    comment: 'CRC-16 + SYNC/SYSINFO/ACCESS-DEFINE parsing -> console.
+    comment: 'CRC-16 + SYNC/SYSINFO/ACCESS-DEFINE + neighbour cells (D-NWRK-BROADCAST).
 
-      Publishes the cell key for the SCH/HD descrambler.
+      Publishes the cell key and the TDMA reference.
 
       Status panel every stats_every s'
     maxoutbuf: '0'
@@ -2309,14 +2753,15 @@ blocks:
     stats_every: '10.0'
   states:
     _io_cache: '(''TETRA CRC + Cell Info'', ''blk'', [(''rf_hz'', ''0.0''), (''stats_every'',
-      ''10.0''), (''show_pdus'', ''False'')], [(''bsch_raw'', ''message'', 1), (''bsch'',
-      ''message'', 1), (''hd'', ''message'', 1)], [(''out'', ''message'', 1), (''tdma'',
-      ''message'', 1), (''cell'', ''message'', 1)], ''TETRA cell info: CRC check +
-      SYNC/SYSINFO parsing of stock-decoded blocks'', [''rf_hz'', ''show_pdus'', ''stats_every''])'
+      ''10.0''), (''show_pdus'', ''False'')], [(''bsch'', ''message'', 1), (''bsch_raw'',
+      ''message'', 1), (''schf'', ''message'', 1), (''hd'', ''message'', 1)], [(''out'',
+      ''message'', 1), (''tdma'', ''message'', 1), (''cell'', ''message'', 1)], ''TETRA
+      cell info: CRC check + SYNC/SYSINFO parsing of stock-decoded blocks'', [''rf_hz'',
+      ''show_pdus'', ''stats_every''])'
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [2080, 1416.0]
+    coordinate: [2072, 1624.0]
     rotation: 0
     state: enabled
 - name: tetra_fec
@@ -2384,7 +2829,10 @@ blocks:
       \    VIT_TABLE += [2.0 * ((_o >> (3 - _g)) & 1) - 1.0 for _g in range(4)]\n\n\
       # trellis steps per block = type-2 bits = info + 16 CRC + 4 tail\nBSCH_STEPS\
       \ = 60 + 16 + 4      # 80  -> 120 sent bits\nHD_STEPS = 124 + 16 + 4       #\
-      \ 144 -> 216 sent bits\n"
+      \ 144 -> 216 sent bits\n\n# ----------------------------------------------------------------\
+      \ SCH/F (full-slot signalling)\n# 268 info + 16 CRC + 4 tail = 288 type-2 bits\
+      \ -> 432 sent bits; interleaver a = 103\nDEINT_432 = deint_table(432, 103)\n\
+      F_STEPS = 268 + 16 + 4\n"
   states:
     bus_sink: false
     bus_source: false
@@ -2598,6 +3046,7 @@ connections:
 - [cut_bsch, pdus, bsch_p2s, pdus]
 - [cut_bsch, pdus, tetra_dec, bsch_raw]
 - [cut_tch, pdus, epy_block_0, tch]
+- [cut_tch, pdus, schf_join, pdu]
 - [d_bsch, '0', add_bsch, '0']
 - [d_nb1, '0', add_blk1, '0']
 - [d_nb2, '0', add_blk2, '2']
@@ -2645,6 +3094,24 @@ connections:
 - [pol_mul, '0', d_tch, '0']
 - [rtlsdr_source, '0', qtgui_freq_sink_x_0, '0']
 - [rtlsdr_source, '0', xlate_0, '0']
+- [schf_deint, '0', schf_dp3, '0']
+- [schf_descr, '0', schf_v2s, '0']
+- [schf_dp3, '0', schf_dp8, '0']
+- [schf_dp3, '1', schf_dp8, '1']
+- [schf_dp3, '2', schf_dp8, '4']
+- [schf_dp8, '0', schf_vit, '0']
+- [schf_erase, '0', schf_dp8, '2']
+- [schf_erase, '0', schf_dp8, '3']
+- [schf_erase, '0', schf_dp8, '5']
+- [schf_erase, '0', schf_dp8, '6']
+- [schf_erase, '0', schf_dp8, '7']
+- [schf_join, pdu, schf_p2s, pdus]
+- [schf_p2s, '0', schf_s2v, '0']
+- [schf_s2t, '0', schf_t2p, '0']
+- [schf_s2v, '0', schf_descr, '0']
+- [schf_t2p, pdus, tetra_dec, schf]
+- [schf_v2s, '0', schf_deint, '0']
+- [schf_vit, '0', schf_s2t, '0']
 - [soft_0, '0', pol_mul, '0']
 - [tetra_dec, cell, cell_to_var, inpair]
 - [tetra_dec, tdma, epy_block_0, tdma]

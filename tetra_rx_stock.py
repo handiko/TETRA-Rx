@@ -30,6 +30,7 @@ from gnuradio.eng_arg import eng_float, intx
 from gnuradio import gr, pdu
 from gnuradio import pdu
 import pmt
+import pmt, numpy as np
 from gnuradio import soapy
 from gnuradio import trellis
 from gnuradio import trellis, digital
@@ -102,6 +103,7 @@ class tetra_rx_stock(gr.top_block, Qt.QWidget):
         self.pol = pol = 1.0
         self.hd_scr = hd_scr = tetra_fec.scr_pm(cell_key, 216)
         self.fine_hz = fine_hz = 0
+        self.f_scr = f_scr = tetra_fec.scr_pm(cell_key, 432)
         self.dqpsk_diff = dqpsk_diff = digital.constellation_calcdist([(0.7071067811865476+0.7071067811865476j), (-0.7071067811865476+0.7071067811865476j), (0.7071067811865476-0.7071067811865476j), (-0.7071067811865476-0.7071067811865476j)], [0, 1, 2, 3], 4, 1, digital.constellation.AMPLITUDE_NORMALIZATION).base()
         self.chan_cut = chan_cut = 13.5e3
         self.ch_rate = ch_rate = samp_rate/decim
@@ -208,6 +210,18 @@ class tetra_rx_stock(gr.top_block, Qt.QWidget):
         self.top_layout.addWidget(self._tetra_freq_entry_tool_bar)
         self.tetra_dec = tetra_dec.blk(rf_hz=tetra_freq + fine_hz*1e3, stats_every=10.0, show_pdus=False)
         self.soft_0 = digital.constellation_soft_decoder_cf(dqpsk_diff, -1)
+        self.schf_vit = trellis.viterbi_combined_fb(trellis.fsm(2, 16, 16, tetra_fec.NS, tetra_fec.OS), tetra_fec.F_STEPS, 0, 0, 4, tetra_fec.VIT_TABLE, digital.TRELLIS_EUCLIDEAN)
+        self.schf_v2s = blocks.vector_to_stream(gr.sizeof_float*1, 432)
+        self.schf_t2p = pdu.tagged_stream_to_pdu(gr.types.byte_t, 'blk')
+        self.schf_s2v = blocks.stream_to_vector(gr.sizeof_float*1, 432)
+        self.schf_s2t = blocks.stream_to_tagged_stream(gr.sizeof_char, 1, tetra_fec.F_STEPS, "blk")
+        self.schf_p2s = pdu.pdu_to_tagged_stream(gr.types.float_t, 'packet_len')
+        self.schf_join = pdu.pdu_lambda(lambda x: np.concatenate((x[:216], x[268:484])) if len(x) == 484 else np.zeros(432, np.float32), "UVEC", pmt.intern("key"))
+        self.schf_erase = blocks.null_source(gr.sizeof_float*1)
+        self.schf_dp8 = blocks.interleave(gr.sizeof_float*1, 1)
+        self.schf_dp3 = blocks.deinterleave(gr.sizeof_float*1, 1)
+        self.schf_descr = blocks.multiply_const_vff(f_scr)
+        self.schf_deint = trellis.permutation(432, tetra_fec.DEINT_432, 1, gr.sizeof_float*1)
         self.rtlsdr_source = None
         dev = 'driver=rtlsdr'
         stream_args = 'bufflen=16384'
@@ -438,7 +452,7 @@ class tetra_rx_stock(gr.top_block, Qt.QWidget):
             0, 0, 0, 0, 0]
         markers = [0, 0, 0, 0, 0,
             0, 0, 0, 0, 0]
-        alphas = [1.0, 1.0, 1.0, 1.0, 1.0,
+        alphas = [0.25, 1.0, 1.0, 1.0, 1.0,
             1.0, 1.0, 1.0, 1.0, 1.0]
 
         for i in range(1):
@@ -490,7 +504,10 @@ class tetra_rx_stock(gr.top_block, Qt.QWidget):
         self.msg_connect((self.cut_bsch, 'pdus'), (self.bsch_p2s, 'pdus'))
         self.msg_connect((self.cut_bsch, 'pdus'), (self.tetra_dec, 'bsch_raw'))
         self.msg_connect((self.cut_tch, 'pdus'), (self.epy_block_0, 'tch'))
+        self.msg_connect((self.cut_tch, 'pdus'), (self.schf_join, 'pdu'))
         self.msg_connect((self.hd_t2p, 'pdus'), (self.tetra_dec, 'hd'))
+        self.msg_connect((self.schf_join, 'pdu'), (self.schf_p2s, 'pdus'))
+        self.msg_connect((self.schf_t2p, 'pdus'), (self.tetra_dec, 'schf'))
         self.msg_connect((self.tetra_dec, 'cell'), (self.cell_to_var, 'inpair'))
         self.msg_connect((self.tetra_dec, 'tdma'), (self.epy_block_0, 'tdma'))
         self.connect((self.add_blk1, 0), (self.cut_blk1, 0))
@@ -500,15 +517,15 @@ class tetra_rx_stock(gr.top_block, Qt.QWidget):
         self.connect((self.analog_agc_xx_0, 0), (self.fll_0, 0))
         self.connect((self.bsch_deint, 0), (self.bsch_dp3, 0))
         self.connect((self.bsch_descr, 0), (self.bsch_v2s, 0))
-        self.connect((self.bsch_dp3, 1), (self.bsch_dp8, 1))
         self.connect((self.bsch_dp3, 0), (self.bsch_dp8, 0))
         self.connect((self.bsch_dp3, 2), (self.bsch_dp8, 4))
+        self.connect((self.bsch_dp3, 1), (self.bsch_dp8, 1))
         self.connect((self.bsch_dp8, 0), (self.bsch_vit, 0))
         self.connect((self.bsch_erase, 0), (self.bsch_dp8, 2))
-        self.connect((self.bsch_erase, 0), (self.bsch_dp8, 7))
-        self.connect((self.bsch_erase, 0), (self.bsch_dp8, 5))
         self.connect((self.bsch_erase, 0), (self.bsch_dp8, 3))
+        self.connect((self.bsch_erase, 0), (self.bsch_dp8, 5))
         self.connect((self.bsch_erase, 0), (self.bsch_dp8, 6))
+        self.connect((self.bsch_erase, 0), (self.bsch_dp8, 7))
         self.connect((self.bsch_p2s, 0), (self.bsch_s2v, 0))
         self.connect((self.bsch_s2t, 0), (self.bsch_t2p, 0))
         self.connect((self.bsch_s2v, 0), (self.bsch_descr, 0))
@@ -525,29 +542,29 @@ class tetra_rx_stock(gr.top_block, Qt.QWidget):
         self.connect((self.d_sb2, 0), (self.add_blk2, 1))
         self.connect((self.d_tch, 0), (self.add_tch, 1))
         self.connect((self.diff_0, 0), (self.vv_dly, 0))
-        self.connect((self.diff_0, 0), (self.vv_pow, 1))
         self.connect((self.diff_0, 0), (self.vv_pow, 0))
-        self.connect((self.diff_0, 0), (self.vv_pow, 3))
         self.connect((self.diff_0, 0), (self.vv_pow, 2))
+        self.connect((self.diff_0, 0), (self.vv_pow, 1))
+        self.connect((self.diff_0, 0), (self.vv_pow, 3))
         self.connect((self.digital_linear_equalizer_0, 0), (self.diff_0, 0))
         self.connect((self.epy_block_0, 0), (self.audio_sink_0, 0))
         self.connect((self.epy_block_0, 0), (self.audio_sink_0, 1))
         self.connect((self.fll_0, 0), (self.clock_0, 0))
         self.connect((self.fll_0, 3), (self.null_ph, 1))
         self.connect((self.fll_0, 2), (self.null_ph, 0))
-        self.connect((self.fll_0, 1), (self.num_0, 1))
         self.connect((self.fll_0, 1), (self.num_0, 0))
+        self.connect((self.fll_0, 1), (self.num_0, 1))
         self.connect((self.hd_deint, 0), (self.hd_dp3, 0))
         self.connect((self.hd_descr, 0), (self.hd_v2s, 0))
         self.connect((self.hd_dp3, 0), (self.hd_dp8, 0))
         self.connect((self.hd_dp3, 2), (self.hd_dp8, 4))
         self.connect((self.hd_dp3, 1), (self.hd_dp8, 1))
         self.connect((self.hd_dp8, 0), (self.hd_vit, 0))
-        self.connect((self.hd_erase, 0), (self.hd_dp8, 6))
+        self.connect((self.hd_erase, 0), (self.hd_dp8, 7))
         self.connect((self.hd_erase, 0), (self.hd_dp8, 3))
         self.connect((self.hd_erase, 0), (self.hd_dp8, 5))
         self.connect((self.hd_erase, 0), (self.hd_dp8, 2))
-        self.connect((self.hd_erase, 0), (self.hd_dp8, 7))
+        self.connect((self.hd_erase, 0), (self.hd_dp8, 6))
         self.connect((self.hd_p2s, 0), (self.hd_s2v, 0))
         self.connect((self.hd_s2t, 0), (self.hd_t2p, 0))
         self.connect((self.hd_s2v, 0), (self.hd_descr, 0))
@@ -565,6 +582,22 @@ class tetra_rx_stock(gr.top_block, Qt.QWidget):
         self.connect((self.pol_mul, 0), (self.d_tch, 0))
         self.connect((self.rtlsdr_source, 0), (self.qtgui_freq_sink_x_0, 0))
         self.connect((self.rtlsdr_source, 0), (self.xlate_0, 0))
+        self.connect((self.schf_deint, 0), (self.schf_dp3, 0))
+        self.connect((self.schf_descr, 0), (self.schf_v2s, 0))
+        self.connect((self.schf_dp3, 0), (self.schf_dp8, 0))
+        self.connect((self.schf_dp3, 1), (self.schf_dp8, 1))
+        self.connect((self.schf_dp3, 2), (self.schf_dp8, 4))
+        self.connect((self.schf_dp8, 0), (self.schf_vit, 0))
+        self.connect((self.schf_erase, 0), (self.schf_dp8, 2))
+        self.connect((self.schf_erase, 0), (self.schf_dp8, 6))
+        self.connect((self.schf_erase, 0), (self.schf_dp8, 7))
+        self.connect((self.schf_erase, 0), (self.schf_dp8, 5))
+        self.connect((self.schf_erase, 0), (self.schf_dp8, 3))
+        self.connect((self.schf_p2s, 0), (self.schf_s2v, 0))
+        self.connect((self.schf_s2t, 0), (self.schf_t2p, 0))
+        self.connect((self.schf_s2v, 0), (self.schf_descr, 0))
+        self.connect((self.schf_v2s, 0), (self.schf_deint, 0))
+        self.connect((self.schf_vit, 0), (self.schf_s2t, 0))
         self.connect((self.soft_0, 0), (self.pol_mul, 0))
         self.connect((self.vv_arg, 0), (self.vv_quarter, 0))
         self.connect((self.vv_avg, 0), (self.vv_arg, 0))
@@ -659,6 +692,7 @@ class tetra_rx_stock(gr.top_block, Qt.QWidget):
 
     def set_cell_key(self, cell_key):
         self.cell_key = cell_key
+        self.set_f_scr(tetra_fec.scr_pm(self.cell_key, 432))
         self.set_hd_scr(tetra_fec.scr_pm(self.cell_key, 216))
         self.epy_block_0.cell_key = self.cell_key
 
@@ -732,6 +766,13 @@ class tetra_rx_stock(gr.top_block, Qt.QWidget):
         self.fft_0.set_frequency_range((self.tetra_freq + self.fine_hz*1e3), self.ch_rate)
         self.tetra_dec.rf_hz = self.tetra_freq + self.fine_hz*1e3
         self.xlate_0.set_center_freq((self.tetra_freq - self.rf_fc + self.fine_hz*1e3))
+
+    def get_f_scr(self):
+        return self.f_scr
+
+    def set_f_scr(self, f_scr):
+        self.f_scr = f_scr
+        self.schf_descr.set_k(self.f_scr)
 
     def get_dqpsk_diff(self):
         return self.dqpsk_diff
