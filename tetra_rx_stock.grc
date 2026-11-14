@@ -388,12 +388,12 @@ blocks:
     gui_hint: ''
     label: TETRA Freq (MHz)
     type: real
-    value: '391.0125'
+    value: '391.025'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [592, 192.0]
+    coordinate: [376, 184.0]
     rotation: 0
     state: enabled
 - name: vv_len
@@ -514,7 +514,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1616, 1128.0]
+    coordinate: [1560, 1112.0]
     rotation: 0
     state: enabled
 - name: bsch_deint
@@ -534,7 +534,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [808, 1320.0]
+    coordinate: [800, 1344.0]
     rotation: 0
     state: enabled
 - name: bsch_descr
@@ -554,7 +554,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [440, 1328.0]
+    coordinate: [432, 1352.0]
     rotation: 0
     state: enabled
 - name: bsch_dp3
@@ -573,7 +573,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1040, 1328.0]
+    coordinate: [1032, 1352.0]
     rotation: 0
     state: enabled
 - name: bsch_dp8
@@ -594,7 +594,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1208, 1320.0]
+    coordinate: [1200, 1344.0]
     rotation: 0
     state: enabled
 - name: bsch_erase
@@ -615,7 +615,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1048, 1416.0]
+    coordinate: [1040, 1440.0]
     rotation: 0
     state: enabled
 - name: bsch_p2s
@@ -632,7 +632,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [64, 1320.0]
+    coordinate: [56, 1344.0]
     rotation: 0
     state: enabled
 - name: bsch_s2t
@@ -651,7 +651,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1640, 1328.0]
+    coordinate: [1632, 1352.0]
     rotation: 0
     state: enabled
 - name: bsch_s2v
@@ -669,7 +669,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [280, 1328.0]
+    coordinate: [272, 1352.0]
     rotation: 0
     state: enabled
 - name: bsch_t2p
@@ -686,7 +686,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1848, 1328.0]
+    coordinate: [1840, 1352.0]
     rotation: 0
     state: enabled
 - name: bsch_v2s
@@ -704,7 +704,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [648, 1328.0]
+    coordinate: [640, 1352.0]
     rotation: 0
     state: enabled
 - name: bsch_vit
@@ -729,7 +729,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1384, 1320.0]
+    coordinate: [1376, 1344.0]
     rotation: 0
     state: enabled
 - name: cell_to_var
@@ -743,7 +743,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [2336, 1400.0]
+    coordinate: [2328, 1424.0]
     rotation: 0
     state: enabled
 - name: chan_lpf
@@ -1409,7 +1409,7 @@ blocks:
     comment: Timeslot-aware TCH/S decoder. Needs tetra_dec.dll next to the generated
       .py
     dll_path: ''''''
-    gain_db: '3.0'
+    gain_db: '0.0'
     maxoutbuf: '0'
     minoutbuf: '0'
     polarity: '-1.0'
@@ -1426,7 +1426,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1368, 1056.0]
+    coordinate: [1240, 1092.0]
     rotation: 0
     state: enabled
 - name: fft_0
@@ -1502,7 +1502,7 @@ blocks:
     width9: '1'
     wintype: window.WIN_BLACKMAN_hARRIS
     ymax: '-20'
-    ymin: '-120'
+    ymin: '-100'
   states:
     bus_sink: false
     bus_source: false
@@ -1549,7 +1549,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [808, 1480.0]
+    coordinate: [800, 1504.0]
     rotation: 0
     state: enabled
 - name: hd_descr
@@ -1569,7 +1569,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [440, 1488.0]
+    coordinate: [432, 1512.0]
     rotation: 0
     state: enabled
 - name: hd_dp3
@@ -1588,7 +1588,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1040, 1488.0]
+    coordinate: [1032, 1512.0]
     rotation: 0
     state: enabled
 - name: hd_dp8
@@ -1609,7 +1609,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1208, 1480.0]
+    coordinate: [1200, 1504.0]
     rotation: 0
     state: enabled
 - name: hd_erase
@@ -1630,7 +1630,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1048, 1576.0]
+    coordinate: [1040, 1600.0]
     rotation: 0
     state: enabled
 - name: hd_p2s
@@ -1647,7 +1647,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [64, 1480.0]
+    coordinate: [56, 1504.0]
     rotation: 0
     state: enabled
 - name: hd_s2t
@@ -1666,7 +1666,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1640, 1488.0]
+    coordinate: [1632, 1512.0]
     rotation: 0
     state: enabled
 - name: hd_s2v
@@ -1684,7 +1684,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [280, 1488.0]
+    coordinate: [272, 1512.0]
     rotation: 0
     state: enabled
 - name: hd_t2p
@@ -1701,7 +1701,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1848, 1488.0]
+    coordinate: [1840, 1512.0]
     rotation: 0
     state: enabled
 - name: hd_v2s
@@ -1719,7 +1719,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [648, 1488.0]
+    coordinate: [640, 1512.0]
     rotation: 0
     state: enabled
 - name: hd_vit
@@ -1744,7 +1744,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1384, 1480.0]
+    coordinate: [1376, 1504.0]
     rotation: 0
     state: enabled
 - name: import_0
@@ -1969,7 +1969,7 @@ blocks:
     width9: '1'
     wintype: window.WIN_BLACKMAN_hARRIS
     ymax: '-20'
-    ymin: '-120'
+    ymin: '-100'
   states:
     bus_sink: false
     bus_source: false
@@ -1981,8 +1981,9 @@ blocks:
   id: snippet
   parameters:
     alias: ''
-    code: "for b in (self.cut_bsch, self.cut_blk1, self.cut_blk2):\n    b.set_log_level('critical')"
-    comment: 'Mutes only the three Tags To PDU blocks: their "SOB tag received during
+    code: "for b in (self.cut_bsch, self.cut_blk1, self.cut_blk2, self.cut_tch):\n\
+      \    b.set_log_level('critical')"
+    comment: 'Mutes only the four Tags To PDU blocks: their "SOB tag received during
       burst"
 
       lines are correlator false hits (harmless). Other blocks still log errors.
@@ -2008,9 +2009,15 @@ blocks:
     center_freq: rf_fc
     comment: 'LIVE: RTL-SDR via in-tree gr-soapy (radioconda ships SoapyRTLSDR).
 
-      1.152 MS/s = 64 x 18 kBd. Bias tee for an LNA: set Bias to True.'
+      1.152 MS/s = 64 x 18 kBd. Bias tee for an LNA: set Bias to True.
+
+      Freq correction is "ppm + 0*rf_fc" ON PURPOSE: every retune makes SoapySDR write
+
+      the tuning remainder (0) into the CORR element, i.e. it resets ppm to 0.
+
+      The dummy rf_fc term makes GRC re-apply ppm right after each retune.'
     dev_args: '""'
-    freq_correction: ppm
+    freq_correction: ppm + 0*rf_fc
     gain: rf_gain
     maxoutbuf: '0'
     minoutbuf: '0'
@@ -2020,7 +2027,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [16, 300]
+    coordinate: [32, 280.0]
     rotation: 0
     state: enabled
 - name: soft_0
@@ -2309,7 +2316,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [2088, 1392.0]
+    coordinate: [2080, 1416.0]
     rotation: 0
     state: enabled
 - name: tetra_fec

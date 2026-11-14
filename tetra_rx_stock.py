@@ -41,7 +41,7 @@ import tetra_rx_stock_tetra_fec as tetra_fec  # embedded python module
 
 
 def snipfcn_quiet_cutters(self):
-    for b in (self.cut_bsch, self.cut_blk1, self.cut_blk2):
+    for b in (self.cut_bsch, self.cut_blk1, self.cut_blk2, self.cut_tch):
         b.set_log_level('critical')
 
 
@@ -83,7 +83,7 @@ class tetra_rx_stock(gr.top_block, Qt.QWidget):
         ##################################################
         # Variables
         ##################################################
-        self.tetra_freq_entry = tetra_freq_entry = 391.0125
+        self.tetra_freq_entry = tetra_freq_entry = 391.025
         self.tetra_freq = tetra_freq = tetra_freq_entry*1e6
         self.sps = sps = 4
         self.samp_rate = samp_rate = 1.152e6
@@ -238,7 +238,7 @@ class tetra_rx_stock(gr.top_block, Qt.QWidget):
 
         self.rtlsdr_source.set_sample_rate(0, samp_rate)
         self.rtlsdr_source.set_frequency(0, rf_fc)
-        self.rtlsdr_source.set_frequency_correction(0, ppm)
+        self.rtlsdr_source.set_frequency_correction(0, (ppm + 0*rf_fc))
         self.set_rtlsdr_source_bias(bool(False))
         self._rtlsdr_source_gain_value = rf_gain
         self.set_rtlsdr_source_gain_mode(0, bool(False))
@@ -253,7 +253,7 @@ class tetra_rx_stock(gr.top_block, Qt.QWidget):
             None # parent
         )
         self.qtgui_freq_sink_x_0.set_update_time(0.10)
-        self.qtgui_freq_sink_x_0.set_y_axis((-120), (-20))
+        self.qtgui_freq_sink_x_0.set_y_axis((-100), (-20))
         self.qtgui_freq_sink_x_0.set_y_label('Relative Gain', 'dB')
         self.qtgui_freq_sink_x_0.set_trigger_mode(qtgui.TRIG_MODE_FREE, 0.0, 0, "")
         self.qtgui_freq_sink_x_0.enable_autoscale(False)
@@ -353,7 +353,7 @@ class tetra_rx_stock(gr.top_block, Qt.QWidget):
             None # parent
         )
         self.fft_0.set_update_time(0.10)
-        self.fft_0.set_y_axis((-120), (-20))
+        self.fft_0.set_y_axis((-100), (-20))
         self.fft_0.set_y_label('Relative Gain', 'dB')
         self.fft_0.set_trigger_mode(qtgui.TRIG_MODE_FREE, 0.0, 0, "")
         self.fft_0.enable_autoscale(False)
@@ -390,7 +390,7 @@ class tetra_rx_stock(gr.top_block, Qt.QWidget):
             self.top_grid_layout.setRowStretch(r, 1)
         for c in range(0, 2):
             self.top_grid_layout.setColumnStretch(c, 1)
-        self.epy_block_0 = epy_block_0.blk(dll_path='', cell_key=cell_key, gain_db=3.0, polarity=-1.0, target_tn=target_tn, skip_fn18=True, prefill_ms=180.0)
+        self.epy_block_0 = epy_block_0.blk(dll_path='', cell_key=cell_key, gain_db=0.0, polarity=-1.0, target_tn=target_tn, skip_fn18=True, prefill_ms=180.0)
         self.digital_linear_equalizer_0 = digital.linear_equalizer(16, 1, algorithm, True, [ ], 'corr_est')
         self.diff_0 = digital.diff_phasor_cc()
         self.d_tch = blocks.delay(gr.sizeof_float*1, tetra_fec.D_NB1)
@@ -501,14 +501,14 @@ class tetra_rx_stock(gr.top_block, Qt.QWidget):
         self.connect((self.bsch_deint, 0), (self.bsch_dp3, 0))
         self.connect((self.bsch_descr, 0), (self.bsch_v2s, 0))
         self.connect((self.bsch_dp3, 1), (self.bsch_dp8, 1))
-        self.connect((self.bsch_dp3, 2), (self.bsch_dp8, 4))
         self.connect((self.bsch_dp3, 0), (self.bsch_dp8, 0))
+        self.connect((self.bsch_dp3, 2), (self.bsch_dp8, 4))
         self.connect((self.bsch_dp8, 0), (self.bsch_vit, 0))
+        self.connect((self.bsch_erase, 0), (self.bsch_dp8, 2))
+        self.connect((self.bsch_erase, 0), (self.bsch_dp8, 7))
+        self.connect((self.bsch_erase, 0), (self.bsch_dp8, 5))
         self.connect((self.bsch_erase, 0), (self.bsch_dp8, 3))
         self.connect((self.bsch_erase, 0), (self.bsch_dp8, 6))
-        self.connect((self.bsch_erase, 0), (self.bsch_dp8, 7))
-        self.connect((self.bsch_erase, 0), (self.bsch_dp8, 2))
-        self.connect((self.bsch_erase, 0), (self.bsch_dp8, 5))
         self.connect((self.bsch_p2s, 0), (self.bsch_s2v, 0))
         self.connect((self.bsch_s2t, 0), (self.bsch_t2p, 0))
         self.connect((self.bsch_s2v, 0), (self.bsch_descr, 0))
@@ -525,16 +525,16 @@ class tetra_rx_stock(gr.top_block, Qt.QWidget):
         self.connect((self.d_sb2, 0), (self.add_blk2, 1))
         self.connect((self.d_tch, 0), (self.add_tch, 1))
         self.connect((self.diff_0, 0), (self.vv_dly, 0))
-        self.connect((self.diff_0, 0), (self.vv_pow, 3))
-        self.connect((self.diff_0, 0), (self.vv_pow, 2))
         self.connect((self.diff_0, 0), (self.vv_pow, 1))
         self.connect((self.diff_0, 0), (self.vv_pow, 0))
+        self.connect((self.diff_0, 0), (self.vv_pow, 3))
+        self.connect((self.diff_0, 0), (self.vv_pow, 2))
         self.connect((self.digital_linear_equalizer_0, 0), (self.diff_0, 0))
         self.connect((self.epy_block_0, 0), (self.audio_sink_0, 0))
         self.connect((self.epy_block_0, 0), (self.audio_sink_0, 1))
         self.connect((self.fll_0, 0), (self.clock_0, 0))
-        self.connect((self.fll_0, 2), (self.null_ph, 0))
         self.connect((self.fll_0, 3), (self.null_ph, 1))
+        self.connect((self.fll_0, 2), (self.null_ph, 0))
         self.connect((self.fll_0, 1), (self.num_0, 1))
         self.connect((self.fll_0, 1), (self.num_0, 0))
         self.connect((self.hd_deint, 0), (self.hd_dp3, 0))
@@ -543,11 +543,11 @@ class tetra_rx_stock(gr.top_block, Qt.QWidget):
         self.connect((self.hd_dp3, 2), (self.hd_dp8, 4))
         self.connect((self.hd_dp3, 1), (self.hd_dp8, 1))
         self.connect((self.hd_dp8, 0), (self.hd_vit, 0))
-        self.connect((self.hd_erase, 0), (self.hd_dp8, 5))
         self.connect((self.hd_erase, 0), (self.hd_dp8, 6))
-        self.connect((self.hd_erase, 0), (self.hd_dp8, 7))
-        self.connect((self.hd_erase, 0), (self.hd_dp8, 2))
         self.connect((self.hd_erase, 0), (self.hd_dp8, 3))
+        self.connect((self.hd_erase, 0), (self.hd_dp8, 5))
+        self.connect((self.hd_erase, 0), (self.hd_dp8, 2))
+        self.connect((self.hd_erase, 0), (self.hd_dp8, 7))
         self.connect((self.hd_p2s, 0), (self.hd_s2v, 0))
         self.connect((self.hd_s2t, 0), (self.hd_t2p, 0))
         self.connect((self.hd_s2v, 0), (self.hd_descr, 0))
@@ -699,6 +699,7 @@ class tetra_rx_stock(gr.top_block, Qt.QWidget):
         self.rf_fc = rf_fc
         self.qtgui_freq_sink_x_0.set_frequency_range(self.rf_fc, self.samp_rate)
         self.rtlsdr_source.set_frequency(0, self.rf_fc)
+        self.rtlsdr_source.set_frequency_correction(0, (self.ppm + 0*self.rf_fc))
         self.xlate_0.set_center_freq((self.tetra_freq - self.rf_fc + self.fine_hz*1e3))
 
     def get_ppm(self):
@@ -706,7 +707,7 @@ class tetra_rx_stock(gr.top_block, Qt.QWidget):
 
     def set_ppm(self, ppm):
         self.ppm = ppm
-        self.rtlsdr_source.set_frequency_correction(0, self.ppm)
+        self.rtlsdr_source.set_frequency_correction(0, (self.ppm + 0*self.rf_fc))
 
     def get_pol(self):
         return self.pol

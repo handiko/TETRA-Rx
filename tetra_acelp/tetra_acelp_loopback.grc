@@ -1,0 +1,2582 @@
+options:
+  parameters:
+    output_language: python
+    generate_options: qt_gui
+    gen_linking: dynamic
+    gen_cmake: 'On'
+    cmake_opt: ''
+    category: '[GRC Hier Blocks]'
+    run_options: prompt
+    placement: (0,0)
+    window_size: (1000,1000)
+    sizing_mode: fixed
+    run: 'True'
+    max_nouts: '0'
+    catch_exceptions: 'True'
+    run_command: '{python} -u {filename}'
+    hier_block_src_path: '.:'
+    author: ''
+    comment: ''
+    copyright: ''
+    description: 'TETRA ACELP codec loopback: ETSI EN 300 395-2 reference codec, stock blocks + 4 EPBs (ctypes to tetra_enc.dll / tetra_dec.dll)'
+    id: tetra_acelp_loopback
+    title: TETRA ACELP codec loopback (no radio)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 8
+    - 8
+    rotation: 0
+    state: enabled
+blocks:
+- name: samp_rate
+  id: variable
+  parameters:
+    comment: 'Codec rate, fixed by EN 300 395-2: 8 kHz, 240 samples = 30 ms per frame'
+    value: '8000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 200
+    - 12
+    rotation: 0
+    state: enabled
+- name: wav_in
+  id: variable
+  parameters:
+    comment: Input speech WAV (mono). Path relative to the .grc folder or absolute
+    value: '''speech.wav'''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 330
+    - 12
+    rotation: 0
+    state: enabled
+- name: wav_rate
+  id: variable
+  parameters:
+    comment: |-
+      Sample rate of wav_in. The resampler converts it to 8 kHz.
+      Check it in Windows Explorer > Properties > Details, or soxi
+    value: '8000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 460
+    - 12
+    rotation: 0
+    state: enabled
+- name: wav_out
+  id: variable
+  parameters:
+    comment: Decoded speech is written here (8 kHz, 16-bit)
+    value: '''tetra_out.wav'''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 590
+    - 12
+    rotation: 0
+    state: enabled
+- name: lib_path
+  id: variable
+  parameters:
+    comment: |-
+      Folder (or file) holding tetra_enc.dll and tetra_dec.dll.
+      '' = look next to this .grc file, then PATH
+    value: ''''''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 720
+    - 12
+    rotation: 0
+    state: enabled
+- name: codec_delay
+  id: variable
+  parameters:
+    comment: |-
+      Codec delay in samples: 40 = 5 ms (encoder look-ahead).
+      Measured by cross-correlation; the input is delayed by this before comparing
+    value: '40'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 850
+    - 12
+    rotation: 0
+    state: enabled
+- name: snr_win
+  id: variable
+  parameters:
+    comment: 'SNR averaging window: 5 s'
+    value: int(5 * samp_rate)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 980
+    - 12
+    rotation: 0
+    state: enabled
+- name: rs_g
+  id: variable
+  parameters:
+    comment: gcd for the resampler ratio
+    value: __import__("math").gcd(int(wav_rate), int(samp_rate))
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1110
+    - 12
+    rotation: 0
+    state: enabled
+- name: sigma
+  id: variable
+  parameters:
+    comment: 'Noise std per +-1 symbol: Es/N0 = 1 / (2 sigma^2)'
+    value: (0.7071067811865476 * 10 ** (-esn0_db / 20.0)) if noise_on else 0.0
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1240
+    - 12
+    rotation: 0
+    state: enabled
+- name: esn0_db
+  id: variable_qtgui_range
+  parameters:
+    alias: ''
+    comment: Channel Es/N0 per coded bit. Only used when noise is on
+    rangeType: float
+    value: '4'
+    start: '-3'
+    stop: '15'
+    step: '0.5'
+    widget: counter_slider
+    orient: QtCore.Qt.Horizontal
+    min_len: '200'
+    label: '"Channel Es/N0 [dB]"'
+    gui_hint: 0,0,1,2
+    outputmsgname: value
+    showports: 'False'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 8
+    - 100
+    rotation: 0
+    state: enabled
+- name: noise_on
+  id: variable_qtgui_check_box
+  parameters:
+    alias: ''
+    comment: 'Off = clean channel: decoder output must equal the local synthesis'
+    type: bool
+    value: 'False'
+    'true': 'True'
+    'false': 'False'
+    label: '"Add channel noise"'
+    gui_hint: 0,2,1,1
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 200
+    - 100
+    rotation: 0
+    state: enabled
+- name: volume
+  id: variable_qtgui_range
+  parameters:
+    alias: ''
+    comment: ''
+    rangeType: float
+    value: '1'
+    start: '0'
+    stop: '4'
+    step: '0.1'
+    widget: counter_slider
+    orient: QtCore.Qt.Horizontal
+    min_len: '200'
+    label: '"Volume"'
+    gui_hint: 0,3,1,1
+    outputmsgname: value
+    showports: 'False'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 360
+    - 100
+    rotation: 0
+    state: enabled
+- name: wav_src
+  id: blocks_wavfile_source
+  parameters:
+    alias: ''
+    comment: speech.wav, mono, float +-1
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    repeat: 'False'
+    nchan: '1'
+    file: wav_in
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 8
+    - 240
+    rotation: 0
+    state: enabled
+- name: resamp_in
+  id: rational_resampler_xxx
+  parameters:
+    alias: ''
+    comment: |-
+      wav_rate -> 8 kHz. At 8 kHz the taps are [1.0]: a true
+      pass-through (1:1 with default taps would still low-pass filter)
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    interp: int(samp_rate) // rs_g
+    decim: int(wav_rate) // rs_g
+    taps: '[1.0] if int(wav_rate) == int(samp_rate) else []'
+    fbw: '0'
+    type: fff
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 200
+    - 240
+    rotation: 0
+    state: enabled
+- name: throttle
+  id: blocks_throttle
+  parameters:
+    alias: ''
+    comment: |-
+      BYPASSED: the sound card is the clock.
+      Enable this only if you disable the speaker (two clocks fight)
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samples_per_second: samp_rate
+    vlen: '1'
+    ignoretag: 'True'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 400
+    - 240
+    rotation: 0
+    state: bypassed
+- name: f2s_in
+  id: blocks_float_to_short
+  parameters:
+    alias: ''
+    comment: |-
+      x 32768 exactly undoes the WAV reader (/32768):
+      the codec gets the file's 16-bit samples unchanged
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+    scale: '32768'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 580
+    - 240
+    rotation: 0
+    state: enabled
+- name: frame_in
+  id: blocks_stream_to_vector
+  parameters:
+    alias: ''
+    comment: 'frame: 240 samples = 30 ms'
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: '240'
+    vlen: '1'
+    type: short
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 760
+    - 240
+    rotation: 0
+    state: enabled
+- name: acelp_enc
+  id: epy_block
+  parameters:
+    alias: ''
+    comment: |-
+      EPB 1  ETSI scoder: 240 PCM -> BFI + 137 bits
+      (+ local synthesis on out 1)
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    _source_code: |
+      """
+      ACELP Speech Encoder -- Embedded Python Block (GNU Radio 3.10). ETSI 'scoder' as a block.
+
+      Input  0 : short vector[240] = one 30 ms speech frame, 16-bit PCM at 8 kHz
+      Output 0 : short vector[138] = serial frame, BFI (=0) + 137 bits, one bit (0/1) per word
+      Output 1 : short vector[240] = the encoder's local synthesis: what any decoder fed the
+                 same bits without errors must output, sample for sample
+
+      Why an EPB: ACELP analysis (LPC/LSP quantisation, pitch and algebraic codebook search)
+      has no stock block. The bit-exact ETSI EN 300 395-2 C code does it, loaded from
+      tetra_enc.dll with ctypes (a private copy per block, so state is never shared).
+      """
+      import atexit
+      import ctypes
+      import glob
+      import os
+      import shutil
+      import sys
+      import tempfile
+      import time
+
+      import numpy as np
+
+      I16 = np.ctypeslib.ndpointer(np.int16, flags='C_CONTIGUOUS')
+
+
+      def load_private(lib_path, base):
+          """Find tetra_enc / tetra_dec (.dll on Windows) and load a PRIVATE COPY of it.
+
+          The ETSI codec keeps its state in C statics, and Init_*() does not clear all of
+          them. A private copy per block gives every block its own fresh state, exactly like
+          starting the ETSI .exe anew, even when a flowgraph contains two decoders.
+          Search order: lib_path (file or folder), the flowgraph's folder, the current folder, PATH.
+          """
+          names = (base + '.dll', 'lib' + base + '.dll', 'lib' + base + '.so', 'lib' + base + '.dylib')
+          cands = []
+          if lib_path and os.path.isfile(lib_path):
+              cands.append(lib_path)
+          dirs = ([lib_path] if lib_path and os.path.isdir(lib_path) else []) + \
+                 [os.path.dirname(os.path.abspath(sys.argv[0] or '.')), os.getcwd()] + \
+                 os.environ.get('PATH', '').split(os.pathsep)
+          cands += [os.path.join(d, n) for d in dirs if d for n in names]
+          src = next((p for p in cands if os.path.isfile(p)), None)
+          if src is None:
+              raise RuntimeError('[TETRA codec] cannot find %s.dll. Put it next to the .grc file or set '
+                                 'lib_path. Tried: %s' % (base, ', '.join(cands[:8]) + ' ...'))
+          now = time.time()
+          for old in glob.glob(os.path.join(tempfile.gettempdir(), 'tetra_codec_*')):
+              try:                                            # copies left by crashed runs, > 1 h old
+                  if now - os.path.getmtime(old) > 3600:
+                      shutil.rmtree(old, ignore_errors=True)
+              except OSError:
+                  pass
+          tmp = tempfile.mkdtemp(prefix='tetra_codec_')
+          dst = os.path.join(tmp, os.path.basename(src))
+          shutil.copyfile(src, dst)
+          atexit.register(shutil.rmtree, tmp, True)
+          lib = ctypes.CDLL(dst)
+          if lib.tetra_wrap_version() != 1:
+              raise RuntimeError('[TETRA codec] %s: unexpected wrapper version' % src)
+          return lib, src
+
+
+      def in_grc():
+          """True while GRC (editor or grcc) instantiates the block only to read its ports."""
+          return 'gnuradio.grc' in sys.modules
+
+
+      from gnuradio import gr
+
+
+      class blk(gr.sync_block):
+          """ACELP Speech Encoder (ETSI scoder): 240 PCM -> BFI + 137 bits, + local synthesis"""
+
+          def __init__(self, lib_path=''):
+              gr.sync_block.__init__(self, name='ACELP Speech Encoder',
+                                     in_sig=[(np.int16, 240)], out_sig=[(np.int16, 138), (np.int16, 240)])
+              self.lib = None
+              if in_grc():
+                  return
+              # Loaded here, in the main thread while the flowgraph is built: a missing DLL
+              # then stops the run with a clear error. (Raised in start(), GNU Radio 3.10
+              # would print it and hang.)
+              self.lib, src = load_private(lib_path, 'tetra_enc')
+              self.lib.tetra_enc_frame.argtypes = [I16, I16, I16]
+              self.lib.tetra_enc_init()
+              print('[ACELP enc] ETSI speech encoder loaded from %s' % src, flush=True)
+
+          def work(self, input_items, output_items):
+              x, ser, syn = input_items[0], output_items[0], output_items[1]
+              for k in range(len(x)):
+                  self.lib.tetra_enc_frame(x[k], ser[k], syn[k])
+              return len(x)
+    lib_path: lib_path
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 940
+    - 224
+    rotation: 0
+    state: enabled
+- name: ser_flat
+  id: blocks_vector_to_stream
+  parameters:
+    alias: ''
+    comment: ''
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: '138'
+    vlen: '1'
+    type: short
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1180
+    - 224
+    rotation: 0
+    state: enabled
+- name: ser_pair
+  id: blocks_stream_to_vector
+  parameters:
+    alias: ''
+    comment: pair two frames = 60 ms (one TCH/S block)
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: '276'
+    vlen: '1'
+    type: short
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1360
+    - 224
+    rotation: 0
+    state: enabled
+- name: tchs_enc
+  id: epy_block
+  parameters:
+    alias: ''
+    comment: |-
+      EPB 2  ETSI ccoder: 2 x 137 bits -> 432 symbols
+      (+1 = bit 0, -1 = bit 1), 7.2 kbit/s
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    _source_code: |
+      """
+      TCH/S Channel Encoder -- Embedded Python Block (GNU Radio 3.10). ETSI 'ccoder' as a block.
+
+      Input  0 : short vector[276] = TWO serial frames (2 x [BFI + 137 bits]) = 60 ms
+      Output 0 : float vector[432] = one TCH/S block, interleaved, as BPSK-style symbols:
+                 +1.0 = bit 0, -1.0 = bit 1 (ccoder writes +127 / -127)
+
+      What happens inside (ETSI EN 300 395-2 clause 5): the 2 x 137 bits are sorted by
+      sensitivity into class 0 (102 bits, sent unprotected), class 1 (112 bits) and
+      class 2 (60 bits + 8-bit CRC + 4 tail bits). Classes 1 and 2 go through the 16-state
+      RCPC convolutional code (K = 5, punctured to rates 2/3 and 8/18), giving 102 + 168 +
+      162 = 432 bits, then a 24 x 18 block interleaver. 432 bits per 60 ms = 7.2 kbit/s.
+
+      Why an EPB: TETRA's RCPC puncturing, class ordering and CRC have no stock blocks.
+      Code: tetra_enc.dll (bit-exact ETSI C), private copy per block.
+      """
+      import atexit
+      import ctypes
+      import glob
+      import os
+      import shutil
+      import sys
+      import tempfile
+      import time
+
+      import numpy as np
+
+      I16 = np.ctypeslib.ndpointer(np.int16, flags='C_CONTIGUOUS')
+
+
+      def load_private(lib_path, base):
+          """Find tetra_enc / tetra_dec (.dll on Windows) and load a PRIVATE COPY of it.
+
+          The ETSI codec keeps its state in C statics, and Init_*() does not clear all of
+          them. A private copy per block gives every block its own fresh state, exactly like
+          starting the ETSI .exe anew, even when a flowgraph contains two decoders.
+          Search order: lib_path (file or folder), the flowgraph's folder, the current folder, PATH.
+          """
+          names = (base + '.dll', 'lib' + base + '.dll', 'lib' + base + '.so', 'lib' + base + '.dylib')
+          cands = []
+          if lib_path and os.path.isfile(lib_path):
+              cands.append(lib_path)
+          dirs = ([lib_path] if lib_path and os.path.isdir(lib_path) else []) + \
+                 [os.path.dirname(os.path.abspath(sys.argv[0] or '.')), os.getcwd()] + \
+                 os.environ.get('PATH', '').split(os.pathsep)
+          cands += [os.path.join(d, n) for d in dirs if d for n in names]
+          src = next((p for p in cands if os.path.isfile(p)), None)
+          if src is None:
+              raise RuntimeError('[TETRA codec] cannot find %s.dll. Put it next to the .grc file or set '
+                                 'lib_path. Tried: %s' % (base, ', '.join(cands[:8]) + ' ...'))
+          now = time.time()
+          for old in glob.glob(os.path.join(tempfile.gettempdir(), 'tetra_codec_*')):
+              try:                                            # copies left by crashed runs, > 1 h old
+                  if now - os.path.getmtime(old) > 3600:
+                      shutil.rmtree(old, ignore_errors=True)
+              except OSError:
+                  pass
+          tmp = tempfile.mkdtemp(prefix='tetra_codec_')
+          dst = os.path.join(tmp, os.path.basename(src))
+          shutil.copyfile(src, dst)
+          atexit.register(shutil.rmtree, tmp, True)
+          lib = ctypes.CDLL(dst)
+          if lib.tetra_wrap_version() != 1:
+              raise RuntimeError('[TETRA codec] %s: unexpected wrapper version' % src)
+          return lib, src
+
+
+      def in_grc():
+          """True while GRC (editor or grcc) instantiates the block only to read its ports."""
+          return 'gnuradio.grc' in sys.modules
+
+
+      from gnuradio import gr
+
+
+      class blk(gr.sync_block):
+          """TCH/S Channel Encoder (ETSI ccoder): 2 x 138 serial words -> 432 symbols (+1 = bit 0)"""
+
+          def __init__(self, lib_path=''):
+              gr.sync_block.__init__(self, name='TCH/S Channel Encoder',
+                                     in_sig=[(np.int16, 276)], out_sig=[(np.float32, 432)])
+              self.lib = None
+              self._blk = np.zeros(432, np.int16)
+              if in_grc():
+                  return
+              self.lib, src = load_private(lib_path, 'tetra_enc')
+              self.lib.tetra_cc_frame.argtypes = [I16, I16]
+              self.lib.tetra_cc_init()
+              print('[TCH/S enc] ETSI channel encoder loaded from %s' % src, flush=True)
+
+          def work(self, input_items, output_items):
+              x, y = input_items[0], output_items[0]
+              for k in range(len(x)):
+                  self.lib.tetra_cc_frame(x[k], self._blk)
+                  y[k] = self._blk * np.float32(1.0 / 127.0)
+              return len(x)
+    lib_path: lib_path
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1560
+    - 224
+    rotation: 0
+    state: enabled
+- name: tx_sym
+  id: blocks_vector_to_stream
+  parameters:
+    alias: ''
+    comment: 432 symbols per 60 ms -> 7200 sym/s
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: '432'
+    vlen: '1'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1780
+    - 240
+    rotation: 0
+    state: enabled
+- name: noise
+  id: analog_noise_source_x
+  parameters:
+    alias: ''
+    comment: AWGN; amplitude = sigma (0 when noise is off)
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    noise_type: analog.GR_GAUSSIAN
+    amp: sigma
+    seed: '0'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1560
+    - 480
+    rotation: 0
+    state: enabled
+- name: chan_add
+  id: blocks_add_xx
+  parameters:
+    alias: ''
+    comment: 'the whole "air": symbols + noise'
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    vlen: '1'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1800
+    - 400
+    rotation: 0
+    state: enabled
+- name: rx_blk
+  id: blocks_stream_to_vector
+  parameters:
+    alias: ''
+    comment: back into 432-symbol blocks
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: '432'
+    vlen: '1'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1960
+    - 400
+    rotation: 0
+    state: enabled
+- name: slice_tx
+  id: digital_binary_slicer_fb
+  parameters:
+    alias: ''
+    comment: ''
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1800
+    - 560
+    rotation: 0
+    state: enabled
+- name: slice_rx
+  id: digital_binary_slicer_fb
+  parameters:
+    alias: ''
+    comment: ''
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1800
+    - 620
+    rotation: 0
+    state: enabled
+- name: ber_xor
+  id: blocks_xor_xx
+  parameters:
+    alias: ''
+    comment: bit flipped by the channel?
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1980
+    - 576
+    rotation: 0
+    state: enabled
+- name: ber_c2f
+  id: blocks_char_to_float
+  parameters:
+    alias: ''
+    comment: ''
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+    scale: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 2120
+    - 576
+    rotation: 0
+    state: enabled
+- name: ber_avg
+  id: blocks_moving_average_xx
+  parameters:
+    alias: ''
+    comment: raw BER over 2 s (14400 bits)
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    length: '14400'
+    scale: 1.0 / 14400
+    max_iter: '4000'
+    vlen: '1'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 2280
+    - 560
+    rotation: 0
+    state: enabled
+- name: ber_num
+  id: qtgui_number_sink
+  parameters:
+    alias: ''
+    comment: ''
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '"Channel (before FEC)"'
+    autoscale: 'False'
+    avg: '0'
+    nconnections: '1'
+    min: '0'
+    max: '0.2'
+    update_time: '0.25'
+    factor1: '1'
+    type: float
+    graph_type: qtgui.NUM_GRAPH_HORIZ
+    gui_hint: 1,0,1,1
+    label1: '"raw BER"'
+    unit1: '""'
+    color1: ("black", "black")
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 2480
+    - 560
+    rotation: 0
+    state: enabled
+- name: tchs_dec
+  id: epy_block
+  parameters:
+    alias: ''
+    comment: |-
+      EPB 3  ETSI cdecoder: 432 soft symbols -> 2 x (BFI + 137 bits)
+      out 1 = BFI per 60 ms block
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    _source_code: |
+      """
+      TCH/S Channel Decoder -- Embedded Python Block (GNU Radio 3.10). ETSI 'cdecoder' as a block.
+
+      Input  0 : float vector[432] = one received TCH/S block, SOFT values, positive = bit 0
+                 (noiseless: exactly +-1.0 as the encoder sent them)
+      Output 0 : short vector[276] = two serial frames (2 x [BFI + 137 bits])
+      Output 1 : float             = BFI of this 60 ms block: 1.0 if the class-2 CRC failed
+
+      soft_scale: input value -> ETSI soft integer, round(soft_scale * x) clipped to +-127.
+        Default 64: a clean +-1.0 becomes +-64, and noisy samples up to +-2.0 keep their
+        reliability instead of being clipped at 127. Measured on 19 s of speech: about 30 %
+        fewer bad frames than 127 at Es/N0 = -1 dB, and still bit-exact with the ETSI programs
+        on a clean channel (only signs matter there). 127 = ETSI's own +-127 exactly.
+
+      Inside: de-interleave, Viterbi decoding of classes 1 and 2 (soft), CRC check of class 2
+      -> Bad Frame Indicator (the speech decoder then conceals both frames), class 0 by sign.
+
+      Why an EPB: no stock block for TETRA's RCPC Viterbi + CRC/BFI. Code: tetra_dec.dll.
+      """
+      import atexit
+      import ctypes
+      import glob
+      import os
+      import shutil
+      import sys
+      import tempfile
+      import time
+
+      import numpy as np
+
+      I16 = np.ctypeslib.ndpointer(np.int16, flags='C_CONTIGUOUS')
+
+
+      def load_private(lib_path, base):
+          """Find tetra_enc / tetra_dec (.dll on Windows) and load a PRIVATE COPY of it.
+
+          The ETSI codec keeps its state in C statics, and Init_*() does not clear all of
+          them. A private copy per block gives every block its own fresh state, exactly like
+          starting the ETSI .exe anew, even when a flowgraph contains two decoders.
+          Search order: lib_path (file or folder), the flowgraph's folder, the current folder, PATH.
+          """
+          names = (base + '.dll', 'lib' + base + '.dll', 'lib' + base + '.so', 'lib' + base + '.dylib')
+          cands = []
+          if lib_path and os.path.isfile(lib_path):
+              cands.append(lib_path)
+          dirs = ([lib_path] if lib_path and os.path.isdir(lib_path) else []) + \
+                 [os.path.dirname(os.path.abspath(sys.argv[0] or '.')), os.getcwd()] + \
+                 os.environ.get('PATH', '').split(os.pathsep)
+          cands += [os.path.join(d, n) for d in dirs if d for n in names]
+          src = next((p for p in cands if os.path.isfile(p)), None)
+          if src is None:
+              raise RuntimeError('[TETRA codec] cannot find %s.dll. Put it next to the .grc file or set '
+                                 'lib_path. Tried: %s' % (base, ', '.join(cands[:8]) + ' ...'))
+          now = time.time()
+          for old in glob.glob(os.path.join(tempfile.gettempdir(), 'tetra_codec_*')):
+              try:                                            # copies left by crashed runs, > 1 h old
+                  if now - os.path.getmtime(old) > 3600:
+                      shutil.rmtree(old, ignore_errors=True)
+              except OSError:
+                  pass
+          tmp = tempfile.mkdtemp(prefix='tetra_codec_')
+          dst = os.path.join(tmp, os.path.basename(src))
+          shutil.copyfile(src, dst)
+          atexit.register(shutil.rmtree, tmp, True)
+          lib = ctypes.CDLL(dst)
+          if lib.tetra_wrap_version() != 1:
+              raise RuntimeError('[TETRA codec] %s: unexpected wrapper version' % src)
+          return lib, src
+
+
+      def in_grc():
+          """True while GRC (editor or grcc) instantiates the block only to read its ports."""
+          return 'gnuradio.grc' in sys.modules
+
+
+      from gnuradio import gr
+
+
+      class blk(gr.sync_block):
+          """TCH/S Channel Decoder (ETSI cdecoder): 432 soft symbols -> 2 x (BFI + 137 bits), BFI"""
+
+          def __init__(self, lib_path='', soft_scale=64.0):
+              gr.sync_block.__init__(self, name='TCH/S Channel Decoder',
+                                     in_sig=[(np.float32, 432)], out_sig=[(np.int16, 276), np.float32])
+              self.soft_scale = float(soft_scale)
+              self.lib = None
+              self._q = np.zeros(432, np.int16)
+              if in_grc():
+                  return
+              self.lib, src = load_private(lib_path, 'tetra_dec')
+              self.lib.tetra_cd_frame.argtypes = [I16, I16]
+              self.lib.tetra_cd_frame.restype = ctypes.c_int
+              self.lib.tetra_cd_init()
+              print('[TCH/S dec] ETSI channel decoder loaded from %s' % src, flush=True)
+
+          def work(self, input_items, output_items):
+              x, ser, bfi = input_items[0], output_items[0], output_items[1]
+              for k in range(len(x)):
+                  np.clip(np.rint(x[k] * self.soft_scale), -127, 127, out=self._q, casting='unsafe')
+                  bfi[k] = self.lib.tetra_cd_frame(self._q, ser[k])
+              return len(x)
+    lib_path: lib_path
+    soft_scale: '64.0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 8
+    - 640
+    rotation: 0
+    state: enabled
+- name: dser_flat
+  id: blocks_vector_to_stream
+  parameters:
+    alias: ''
+    comment: ''
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: '276'
+    vlen: '1'
+    type: short
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 300
+    - 640
+    rotation: 0
+    state: enabled
+- name: dser_frame
+  id: blocks_stream_to_vector
+  parameters:
+    alias: ''
+    comment: ''
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: '138'
+    vlen: '1'
+    type: short
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 460
+    - 640
+    rotation: 0
+    state: enabled
+- name: acelp_dec
+  id: epy_block
+  parameters:
+    alias: ''
+    comment: 'EPB 4  ETSI sdecoder: BFI + 137 bits -> 240 PCM'
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    _source_code: |
+      """
+      ACELP Speech Decoder -- Embedded Python Block (GNU Radio 3.10). ETSI 'sdecoder' as a block.
+
+      Input  0 : short vector[138] = serial frame, BFI + 137 bits (BFI = 1: frame is concealed,
+                 i.e. rebuilt from the previous good parameters instead of the received bits)
+      Output 0 : short vector[240] = 30 ms of 16-bit PCM at 8 kHz
+
+      Why an EPB: ACELP synthesis (codebooks, LSP interpolation, synthesis and post filters,
+      bad-frame concealment) has no stock block. Code: tetra_dec.dll (bit-exact ETSI C).
+      """
+      import atexit
+      import ctypes
+      import glob
+      import os
+      import shutil
+      import sys
+      import tempfile
+      import time
+
+      import numpy as np
+
+      I16 = np.ctypeslib.ndpointer(np.int16, flags='C_CONTIGUOUS')
+
+
+      def load_private(lib_path, base):
+          """Find tetra_enc / tetra_dec (.dll on Windows) and load a PRIVATE COPY of it.
+
+          The ETSI codec keeps its state in C statics, and Init_*() does not clear all of
+          them. A private copy per block gives every block its own fresh state, exactly like
+          starting the ETSI .exe anew, even when a flowgraph contains two decoders.
+          Search order: lib_path (file or folder), the flowgraph's folder, the current folder, PATH.
+          """
+          names = (base + '.dll', 'lib' + base + '.dll', 'lib' + base + '.so', 'lib' + base + '.dylib')
+          cands = []
+          if lib_path and os.path.isfile(lib_path):
+              cands.append(lib_path)
+          dirs = ([lib_path] if lib_path and os.path.isdir(lib_path) else []) + \
+                 [os.path.dirname(os.path.abspath(sys.argv[0] or '.')), os.getcwd()] + \
+                 os.environ.get('PATH', '').split(os.pathsep)
+          cands += [os.path.join(d, n) for d in dirs if d for n in names]
+          src = next((p for p in cands if os.path.isfile(p)), None)
+          if src is None:
+              raise RuntimeError('[TETRA codec] cannot find %s.dll. Put it next to the .grc file or set '
+                                 'lib_path. Tried: %s' % (base, ', '.join(cands[:8]) + ' ...'))
+          now = time.time()
+          for old in glob.glob(os.path.join(tempfile.gettempdir(), 'tetra_codec_*')):
+              try:                                            # copies left by crashed runs, > 1 h old
+                  if now - os.path.getmtime(old) > 3600:
+                      shutil.rmtree(old, ignore_errors=True)
+              except OSError:
+                  pass
+          tmp = tempfile.mkdtemp(prefix='tetra_codec_')
+          dst = os.path.join(tmp, os.path.basename(src))
+          shutil.copyfile(src, dst)
+          atexit.register(shutil.rmtree, tmp, True)
+          lib = ctypes.CDLL(dst)
+          if lib.tetra_wrap_version() != 1:
+              raise RuntimeError('[TETRA codec] %s: unexpected wrapper version' % src)
+          return lib, src
+
+
+      def in_grc():
+          """True while GRC (editor or grcc) instantiates the block only to read its ports."""
+          return 'gnuradio.grc' in sys.modules
+
+
+      from gnuradio import gr
+
+
+      class blk(gr.sync_block):
+          """ACELP Speech Decoder (ETSI sdecoder): BFI + 137 bits -> 240 PCM"""
+
+          def __init__(self, lib_path=''):
+              gr.sync_block.__init__(self, name='ACELP Speech Decoder',
+                                     in_sig=[(np.int16, 138)], out_sig=[(np.int16, 240)])
+              self.lib = None
+              if in_grc():
+                  return
+              self.lib, src = load_private(lib_path, 'tetra_dec')
+              self.lib.tetra_dec_frame.argtypes = [I16, I16]
+              self.lib.tetra_dec_init()
+              print('[ACELP dec] ETSI speech decoder loaded from %s' % src, flush=True)
+
+          def work(self, input_items, output_items):
+              x, y = input_items[0], output_items[0]
+              for k in range(len(x)):
+                  self.lib.tetra_dec_frame(x[k], y[k])
+              return len(x)
+    lib_path: lib_path
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 640
+    - 640
+    rotation: 0
+    state: enabled
+- name: pcm_out
+  id: blocks_vector_to_stream
+  parameters:
+    alias: ''
+    comment: ''
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: '240'
+    vlen: '1'
+    type: short
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 880
+    - 640
+    rotation: 0
+    state: enabled
+- name: s2f_out
+  id: blocks_short_to_float
+  parameters:
+    alias: ''
+    comment: 16-bit -> +-1.0
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+    scale: '32768'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1040
+    - 640
+    rotation: 0
+    state: enabled
+- name: s2f_wav
+  id: blocks_short_to_float
+  parameters:
+    alias: ''
+    comment: |-
+      separate scale for the file: libsndfile writes
+      float -> 16-bit as x 32767, so this makes out.wav bit-exact
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+    scale: '32767'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1040
+    - 580
+    rotation: 0
+    state: enabled
+- name: wav_sink
+  id: blocks_wavfile_sink
+  parameters:
+    alias: ''
+    comment: out.wav, 8 kHz 16-bit PCM
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    nchan: '1'
+    samp_rate: samp_rate
+    format: FORMAT_WAV
+    bits_per_sample1: FORMAT_PCM_16
+    bits_per_sample2: FORMAT_PCM_16
+    bits_per_sample3: FORMAT_VORBIS
+    bits_per_sample4: FORMAT_PCM_16
+    append: 'False'
+    file: wav_out
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1240
+    - 600
+    rotation: 0
+    state: enabled
+- name: vol
+  id: blocks_multiply_const_vxx
+  parameters:
+    alias: ''
+    comment: ''
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    const: volume
+    vlen: '1'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1240
+    - 700
+    rotation: 0
+    state: enabled
+- name: to48k
+  id: rational_resampler_xxx
+  parameters:
+    alias: ''
+    comment: '8 -> 48 kHz: every sound card takes 48 kHz'
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    interp: '6'
+    decim: '1'
+    taps: '[]'
+    fbw: '0'
+    type: fff
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1400
+    - 684
+    rotation: 0
+    state: enabled
+- name: speaker
+  id: audio_sink
+  parameters:
+    alias: ''
+    comment: Listen. Disable when running without a sound card
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: '48000'
+    ok_to_block: 'True'
+    num_inputs: '1'
+    device_name: '""'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1600
+    - 700
+    rotation: 0
+    state: enabled
+- name: bfi_count
+  id: iir_filter_xxx
+  parameters:
+    alias: ''
+    comment: 'integrator y[n] = x[n] + y[n-1]: total bad blocks'
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    oldstyle: 'True'
+    type: ffd
+    fftaps: '[1.0]'
+    fbtaps: '[0.0, 1.0]'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 300
+    - 760
+    rotation: 0
+    state: enabled
+- name: bfi_rate
+  id: blocks_moving_average_xx
+  parameters:
+    alias: ''
+    comment: BFI rate over 2 s (33 blocks)
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    length: '33'
+    scale: 1.0 / 33
+    max_iter: '4000'
+    vlen: '1'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 300
+    - 840
+    rotation: 0
+    state: enabled
+- name: fer_num
+  id: qtgui_number_sink
+  parameters:
+    alias: ''
+    comment: ''
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '"Channel decoder"'
+    autoscale: 'False'
+    avg: '0'
+    nconnections: '2'
+    min: '0'
+    max: '1'
+    update_time: '0.25'
+    factor1: '1'
+    type: float
+    graph_type: qtgui.NUM_GRAPH_HORIZ
+    gui_hint: 1,1,1,1
+    label1: '"bad-frame rate (BFI)"'
+    unit1: '""'
+    color1: ("black", "black")
+    label2: '"bad 60 ms blocks, total"'
+    unit2: '""'
+    color2: ("black", "black")
+    factor2: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 520
+    - 780
+    rotation: 0
+    state: enabled
+- name: ref_delay
+  id: blocks_delay
+  parameters:
+    alias: ''
+    comment: 'align input with output: delay by the codec delay'
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    delay: codec_delay
+    num_ports: '1'
+    vlen: '1'
+    showports: 'False'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 8
+    - 900
+    rotation: 0
+    state: enabled
+- name: lsyn_flat
+  id: blocks_vector_to_stream
+  parameters:
+    alias: ''
+    comment: encoder local synthesis
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: '240'
+    vlen: '1'
+    type: short
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1180
+    - 760
+    rotation: 0
+    state: enabled
+- name: self_sub
+  id: blocks_sub_xx
+  parameters:
+    alias: ''
+    comment: decoder out - local synthesis
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+    num_inputs: '2'
+    type: short
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1380
+    - 760
+    rotation: 0
+    state: enabled
+- name: self_s2f
+  id: blocks_short_to_float
+  parameters:
+    alias: ''
+    comment: ''
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+    scale: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1560
+    - 760
+    rotation: 0
+    state: enabled
+- name: self_abs
+  id: blocks_abs_xx
+  parameters:
+    alias: ''
+    comment: ''
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1720
+    - 760
+    rotation: 0
+    state: enabled
+- name: self_thr
+  id: blocks_threshold_ff
+  parameters:
+    alias: ''
+    comment: 1 where the samples differ
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    low: '0.5'
+    high: '0.5'
+    init: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1860
+    - 744
+    rotation: 0
+    state: enabled
+- name: self_count
+  id: iir_filter_xxx
+  parameters:
+    alias: ''
+    comment: running count of differing samples
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    oldstyle: 'True'
+    type: ffd
+    fftaps: '[1.0]'
+    fbtaps: '[0.0, 1.0]'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 2040
+    - 744
+    rotation: 0
+    state: enabled
+- name: err
+  id: blocks_sub_xx
+  parameters:
+    alias: ''
+    comment: error = input (aligned) - output
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+    num_inputs: '2'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 200
+    - 916
+    rotation: 0
+    state: enabled
+- name: sq_sig
+  id: blocks_multiply_xx
+  parameters:
+    alias: ''
+    comment: x^2
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    vlen: '1'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 380
+    - 840
+    rotation: 0
+    state: enabled
+- name: sq_err
+  id: blocks_multiply_xx
+  parameters:
+    alias: ''
+    comment: e^2
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    vlen: '1'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 380
+    - 930
+    rotation: 0
+    state: enabled
+- name: p_sig
+  id: blocks_moving_average_xx
+  parameters:
+    alias: ''
+    comment: signal power, 5 s
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    length: snr_win
+    scale: '1'
+    max_iter: '4000'
+    vlen: '1'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 540
+    - 824
+    rotation: 0
+    state: enabled
+- name: p_err
+  id: blocks_moving_average_xx
+  parameters:
+    alias: ''
+    comment: error power, 5 s
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    length: snr_win
+    scale: '1'
+    max_iter: '4000'
+    vlen: '1'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 540
+    - 914
+    rotation: 0
+    state: enabled
+- name: p_err_eps
+  id: blocks_add_const_vxx
+  parameters:
+    alias: ''
+    comment: avoid /0
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    const: 1e-9
+    vlen: '1'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 740
+    - 930
+    rotation: 0
+    state: enabled
+- name: snr_div
+  id: blocks_divide_xx
+  parameters:
+    alias: ''
+    comment: ''
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+    num_inputs: '2'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 900
+    - 860
+    rotation: 0
+    state: enabled
+- name: snr_db
+  id: blocks_nlog10_ff
+  parameters:
+    alias: ''
+    comment: 10 log10
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    n: '10'
+    k: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1040
+    - 860
+    rotation: 0
+    state: enabled
+- name: ps_sig
+  id: blocks_moving_average_xx
+  parameters:
+    alias: ''
+    comment: signal power, 30 ms
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    length: '240'
+    scale: '1'
+    max_iter: '4000'
+    vlen: '1'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 540
+    - 1020
+    rotation: 0
+    state: enabled
+- name: ps_err
+  id: blocks_moving_average_xx
+  parameters:
+    alias: ''
+    comment: error power, 30 ms
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    length: '240'
+    scale: '1'
+    max_iter: '4000'
+    vlen: '1'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 540
+    - 1100
+    rotation: 0
+    state: enabled
+- name: ps_sig_eps
+  id: blocks_add_const_vxx
+  parameters:
+    alias: ''
+    comment: ''
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    const: 1e-9
+    vlen: '1'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 740
+    - 1036
+    rotation: 0
+    state: enabled
+- name: ps_err_eps
+  id: blocks_add_const_vxx
+  parameters:
+    alias: ''
+    comment: ''
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    const: 1e-9
+    vlen: '1'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 740
+    - 1116
+    rotation: 0
+    state: enabled
+- name: seg_div
+  id: blocks_divide_xx
+  parameters:
+    alias: ''
+    comment: ''
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+    num_inputs: '2'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 900
+    - 1060
+    rotation: 0
+    state: enabled
+- name: seg_db
+  id: blocks_nlog10_ff
+  parameters:
+    alias: ''
+    comment: ''
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    n: '10'
+    k: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1040
+    - 1060
+    rotation: 0
+    state: enabled
+- name: lo_lim
+  id: analog_const_source_x
+  parameters:
+    alias: ''
+    comment: ''
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    const: '-10.0'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1040
+    - 1140
+    rotation: 0
+    state: enabled
+- name: hi_lim
+  id: analog_const_source_x
+  parameters:
+    alias: ''
+    comment: ''
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    const: '35.0'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1200
+    - 1160
+    rotation: 0
+    state: enabled
+- name: seg_max
+  id: blocks_max_xx
+  parameters:
+    alias: ''
+    comment: clamp below at -10 dB
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    vlen: '1'
+    vlen_out: '1'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1220
+    - 1060
+    rotation: 0
+    state: enabled
+- name: seg_min
+  id: blocks_min_xx
+  parameters:
+    alias: ''
+    comment: clamp above at +35 dB
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    vlen: '1'
+    vlen_out: '1'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1380
+    - 1076
+    rotation: 0
+    state: enabled
+- name: seg_avg
+  id: blocks_moving_average_xx
+  parameters:
+    alias: ''
+    comment: mean over 5 s
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    length: snr_win
+    scale: 1.0 / snr_win
+    max_iter: '4000'
+    vlen: '1'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1540
+    - 1060
+    rotation: 0
+    state: enabled
+- name: cmp_num
+  id: qtgui_number_sink
+  parameters:
+    alias: ''
+    comment: ''
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '"Input vs output"'
+    autoscale: 'False'
+    avg: '0'
+    nconnections: '2'
+    min: '-10'
+    max: '35'
+    update_time: '0.25'
+    factor1: '1'
+    type: float
+    graph_type: qtgui.NUM_GRAPH_HORIZ
+    gui_hint: 1,2,1,1
+    label1: '"SNR [dB], 5 s"'
+    unit1: '""'
+    color1: ("black", "black")
+    label2: '"segmental SNR [dB], 5 s"'
+    unit2: '""'
+    color2: ("black", "black")
+    factor2: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 2240
+    - 860
+    rotation: 0
+    state: enabled
+- name: self_num
+  id: qtgui_number_sink
+  parameters:
+    alias: ''
+    comment: |-
+      Clean channel: must stay 0 (bit-exact decoder).
+      With noise it climbs: any bit error changes the decoder state
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '"Self-check"'
+    autoscale: 'False'
+    avg: '0'
+    nconnections: '1'
+    min: '0'
+    max: '1'
+    update_time: '0.25'
+    factor1: '1'
+    type: float
+    graph_type: qtgui.NUM_GRAPH_NONE
+    gui_hint: 1,3,1,1
+    label1: '"output samples != encoder local synthesis (0 = PASS)"'
+    unit1: '""'
+    color1: ("black", "black")
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 2240
+    - 724
+    rotation: 0
+    state: enabled
+- name: wave_plot
+  id: qtgui_time_sink_x
+  parameters:
+    alias: ''
+    comment: Input (delayed by codec_delay) over output
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    name: '"Waveforms: input (aligned) vs decoded"'
+    ylabel: '"Amplitude"'
+    yunit: '""'
+    size: '2048'
+    srate: samp_rate
+    grid: 'True'
+    autoscale: 'False'
+    ymin: '-1'
+    ymax: '1'
+    nconnections: '2'
+    update_time: '0.10'
+    entags: 'False'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_slope: qtgui.TRIG_MODE_POS
+    tr_level: '0.0'
+    tr_delay: '0'
+    tr_chan: '0'
+    tr_tag: '""'
+    ctrlpanel: 'False'
+    legend: 'True'
+    axislabels: 'True'
+    stemplot: 'False'
+    label1: '"input"'
+    width1: '1'
+    color1: blue
+    style1: '1'
+    marker1: '-1'
+    alpha1: '1.0'
+    label2: '"decoded"'
+    width2: '1'
+    color2: red
+    style2: '1'
+    marker2: '-1'
+    alpha2: '1.0'
+    label3: Signal 3
+    width3: '1'
+    color3: green
+    style3: '1'
+    marker3: '-1'
+    alpha3: '1.0'
+    label4: Signal 4
+    width4: '1'
+    color4: black
+    style4: '1'
+    marker4: '-1'
+    alpha4: '1.0'
+    label5: Signal 5
+    width5: '1'
+    color5: cyan
+    style5: '1'
+    marker5: '-1'
+    alpha5: '1.0'
+    label6: Signal 6
+    width6: '1'
+    color6: magenta
+    style6: '1'
+    marker6: '-1'
+    alpha6: '1.0'
+    label7: Signal 7
+    width7: '1'
+    color7: yellow
+    style7: '1'
+    marker7: '-1'
+    alpha7: '1.0'
+    label8: Signal 8
+    width8: '1'
+    color8: dark red
+    style8: '1'
+    marker8: '-1'
+    alpha8: '1.0'
+    label9: Signal 9
+    width9: '1'
+    color9: dark green
+    style9: '1'
+    marker9: '-1'
+    alpha9: '1.0'
+    label10: Signal 10
+    width10: '1'
+    color10: dark blue
+    style10: '1'
+    marker10: '-1'
+    alpha10: '1.0'
+    gui_hint: 2,0,1,2
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1240
+    - 1240
+    rotation: 0
+    state: enabled
+- name: seg_plot
+  id: qtgui_time_sink_x
+  parameters:
+    alias: ''
+    comment: segmental SNR vs time
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    name: '"Segmental SNR [dB], 30 ms segments"'
+    ylabel: '"dB"'
+    yunit: '""'
+    size: '8000'
+    srate: samp_rate
+    grid: 'True'
+    autoscale: 'False'
+    ymin: '-10'
+    ymax: '35'
+    nconnections: '1'
+    update_time: '0.10'
+    entags: 'False'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_slope: qtgui.TRIG_MODE_POS
+    tr_level: '0.0'
+    tr_delay: '0'
+    tr_chan: '0'
+    tr_tag: '""'
+    ctrlpanel: 'False'
+    legend: 'False'
+    axislabels: 'True'
+    stemplot: 'False'
+    label1: Signal 1
+    width1: '1'
+    color1: blue
+    style1: '1'
+    marker1: '-1'
+    alpha1: '1.0'
+    label2: Signal 2
+    width2: '1'
+    color2: red
+    style2: '1'
+    marker2: '-1'
+    alpha2: '1.0'
+    label3: Signal 3
+    width3: '1'
+    color3: green
+    style3: '1'
+    marker3: '-1'
+    alpha3: '1.0'
+    label4: Signal 4
+    width4: '1'
+    color4: black
+    style4: '1'
+    marker4: '-1'
+    alpha4: '1.0'
+    label5: Signal 5
+    width5: '1'
+    color5: cyan
+    style5: '1'
+    marker5: '-1'
+    alpha5: '1.0'
+    label6: Signal 6
+    width6: '1'
+    color6: magenta
+    style6: '1'
+    marker6: '-1'
+    alpha6: '1.0'
+    label7: Signal 7
+    width7: '1'
+    color7: yellow
+    style7: '1'
+    marker7: '-1'
+    alpha7: '1.0'
+    label8: Signal 8
+    width8: '1'
+    color8: dark red
+    style8: '1'
+    marker8: '-1'
+    alpha8: '1.0'
+    label9: Signal 9
+    width9: '1'
+    color9: dark green
+    style9: '1'
+    marker9: '-1'
+    alpha9: '1.0'
+    label10: Signal 10
+    width10: '1'
+    color10: dark blue
+    style10: '1'
+    marker10: '-1'
+    alpha10: '1.0'
+    gui_hint: 2,2,1,2
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1700
+    - 1240
+    rotation: 0
+    state: enabled
+- name: spec_plot
+  id: qtgui_freq_sink_x
+  parameters:
+    alias: ''
+    comment: ''
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    name: '"Spectrum: input vs decoded"'
+    fftsize: '512'
+    freqhalf: 'False'
+    wintype: window.WIN_BLACKMAN_hARRIS
+    norm_window: 'False'
+    fc: '0'
+    bw: samp_rate
+    grid: 'True'
+    autoscale: 'False'
+    average: '0.1'
+    ymin: '-110'
+    ymax: '-10'
+    label: Relative Gain
+    units: dB
+    nconnections: '2'
+    update_time: '0.10'
+    showports: 'False'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_level: '0.0'
+    tr_chan: '0'
+    tr_tag: '""'
+    ctrlpanel: 'False'
+    legend: 'True'
+    axislabels: 'True'
+    width1: '1'
+    alpha1: '1.0'
+    label2: '"decoded"'
+    width2: '1'
+    color2: '"red"'
+    alpha2: '1.0'
+    label3: ''''''
+    width3: '1'
+    color3: '"green"'
+    alpha3: '1.0'
+    label4: ''''''
+    width4: '1'
+    color4: '"black"'
+    alpha4: '1.0'
+    label5: ''''''
+    width5: '1'
+    color5: '"cyan"'
+    alpha5: '1.0'
+    label6: ''''''
+    width6: '1'
+    color6: '"magenta"'
+    alpha6: '1.0'
+    label7: ''''''
+    width7: '1'
+    color7: '"yellow"'
+    alpha7: '1.0'
+    label8: ''''''
+    width8: '1'
+    color8: '"dark red"'
+    alpha8: '1.0'
+    label9: ''''''
+    width9: '1'
+    color9: '"dark green"'
+    alpha9: '1.0'
+    label10: ''''''
+    width10: '1'
+    color10: '"dark blue"'
+    alpha10: '1.0'
+    fftsize_qt: '512'
+    gui_hint: 3,0,1,2
+    label1: '"input"'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1240
+    - 1380
+    rotation: 0
+    state: enabled
+- name: wf_in
+  id: qtgui_waterfall_sink_x
+  parameters:
+    alias: ''
+    comment: ''
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    name: '"Spectrogram: input"'
+    fftsize: '512'
+    freqhalf: 'False'
+    wintype: window.WIN_BLACKMAN_hARRIS
+    fc: '0'
+    bw: samp_rate
+    int_min: '-110'
+    int_max: '-20'
+    grid: 'False'
+    nconnections: '1'
+    update_time: '0.05'
+    showports: 'False'
+    legend: 'False'
+    axislabels: 'True'
+    alpha1: '1.0'
+    gui_hint: 3,2,1,1
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1700
+    - 1380
+    rotation: 0
+    state: enabled
+- name: wf_out
+  id: qtgui_waterfall_sink_x
+  parameters:
+    alias: ''
+    comment: ''
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    name: '"Spectrogram: decoded"'
+    fftsize: '512'
+    freqhalf: 'False'
+    wintype: window.WIN_BLACKMAN_hARRIS
+    fc: '0'
+    bw: samp_rate
+    int_min: '-110'
+    int_max: '-20'
+    grid: 'False'
+    nconnections: '1'
+    update_time: '0.05'
+    showports: 'False'
+    legend: 'False'
+    axislabels: 'True'
+    alpha1: '1.0'
+    gui_hint: 3,3,1,1
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1980
+    - 1380
+    rotation: 0
+    state: enabled
+connections:
+- - wav_src
+  - '0'
+  - resamp_in
+  - '0'
+- - resamp_in
+  - '0'
+  - throttle
+  - '0'
+- - throttle
+  - '0'
+  - f2s_in
+  - '0'
+- - f2s_in
+  - '0'
+  - frame_in
+  - '0'
+- - frame_in
+  - '0'
+  - acelp_enc
+  - '0'
+- - acelp_enc
+  - '0'
+  - ser_flat
+  - '0'
+- - ser_flat
+  - '0'
+  - ser_pair
+  - '0'
+- - ser_pair
+  - '0'
+  - tchs_enc
+  - '0'
+- - tchs_enc
+  - '0'
+  - tx_sym
+  - '0'
+- - tx_sym
+  - '0'
+  - chan_add
+  - '0'
+- - noise
+  - '0'
+  - chan_add
+  - '1'
+- - chan_add
+  - '0'
+  - rx_blk
+  - '0'
+- - tx_sym
+  - '0'
+  - slice_tx
+  - '0'
+- - chan_add
+  - '0'
+  - slice_rx
+  - '0'
+- - slice_tx
+  - '0'
+  - ber_xor
+  - '0'
+- - slice_rx
+  - '0'
+  - ber_xor
+  - '1'
+- - ber_xor
+  - '0'
+  - ber_c2f
+  - '0'
+- - ber_c2f
+  - '0'
+  - ber_avg
+  - '0'
+- - ber_avg
+  - '0'
+  - ber_num
+  - '0'
+- - rx_blk
+  - '0'
+  - tchs_dec
+  - '0'
+- - tchs_dec
+  - '0'
+  - dser_flat
+  - '0'
+- - dser_flat
+  - '0'
+  - dser_frame
+  - '0'
+- - dser_frame
+  - '0'
+  - acelp_dec
+  - '0'
+- - acelp_dec
+  - '0'
+  - pcm_out
+  - '0'
+- - pcm_out
+  - '0'
+  - s2f_out
+  - '0'
+- - pcm_out
+  - '0'
+  - s2f_wav
+  - '0'
+- - s2f_wav
+  - '0'
+  - wav_sink
+  - '0'
+- - s2f_out
+  - '0'
+  - vol
+  - '0'
+- - vol
+  - '0'
+  - to48k
+  - '0'
+- - to48k
+  - '0'
+  - speaker
+  - '0'
+- - tchs_dec
+  - '1'
+  - bfi_rate
+  - '0'
+- - tchs_dec
+  - '1'
+  - bfi_count
+  - '0'
+- - bfi_rate
+  - '0'
+  - fer_num
+  - '0'
+- - bfi_count
+  - '0'
+  - fer_num
+  - '1'
+- - throttle
+  - '0'
+  - ref_delay
+  - '0'
+- - acelp_enc
+  - '1'
+  - lsyn_flat
+  - '0'
+- - pcm_out
+  - '0'
+  - self_sub
+  - '0'
+- - lsyn_flat
+  - '0'
+  - self_sub
+  - '1'
+- - self_sub
+  - '0'
+  - self_s2f
+  - '0'
+- - self_s2f
+  - '0'
+  - self_abs
+  - '0'
+- - self_abs
+  - '0'
+  - self_thr
+  - '0'
+- - self_thr
+  - '0'
+  - self_count
+  - '0'
+- - ref_delay
+  - '0'
+  - err
+  - '0'
+- - s2f_out
+  - '0'
+  - err
+  - '1'
+- - ref_delay
+  - '0'
+  - sq_sig
+  - '0'
+- - ref_delay
+  - '0'
+  - sq_sig
+  - '1'
+- - err
+  - '0'
+  - sq_err
+  - '0'
+- - err
+  - '0'
+  - sq_err
+  - '1'
+- - sq_sig
+  - '0'
+  - p_sig
+  - '0'
+- - sq_err
+  - '0'
+  - p_err
+  - '0'
+- - p_err
+  - '0'
+  - p_err_eps
+  - '0'
+- - p_sig
+  - '0'
+  - snr_div
+  - '0'
+- - p_err_eps
+  - '0'
+  - snr_div
+  - '1'
+- - snr_div
+  - '0'
+  - snr_db
+  - '0'
+- - sq_sig
+  - '0'
+  - ps_sig
+  - '0'
+- - sq_err
+  - '0'
+  - ps_err
+  - '0'
+- - ps_sig
+  - '0'
+  - ps_sig_eps
+  - '0'
+- - ps_err
+  - '0'
+  - ps_err_eps
+  - '0'
+- - ps_sig_eps
+  - '0'
+  - seg_div
+  - '0'
+- - ps_err_eps
+  - '0'
+  - seg_div
+  - '1'
+- - seg_div
+  - '0'
+  - seg_db
+  - '0'
+- - seg_db
+  - '0'
+  - seg_max
+  - '0'
+- - lo_lim
+  - '0'
+  - seg_max
+  - '1'
+- - seg_max
+  - '0'
+  - seg_min
+  - '0'
+- - hi_lim
+  - '0'
+  - seg_min
+  - '1'
+- - seg_min
+  - '0'
+  - seg_avg
+  - '0'
+- - snr_db
+  - '0'
+  - cmp_num
+  - '0'
+- - seg_avg
+  - '0'
+  - cmp_num
+  - '1'
+- - self_count
+  - '0'
+  - self_num
+  - '0'
+- - ref_delay
+  - '0'
+  - wave_plot
+  - '0'
+- - s2f_out
+  - '0'
+  - wave_plot
+  - '1'
+- - seg_min
+  - '0'
+  - seg_plot
+  - '0'
+- - ref_delay
+  - '0'
+  - spec_plot
+  - '0'
+- - s2f_out
+  - '0'
+  - spec_plot
+  - '1'
+- - ref_delay
+  - '0'
+  - wf_in
+  - '0'
+- - s2f_out
+  - '0'
+  - wf_out
+  - '0'
+metadata:
+  file_format: 1
+  grc_version: 3.10.9.2
