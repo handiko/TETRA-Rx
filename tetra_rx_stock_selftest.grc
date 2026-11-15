@@ -1,0 +1,2588 @@
+options:
+  parameters:
+    author: ''
+    catch_exceptions: 'True'
+    category: '[GRC Hier Blocks]'
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: Same decoder as tetra_rx_stock, fed from tetra_test_72k.cf32 (tetra_testgen.py)
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: qt_gui
+    hier_block_src_path: '.:'
+    id: tetra_rx_stock_selftest
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: TETRA RX stock FEC - SELF-TEST (synthetic file, no RTL-SDR)
+    window_size: (1000,1000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 8
+    - 8
+    rotation: 0
+    state: enabled
+blocks:
+- name: add_blk1
+  id: blocks_add_xx
+  parameters:
+    alias: ''
+    comment: ''
+    type: float
+    num_inputs: '2'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 864
+    - 924
+    rotation: 0
+    state: enabled
+- name: add_blk2
+  id: blocks_add_xx
+  parameters:
+    alias: ''
+    comment: ''
+    type: float
+    num_inputs: '3'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 864
+    - 760
+    rotation: 0
+    state: enabled
+- name: add_bsch
+  id: blocks_add_xx
+  parameters:
+    alias: ''
+    comment: data + 0 = data; tags from both inputs survive
+    type: float
+    num_inputs: '2'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 864
+    - 636
+    rotation: 0
+    state: enabled
+- name: algorithm
+  id: variable_adaptive_algorithm
+  parameters:
+    comment: ''
+    cons: constellation
+    delta: '10.0'
+    ffactor: '0.99'
+    modulus: '1'
+    step_size: '.005'
+    type: cma
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 2264
+    - 12
+    rotation: 0
+    state: true
+- name: analog_agc_xx_0
+  id: analog_agc_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    gain: '1.0'
+    max_gain: '65536'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    rate: 10e-3
+    reference: '0.25'
+    type: complex
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 528
+    - 300.0
+    rotation: 0
+    state: enabled
+- name: bsch_deint
+  id: trellis_permutation
+  parameters:
+    alias: ''
+    comment: 'SOFT DE-INTERLEAVE: out[i] = in[(a*(i+1)) mod K]'
+    type: float
+    interleaver_size: '120'
+    table: tetra_fec.DEINT_120
+    syms_per_block: '1'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 760
+    - 1040
+    rotation: 0
+    state: enabled
+- name: bsch_descr
+  id: blocks_multiply_const_vxx
+  parameters:
+    alias: ''
+    comment: |-
+      SOFT DESCRAMBLE: x (+-1) per bit.
+      Changing k takes effect between whole vectors
+    type: float
+    const: tetra_fec.BSCH_SCR
+    vlen: '120'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 392
+    - 1048
+    rotation: 0
+    state: enabled
+- name: bsch_dp3
+  id: blocks_deinterleave
+  parameters:
+    alias: ''
+    comment: 'DE-PUNCTURE (1/2): split every 3 received bits'
+    type: float
+    num_streams: '3'
+    blocksize: '1'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 992
+    - 1048
+    rotation: 0
+    state: enabled
+- name: bsch_dp8
+  id: blocks_interleave
+  parameters:
+    alias: ''
+    comment: |-
+      DE-PUNCTURE (2/2): rebuild 8 mother bits,
+      0.0 (erasure) where the TX punctured
+    type: float
+    num_streams: '8'
+    blocksize: '1'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1160
+    - 1040
+    rotation: 0
+    state: enabled
+- name: bsch_erase
+  id: blocks_null_source
+  parameters:
+    alias: ''
+    comment: |-
+      Erasures for de-puncturing (0.0 = no information).
+      One per chain: a shared source would couple the two chains' buffers
+    type: float
+    vlen: '1'
+    num_outputs: '1'
+    bus_structure_source: '[[0,],]'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1000
+    - 1136
+    rotation: 0
+    state: enabled
+- name: bsch_p2s
+  id: pdu_pdu_to_tagged_stream
+  parameters:
+    alias: ''
+    comment: BSCH cuts -> stream (whole blocks only, so everything below stays aligned)
+    type: float
+    tag: packet_len
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 16
+    - 1040
+    rotation: 0
+    state: enabled
+- name: bsch_s2t
+  id: blocks_stream_to_tagged_stream
+  parameters:
+    alias: ''
+    comment: ''
+    type: byte
+    vlen: '1'
+    packet_len: tetra_fec.BSCH_STEPS
+    len_tag_key: '"blk"'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1592
+    - 1048
+    rotation: 0
+    state: enabled
+- name: bsch_s2v
+  id: blocks_stream_to_vector
+  parameters:
+    alias: ''
+    comment: ''
+    type: float
+    num_items: '120'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 232
+    - 1048
+    rotation: 0
+    state: enabled
+- name: bsch_t2p
+  id: pdu_tagged_stream_to_pdu
+  parameters:
+    alias: ''
+    comment: ''
+    type: byte
+    tag: blk
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1800
+    - 1048
+    rotation: 0
+    state: enabled
+- name: bsch_v2s
+  id: blocks_vector_to_stream
+  parameters:
+    alias: ''
+    comment: ''
+    type: float
+    num_items: '120'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 600
+    - 1048
+    rotation: 0
+    state: enabled
+- name: bsch_vit
+  id: trellis_viterbi_combined_xx
+  parameters:
+    alias: ''
+    comment: 'SOFT VITERBI: K=5 rate-1/4 mother code, terminated (start/end state 0)'
+    type: f
+    out_type: b
+    fsm_args: 2, 16, 16, tetra_fec.NS, tetra_fec.OS
+    block_size: tetra_fec.BSCH_STEPS
+    init_state: '0'
+    final_state: '0'
+    dim: '4'
+    table: tetra_fec.VIT_TABLE
+    metric_type: digital.TRELLIS_EUCLIDEAN
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1336
+    - 1040
+    rotation: 0
+    state: enabled
+- name: cell_key
+  id: variable
+  parameters:
+    alias: ''
+    comment: |-
+      Extended colour code MCC<<20|MNC<<6|CC. Set at run time by
+      Message Pair to Var from the decoded SYNC (0 = not known yet)
+    value: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1720
+    - 12
+    rotation: 0
+    state: enabled
+- name: cell_to_var
+  id: blocks_msgpair_to_var
+  parameters:
+    alias: ''
+    comment: Sets variable cell_key -> hd_scr -> SCH/HD descrambler
+    target: cell_key
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 2288
+    - 1120
+    rotation: 0
+    state: enabled
+- name: ch_rate
+  id: variable
+  parameters:
+    comment: 72 kS/s = 4 samples/symbol
+    value: samp_rate/decim
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 520
+    - 92
+    rotation: 0
+    state: enabled
+- name: chan_cut
+  id: variable
+  parameters:
+    alias: ''
+    comment: |-
+      Channel filter -6 dB point. TETRA occupies +-12.15 kHz; neighbours start at
+      +-12.85 kHz (25 kHz raster). 16 kHz alone let them bias the FLL by kHz
+    value: 13.5e3
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1856
+    - 92
+    rotation: 0
+    state: enabled
+- name: chan_lpf
+  id: fir_filter_xxx
+  parameters:
+    alias: ''
+    comment: |-
+      Tight channel filter at 72 kS/s (~80 taps, cheap): keeps the 25 kHz
+      neighbours out of the FLL band-edge filters (measured: a +9 dB neighbour
+      otherwise pulls the FLL ~2 kHz off)
+    type: ccf
+    decim: '1'
+    taps: firdes.low_pass(1.0, ch_rate, chan_cut, 3e3)
+    samp_delay: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 440
+    - 412
+    rotation: 0
+    state: enabled
+- name: clock_0
+  id: digital_pfb_clock_sync_xxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: Matched RRC + symbol timing in one block, 4 sps -> 1 sps
+    filter_size: nfilts
+    init_phase: nfilts/2
+    loop_bw: '0.0628'
+    max_dev: '1.5'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    osps: '1'
+    sps: sps
+    taps: rrc_taps
+    type: ccf
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 904
+    - 232.0
+    rotation: 0
+    state: enabled
+- name: const_0
+  id: qtgui_const_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    axislabels: 'True'
+    color1: '"blue"'
+    color10: '"dark blue"'
+    color2: '"red"'
+    color3: '"green"'
+    color4: '"black"'
+    color5: '"cyan"'
+    color6: '"magenta"'
+    color7: '"yellow"'
+    color8: '"dark red"'
+    color9: '"dark green"'
+    comment: |-
+      Blue: symbols after clock sync + equaliser: a THIN RING = timing locked.
+      Red: phase steps after the 4th-power derotator = what the decoder sees.
+        4 tight clusters at +-45/+-135 deg = healthy.
+      Green: the same steps BEFORE the derotator. Their rotation = carrier left over
+        after the FLL (also on the number sink). > ~20 deg rotation: fix ppm.
+    grid: 'True'
+    gui_hint: 1,2,1,1
+    label1: symbols
+    label10: ''
+    label2: phase steps -> decoder
+    label3: raw phase steps
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    legend: 'True'
+    marker1: '0'
+    marker10: '0'
+    marker2: '0'
+    marker3: '0'
+    marker4: '0'
+    marker5: '0'
+    marker6: '0'
+    marker7: '0'
+    marker8: '0'
+    marker9: '0'
+    name: '"blue: symbols (thin ring = OK)   red: steps to decoder (4 clusters on diagonals)   green: before derotator"'
+    nconnections: '3'
+    size: '1024'
+    style1: '0'
+    style10: '0'
+    style2: '0'
+    style3: '0'
+    style4: '0'
+    style5: '0'
+    style6: '0'
+    style7: '0'
+    style8: '0'
+    style9: '0'
+    tr_chan: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_slope: qtgui.TRIG_SLOPE_POS
+    tr_tag: '""'
+    type: complex
+    update_time: '0.10'
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    xmax: '2'
+    xmin: '-2'
+    ymax: '2'
+    ymin: '-2'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 2072
+    - 368
+    rotation: 0
+    state: enabled
+- name: constellation
+  id: variable_constellation_rect
+  parameters:
+    comment: ''
+    const_points: '[1+1j, -1+1j, 1-1j, -1-1j]'
+    imag_sect: '2'
+    precision: '8'
+    real_sect: '2'
+    rot_sym: '4'
+    soft_dec_lut: None
+    sym_map: '[0, 1, 2, 3]'
+    w_imag_sect: '1'
+    w_real_sect: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 2264
+    - 112
+    rotation: 0
+    state: enabled
+- name: corr_p
+  id: digital_correlate_access_code_tag_xx
+  parameters:
+    alias: ''
+    comment: |-
+      Normal burst with two half-slot blocks: 22-bit NTS2, <= 1 error.
+      Tag on slot bit 266. ~0.2 false hits/s on random data (2.2/s at <= 2 errors);
+      CRC + 2-copy rule reject the rest
+    type: float
+    access_code: '0111101001000011011110'
+    threshold: '1'
+    tagname: slot
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 208
+    - 860
+    rotation: 0
+    state: enabled
+- name: corr_y
+  id: digital_correlate_access_code_tag_xx
+  parameters:
+    alias: ''
+    comment: |-
+      Sync burst: 38-bit training seq y, <= 4 errors.
+      Tag lands on the bit after y = slot bit 252
+    type: float
+    access_code: '11000001100111001110100111000001100111'
+    threshold: '4'
+    tagname: slot
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 208
+    - 700
+    rotation: 0
+    state: enabled
+- name: cut_blk1
+  id: pdu_tags_to_pdu_x
+  parameters:
+    alias: ''
+    comment: 'Block 1 of normal bursts: 216 soft bits'
+    type: f
+    start_tag: slot
+    end_tag: EOB
+    max_pdu_size: '216'
+    rate: 2*ch_rate/sps
+    prepend: '[]'
+    cfg_port: 'False'
+    pub_det: 'False'
+    tail_size: '0'
+    eob_alignment: '1'
+    eob_offset: '0'
+    start_time: '0.0'
+    boost_time: 'False'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1032
+    - 908
+    rotation: 0
+    state: enabled
+- name: cut_blk2
+  id: pdu_tags_to_pdu_x
+  parameters:
+    alias: ''
+    comment: 'Block 2 of sync AND normal bursts: 216 soft bits'
+    type: f
+    start_tag: slot
+    end_tag: EOB
+    max_pdu_size: '216'
+    rate: 2*ch_rate/sps
+    prepend: '[]'
+    cfg_port: 'False'
+    pub_det: 'False'
+    tail_size: '0'
+    eob_alignment: '1'
+    eob_offset: '0'
+    start_time: '0.0'
+    boost_time: 'False'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1032
+    - 748
+    rotation: 0
+    state: enabled
+- name: cut_bsch
+  id: pdu_tags_to_pdu_x
+  parameters:
+    alias: ''
+    comment: 'BSCH: 120 soft bits from the tag'
+    type: f
+    start_tag: slot
+    end_tag: EOB
+    max_pdu_size: '120'
+    rate: 2*ch_rate/sps
+    prepend: '[]'
+    cfg_port: 'False'
+    pub_det: 'False'
+    tail_size: '0'
+    eob_alignment: '1'
+    eob_offset: '0'
+    start_time: '0.0'
+    boost_time: 'False'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1032
+    - 620
+    rotation: 0
+    state: enabled
+- name: d_bsch
+  id: blocks_delay
+  parameters:
+    alias: ''
+    comment: 'DATA late by 158: y tag now sits on BSCH bit 94'
+    type: float
+    delay: tetra_fec.D_BSCH
+    num_ports: '1'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 656
+    - 620
+    rotation: 0
+    state: enabled
+- name: d_nb1
+  id: blocks_delay
+  parameters:
+    alias: ''
+    comment: 'DATA late by 252: p tag now sits on block 1 (bit 14)'
+    type: float
+    delay: tetra_fec.D_NB1
+    num_ports: '1'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 656
+    - 940
+    rotation: 0
+    state: enabled
+- name: d_nb2
+  id: blocks_delay
+  parameters:
+    alias: ''
+    comment: 'TAG late by 16: lands on block 2 (bit 282)'
+    type: float
+    delay: tetra_fec.D_NB2
+    num_ports: '1'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 656
+    - 820
+    rotation: 0
+    state: enabled
+- name: d_sb2
+  id: blocks_delay
+  parameters:
+    alias: ''
+    comment: 'TAG late by 30: lands on block 2 (bit 282)'
+    type: float
+    delay: tetra_fec.D_SB2
+    num_ports: '1'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 656
+    - 740
+    rotation: 0
+    state: enabled
+- name: decim
+  id: variable
+  parameters:
+    comment: 1.152 MS/s / 16 = 72 kS/s
+    value: '16'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 520
+    - 12
+    rotation: 0
+    state: enabled
+- name: diff_0
+  id: digital_diff_phasor_cc
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: 'y[n] = x[n] * conj(x[n-1]): the pi/4-DQPSK phase step'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1336
+    - 224.0
+    rotation: 0
+    state: enabled
+- name: digital_linear_equalizer_0
+  id: digital_linear_equalizer
+  parameters:
+    adapt_after_training: 'True'
+    affinity: ''
+    alg: algorithm
+    alias: ''
+    comment: CMA, T-spaced, 16 taps. Training fields unused (no corr_est tags in this graph)
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_taps: '16'
+    sps: '1'
+    training_sequence: '[ ]'
+    training_start_tag: corr_est
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1120
+    - 224.0
+    rotation: 0
+    state: true
+- name: dqpsk_diff
+  id: variable
+  parameters:
+    comment: |-
+      Phase CHANGE per symbol -> dibit (EN 300 392-2 Table 5.x):
+      +pi/4=00  +3pi/4=01  -pi/4=10  -3pi/4=11  (index = dibit value)
+    value: digital.constellation_calcdist([(0.7071067811865476+0.7071067811865476j), (-0.7071067811865476+0.7071067811865476j), (0.7071067811865476-0.7071067811865476j), (-0.7071067811865476-0.7071067811865476j)], [0, 1, 2, 3], 4, 1, digital.constellation.AMPLITUDE_NORMALIZATION).base()
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 760
+    - 92
+    rotation: 0
+    state: enabled
+- name: fft_0
+  id: qtgui_freq_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    average: '0.2'
+    axislabels: 'True'
+    bw: ch_rate
+    color1: '"blue"'
+    color10: '"dark blue"'
+    color2: '"red"'
+    color3: '"green"'
+    color4: '"black"'
+    color5: '"cyan"'
+    color6: '"magenta"'
+    color7: '"yellow"'
+    color8: '"dark red"'
+    color9: '"dark green"'
+    comment: Channel at 0 Hz. Neighbour carriers sit at +-25 kHz multiples
+    ctrlpanel: 'False'
+    fc: '0'
+    fftsize: '2048'
+    freqhalf: 'True'
+    grid: 'True'
+    gui_hint: 1,0,1,2
+    label: Relative Gain
+    label1: ''
+    label10: ''''''
+    label2: ''''''
+    label3: ''''''
+    label4: ''''''
+    label5: ''''''
+    label6: ''''''
+    label7: ''''''
+    label8: ''''''
+    label9: ''''''
+    legend: 'False'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '"72 kHz around the channel"'
+    nconnections: '1'
+    norm_window: 'False'
+    showports: 'False'
+    tr_chan: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_tag: '""'
+    type: complex
+    units: dB
+    update_time: '0.10'
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    wintype: window.WIN_BLACKMAN_hARRIS
+    ymax: '-20'
+    ymin: '-120'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 600
+    - 428.0
+    rotation: 0
+    state: enabled
+- name: file_src
+  id: blocks_file_source
+  parameters:
+    alias: ''
+    comment: |-
+      Synthetic TETRA from tetra_testgen.py (put it next to this .grc).
+      Expected: CELL MCC 510 MNC 1945 colour code 1, SYSINFO DL 393.0750 MHz, LA 105
+    file: tetra_test_72k.cf32
+    type: complex
+    repeat: 'True'
+    vlen: '1'
+    offset: '0'
+    length: '0'
+    begin_tag: pmt.PMT_NIL
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 16
+    - 300
+    rotation: 0
+    state: enabled
+- name: fine_hz
+  id: variable_qtgui_range
+  parameters:
+    comment: 'Moves the channel inside the capture. Prefer fixing ppm: fine tune does not calibrate anything'
+    gui_hint: 0,2,1,1
+    label: Fine tune [Hz]
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '-15000'
+    step: '100'
+    stop: '15000'
+    value: '0'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1360
+    - 12
+    rotation: 0
+    state: enabled
+- name: fll_0
+  id: digital_fll_band_edge_cc
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: |-
+      Band-edge FLL: removes carrier offset (RTL ppm residue).
+      Tested pull-in: +-6 kHz. Differential detection then needs < ~1 kHz
+    filter_size: '45'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    rolloff: '0.35'
+    samps_per_sym: sps
+    type: cc
+    w: '0.0314'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 672
+    - 304.0
+    rotation: 0
+    state: enabled
+- name: hd_deint
+  id: trellis_permutation
+  parameters:
+    alias: ''
+    comment: 'SOFT DE-INTERLEAVE: out[i] = in[(a*(i+1)) mod K]'
+    type: float
+    interleaver_size: '216'
+    table: tetra_fec.DEINT_216
+    syms_per_block: '1'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 760
+    - 1200
+    rotation: 0
+    state: enabled
+- name: hd_descr
+  id: blocks_multiply_const_vxx
+  parameters:
+    alias: ''
+    comment: |-
+      SOFT DESCRAMBLE: x (+-1) per bit.
+      Changing k takes effect between whole vectors
+    type: float
+    const: hd_scr
+    vlen: '216'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 392
+    - 1208
+    rotation: 0
+    state: enabled
+- name: hd_dp3
+  id: blocks_deinterleave
+  parameters:
+    alias: ''
+    comment: 'DE-PUNCTURE (1/2): split every 3 received bits'
+    type: float
+    num_streams: '3'
+    blocksize: '1'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 992
+    - 1208
+    rotation: 0
+    state: enabled
+- name: hd_dp8
+  id: blocks_interleave
+  parameters:
+    alias: ''
+    comment: |-
+      DE-PUNCTURE (2/2): rebuild 8 mother bits,
+      0.0 (erasure) where the TX punctured
+    type: float
+    num_streams: '8'
+    blocksize: '1'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1160
+    - 1200
+    rotation: 0
+    state: enabled
+- name: hd_erase
+  id: blocks_null_source
+  parameters:
+    alias: ''
+    comment: |-
+      Erasures for de-puncturing (0.0 = no information).
+      One per chain: a shared source would couple the two chains' buffers
+    type: float
+    vlen: '1'
+    num_outputs: '1'
+    bus_structure_source: '[[0,],]'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1000
+    - 1296
+    rotation: 0
+    state: enabled
+- name: hd_p2s
+  id: pdu_pdu_to_tagged_stream
+  parameters:
+    alias: ''
+    comment: SCH/HD cuts -> stream (whole blocks only, so everything below stays aligned)
+    type: float
+    tag: packet_len
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 16
+    - 1200
+    rotation: 0
+    state: enabled
+- name: hd_s2t
+  id: blocks_stream_to_tagged_stream
+  parameters:
+    alias: ''
+    comment: ''
+    type: byte
+    vlen: '1'
+    packet_len: tetra_fec.HD_STEPS
+    len_tag_key: '"blk"'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1592
+    - 1208
+    rotation: 0
+    state: enabled
+- name: hd_s2v
+  id: blocks_stream_to_vector
+  parameters:
+    alias: ''
+    comment: ''
+    type: float
+    num_items: '216'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 232
+    - 1208
+    rotation: 0
+    state: enabled
+- name: hd_scr
+  id: variable
+  parameters:
+    alias: ''
+    comment: SCH/HD + BNCH descrambling vector (+-1), follows cell_key
+    value: tetra_fec.scr_pm(cell_key, 216)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1720
+    - 92
+    rotation: 0
+    state: enabled
+- name: hd_t2p
+  id: pdu_tagged_stream_to_pdu
+  parameters:
+    alias: ''
+    comment: ''
+    type: byte
+    tag: blk
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1800
+    - 1208
+    rotation: 0
+    state: enabled
+- name: hd_v2s
+  id: blocks_vector_to_stream
+  parameters:
+    alias: ''
+    comment: ''
+    type: float
+    num_items: '216'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 600
+    - 1208
+    rotation: 0
+    state: enabled
+- name: hd_vit
+  id: trellis_viterbi_combined_xx
+  parameters:
+    alias: ''
+    comment: 'SOFT VITERBI: K=5 rate-1/4 mother code, terminated (start/end state 0)'
+    type: f
+    out_type: b
+    fsm_args: 2, 16, 16, tetra_fec.NS, tetra_fec.OS
+    block_size: tetra_fec.HD_STEPS
+    init_state: '0'
+    final_state: '0'
+    dim: '4'
+    table: tetra_fec.VIT_TABLE
+    metric_type: digital.TRELLIS_EUCLIDEAN
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1336
+    - 1200
+    rotation: 0
+    state: enabled
+- name: import_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import math
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 2136
+    - 12
+    rotation: 0
+    state: true
+- name: lo_offset
+  id: variable
+  parameters:
+    comment: |-
+      LO sits this far below the channel:
+      keeps it off the RTL DC spike / LO leakage
+    value: 150e3
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 360
+    - 92
+    rotation: 0
+    state: enabled
+- name: nfilts
+  id: variable
+  parameters:
+    comment: Polyphase clock-sync filter arms
+    value: '32'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 640
+    - 92
+    rotation: 0
+    state: enabled
+- name: null_ph
+  id: blocks_null_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    bus_structure_sink: '[[0,],]'
+    comment: FLL writes its freq output only when ALL four outputs are connected
+    num_inputs: '2'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 944
+    - 560
+    rotation: 0
+    state: enabled
+- name: num_0
+  id: qtgui_number_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    autoscale: 'False'
+    avg: '0.02'
+    color1: ("black", "black")
+    color10: ("black", "black")
+    color2: ("black", "black")
+    color3: ("black", "black")
+    color4: ("black", "black")
+    color5: ("black", "black")
+    color6: ("black", "black")
+    color7: ("black", "black")
+    color8: ("black", "black")
+    color9: ("black", "black")
+    comment: |-
+      Carrier offset the FLL is removing. Divide by 393 to get extra ppm.
+      If it sits near +-6 kHz, fix ppm / fine tune.
+    factor1: -ch_rate/6.283185307179586
+    factor10: '1'
+    factor2: ch_rate/6.283185307179586/(tetra_freq/1e6)
+    factor3: '1'
+    factor4: '1'
+    factor5: '1'
+    factor6: '1'
+    factor7: '1'
+    factor8: '1'
+    factor9: '1'
+    graph_type: qtgui.NUM_GRAPH_HORIZ
+    gui_hint: 2,0,1,3
+    label1: '"carrier offset"'
+    label10: ''
+    label2: '"ppm to add"'
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    max: '8000'
+    min: '-8000'
+    name: '"FLL carrier offset"'
+    nconnections: '2'
+    type: float
+    unit1: '"Hz"'
+    unit10: ''
+    unit2: '"ppm"'
+    unit3: ''
+    unit4: ''
+    unit5: ''
+    unit6: ''
+    unit7: ''
+    unit8: ''
+    unit9: ''
+    update_time: '0.20'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1040
+    - 404.0
+    rotation: 0
+    state: enabled
+- name: num_res
+  id: qtgui_number_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    autoscale: 'False'
+    avg: '0.02'
+    color1: ("black", "black")
+    color10: ("black", "black")
+    color2: ("black", "black")
+    color3: ("black", "black")
+    color4: ("black", "black")
+    color5: ("black", "black")
+    color6: ("black", "black")
+    color7: ("black", "black")
+    color8: ("black", "black")
+    color9: ("black", "black")
+    comment: |-
+      Carrier offset the FLL leaves behind, measured from the phase steps.
+      Valid within +-2.25 kHz. Add it to the FLL reading when calibrating ppm;
+      this part alone is what costs SNR (and what a Costas loop would have hidden).
+    factor1: ch_rate/sps/(8*math.pi)
+    factor10: '1'
+    factor2: ch_rate/6.283185307179586/(tetra_freq/1e6)
+    factor3: '1'
+    factor4: '1'
+    factor5: '1'
+    factor6: '1'
+    factor7: '1'
+    factor8: '1'
+    factor9: '1'
+    graph_type: qtgui.NUM_GRAPH_HORIZ
+    gui_hint: 3,1,1,2
+    label1: '"left after FLL"'
+    label10: ''
+    label2: '"ppm to add"'
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    max: '2250'
+    min: '-2250'
+    name: '"Residual carrier after FLL (4th-power estimate)"'
+    nconnections: '1'
+    type: float
+    unit1: '"Hz"'
+    unit10: ''
+    unit2: '"ppm"'
+    unit3: ''
+    unit4: ''
+    unit5: ''
+    unit6: ''
+    unit7: ''
+    unit8: ''
+    unit9: ''
+    update_time: '0.20'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 2128
+    - 560
+    rotation: 0
+    state: enabled
+- name: p_zero
+  id: blocks_multiply_const_vxx
+  parameters:
+    alias: ''
+    comment: Keep the tag, drop the data
+    type: float
+    const: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 480
+    - 868
+    rotation: 0
+    state: enabled
+- name: pol
+  id: variable_qtgui_chooser
+  parameters:
+    alias: ''
+    comment: |-
+      Sign convention between the soft decoder and the correlators / Viterbi table.
+      "normal" is verified with tetra_testgen.py. Flip only if "no sync seen" persists
+      while the red constellation is clean.
+    label: Soft-bit polarity
+    type: real
+    num_opts: '2'
+    option0: '1.0'
+    label0: normal
+    option1: '-1.0'
+    label1: inverted
+    option2: '2'
+    label2: ''
+    option3: '3'
+    label3: ''
+    option4: '4'
+    label4: ''
+    options: '[0, 1, 2]'
+    labels: '[]'
+    value: '1.0'
+    widget: radio_buttons
+    orient: Qt.QHBoxLayout
+    gui_hint: 3,0,1,1
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1976
+    - 12
+    rotation: 0
+    state: enabled
+- name: pol_mul
+  id: blocks_multiply_const_vxx
+  parameters:
+    alias: ''
+    comment: Soft bits, + = bit 1 from here on
+    type: float
+    const: pol
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 16
+    - 780
+    rotation: 0
+    state: enabled
+- name: ppm
+  id: variable_qtgui_range
+  parameters:
+    comment: |-
+      35 = 10 + 25: two cells both read 10 kHz low at 10 ppm. If nothing decodes, try -15.
+      Fine-calibrate: add the "ppm to add" readout until the offset is < ~300 Hz.
+      The FLL only pulls ~85% of an offset; > ~5 kHz left over spreads the red clusters
+    gui_hint: 0,1,1,1
+    label: Freq corr [ppm]
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '-60'
+    step: '0.5'
+    stop: '60'
+    value: '35'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1180
+    - 12
+    rotation: 0
+    state: enabled
+- name: quiet_cutters
+  id: snippet
+  parameters:
+    alias: ''
+    comment: |-
+      Mutes only the three Tags To PDU blocks: their "SOB tag received during burst"
+      lines are correlator false hits (harmless). Other blocks still log errors.
+      Disable this block to see them again
+    section: main_after_init
+    priority: '0'
+    code: |-
+      for b in (self.cut_bsch, self.cut_blk1, self.cut_blk2):
+          b.set_log_level('critical')
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 2264
+    - 200
+    rotation: 0
+    state: enabled
+- name: rf_gain
+  id: variable_qtgui_range
+  parameters:
+    comment: Your gqrx LNA was 25.6 dB. Back off if the FFT shows a raised floor / images
+    gui_hint: 0,0,1,1
+    label: RF gain [dB]
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '0'
+    step: '0.1'
+    stop: '49.6'
+    value: '25.4'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1000
+    - 12
+    rotation: 0
+    state: enabled
+- name: rrc_taps
+  id: variable
+  parameters:
+    comment: Matched RRC (alpha 0.35) for the polyphase clock sync
+    value: firdes.root_raised_cosine(nfilts, nfilts*sps, 1.0, 0.35, 11*sps*nfilts)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 760
+    - 12
+    rotation: 0
+    state: enabled
+- name: samp_rate
+  id: variable
+  parameters:
+    comment: 'RTL rate 1.152 MS/s = 64 x 18 kBd: one integer /16 -> 4 sps'
+    value: 1.152e6
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 360
+    - 12
+    rotation: 0
+    state: enabled
+- name: soft_0
+  id: digital_constellation_soft_decoder_cf
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: |-
+      Phase step -> 2 soft bits per symbol (36 kbit/s).
+      Sign is fixed by the soft decoder; the "Soft-bit polarity" chooser downstream matches it
+    constellation: dqpsk_diff
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    npwr: '-1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1872
+    - 240
+    rotation: 0
+    state: enabled
+- name: sps
+  id: variable
+  parameters:
+    comment: 'TETRA: 18 ksym/s pi/4-DQPSK, RRC alpha 0.35'
+    value: '4'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 640
+    - 12
+    rotation: 0
+    state: enabled
+- name: tetra_dec
+  id: epy_block
+  parameters:
+    alias: ''
+    comment: |-
+      CRC-16 + SYNC/SYSINFO/ACCESS-DEFINE parsing -> console.
+      Publishes the cell key for the SCH/HD descrambler.
+      Status panel every stats_every s
+    _source_code: |
+      """
+      TETRA cell-info decoder, tail end -- Embedded Python Block, GNU Radio 3.10
+
+      Everything before this block is stock GNU Radio: frame sync (Correlate Access Code - Tag),
+      burst cutting (Delay/Add tag shift + Tags to PDU), soft descrambling (Multiply Const),
+      de-interleaving (Trellis Permutation), de-puncturing (Deinterleave/Interleave + Null Source)
+      and Viterbi decoding (Viterbi Combo).
+
+      This block does only what no stock block can:
+        * CRC-16 check on 76 / 140-bit blocks (digital.crc_check needs whole bytes; these are not)
+        * TETRA PDU parsing: SYNC (BSCH), MAC SYSINFO and ACCESS-DEFINE
+        * printing (event lines + a status panel every `stats_every` seconds)
+        * publishing the cell's scrambling key (message pair 'cell_key') so that a stock
+          Message Pair to Var block re-programs the SCH/HD descrambler for this cell
+
+      Inputs  (message): 'bsch' - u8 PDUs of 80 decoded bits  (60 info + 16 CRC + 4 tail)
+                         'hd'   - u8 PDUs of 144 decoded bits (124 info + 16 CRC + 4 tail)
+      Outputs (message): 'cell' - pair ('cell_key', MCC<<20 | MNC<<6 | CC) when the cell changes
+                         'out'  - u8 PDU per printed line (optional)
+      A new cell identity or SYSINFO is only accepted after two identical CRC-good copies,
+      so a rare false CRC pass (16-bit CRC on correlator false hits) never reaches the display.
+      """
+      import sys
+      import time
+      import threading
+      import numpy as np
+      import pmt
+      from gnuradio import gr
+
+      SYS_CODE = {0: 'EN 300 392-2 V1', 1: 'EN 300 392-2 V2.3.2+', 2: 'EN 300 392-2 V3.1.1+'}
+      SHARING = {0: 'continuous transmission', 1: 'carrier sharing', 2: 'MCCH sharing', 3: 'traffic carrier sharing'}
+      RES_FRAMES = (1, 2, 3, 4, 6, 9, 12, 18)
+      CELL_LOAD = {0: 'unknown', 1: 'low', 2: 'medium', 3: 'high'}
+      NEIGH_BCAST = {0: 'not supported', 1: 'on MCCH, not in idle', 2: 'on MCCH, supported in idle', 3: 'reserved'}
+      OFFSET_HZ = (0, 6250, -6250, 12500)
+      DUPLEX_KHZ = {
+          0: {1: 1600, 2: 10000, 3: 10000, 4: 10000, 5: 10000, 6: 10000},
+          1: {1: 4500, 3: 36000, 4: 7000, 8: 45000, 9: 45000},
+          2: {b: 0 for b in range(16)},
+          3: {3: 8000, 4: 8000, 8: 18000, 9: 18000},
+          4: {3: 18000, 4: 5000, 6: 30000, 7: 30000, 9: 39000},
+          5: {4: 9500},
+      }
+      SERVICES = ((11, 'registration mandatory'), (10, 'de-registration mandatory'), (9, 'priority cell'),
+                  (8, 'never uses minimum mode'), (7, 'migration'), (6, 'system-wide services'),
+                  (5, 'voice'), (4, 'circuit data'), (2, 'SNDCP packet data'), (1, 'AIR ENCRYPTION'),
+                  (0, 'advanced link'))
+      OPT_FIELD = {0: 'even-multiframe TS_COMMON_FRAMES', 1: 'odd-multiframe TS_COMMON_FRAMES',
+                   2: 'default access code A', 3: 'extended services broadcast'}
+      MAC_TYPE = {0: 'MAC-RESOURCE', 1: 'MAC-FRAG/END', 2: 'broadcast', 3: 'MAC-U-SIGNAL/D-BLCK'}
+
+
+      def crc_ok(bits):
+          """CRC-ITU-T over info+CRC; a correct block leaves the residue 0x1D0F"""
+          crc = 0xFFFF
+          for b in bits:
+              crc ^= int(b) << 15
+              crc = ((crc << 1) ^ 0x1021) & 0xFFFF if crc & 0x8000 else (crc << 1) & 0xFFFF
+          return crc == 0x1D0F
+
+
+      def bits_uint(bits, start, n):
+          v = 0
+          for b in bits[start:start + n]:
+              v = (v << 1) | int(b)
+          return v
+
+
+      def parse_sync(b):
+          return {
+              'syscode': bits_uint(b, 0, 4), 'cc': bits_uint(b, 4, 6),
+              'tn': bits_uint(b, 10, 2) + 1, 'fn': bits_uint(b, 12, 5), 'mn': bits_uint(b, 17, 6),
+              'sharing': bits_uint(b, 23, 2), 'resv': bits_uint(b, 25, 3), 'dtx': bits_uint(b, 28, 1),
+              'f18ext': bits_uint(b, 29, 1),
+              'mcc': bits_uint(b, 31, 10), 'mnc': bits_uint(b, 41, 14),
+              'nbcast': bits_uint(b, 55, 2), 'load': bits_uint(b, 57, 2), 'late': bits_uint(b, 59, 1)}
+
+
+      def parse_sysinfo(b):
+          d = {'carrier': bits_uint(b, 4, 12), 'band': bits_uint(b, 16, 4), 'offset': bits_uint(b, 20, 2),
+               'duplex': bits_uint(b, 22, 3), 'reverse': bits_uint(b, 25, 1), 'n_scch': bits_uint(b, 26, 2),
+               'txpwr': bits_uint(b, 28, 3), 'rxlev_min': bits_uint(b, 31, 4), 'acc_par': bits_uint(b, 35, 4),
+               'dl_timeout': bits_uint(b, 39, 4), 'cck_flag': bits_uint(b, 43, 1), 'hf_or_cck': bits_uint(b, 44, 16),
+               'opt': bits_uint(b, 60, 2), 'opt_val': bits_uint(b, 62, 20),
+               'la': bits_uint(b, 82, 14), 'subscr': bits_uint(b, 96, 16), 'service': bits_uint(b, 112, 12)}
+          d['dl_hz'] = d['band'] * 100e6 + d['carrier'] * 25e3 + OFFSET_HZ[d['offset']]
+          dup = DUPLEX_KHZ.get(d['duplex'], {}).get(d['band'])
+          d['ul_hz'] = None if dup is None else d['dl_hz'] + (1 if d['reverse'] else -1) * dup * 1e3
+          return d
+
+
+      def fmt_sysinfo(d):
+          srv = [name for bit, name in SERVICES if d['service'] >> bit & 1]
+          ul = ('%.4f MHz' % (d['ul_hz'] / 1e6)) if d['ul_hz'] is not None else 'n/a (reserved duplex code)'
+          return [
+              'Main carrier : %d  band %d  offset %+.2f kHz  ->  DL %.4f MHz   UL %s' % (
+                  d['carrier'], d['band'], OFFSET_HZ[d['offset']] / 1e3, d['dl_hz'] / 1e6, ul),
+              'Location area: %d   subscriber classes %s   secondary CCHs %d' % (
+                  d['la'], format(d['subscr'], '016b'), d['n_scch']),
+              'Access       : MS max %s   RXLEV_ACCESS_MIN %d dBm   ACCESS_PARAMETER %d dBm   DL timeout %s' % (
+                  ('%d dBm' % (10 + 5 * d['txpwr'])) if d['txpwr'] else 'reserved',
+                  -125 + 5 * d['rxlev_min'], -53 + 2 * d['acc_par'],
+                  'off' if d['dl_timeout'] == 0 else '%d slots' % (144 * d['dl_timeout'])),
+              'Services     : %s' % (', '.join(srv) if srv else 'none announced'),
+              '%s : %d   option: %s = %05X' % ('CCK id      ' if d['cck_flag'] else 'Hyperframe  ', d['hf_or_cck'],
+                                               OPT_FIELD[d['opt']], d['opt_val'])]
+
+
+      _LOCK = threading.Lock()
+
+
+      def _say(line):
+          with _LOCK:
+              sys.stdout.write(line + '\n')
+              sys.stdout.flush()
+
+
+      class blk(gr.basic_block):
+          """TETRA cell info: CRC check + SYNC/SYSINFO parsing of stock-decoded blocks"""
+
+          def __init__(self, rf_hz=0.0, stats_every=10.0, show_pdus=False):
+              gr.basic_block.__init__(self, name='TETRA CRC + Cell Info', in_sig=None, out_sig=None)
+              self.message_port_register_in(pmt.intern('bsch'))
+              self.message_port_register_in(pmt.intern('hd'))
+              self.message_port_register_out(pmt.intern('cell'))
+              self.message_port_register_out(pmt.intern('out'))
+              self.set_msg_handler(pmt.intern('bsch'), self._on_bsch)
+              self.set_msg_handler(pmt.intern('hd'), self._on_hd)
+              self.rf_hz = float(rf_hz)
+              self.stats_every = float(stats_every)
+              self.show_pdus = bool(show_pdus)
+              self._rf_seen = self.rf_hz
+              self._mtx = threading.Lock()
+              self._stop_ev = threading.Event()
+              self._thr = None
+              self._reset()
+
+          def _reset(self):
+              self.cell = None            # last good SYNC dict
+              self.key = None             # confirmed cell key
+              self.key_cand = None        # (key, count) waiting for a second identical copy
+              self.si = None
+              self.si_lines = None
+              self.si_cand = None
+              self.acc_def = {}
+              self.mac_cnt = {}
+              self.n = dict(bsch=0, bsch_ok=0, hd=0, hd_ok=0)
+              self.t0 = time.time()
+
+          # ------------------------------------------------------------ helpers
+          def _emit(self, text):
+              _say(text)
+              b = np.frombuffer((text + '\n').encode('ascii', 'replace'), dtype=np.uint8)
+              self.message_port_pub(pmt.intern('out'), pmt.cons(pmt.PMT_NIL, pmt.init_u8vector(len(b), b.tolist())))
+
+          @staticmethod
+          def _stamp():
+              return '[TETRA %s]' % time.strftime('%H:%M:%S')
+
+          @staticmethod
+          def _bits(msg):
+              return np.array(pmt.u8vector_elements(pmt.cdr(msg)), np.uint8)
+
+          def _check_retune(self):
+              if self.rf_hz != self._rf_seen:
+                  self._rf_seen = self.rf_hz
+                  self._reset()
+                  self._emit('%s --- retuned to %.4f MHz: cell picture reset ---' % (self._stamp(), self.rf_hz / 1e6))
+
+          # ------------------------------------------------------------ BSCH (SYNC PDU)
+          def _on_bsch(self, msg):
+              with self._mtx:
+                  self._check_retune()
+                  b = self._bits(msg)
+                  self.n['bsch'] += 1
+                  if len(b) < 76 or not crc_ok(b[:76]):
+                      return
+                  self.n['bsch_ok'] += 1
+                  c = parse_sync(b[:60])
+                  self.cell = c
+                  key = (c['mcc'] << 20) | (c['mnc'] << 6) | c['cc']
+                  if key == self.key:
+                      return
+                  # new identity: wait for a second identical copy before switching the descrambler
+                  if self.key_cand and self.key_cand[0] == key:
+                      self.key, self.key_cand = key, None
+                      self.si = self.si_lines = self.si_cand = None
+                      self.message_port_pub(pmt.intern('cell'), pmt.cons(pmt.intern('cell_key'), pmt.from_long(key)))
+                      self._emit('%s CELL  MCC %d  MNC %d  colour code %d   (%s, %s, cell load %s)  -> SCH/HD descrambler set' % (
+                          self._stamp(), c['mcc'], c['mnc'], c['cc'],
+                          SYS_CODE.get(c['syscode'], 'system code %d' % c['syscode']),
+                          SHARING[c['sharing']], CELL_LOAD[c['load']]))
+                  else:
+                      self.key_cand = (key, 1)
+
+          # ------------------------------------------------------------ SCH/HD, BNCH (MAC PDUs)
+          def _on_hd(self, msg):
+              with self._mtx:
+                  self._check_retune()
+                  b = self._bits(msg)
+                  self.n['hd'] += 1
+                  if self.key is None or len(b) < 140 or not crc_ok(b[:140]):
+                      return
+                  self.n['hd_ok'] += 1
+                  b = b[:124]
+                  mt = bits_uint(b, 0, 2)
+                  name = MAC_TYPE[mt]
+                  if mt == 2:
+                      bt = bits_uint(b, 2, 2)
+                      name = {0: 'SYSINFO', 1: 'ACCESS-DEFINE'}.get(bt, 'broadcast type %d' % bt)
+                      if bt == 0:
+                          d = parse_sysinfo(b)
+                          lines = fmt_sysinfo(d)
+                          stable = lines[:-1]                # hyperframe counter changes every minute
+                          if self.si_lines is not None and self.si_lines[:-1] == stable:
+                              self.si, self.si_lines = d, lines
+                          elif self.si_cand == stable:       # second identical copy: accept and print
+                              self.si, self.si_lines, self.si_cand = d, lines, None
+                              self._emit('%s SYSINFO\n    ' % self._stamp() + '\n    '.join(lines))
+                          else:
+                              self.si_cand = stable
+                      elif bt == 1:
+                          ac = bits_uint(b, 5, 2)
+                          txt = 'access code %s: IMM %d WT %d Nu %d framelength x%d TS_PTR %d min PDU prio %d' % (
+                              'ABCD'[ac], bits_uint(b, 7, 4), bits_uint(b, 11, 4), bits_uint(b, 15, 4),
+                              (1, 4)[bits_uint(b, 19, 1)], bits_uint(b, 20, 4), bits_uint(b, 24, 3))
+                          if self.acc_def.get(ac) != txt:
+                              self._emit('%s ACCESS-DEFINE %s' % (self._stamp(), txt))
+                          self.acc_def[ac] = txt
+                  self.mac_cnt[name] = self.mac_cnt.get(name, 0) + 1
+                  if self.show_pdus and name not in ('SYSINFO', 'ACCESS-DEFINE'):
+                      self._emit('%s %s %s' % (self._stamp(), name, ''.join(str(x) for x in b[:40])))
+
+          # ------------------------------------------------------------ status panel (own thread)
+          def start(self):
+              self._stop_ev.clear()
+              if self.stats_every > 0:
+                  self._thr = threading.Thread(target=self._panel_loop, daemon=True)
+                  self._thr.start()
+              return True
+
+          def stop(self):
+              self._stop_ev.set()
+              return True
+
+          def _panel_loop(self):
+              while not self._stop_ev.wait(self.stats_every):
+                  with self._mtx:
+                      self._check_retune()
+                      txt = self._status(time.time())
+                  _say(txt)
+
+          def _status(self, now):
+              bar = '=' * 76
+              L = [bar, ' TETRA cell status   %s   (running %d s)' % (time.strftime('%H:%M:%S'), now - self.t0), bar]
+              if self.rf_hz > 0:
+                  L.append(' Tuned        : %.4f MHz' % (self.rf_hz / 1e6))
+              c = self.cell
+              if c is None:
+                  L.append(' No SYNC decoded yet: check frequency / ppm / gain, the polarity chooser and the plots.')
+              else:
+                  L.append(' Network      : MCC %d  MNC %d (0x%04X)  colour code %d%s' % (
+                      c['mcc'], c['mnc'], c['mnc'], c['cc'], '   [MCC 510 = Indonesia]' if c['mcc'] == 510 else ''))
+                  L.append(' SYNC         : %s; %s; %d reserved frame(s); U-plane DTX %s; frame-18 ext %s' % (
+                      SYS_CODE.get(c['syscode'], 'system code %d' % c['syscode']), SHARING[c['sharing']],
+                      RES_FRAMES[c['resv']], 'yes' if c['dtx'] else 'no', 'yes' if c['f18ext'] else 'no'))
+                  L.append(' MLE          : cell load %s; neighbour-cell broadcast %s; late entry %s' % (
+                      CELL_LOAD[c['load']], NEIGH_BCAST[c['nbcast']], 'yes' if c['late'] else 'no'))
+                  L.append(' TDMA time    : TN %d  FN %2d  MN %2d (at last SYNC)' % (c['tn'], c['fn'], c['mn']))
+              if self.si_lines:
+                  for ln in self.si_lines:
+                      L.append(' ' + ln)
+                  if self.rf_hz > 0 and self.si:
+                      dif = self.si['dl_hz'] - self.rf_hz
+                      if abs(dif) < 1e3:
+                          note = '  (you are on the main carrier, receiver calibrated)'
+                      elif abs(dif) < 12.5e3:
+                          note = ('\n                You ARE on the main carrier; the receiver is %+.1f kHz off.'
+                                  '\n                Add %+.1f ppm to Freq corr and set tetra_freq to %.4f MHz'
+                                  ' (if it gets worse, the sign is the other way)' % (
+                                      -dif / 1e3, dif / self.rf_hz * 1e6, self.si['dl_hz'] / 1e6))
+                      else:
+                          note = '  (secondary carrier: the main carrier is elsewhere)'
+                      L.append(' Tuning check : announced main carrier minus tuned frequency = %+.1f kHz%s' % (dif / 1e3, note))
+              elif c is not None:
+                  L.append(' SYSINFO      : not decoded yet (needs two identical copies; a few seconds)')
+              for v in self.acc_def.values():
+                  L.append(' Access def.  : ' + v)
+              if self.mac_cnt:
+                  L.append(' Half-slot PDUs: ' + ', '.join('%s %d' % kv for kv in sorted(self.mac_cnt.items(), key=lambda kv: -kv[1])))
+              L.append(' Decoder      : BSCH cuts %d (CRC ok %d)   half-slot cuts %d (CRC ok %d)' % (
+                  self.n['bsch'], self.n['bsch_ok'], self.n['hd'], self.n['hd_ok']))
+              if self.n['bsch'] == 0:
+                  L.append(' NOTE         : no sync training sequence seen - not TETRA, not locked, too weak, or wrong polarity')
+              elif self.n['bsch_ok'] == 0:
+                  L.append(' NOTE         : y seen but no BSCH passes CRC - SNR too low, ppm far off, or wrong polarity')
+              L.append(' (half-slot cuts include correlator false hits on random data; a low CRC-ok ratio there is normal)')
+              L.append(bar)
+              return '\n'.join(L)
+    rf_hz: tetra_freq + fine_hz
+    stats_every: '10.0'
+    show_pdus: 'False'
+    affinity: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 2040
+    - 1112
+    rotation: 0
+    state: enabled
+    _io_cache: '(''TETRA CRC + Cell Info'', ''blk'', [(''rf_hz'', ''0.0''), (''stats_every'', ''10.0''), (''show_pdus'', ''False'')], [(''bsch'', ''message'', 1), (''hd'', ''message'', 1)], [(''cell'', ''message'', 1), (''out'', ''message'', 1)], ''TETRA cell info: CRC check + SYNC/SYSINFO parsing of stock-decoded blocks'', [''rf_hz'', ''show_pdus'', ''stats_every''])'
+- name: tetra_fec
+  id: epy_module
+  parameters:
+    alias: ''
+    comment: 'Tables for the stock FEC blocks: scrambler, interleaver, FSM, Viterbi table, cut offsets'
+    source_code: |
+      """
+      tetra_fec - Python Module block (id: tetra_fec). Tables only: no signal processing runs here.
+      Every number below is used as a parameter of a STOCK block; the processing itself happens in
+      Multiply Const (descramble), Trellis Permutation (de-interleave), Deinterleave/Interleave +
+      Null Source (de-puncture) and Viterbi Combo (decode).
+
+      Spec: ETSI EN 300 392-2 clause 8 (channel coding), cross-checked against the original EPB,
+      which decoded live cells (MCC 510 MNC 1945).
+      """
+      import numpy as np
+
+      # ---------------------------------------------------------------- frame sync
+      # Correlate Access Code - Tag puts its tag on the FIRST bit AFTER the code.
+      # Measured in GNU Radio 3.10.9: tag offset = code start + code length.
+      Y_CODE = '11000001100111001110100111000001100111'   # 38-bit synchronisation training seq (sync burst)
+      P_CODE = '0111101001000011011110'                   # 22-bit normal training seq 2 (two half-slot blocks)
+      # slot positions [bits]: sync burst  BSCH 94..213, y 214..251, SCH/HD 282..497
+      #                        normal burst blk1 14..229, p 244..265,  blk2 282..497
+      Y_TAG = 214 + 38      # = 252 : y tag lands here
+      P_TAG = 244 + 22      # = 266 : p tag lands here
+      D_BSCH = Y_TAG - 94   # = 158 : delay the DATA by this so the y tag sits on the BSCH start
+      D_SB2 = 282 - Y_TAG   # =  30 : delay the y TAG by this so it sits on sync-burst block 2
+      D_NB1 = P_TAG - 14    # = 252 : delay the DATA by this so the p tag sits on normal-burst block 1
+      D_NB2 = 282 - P_TAG   # =  16 : delay the p TAG by this so it sits on normal-burst block 2
+
+      # ---------------------------------------------------------------- scrambler (cl. 8.2.5)
+      _SCR_TAPS = (32, 26, 23, 22, 16, 12, 11, 10, 8, 7, 5, 4, 2, 1)
+
+
+      def cell_key(mcc, mnc, cc):
+          """30-bit extended colour code = MCC(10) | MNC(14) | colour code(6)"""
+          return ((mcc & 0x3FF) << 20) | ((mnc & 0x3FFF) << 6) | (cc & 0x3F)
+
+
+      def scr_pm(key, n):
+          """n scrambling values as +-1.0 (bit 1 -> -1). Multiply soft bits by this to descramble.
+          key = cell_key(mcc, mnc, cc); key 0 is the fixed BSCH scrambler."""
+          reg = ((int(key) << 2) | 3) & 0xFFFFFFFF
+          out = []
+          for _ in range(n):
+              b = 0
+              for t in _SCR_TAPS:
+                  b ^= (reg >> (32 - t)) & 1
+              reg = (reg >> 1) | (b << 31)
+              out.append(1.0 - 2.0 * b)
+          return out
+
+
+      BSCH_SCR = scr_pm(0, 120)
+
+      # ---------------------------------------------------------------- block (de)interleaver (cl. 8.2.4.1)
+      # Trellis Permutation computes out[i] = in[TABLE[i]] (verified), which is exactly the de-interleaver:
+      # type-3 bit i (1..K) was sent as type-4 bit k = 1 + (a*i mod K)
+
+
+      def deint_table(K, a):
+          return [(a * i) % K for i in range(1, K + 1)]
+
+
+      DEINT_120 = deint_table(120, 11)    # BSCH
+      DEINT_216 = deint_table(216, 101)   # SCH/HD, BNCH, STCH
+
+      # ---------------------------------------------------------------- RCPC rate 2/3 (cl. 8.2.3.1.3)
+      # From the 1/4 mother code keep mother bits 1, 2, 5 of every 8 (2 info bits -> 3 sent bits).
+      # De-puncture = Deinterleave(3 outputs) -> Interleave(8 inputs), received bits on inputs 0, 1, 4,
+      # a Null Source (0.0 = erasure, no information) on inputs 2, 3, 5, 6, 7.
+      PUNCT_KEEP = (0, 1, 4)
+
+      # ---------------------------------------------------------------- mother code (cl. 8.2.3.1.1)
+      # K = 5, rate 1/4: G1 = 1+D+D^4, G2 = 1+D^2+D^3+D^4, G3 = 1+D+D^2+D^4, G4 = 1+D+D^3+D^4.
+      # The FSM is written out explicitly (next-state / output tables) so there is no octal
+      # generator-order convention to get wrong. Output symbol = g1 g2 g3 g4 (g1 = MSB).
+      _TAPS = ((0, 3), (1, 2, 3), (0, 1, 3), (0, 2, 3))   # delay cells D1..D4 = state bits 0..3
+      NS, OS = [], []
+      for _s in range(16):
+          _d = [(_s >> _i) & 1 for _i in range(4)]
+          for _u in (0, 1):
+              _o = 0
+              for _taps in _TAPS:
+                  _b = _u
+                  for _t in _taps:
+                      _b ^= _d[_t]
+                  _o = (_o << 1) | _b
+              NS.append(((_s << 1) | _u) & 15)
+              OS.append(_o)
+      FSM_ARGS = (2, 16, 16, NS, OS)     # trellis.fsm(I, S, O, NS, OS)
+
+      # Viterbi Combo, Euclidean metric, dimension 4: symbol o -> 4 coded bits as +-1 (+1 = bit 1),
+      # the same sign convention as the soft bits after the polarity multiplier.
+      VIT_TABLE = []
+      for _o in range(16):
+          VIT_TABLE += [2.0 * ((_o >> (3 - _g)) & 1) - 1.0 for _g in range(4)]
+
+      # trellis steps per block = type-2 bits = info + 16 CRC + 4 tail
+      BSCH_STEPS = 60 + 16 + 4      # 80  -> 120 sent bits
+      HD_STEPS = 124 + 16 + 4       # 144 -> 216 sent bits
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1560
+    - 12
+    rotation: 0
+    state: enabled
+- name: tetra_freq
+  id: variable
+  parameters:
+    comment: |-
+      TETRA DL carrier [Hz], TRUE frequency as announced in SYSINFO.
+      MCC 510 MNC 1945 cells decoded so far: 393.0750 MHz (LA 105, clean)
+      and 393.3000 MHz (LA 102). Neighbours on the 25 kHz raster: 393.100, 393.125
+    value: tetra_freq_entry*1e6
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 200
+    - 12
+    rotation: 0
+    state: enabled
+- name: tetra_freq_entry
+  id: variable_qtgui_entry
+  parameters:
+    comment: ''
+    entry_signal: editingFinished
+    gui_hint: ''
+    label: TETRA Freq(MHz)
+    type: real
+    value: '393.075'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 176
+    - 128.0
+    rotation: 0
+    state: enabled
+- name: throttle
+  id: blocks_throttle2
+  parameters:
+    alias: ''
+    comment: ''
+    type: complex
+    samples_per_second: ch_rate
+    vlen: '1'
+    ignoretag: 'True'
+    limit: auto
+    maximum: '0.1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 240
+    - 308
+    rotation: 0
+    state: enabled
+- name: vv_arg
+  id: blocks_complex_to_arg
+  parameters:
+    alias: ''
+    comment: = 4 x rotation [rad]
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1680
+    - 368
+    rotation: 0
+    state: enabled
+- name: vv_avg
+  id: blocks_moving_average_xx
+  parameters:
+    alias: ''
+    comment: 'Average of -z^4 (complex: no wrapping problems)'
+    type: complex
+    length: vv_len
+    scale: -1.0/vv_len
+    max_iter: '4000'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1488
+    - 360
+    rotation: 0
+    state: enabled
+- name: vv_dly
+  id: blocks_delay
+  parameters:
+    alias: ''
+    comment: Centre the steps in the averaging window
+    type: complex
+    delay: vv_len//2
+    num_ports: '1'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1528
+    - 232
+    rotation: 0
+    state: enabled
+- name: vv_len
+  id: variable
+  parameters:
+    alias: ''
+    comment: 4th-power derotator averaging length [symbols] (7 ms)
+    value: '128'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1856
+    - 12
+    rotation: 0
+    state: enabled
+- name: vv_mul
+  id: blocks_multiply_xx
+  parameters:
+    alias: ''
+    comment: |-
+      Derotated phase steps.
+      Feed-forward: no loop, no lock state, cannot get stuck
+      in a wrong quadrant (unlike a Costas loop)
+    type: complex
+    num_inputs: '2'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1704
+    - 248
+    rotation: 0
+    state: enabled
+- name: vv_pow
+  id: blocks_multiply_xx
+  parameters:
+    alias: ''
+    comment: |-
+      z^4: the four pi/4-DQPSK steps all land on -1;
+      what is left is 4x the carrier rotation
+    type: complex
+    num_inputs: '4'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1336
+    - 360
+    rotation: 0
+    state: enabled
+- name: vv_quarter
+  id: blocks_multiply_const_vxx
+  parameters:
+    alias: ''
+    comment: rotation estimate, negated
+    type: float
+    const: '-0.25'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1824
+    - 368
+    rotation: 0
+    state: enabled
+- name: vv_rot
+  id: analog_phase_modulator_fc
+  parameters:
+    alias: ''
+    comment: 'exp(j * x): the correcting phasor'
+    sensitivity: '1.0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1968
+    - 368
+    rotation: 0
+    state: enabled
+- name: y_zero
+  id: blocks_multiply_const_vxx
+  parameters:
+    alias: ''
+    comment: Keep the tag, drop the data
+    type: float
+    const: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 480
+    - 708
+    rotation: 0
+    state: enabled
+connections:
+- - add_blk1
+  - '0'
+  - cut_blk1
+  - '0'
+- - add_blk2
+  - '0'
+  - cut_blk2
+  - '0'
+- - add_bsch
+  - '0'
+  - cut_bsch
+  - '0'
+- - analog_agc_xx_0
+  - '0'
+  - fll_0
+  - '0'
+- - bsch_deint
+  - '0'
+  - bsch_dp3
+  - '0'
+- - bsch_descr
+  - '0'
+  - bsch_v2s
+  - '0'
+- - bsch_dp3
+  - '0'
+  - bsch_dp8
+  - '0'
+- - bsch_dp3
+  - '1'
+  - bsch_dp8
+  - '1'
+- - bsch_dp3
+  - '2'
+  - bsch_dp8
+  - '4'
+- - bsch_dp8
+  - '0'
+  - bsch_vit
+  - '0'
+- - bsch_erase
+  - '0'
+  - bsch_dp8
+  - '2'
+- - bsch_erase
+  - '0'
+  - bsch_dp8
+  - '3'
+- - bsch_erase
+  - '0'
+  - bsch_dp8
+  - '5'
+- - bsch_erase
+  - '0'
+  - bsch_dp8
+  - '6'
+- - bsch_erase
+  - '0'
+  - bsch_dp8
+  - '7'
+- - bsch_p2s
+  - '0'
+  - bsch_s2v
+  - '0'
+- - bsch_s2t
+  - '0'
+  - bsch_t2p
+  - '0'
+- - bsch_s2v
+  - '0'
+  - bsch_descr
+  - '0'
+- - bsch_t2p
+  - pdus
+  - tetra_dec
+  - bsch
+- - bsch_v2s
+  - '0'
+  - bsch_deint
+  - '0'
+- - bsch_vit
+  - '0'
+  - bsch_s2t
+  - '0'
+- - chan_lpf
+  - '0'
+  - analog_agc_xx_0
+  - '0'
+- - clock_0
+  - '0'
+  - digital_linear_equalizer_0
+  - '0'
+- - corr_p
+  - '0'
+  - p_zero
+  - '0'
+- - corr_y
+  - '0'
+  - y_zero
+  - '0'
+- - cut_blk1
+  - pdus
+  - hd_p2s
+  - pdus
+- - cut_blk2
+  - pdus
+  - hd_p2s
+  - pdus
+- - cut_bsch
+  - pdus
+  - bsch_p2s
+  - pdus
+- - d_bsch
+  - '0'
+  - add_bsch
+  - '0'
+- - d_nb1
+  - '0'
+  - add_blk1
+  - '0'
+- - d_nb2
+  - '0'
+  - add_blk2
+  - '2'
+- - d_sb2
+  - '0'
+  - add_blk2
+  - '1'
+- - diff_0
+  - '0'
+  - const_0
+  - '2'
+- - diff_0
+  - '0'
+  - vv_dly
+  - '0'
+- - diff_0
+  - '0'
+  - vv_pow
+  - '0'
+- - diff_0
+  - '0'
+  - vv_pow
+  - '1'
+- - diff_0
+  - '0'
+  - vv_pow
+  - '2'
+- - diff_0
+  - '0'
+  - vv_pow
+  - '3'
+- - digital_linear_equalizer_0
+  - '0'
+  - const_0
+  - '0'
+- - digital_linear_equalizer_0
+  - '0'
+  - diff_0
+  - '0'
+- - file_src
+  - '0'
+  - throttle
+  - '0'
+- - fll_0
+  - '0'
+  - clock_0
+  - '0'
+- - fll_0
+  - '1'
+  - num_0
+  - '0'
+- - fll_0
+  - '1'
+  - num_0
+  - '1'
+- - fll_0
+  - '2'
+  - null_ph
+  - '0'
+- - fll_0
+  - '3'
+  - null_ph
+  - '1'
+- - hd_deint
+  - '0'
+  - hd_dp3
+  - '0'
+- - hd_descr
+  - '0'
+  - hd_v2s
+  - '0'
+- - hd_dp3
+  - '0'
+  - hd_dp8
+  - '0'
+- - hd_dp3
+  - '1'
+  - hd_dp8
+  - '1'
+- - hd_dp3
+  - '2'
+  - hd_dp8
+  - '4'
+- - hd_dp8
+  - '0'
+  - hd_vit
+  - '0'
+- - hd_erase
+  - '0'
+  - hd_dp8
+  - '2'
+- - hd_erase
+  - '0'
+  - hd_dp8
+  - '3'
+- - hd_erase
+  - '0'
+  - hd_dp8
+  - '5'
+- - hd_erase
+  - '0'
+  - hd_dp8
+  - '6'
+- - hd_erase
+  - '0'
+  - hd_dp8
+  - '7'
+- - hd_p2s
+  - '0'
+  - hd_s2v
+  - '0'
+- - hd_s2t
+  - '0'
+  - hd_t2p
+  - '0'
+- - hd_s2v
+  - '0'
+  - hd_descr
+  - '0'
+- - hd_t2p
+  - pdus
+  - tetra_dec
+  - hd
+- - hd_v2s
+  - '0'
+  - hd_deint
+  - '0'
+- - hd_vit
+  - '0'
+  - hd_s2t
+  - '0'
+- - p_zero
+  - '0'
+  - add_blk1
+  - '1'
+- - p_zero
+  - '0'
+  - d_nb2
+  - '0'
+- - pol_mul
+  - '0'
+  - add_blk2
+  - '0'
+- - pol_mul
+  - '0'
+  - corr_p
+  - '0'
+- - pol_mul
+  - '0'
+  - corr_y
+  - '0'
+- - pol_mul
+  - '0'
+  - d_bsch
+  - '0'
+- - pol_mul
+  - '0'
+  - d_nb1
+  - '0'
+- - soft_0
+  - '0'
+  - pol_mul
+  - '0'
+- - tetra_dec
+  - cell
+  - cell_to_var
+  - inpair
+- - throttle
+  - '0'
+  - chan_lpf
+  - '0'
+- - throttle
+  - '0'
+  - fft_0
+  - '0'
+- - vv_arg
+  - '0'
+  - num_res
+  - '0'
+- - vv_arg
+  - '0'
+  - vv_quarter
+  - '0'
+- - vv_avg
+  - '0'
+  - vv_arg
+  - '0'
+- - vv_dly
+  - '0'
+  - vv_mul
+  - '0'
+- - vv_mul
+  - '0'
+  - const_0
+  - '1'
+- - vv_mul
+  - '0'
+  - soft_0
+  - '0'
+- - vv_pow
+  - '0'
+  - vv_avg
+  - '0'
+- - vv_quarter
+  - '0'
+  - vv_rot
+  - '0'
+- - vv_rot
+  - '0'
+  - vv_mul
+  - '1'
+- - y_zero
+  - '0'
+  - add_bsch
+  - '1'
+- - y_zero
+  - '0'
+  - d_sb2
+  - '0'
+metadata:
+  file_format: 1
+  grc_version: 3.10.10.0
