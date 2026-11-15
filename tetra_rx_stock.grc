@@ -827,7 +827,7 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    alpha1: '1.0'
+    alpha1: '0.5'
     alpha10: '1.0'
     alpha2: '1.0'
     alpha3: '1.0'
@@ -867,7 +867,7 @@ blocks:
     label8: ''
     label9: ''
     legend: 'True'
-    marker1: '0'
+    marker1: '1'
     marker10: '0'
     marker2: '0'
     marker3: '0'
@@ -1439,7 +1439,7 @@ blocks:
     comment: Timeslot-aware TCH/S decoder. Needs tetra_dec.dll next to the generated
       .py
     dll_path: ''''''
-    gain_db: '0.0'
+    gain_db: '3.0'
     maxoutbuf: '0'
     minoutbuf: '0'
     polarity: '-1.0'
@@ -3124,11 +3124,11 @@ blocks:
     stats_every: '10.0'
   states:
     _io_cache: '(''TETRA CRC + Cell Info'', ''blk'', [(''rf_hz'', ''0.0''), (''stats_every'',
-      ''10.0''), (''show_pdus'', ''False'')], [(''hd'', ''message'', 1), (''schf'',
-      ''message'', 1), (''bsch_raw'', ''message'', 1), (''bsch'', ''message'', 1)],
-      [(''out'', ''message'', 1), (''tdma'', ''message'', 1), (''cell'', ''message'',
-      1)], ''TETRA cell info: CRC check + SYNC/SYSINFO parsing of stock-decoded blocks'',
-      [''rf_hz'', ''show_pdus'', ''stats_every''])'
+      ''10.0''), (''show_pdus'', ''False'')], [(''schf'', ''message'', 1), (''bsch_raw'',
+      ''message'', 1), (''hd'', ''message'', 1), (''bsch'', ''message'', 1)], [(''out'',
+      ''message'', 1), (''tdma'', ''message'', 1), (''cell'', ''message'', 1)], ''TETRA
+      cell info: CRC check + SYNC/SYSINFO parsing of stock-decoded blocks'', [''rf_hz'',
+      ''show_pdus'', ''stats_every''])'
     bus_sink: false
     bus_source: false
     bus_structure: null
