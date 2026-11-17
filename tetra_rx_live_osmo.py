@@ -96,7 +96,7 @@ class tetra_rx_live_osmo(gr.top_block, Qt.QWidget):
         self.sps = sps = 4
         self.samp_rate = samp_rate = 1.152e6
         self.nfilts = nfilts = 32
-        self.lo_offset = lo_offset = 150e3
+        self.lo_offset = lo_offset = 0*150e3
         self.decim = decim = 16
         self.constellation = constellation = digital.constellation_rect([1+1j, -1+1j, 1-1j, -1-1j], [0, 1, 2, 3],
         4, 2, 2, 1, 1).base()
@@ -106,7 +106,7 @@ class tetra_rx_live_osmo(gr.top_block, Qt.QWidget):
         self.rrc_taps = rrc_taps = firdes.root_raised_cosine(nfilts, nfilts*sps, 1.0, 0.35, 11*sps*nfilts)
         self.rf_gain = rf_gain = 25.4
         self.rf_fc = rf_fc = tetra_freq - lo_offset
-        self.ppm = ppm = 35
+        self.ppm = ppm = 34
         self.pol = pol = 1.0
         self.hd_scr = hd_scr = tetra_fec.scr_pm(cell_key, 216)
         self.fll_range_hz = fll_range_hz = 8e3
@@ -157,7 +157,7 @@ class tetra_rx_live_osmo(gr.top_block, Qt.QWidget):
             self.top_grid_layout.setRowStretch(r, 1)
         for c in range(0, 1):
             self.top_grid_layout.setColumnStretch(c, 1)
-        self._ppm_range = qtgui.Range(-60, 60, 0.5, 35, 200)
+        self._ppm_range = qtgui.Range(-60, 60, 0.5, 34, 200)
         self._ppm_win = qtgui.RangeWidget(self._ppm_range, self.set_ppm, "Freq corr [ppm]", "counter_slider", float, QtCore.Qt.Horizontal)
         self.top_grid_layout.addWidget(self._ppm_win, 0, 1, 1, 1)
         for r in range(0, 1):
@@ -386,7 +386,7 @@ class tetra_rx_live_osmo(gr.top_block, Qt.QWidget):
             self.top_grid_layout.setRowStretch(r, 1)
         for c in range(0, 2):
             self.top_grid_layout.setColumnStretch(c, 1)
-        self.epy_block_0 = epy_block_0.blk(dll_path='', cell_key=cell_key, gain_db=3.0, polarity=-1.0, target_tn=target_tn, skip_fn18=True, prefill_ms=180.0)
+        self.epy_block_0 = epy_block_0.blk(dll_path='', cell_key=cell_key, gain_db=0.0, polarity=-1.0, target_tn=target_tn, skip_fn18=True, prefill_ms=180.0)
         self.digital_linear_equalizer_0 = digital.linear_equalizer(16, 1, algorithm, True, [ ], 'corr_est')
         self.diff_0 = digital.diff_phasor_cc()
         self.d_tch = blocks.delay(gr.sizeof_float*1, tetra_fec.D_NB1)
@@ -499,15 +499,15 @@ class tetra_rx_live_osmo(gr.top_block, Qt.QWidget):
         self.connect((self.analog_agc_xx_0, 0), (self.fll_0, 0))
         self.connect((self.bsch_deint, 0), (self.bsch_dp3, 0))
         self.connect((self.bsch_descr, 0), (self.bsch_v2s, 0))
-        self.connect((self.bsch_dp3, 1), (self.bsch_dp8, 1))
         self.connect((self.bsch_dp3, 0), (self.bsch_dp8, 0))
+        self.connect((self.bsch_dp3, 1), (self.bsch_dp8, 1))
         self.connect((self.bsch_dp3, 2), (self.bsch_dp8, 4))
         self.connect((self.bsch_dp8, 0), (self.bsch_vit, 0))
+        self.connect((self.bsch_erase, 0), (self.bsch_dp8, 7))
         self.connect((self.bsch_erase, 0), (self.bsch_dp8, 3))
         self.connect((self.bsch_erase, 0), (self.bsch_dp8, 5))
         self.connect((self.bsch_erase, 0), (self.bsch_dp8, 6))
         self.connect((self.bsch_erase, 0), (self.bsch_dp8, 2))
-        self.connect((self.bsch_erase, 0), (self.bsch_dp8, 7))
         self.connect((self.bsch_p2s, 0), (self.bsch_s2v, 0))
         self.connect((self.bsch_s2t, 0), (self.bsch_t2p, 0))
         self.connect((self.bsch_s2v, 0), (self.bsch_descr, 0))
@@ -524,16 +524,16 @@ class tetra_rx_live_osmo(gr.top_block, Qt.QWidget):
         self.connect((self.d_sb2, 0), (self.add_blk2, 1))
         self.connect((self.d_tch, 0), (self.add_tch, 1))
         self.connect((self.diff_0, 0), (self.vv_dly, 0))
+        self.connect((self.diff_0, 0), (self.vv_pow, 3))
         self.connect((self.diff_0, 0), (self.vv_pow, 1))
         self.connect((self.diff_0, 0), (self.vv_pow, 2))
         self.connect((self.diff_0, 0), (self.vv_pow, 0))
-        self.connect((self.diff_0, 0), (self.vv_pow, 3))
         self.connect((self.digital_linear_equalizer_0, 0), (self.diff_0, 0))
         self.connect((self.epy_block_0, 0), (self.audio_sink_0, 1))
         self.connect((self.epy_block_0, 0), (self.audio_sink_0, 0))
         self.connect((self.fll_0, 0), (self.clock_0, 0))
-        self.connect((self.fll_0, 2), (self.null_ph, 0))
         self.connect((self.fll_0, 3), (self.null_ph, 1))
+        self.connect((self.fll_0, 2), (self.null_ph, 0))
         self.connect((self.fll_0, 1), (self.num_0, 0))
         self.connect((self.fll_0, 1), (self.num_0, 1))
         self.connect((self.hd_deint, 0), (self.hd_dp3, 0))
@@ -542,11 +542,11 @@ class tetra_rx_live_osmo(gr.top_block, Qt.QWidget):
         self.connect((self.hd_dp3, 0), (self.hd_dp8, 0))
         self.connect((self.hd_dp3, 2), (self.hd_dp8, 4))
         self.connect((self.hd_dp8, 0), (self.hd_vit, 0))
+        self.connect((self.hd_erase, 0), (self.hd_dp8, 3))
         self.connect((self.hd_erase, 0), (self.hd_dp8, 7))
+        self.connect((self.hd_erase, 0), (self.hd_dp8, 6))
         self.connect((self.hd_erase, 0), (self.hd_dp8, 2))
         self.connect((self.hd_erase, 0), (self.hd_dp8, 5))
-        self.connect((self.hd_erase, 0), (self.hd_dp8, 6))
-        self.connect((self.hd_erase, 0), (self.hd_dp8, 3))
         self.connect((self.hd_p2s, 0), (self.hd_s2v, 0))
         self.connect((self.hd_s2t, 0), (self.hd_t2p, 0))
         self.connect((self.hd_s2v, 0), (self.hd_descr, 0))
@@ -566,14 +566,14 @@ class tetra_rx_live_osmo(gr.top_block, Qt.QWidget):
         self.connect((self.pol_mul, 0), (self.d_tch, 0))
         self.connect((self.schf_deint, 0), (self.schf_dp3, 0))
         self.connect((self.schf_descr, 0), (self.schf_v2s, 0))
-        self.connect((self.schf_dp3, 0), (self.schf_dp8, 0))
         self.connect((self.schf_dp3, 1), (self.schf_dp8, 1))
+        self.connect((self.schf_dp3, 0), (self.schf_dp8, 0))
         self.connect((self.schf_dp3, 2), (self.schf_dp8, 4))
         self.connect((self.schf_dp8, 0), (self.schf_vit, 0))
         self.connect((self.schf_erase, 0), (self.schf_dp8, 2))
-        self.connect((self.schf_erase, 0), (self.schf_dp8, 6))
-        self.connect((self.schf_erase, 0), (self.schf_dp8, 3))
         self.connect((self.schf_erase, 0), (self.schf_dp8, 7))
+        self.connect((self.schf_erase, 0), (self.schf_dp8, 3))
+        self.connect((self.schf_erase, 0), (self.schf_dp8, 6))
         self.connect((self.schf_erase, 0), (self.schf_dp8, 5))
         self.connect((self.schf_p2s, 0), (self.schf_s2v, 0))
         self.connect((self.schf_s2t, 0), (self.schf_t2p, 0))

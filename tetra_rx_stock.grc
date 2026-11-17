@@ -209,7 +209,7 @@ blocks:
   parameters:
     comment: 'Tuner sits this far below the channel: keeps it off the RTL DC spike
       / LO leakage'
-    value: 150e3
+    value: 0*150e3
   states:
     bus_sink: false
     bus_source: false
@@ -284,7 +284,7 @@ blocks:
     start: '-60'
     step: '0.5'
     stop: '60'
-    value: '35'
+    value: '34'
     widget: counter_slider
   states:
     bus_sink: false
@@ -1439,7 +1439,7 @@ blocks:
     comment: Timeslot-aware TCH/S decoder. Needs tetra_dec.dll next to the generated
       .py
     dll_path: ''''''
-    gain_db: '3.0'
+    gain_db: '0.0'
     maxoutbuf: '0'
     minoutbuf: '0'
     polarity: '-1.0'
@@ -1449,8 +1449,8 @@ blocks:
   states:
     _io_cache: '(''TETRA TCH/S ACELP decoder'', ''blk'', [(''dll_path'', "''''"),
       (''cell_key'', ''0''), (''gain_db'', ''0.0''), (''polarity'', ''-1.0''), (''target_tn'',
-      ''0''), (''skip_fn18'', ''True''), (''prefill_ms'', ''180.0'')], [(''tdma'',
-      ''message'', 1), (''tch'', ''message'', 1)], [(''0'', ''float'', 1)], ''TETRA
+      ''0''), (''skip_fn18'', ''True''), (''prefill_ms'', ''180.0'')], [(''tch'',
+      ''message'', 1), (''tdma'', ''message'', 1)], [(''0'', ''float'', 1)], ''TETRA
       TCH/S decoder: timeslot-aware, ETSI ACELP via tetra_dec.dll'', [''cell_key'',
       ''polarity'', ''skip_fn18'', ''target_tn''])'
     bus_sink: false
@@ -3124,11 +3124,11 @@ blocks:
     stats_every: '10.0'
   states:
     _io_cache: '(''TETRA CRC + Cell Info'', ''blk'', [(''rf_hz'', ''0.0''), (''stats_every'',
-      ''10.0''), (''show_pdus'', ''False'')], [(''schf'', ''message'', 1), (''bsch_raw'',
-      ''message'', 1), (''hd'', ''message'', 1), (''bsch'', ''message'', 1)], [(''out'',
-      ''message'', 1), (''tdma'', ''message'', 1), (''cell'', ''message'', 1)], ''TETRA
-      cell info: CRC check + SYNC/SYSINFO parsing of stock-decoded blocks'', [''rf_hz'',
-      ''show_pdus'', ''stats_every''])'
+      ''10.0''), (''show_pdus'', ''False'')], [(''bsch'', ''message'', 1), (''hd'',
+      ''message'', 1), (''schf'', ''message'', 1), (''bsch_raw'', ''message'', 1)],
+      [(''out'', ''message'', 1), (''tdma'', ''message'', 1), (''cell'', ''message'',
+      1)], ''TETRA cell info: CRC check + SYNC/SYSINFO parsing of stock-decoded blocks'',
+      [''rf_hz'', ''show_pdus'', ''stats_every''])'
     bus_sink: false
     bus_source: false
     bus_structure: null
