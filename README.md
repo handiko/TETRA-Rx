@@ -2,6 +2,10 @@
 
 *One carrier, four timeslots, and a base station that never stops announcing who it is. This is the build log of my TETRA receiver: stock GNU Radio blocks from the RTL-SDR all the way to the cell's broadcast messages, a little Python where nothing stock exists, and finally clear speech from a live call coming out of my laptop speaker. Plus the eight bugs that stood in the way.*
 
+[Code repo here](https://github.com/handiko/TETRA-Rx)
+
+![](tetra.png)
+
 ---
 
 ## Why I did this
