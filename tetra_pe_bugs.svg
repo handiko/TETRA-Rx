@@ -1,83 +1,72 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 640" width="1100" height="640" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif" role="img" aria-label="The bug hunt: what was wrong with the first voice version, and how each problem was fixed">
-<title>The bug hunt: what was wrong with the first voice version, and how each problem was fixed</title>
-<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3d3d3a"/></marker><marker id="ahc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#A32D2D"/></marker><marker id="aht" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0F6E56"/></marker><marker id="ahb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1d4ed8"/></marker><marker id="aha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#B45309"/></marker><marker id="ahg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#15803d"/></marker><marker id="ahr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#B91C1C"/></marker><marker id="ahm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6b6b66"/></marker><marker id="ahp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6D28D9"/></marker></defs>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 760" width="1100" height="760" font-family="Helvetica, Arial, 'Liberation Sans', 'DejaVu Sans', sans-serif" role="img" aria-label="The bug hunt: eight problems and their fixes">
+<title>The bug hunt: eight problems and their fixes</title>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9.5" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,1 L10,5 L0,9 z" fill="#1b1b1b"/></marker><marker id="o" viewBox="0 0 10 10" refX="9.5" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0,1 L10,5 L0,9" fill="none" stroke="#1b1b1b" stroke-width="1.4"/></marker><marker id="r" viewBox="0 0 10 10" refX="9.5" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,1 L10,5 L0,9 z" fill="#a3312a"/></marker><marker id="or" viewBox="0 0 10 10" refX="9.5" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0,1 L10,5 L0,9" fill="none" stroke="#a3312a" stroke-width="1.4"/></marker><pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="7" stroke="#9a9a9a" stroke-width="1.6"/></pattern></defs>
 <rect width="100%" height="100%" fill="#ffffff"/>
-<text x="30.0" y="22.0" font-size="15" fill="#2b2b29" font-weight="700" text-anchor="start" dominant-baseline="central">The bug hunt, in the order I found things</text>
-<rect x="30.0" y="52.0" width="510.0" height="124.0" rx="10" fill="#ffffff" stroke="#c9c9c4" stroke-width="1.2"/>
-<circle cx="56.0" cy="78.0" r="15.0" fill="#A32D2D" stroke="#A32D2D" stroke-width="1.2"/>
-<text x="56.0" y="78.0" font-size="12" fill="#ffffff" font-weight="700" text-anchor="middle" dominant-baseline="central">1</text>
-<text x="82.0" y="78.0" font-size="13" fill="#2b2b29" font-weight="700" text-anchor="start" dominant-baseline="central">Voice decoder fed the wrong bursts</text>
-<text x="50.0" y="104.0" font-size="10" fill="#B91C1C" font-weight="700" text-anchor="start" dominant-baseline="central">Symptom</text>
-<text x="112.0" y="104.0" font-size="10" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">It listened to NTS2 (half slots = signalling). Speech uses NTS1.</text>
-<rect x="44.0" y="134.0" width="482.0" height="32.0" rx="6" fill="#E7F6EC" stroke="#15803d" stroke-width="1.0"/>
-<text x="56.0" y="150.0" font-size="10" fill="#15803d" font-weight="700" text-anchor="start" dominant-baseline="central">Fix</text>
-<text x="86.0" y="150.0" font-size="10" fill="#2b2b29" font-weight="600" text-anchor="start" dominant-baseline="central">Added a third correlator on NTS1 with its own cutter.</text>
-<rect x="560.0" y="52.0" width="510.0" height="124.0" rx="10" fill="#ffffff" stroke="#c9c9c4" stroke-width="1.2"/>
-<circle cx="586.0" cy="78.0" r="15.0" fill="#A32D2D" stroke="#A32D2D" stroke-width="1.2"/>
-<text x="586.0" y="78.0" font-size="12" fill="#ffffff" font-weight="700" text-anchor="middle" dominant-baseline="central">2</text>
-<text x="612.0" y="78.0" font-size="13" fill="#2b2b29" font-weight="700" text-anchor="start" dominant-baseline="central">Two cutters, one burst</text>
-<text x="580.0" y="104.0" font-size="10" fill="#B91C1C" font-weight="700" text-anchor="start" dominant-baseline="central">Symptom</text>
-<text x="642.0" y="104.0" font-size="10" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">Block 1 and block 2 came from two blocks in two threads and had to be</text>
-<text x="642.0" y="119.0" font-size="10" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">paired.</text>
-<rect x="574.0" y="134.0" width="482.0" height="32.0" rx="6" fill="#E7F6EC" stroke="#15803d" stroke-width="1.0"/>
-<text x="586.0" y="150.0" font-size="10" fill="#15803d" font-weight="700" text-anchor="start" dominant-baseline="central">Fix</text>
-<text x="616.0" y="150.0" font-size="10" fill="#2b2b29" font-weight="600" text-anchor="start" dominant-baseline="central">One Tags To PDU cuts all 484 bits; Python slices them.</text>
-<rect x="30.0" y="192.0" width="510.0" height="124.0" rx="10" fill="#ffffff" stroke="#c9c9c4" stroke-width="1.2"/>
-<circle cx="56.0" cy="218.0" r="15.0" fill="#A32D2D" stroke="#A32D2D" stroke-width="1.2"/>
-<text x="56.0" y="218.0" font-size="12" fill="#ffffff" font-weight="700" text-anchor="middle" dominant-baseline="central">3</text>
-<text x="82.0" y="218.0" font-size="13" fill="#2b2b29" font-weight="700" text-anchor="start" dominant-baseline="central">The timeslot filter stopped the block</text>
-<text x="50.0" y="244.0" font-size="10" fill="#B91C1C" font-weight="700" text-anchor="start" dominant-baseline="central">Symptom</text>
-<text x="112.0" y="244.0" font-size="10" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">pmt objects have no .to_long(): AttributeError on the very first burst.</text>
-<rect x="44.0" y="274.0" width="482.0" height="32.0" rx="6" fill="#E7F6EC" stroke="#15803d" stroke-width="1.0"/>
-<text x="56.0" y="290.0" font-size="10" fill="#15803d" font-weight="700" text-anchor="start" dominant-baseline="central">Fix</text>
-<text x="86.0" y="290.0" font-size="10" fill="#2b2b29" font-weight="600" text-anchor="start" dominant-baseline="central">Use pmt.to_long(). Confirmed on a real GNU Radio 3.10 install.</text>
-<rect x="560.0" y="192.0" width="510.0" height="124.0" rx="10" fill="#ffffff" stroke="#c9c9c4" stroke-width="1.2"/>
-<circle cx="586.0" cy="218.0" r="15.0" fill="#A32D2D" stroke="#A32D2D" stroke-width="1.2"/>
-<text x="586.0" y="218.0" font-size="12" fill="#ffffff" font-weight="700" text-anchor="middle" dominant-baseline="central">4</text>
-<text x="612.0" y="218.0" font-size="13" fill="#2b2b29" font-weight="700" text-anchor="start" dominant-baseline="central">There was no timeslot to filter on</text>
-<text x="580.0" y="244.0" font-size="10" fill="#B91C1C" font-weight="700" text-anchor="start" dominant-baseline="central">Symptom</text>
-<text x="642.0" y="244.0" font-size="10" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">Nothing in the graph ever produced a "timeslot" value. The filter let</text>
-<text x="642.0" y="259.0" font-size="10" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">everything through.</text>
-<rect x="574.0" y="274.0" width="482.0" height="32.0" rx="6" fill="#E7F6EC" stroke="#15803d" stroke-width="1.0"/>
-<text x="586.0" y="290.0" font-size="10" fill="#15803d" font-weight="700" text-anchor="start" dominant-baseline="central">Fix</text>
-<text x="616.0" y="290.0" font-size="10" fill="#2b2b29" font-weight="600" text-anchor="start" dominant-baseline="central">Bit positions from rx_time + a SYNC reference (previous picture).</text>
-<rect x="30.0" y="332.0" width="510.0" height="124.0" rx="10" fill="#ffffff" stroke="#c9c9c4" stroke-width="1.2"/>
-<circle cx="56.0" cy="358.0" r="15.0" fill="#A32D2D" stroke="#A32D2D" stroke-width="1.2"/>
-<text x="56.0" y="358.0" font-size="12" fill="#ffffff" font-weight="700" text-anchor="middle" dominant-baseline="central">5</text>
-<text x="82.0" y="358.0" font-size="13" fill="#2b2b29" font-weight="700" text-anchor="start" dominant-baseline="central">"Tuned: 0.0000 MHz"</text>
-<text x="50.0" y="384.0" font-size="10" fill="#B91C1C" font-weight="700" text-anchor="start" dominant-baseline="central">Symptom</text>
-<text x="112.0" y="384.0" font-size="10" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">rf_hz was tetra_freq + fine_hz, with fine_hz in kHz: 25 Hz instead of</text>
-<text x="112.0" y="399.0" font-size="10" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">390.625 MHz.</text>
-<rect x="44.0" y="414.0" width="482.0" height="32.0" rx="6" fill="#E7F6EC" stroke="#15803d" stroke-width="1.0"/>
-<text x="56.0" y="430.0" font-size="10" fill="#15803d" font-weight="700" text-anchor="start" dominant-baseline="central">Fix</text>
-<text x="86.0" y="430.0" font-size="10" fill="#2b2b29" font-weight="600" text-anchor="start" dominant-baseline="central">rf_hz = tetra_freq + fine_hz × 1e3. Tuning check works again.</text>
-<rect x="560.0" y="332.0" width="510.0" height="124.0" rx="10" fill="#ffffff" stroke="#c9c9c4" stroke-width="1.2"/>
-<circle cx="586.0" cy="358.0" r="15.0" fill="#A32D2D" stroke="#A32D2D" stroke-width="1.2"/>
-<text x="586.0" y="358.0" font-size="12" fill="#ffffff" font-weight="700" text-anchor="middle" dominant-baseline="central">6</text>
-<text x="612.0" y="358.0" font-size="13" fill="#2b2b29" font-weight="700" text-anchor="start" dominant-baseline="central">A ppm slider wired to nothing</text>
-<text x="580.0" y="384.0" font-size="10" fill="#B91C1C" font-weight="700" text-anchor="start" dominant-baseline="central">Symptom</text>
-<text x="642.0" y="384.0" font-size="10" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">After switching to file playback, ppm and gain fed no block at all.</text>
-<rect x="574.0" y="414.0" width="482.0" height="32.0" rx="6" fill="#E7F6EC" stroke="#15803d" stroke-width="1.0"/>
-<text x="586.0" y="430.0" font-size="10" fill="#15803d" font-weight="700" text-anchor="start" dominant-baseline="central">Fix</text>
-<text x="616.0" y="430.0" font-size="10" fill="#2b2b29" font-weight="600" text-anchor="start" dominant-baseline="central">Back on the RTL-SDR source: ppm and gain go to the dongle.</text>
-<rect x="30.0" y="472.0" width="510.0" height="124.0" rx="10" fill="#ffffff" stroke="#c9c9c4" stroke-width="1.2"/>
-<circle cx="56.0" cy="498.0" r="15.0" fill="#A32D2D" stroke="#A32D2D" stroke-width="1.2"/>
-<text x="56.0" y="498.0" font-size="12" fill="#ffffff" font-weight="700" text-anchor="middle" dominant-baseline="central">7</text>
-<text x="82.0" y="498.0" font-size="13" fill="#2b2b29" font-weight="700" text-anchor="start" dominant-baseline="central">Choppy audio</text>
-<text x="50.0" y="524.0" font-size="10" fill="#B91C1C" font-weight="700" text-anchor="start" dominant-baseline="central">Symptom</text>
-<text x="112.0" y="524.0" font-size="10" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">Every gap between 60 ms chunks was filled with silence straight away.</text>
-<rect x="44.0" y="554.0" width="482.0" height="32.0" rx="6" fill="#E7F6EC" stroke="#15803d" stroke-width="1.0"/>
-<text x="56.0" y="570.0" font-size="10" fill="#15803d" font-weight="700" text-anchor="start" dominant-baseline="central">Fix</text>
-<text x="86.0" y="570.0" font-size="10" fill="#2b2b29" font-weight="600" text-anchor="start" dominant-baseline="central">Start playing only once 180 ms is queued; re-buffer if it runs dry.</text>
-<rect x="560.0" y="472.0" width="510.0" height="124.0" rx="10" fill="#ffffff" stroke="#c9c9c4" stroke-width="1.2"/>
-<circle cx="586.0" cy="498.0" r="15.0" fill="#A32D2D" stroke="#A32D2D" stroke-width="1.2"/>
-<text x="586.0" y="498.0" font-size="12" fill="#ffffff" font-weight="700" text-anchor="middle" dominant-baseline="central">8</text>
-<text x="612.0" y="498.0" font-size="13" fill="#2b2b29" font-weight="700" text-anchor="start" dominant-baseline="central">A race on cell change</text>
-<text x="580.0" y="524.0" font-size="10" fill="#B91C1C" font-weight="700" text-anchor="start" dominant-baseline="central">Symptom</text>
-<text x="642.0" y="524.0" font-size="10" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">The new cell key could reset the ETSI code while it was decoding a</text>
-<text x="642.0" y="539.0" font-size="10" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">frame.</text>
-<rect x="574.0" y="554.0" width="482.0" height="32.0" rx="6" fill="#E7F6EC" stroke="#15803d" stroke-width="1.0"/>
-<text x="586.0" y="570.0" font-size="10" fill="#15803d" font-weight="700" text-anchor="start" dominant-baseline="central">Fix</text>
-<text x="616.0" y="570.0" font-size="10" fill="#2b2b29" font-weight="600" text-anchor="start" dominant-baseline="central">One lock around every call into the DLL.</text>
-<text x="30.0" y="620.0" font-size="11" fill="#6b6b66" font-weight="400" text-anchor="start" dominant-baseline="central" font-style="italic">Items 1–4 came from reading the code; 3 was confirmed on a GNU Radio 3.10.9 install, 1–4 on test signals, and the whole fixed receiver on a live cell.</text>
+<text x="20.0" y="28.0" font-size="21" fill="#1b1b1b" font-weight="700" text-anchor="start" dominant-baseline="central">Fig. 11  The bug hunt, in the order I found things</text>
+<line x1="20.0" y1="62.0" x2="540.0" y2="62.0" stroke="#bdbdbd" stroke-width="1"/>
+<text x="20.0" y="92.0" font-size="30" fill="#a3312a" font-weight="700" text-anchor="start" dominant-baseline="central" font-family="'Times New Roman', Times, 'Liberation Serif', 'DejaVu Serif', serif">1</text>
+<text x="60.0" y="92.0" font-size="17" fill="#1b1b1b" font-weight="700" text-anchor="start" dominant-baseline="central">Voice decoder fed the wrong bursts</text>
+<text x="60.0" y="122.0" font-size="14.5" fill="#666666" font-weight="700" text-anchor="start" dominant-baseline="central">Symptom</text>
+<text x="144.0" y="122.0" font-size="15" fill="#1b1b1b" font-weight="400" text-anchor="start" dominant-baseline="central">It listened to NTS2 (half slots = signalling).</text>
+<text x="144.0" y="144.0" font-size="15" fill="#1b1b1b" font-weight="400" text-anchor="start" dominant-baseline="central">Speech uses NTS1.</text>
+<text x="60.0" y="182.0" font-size="14.5" fill="#a3312a" font-weight="700" text-anchor="start" dominant-baseline="central">Fix</text>
+<text x="144.0" y="182.0" font-size="15" fill="#1b1b1b" font-weight="700" text-anchor="start" dominant-baseline="central">A third correlator on NTS1, with its own cutter.</text>
+<line x1="560.0" y1="62.0" x2="1080.0" y2="62.0" stroke="#bdbdbd" stroke-width="1"/>
+<text x="560.0" y="92.0" font-size="30" fill="#a3312a" font-weight="700" text-anchor="start" dominant-baseline="central" font-family="'Times New Roman', Times, 'Liberation Serif', 'DejaVu Serif', serif">2</text>
+<text x="600.0" y="92.0" font-size="17" fill="#1b1b1b" font-weight="700" text-anchor="start" dominant-baseline="central">Two cutters, one burst</text>
+<text x="600.0" y="122.0" font-size="14.5" fill="#666666" font-weight="700" text-anchor="start" dominant-baseline="central">Symptom</text>
+<text x="684.0" y="122.0" font-size="15" fill="#1b1b1b" font-weight="400" text-anchor="start" dominant-baseline="central">The two halves came from two blocks in two</text>
+<text x="684.0" y="144.0" font-size="15" fill="#1b1b1b" font-weight="400" text-anchor="start" dominant-baseline="central">threads and had to be paired.</text>
+<text x="600.0" y="182.0" font-size="14.5" fill="#a3312a" font-weight="700" text-anchor="start" dominant-baseline="central">Fix</text>
+<text x="684.0" y="182.0" font-size="15" fill="#1b1b1b" font-weight="700" text-anchor="start" dominant-baseline="central">One Tags To PDU cuts all 484 bits; Python slices.</text>
+<line x1="20.0" y1="226.0" x2="540.0" y2="226.0" stroke="#bdbdbd" stroke-width="1"/>
+<text x="20.0" y="256.0" font-size="30" fill="#a3312a" font-weight="700" text-anchor="start" dominant-baseline="central" font-family="'Times New Roman', Times, 'Liberation Serif', 'DejaVu Serif', serif">3</text>
+<text x="60.0" y="256.0" font-size="17" fill="#1b1b1b" font-weight="700" text-anchor="start" dominant-baseline="central">The timeslot filter stopped the block</text>
+<text x="60.0" y="286.0" font-size="14.5" fill="#666666" font-weight="700" text-anchor="start" dominant-baseline="central">Symptom</text>
+<text x="144.0" y="286.0" font-size="15" fill="#1b1b1b" font-weight="400" text-anchor="start" dominant-baseline="central">PMT objects have no .to_long():</text>
+<text x="144.0" y="308.0" font-size="15" fill="#1b1b1b" font-weight="400" text-anchor="start" dominant-baseline="central">AttributeError on the very first burst.</text>
+<text x="60.0" y="346.0" font-size="14.5" fill="#a3312a" font-weight="700" text-anchor="start" dominant-baseline="central">Fix</text>
+<text x="144.0" y="346.0" font-size="15" fill="#1b1b1b" font-weight="700" text-anchor="start" dominant-baseline="central">pmt.to_long(x), confirmed on GNU Radio 3.10.</text>
+<line x1="560.0" y1="226.0" x2="1080.0" y2="226.0" stroke="#bdbdbd" stroke-width="1"/>
+<text x="560.0" y="256.0" font-size="30" fill="#a3312a" font-weight="700" text-anchor="start" dominant-baseline="central" font-family="'Times New Roman', Times, 'Liberation Serif', 'DejaVu Serif', serif">4</text>
+<text x="600.0" y="256.0" font-size="17" fill="#1b1b1b" font-weight="700" text-anchor="start" dominant-baseline="central">There was no timeslot to filter on</text>
+<text x="600.0" y="286.0" font-size="14.5" fill="#666666" font-weight="700" text-anchor="start" dominant-baseline="central">Symptom</text>
+<text x="684.0" y="286.0" font-size="15" fill="#1b1b1b" font-weight="400" text-anchor="start" dominant-baseline="central">Nothing ever produced a "timeslot" value;</text>
+<text x="684.0" y="308.0" font-size="15" fill="#1b1b1b" font-weight="400" text-anchor="start" dominant-baseline="central">the filter let everything through.</text>
+<text x="600.0" y="346.0" font-size="14.5" fill="#a3312a" font-weight="700" text-anchor="start" dominant-baseline="central">Fix</text>
+<text x="684.0" y="346.0" font-size="15" fill="#1b1b1b" font-weight="700" text-anchor="start" dominant-baseline="central">Bit positions from rx_time + a SYNC reference.</text>
+<line x1="20.0" y1="390.0" x2="540.0" y2="390.0" stroke="#bdbdbd" stroke-width="1"/>
+<text x="20.0" y="420.0" font-size="30" fill="#a3312a" font-weight="700" text-anchor="start" dominant-baseline="central" font-family="'Times New Roman', Times, 'Liberation Serif', 'DejaVu Serif', serif">5</text>
+<text x="60.0" y="420.0" font-size="17" fill="#1b1b1b" font-weight="700" text-anchor="start" dominant-baseline="central">"Tuned: 0.0000 MHz"</text>
+<text x="60.0" y="450.0" font-size="14.5" fill="#666666" font-weight="700" text-anchor="start" dominant-baseline="central">Symptom</text>
+<text x="144.0" y="450.0" font-size="15" fill="#1b1b1b" font-weight="400" text-anchor="start" dominant-baseline="central">tetra_freq + fine_hz, with fine_hz in kHz:</text>
+<text x="144.0" y="472.0" font-size="15" fill="#1b1b1b" font-weight="400" text-anchor="start" dominant-baseline="central">the panel thought I was tuned to 25 Hz.</text>
+<text x="60.0" y="510.0" font-size="14.5" fill="#a3312a" font-weight="700" text-anchor="start" dominant-baseline="central">Fix</text>
+<text x="144.0" y="510.0" font-size="15" fill="#1b1b1b" font-weight="700" text-anchor="start" dominant-baseline="central">tetra_freq + fine_hz × 1e3.</text>
+<line x1="560.0" y1="390.0" x2="1080.0" y2="390.0" stroke="#bdbdbd" stroke-width="1"/>
+<text x="560.0" y="420.0" font-size="30" fill="#a3312a" font-weight="700" text-anchor="start" dominant-baseline="central" font-family="'Times New Roman', Times, 'Liberation Serif', 'DejaVu Serif', serif">6</text>
+<text x="600.0" y="420.0" font-size="17" fill="#1b1b1b" font-weight="700" text-anchor="start" dominant-baseline="central">A ppm slider wired to nothing</text>
+<text x="600.0" y="450.0" font-size="14.5" fill="#666666" font-weight="700" text-anchor="start" dominant-baseline="central">Symptom</text>
+<text x="684.0" y="450.0" font-size="15" fill="#1b1b1b" font-weight="400" text-anchor="start" dominant-baseline="central">After switching to file playback, ppm and</text>
+<text x="684.0" y="472.0" font-size="15" fill="#1b1b1b" font-weight="400" text-anchor="start" dominant-baseline="central">gain fed no block at all.</text>
+<text x="600.0" y="510.0" font-size="14.5" fill="#a3312a" font-weight="700" text-anchor="start" dominant-baseline="central">Fix</text>
+<text x="684.0" y="510.0" font-size="15" fill="#1b1b1b" font-weight="700" text-anchor="start" dominant-baseline="central">Back on the RTL-SDR source: both go to the dongle.</text>
+<line x1="20.0" y1="554.0" x2="540.0" y2="554.0" stroke="#bdbdbd" stroke-width="1"/>
+<text x="20.0" y="584.0" font-size="30" fill="#a3312a" font-weight="700" text-anchor="start" dominant-baseline="central" font-family="'Times New Roman', Times, 'Liberation Serif', 'DejaVu Serif', serif">7</text>
+<text x="60.0" y="584.0" font-size="17" fill="#1b1b1b" font-weight="700" text-anchor="start" dominant-baseline="central">Choppy audio</text>
+<text x="60.0" y="614.0" font-size="14.5" fill="#666666" font-weight="700" text-anchor="start" dominant-baseline="central">Symptom</text>
+<text x="144.0" y="614.0" font-size="15" fill="#1b1b1b" font-weight="400" text-anchor="start" dominant-baseline="central">Every gap between 60 ms lumps was filled</text>
+<text x="144.0" y="636.0" font-size="15" fill="#1b1b1b" font-weight="400" text-anchor="start" dominant-baseline="central">with silence straight away.</text>
+<text x="60.0" y="674.0" font-size="14.5" fill="#a3312a" font-weight="700" text-anchor="start" dominant-baseline="central">Fix</text>
+<text x="144.0" y="674.0" font-size="15" fill="#1b1b1b" font-weight="700" text-anchor="start" dominant-baseline="central">Play only once 180 ms is queued; re-buffer if dry.</text>
+<line x1="560.0" y1="554.0" x2="1080.0" y2="554.0" stroke="#bdbdbd" stroke-width="1"/>
+<text x="560.0" y="584.0" font-size="30" fill="#a3312a" font-weight="700" text-anchor="start" dominant-baseline="central" font-family="'Times New Roman', Times, 'Liberation Serif', 'DejaVu Serif', serif">8</text>
+<text x="600.0" y="584.0" font-size="17" fill="#1b1b1b" font-weight="700" text-anchor="start" dominant-baseline="central">A race on cell change</text>
+<text x="600.0" y="614.0" font-size="14.5" fill="#666666" font-weight="700" text-anchor="start" dominant-baseline="central">Symptom</text>
+<text x="684.0" y="614.0" font-size="15" fill="#1b1b1b" font-weight="400" text-anchor="start" dominant-baseline="central">A new cell key could reset the ETSI code</text>
+<text x="684.0" y="636.0" font-size="15" fill="#1b1b1b" font-weight="400" text-anchor="start" dominant-baseline="central">while it was decoding a frame.</text>
+<text x="600.0" y="674.0" font-size="14.5" fill="#a3312a" font-weight="700" text-anchor="start" dominant-baseline="central">Fix</text>
+<text x="684.0" y="674.0" font-size="15" fill="#1b1b1b" font-weight="700" text-anchor="start" dominant-baseline="central">One lock around every call into the DLL.</text>
+<line x1="20.0" y1="718.0" x2="1080.0" y2="718.0" stroke="#bdbdbd" stroke-width="1"/>
+<text x="20.0" y="735.0" font-size="14.5" fill="#666666" font-weight="400" text-anchor="start" dominant-baseline="central" font-style="italic">Items 1–4 were found by reading and reasoning; 3 was confirmed on a GNU Radio 3.10.9 install, and 1, 2 and 4 by running the fixed graph on test signals.</text>
 </svg>

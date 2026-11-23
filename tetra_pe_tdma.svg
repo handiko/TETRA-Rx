@@ -1,134 +1,135 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 560" width="1100" height="560" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif" role="img" aria-label="TETRA time structure: hyperframe, multiframe, frame, timeslot">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 640" width="1100" height="640" font-family="Helvetica, Arial, 'Liberation Sans', 'DejaVu Sans', sans-serif" role="img" aria-label="TETRA time structure: hyperframe, multiframe, frame, timeslot">
 <title>TETRA time structure: hyperframe, multiframe, frame, timeslot</title>
-<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3d3d3a"/></marker><marker id="ahc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#A32D2D"/></marker><marker id="aht" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0F6E56"/></marker><marker id="ahb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1d4ed8"/></marker><marker id="aha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#B45309"/></marker><marker id="ahg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#15803d"/></marker><marker id="ahr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#B91C1C"/></marker><marker id="ahm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6b6b66"/></marker><marker id="ahp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6D28D9"/></marker></defs>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9.5" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,1 L10,5 L0,9 z" fill="#1b1b1b"/></marker><marker id="o" viewBox="0 0 10 10" refX="9.5" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0,1 L10,5 L0,9" fill="none" stroke="#1b1b1b" stroke-width="1.4"/></marker><marker id="r" viewBox="0 0 10 10" refX="9.5" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,1 L10,5 L0,9 z" fill="#a3312a"/></marker><marker id="or" viewBox="0 0 10 10" refX="9.5" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0,1 L10,5 L0,9" fill="none" stroke="#a3312a" stroke-width="1.4"/></marker><pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="7" stroke="#9a9a9a" stroke-width="1.6"/></pattern></defs>
 <rect width="100%" height="100%" fill="#ffffff"/>
-<text x="30.0" y="22.0" font-size="15" fill="#2b2b29" font-weight="700" text-anchor="start" dominant-baseline="central">How TETRA chops time: four nested boxes</text>
-<text x="30.0" y="56.0" font-size="12" fill="#2b2b29" font-weight="700" text-anchor="start" dominant-baseline="central">Hyperframe</text>
-<text x="140.0" y="56.0" font-size="11" fill="#6b6b66" font-weight="600" text-anchor="start" dominant-baseline="central">60 multiframes = 61.2 s</text>
-<rect x="60.0" y="70.0" width="16.3" height="40.0" rx="2" fill="#FDF0DC" stroke="#B45309" stroke-width="1.0"/>
-<rect x="76.3" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="92.7" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="109.0" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="125.3" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="141.7" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="158.0" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="174.3" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="190.7" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="207.0" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="223.3" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="239.7" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="256.0" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="272.3" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="288.7" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="305.0" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="321.3" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="337.7" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="354.0" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="370.3" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="386.7" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="403.0" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="419.3" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="435.7" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="452.0" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="468.3" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="484.7" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="501.0" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="517.3" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="533.7" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="550.0" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="566.3" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="582.7" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="599.0" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="615.3" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="631.7" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="648.0" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="664.3" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="680.7" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="697.0" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="713.3" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="729.7" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="746.0" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="762.3" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="778.7" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="795.0" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="811.3" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="827.7" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="844.0" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="860.3" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="876.7" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="893.0" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="909.3" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="925.7" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="942.0" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="958.3" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="974.7" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="991.0" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="1007.3" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<rect x="1023.7" y="70.0" width="16.3" height="40.0" rx="2" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.0"/>
-<polygon points="60.0,110.0 76.3,110.0 1040.0,170.0 60.0,170.0" fill="#1d4ed8" fill-opacity="0.06" stroke="none"/>
-<path d="M60.0 110.0 L60.0 170.0" fill="none" stroke="#9aa6c7" stroke-width="1" stroke-dasharray="3 3"/>
-<path d="M76.3 110.0 L1040.0 170.0" fill="none" stroke="#9aa6c7" stroke-width="1" stroke-dasharray="3 3"/>
-<text x="30.0" y="156.0" font-size="12" fill="#2b2b29" font-weight="700" text-anchor="start" dominant-baseline="central">Multiframe</text>
-<text x="140.0" y="156.0" font-size="11" fill="#6b6b66" font-weight="600" text-anchor="start" dominant-baseline="central">18 frames = 1.02 s</text>
-<rect x="60.0" y="170.0" width="54.4" height="40.0" rx="2" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.0"/>
-<text x="87.2" y="190.0" font-size="11" fill="#2b2b29" font-weight="600" text-anchor="middle" dominant-baseline="central">FN 1</text>
-<rect x="114.4" y="170.0" width="54.4" height="40.0" rx="2" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.0"/>
-<text x="141.7" y="190.0" font-size="11" fill="#2b2b29" font-weight="600" text-anchor="middle" dominant-baseline="central">FN 2</text>
-<rect x="168.9" y="170.0" width="54.4" height="40.0" rx="2" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.0"/>
-<text x="196.1" y="190.0" font-size="11" fill="#2b2b29" font-weight="600" text-anchor="middle" dominant-baseline="central">FN 3</text>
-<rect x="223.3" y="170.0" width="54.4" height="40.0" rx="2" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.0"/>
-<text x="250.6" y="190.0" font-size="11" fill="#2b2b29" font-weight="600" text-anchor="middle" dominant-baseline="central">FN 4</text>
-<rect x="277.8" y="170.0" width="54.4" height="40.0" rx="2" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.0"/>
-<text x="305.0" y="190.0" font-size="11" fill="#2b2b29" font-weight="600" text-anchor="middle" dominant-baseline="central">FN 5</text>
-<rect x="332.2" y="170.0" width="54.4" height="40.0" rx="2" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.0"/>
-<text x="359.4" y="190.0" font-size="11" fill="#2b2b29" font-weight="600" text-anchor="middle" dominant-baseline="central">FN 6</text>
-<rect x="386.7" y="170.0" width="54.4" height="40.0" rx="2" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.0"/>
-<text x="413.9" y="190.0" font-size="11" fill="#2b2b29" font-weight="600" text-anchor="middle" dominant-baseline="central">FN 7</text>
-<rect x="441.1" y="170.0" width="54.4" height="40.0" rx="2" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.0"/>
-<text x="468.3" y="190.0" font-size="11" fill="#2b2b29" font-weight="600" text-anchor="middle" dominant-baseline="central">FN 8</text>
-<rect x="495.6" y="170.0" width="54.4" height="40.0" rx="2" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.0"/>
-<text x="522.8" y="190.0" font-size="11" fill="#2b2b29" font-weight="600" text-anchor="middle" dominant-baseline="central">FN 9</text>
-<rect x="550.0" y="170.0" width="54.4" height="40.0" rx="2" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.0"/>
-<text x="577.2" y="190.0" font-size="11" fill="#2b2b29" font-weight="600" text-anchor="middle" dominant-baseline="central">FN 10</text>
-<rect x="604.4" y="170.0" width="54.4" height="40.0" rx="2" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.0"/>
-<text x="631.7" y="190.0" font-size="11" fill="#2b2b29" font-weight="600" text-anchor="middle" dominant-baseline="central">FN 11</text>
-<rect x="658.9" y="170.0" width="54.4" height="40.0" rx="2" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.0"/>
-<text x="686.1" y="190.0" font-size="11" fill="#2b2b29" font-weight="600" text-anchor="middle" dominant-baseline="central">FN 12</text>
-<rect x="713.3" y="170.0" width="54.4" height="40.0" rx="2" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.0"/>
-<text x="740.6" y="190.0" font-size="11" fill="#2b2b29" font-weight="600" text-anchor="middle" dominant-baseline="central">FN 13</text>
-<rect x="767.8" y="170.0" width="54.4" height="40.0" rx="2" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.0"/>
-<text x="795.0" y="190.0" font-size="11" fill="#2b2b29" font-weight="600" text-anchor="middle" dominant-baseline="central">FN 14</text>
-<rect x="822.2" y="170.0" width="54.4" height="40.0" rx="2" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.0"/>
-<text x="849.4" y="190.0" font-size="11" fill="#2b2b29" font-weight="600" text-anchor="middle" dominant-baseline="central">FN 15</text>
-<rect x="876.7" y="170.0" width="54.4" height="40.0" rx="2" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.0"/>
-<text x="903.9" y="190.0" font-size="11" fill="#2b2b29" font-weight="600" text-anchor="middle" dominant-baseline="central">FN 16</text>
-<rect x="931.1" y="170.0" width="54.4" height="40.0" rx="2" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.0"/>
-<text x="958.3" y="190.0" font-size="11" fill="#2b2b29" font-weight="600" text-anchor="middle" dominant-baseline="central">FN 17</text>
-<rect x="985.6" y="170.0" width="54.4" height="40.0" rx="2" fill="#FDF0DC" stroke="#B45309" stroke-width="1.0"/>
-<text x="1012.8" y="190.0" font-size="11" fill="#2b2b29" font-weight="600" text-anchor="middle" dominant-baseline="central">FN 18</text>
-<text x="1012.8" y="222.0" font-size="10" fill="#B45309" font-weight="700" text-anchor="middle" dominant-baseline="central">control frame</text>
-<polygon points="60.0,210.0 114.4,210.0 1040.0,280.0 60.0,280.0" fill="#1d4ed8" fill-opacity="0.06" stroke="none"/>
-<path d="M60.0 210.0 L60.0 280.0" fill="none" stroke="#9aa6c7" stroke-width="1" stroke-dasharray="3 3"/>
-<path d="M114.4 210.0 L1040.0 280.0" fill="none" stroke="#9aa6c7" stroke-width="1" stroke-dasharray="3 3"/>
-<text x="30.0" y="266.0" font-size="12" fill="#2b2b29" font-weight="700" text-anchor="start" dominant-baseline="central">Frame</text>
-<text x="140.0" y="266.0" font-size="11" fill="#6b6b66" font-weight="600" text-anchor="start" dominant-baseline="central">4 timeslots = 56.67 ms</text>
-<rect x="60.0" y="280.0" width="245.0" height="40.0" rx="2" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.0"/>
-<text x="182.5" y="300.0" font-size="11" fill="#2b2b29" font-weight="600" text-anchor="middle" dominant-baseline="central">TN 1  (control)</text>
-<rect x="305.0" y="280.0" width="245.0" height="40.0" rx="2" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.0"/>
-<text x="427.5" y="300.0" font-size="11" fill="#2b2b29" font-weight="600" text-anchor="middle" dominant-baseline="central">TN 2</text>
-<rect x="550.0" y="280.0" width="245.0" height="40.0" rx="2" fill="#F8E6E4" stroke="#A32D2D" stroke-width="1.0"/>
-<text x="672.5" y="300.0" font-size="11" fill="#2b2b29" font-weight="600" text-anchor="middle" dominant-baseline="central">TN 3  (a call)</text>
-<rect x="795.0" y="280.0" width="245.0" height="40.0" rx="2" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.0"/>
-<text x="917.5" y="300.0" font-size="11" fill="#2b2b29" font-weight="600" text-anchor="middle" dominant-baseline="central">TN 4</text>
-<polygon points="550.0,320.0 795.0,320.0 1040.0,390.0 60.0,390.0" fill="#1d4ed8" fill-opacity="0.06" stroke="none"/>
-<path d="M550.0 320.0 L60.0 390.0" fill="none" stroke="#9aa6c7" stroke-width="1" stroke-dasharray="3 3"/>
-<path d="M795.0 320.0 L1040.0 390.0" fill="none" stroke="#9aa6c7" stroke-width="1" stroke-dasharray="3 3"/>
-<text x="30.0" y="376.0" font-size="12" fill="#2b2b29" font-weight="700" text-anchor="start" dominant-baseline="central">Timeslot</text>
-<text x="140.0" y="376.0" font-size="11" fill="#6b6b66" font-weight="600" text-anchor="start" dominant-baseline="central">510 bits = 255 symbols = 14.17 ms</text>
-<rect x="60.0" y="390.0" width="980.0" height="40.0" rx="2" fill="#F8E6E4" stroke="#A32D2D" stroke-width="1.0"/>
-<text x="550.0" y="410.0" font-size="12" fill="#2b2b29" font-weight="600" text-anchor="middle" dominant-baseline="central">one burst: training sequence in the middle, data either side (next picture)</text>
-<text x="60.0" y="462.0" font-size="12" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">• The main carrier keeps TN 1 for the control channel (MCCH): SYNC, SYSINFO, signalling.</text>
-<text x="60.0" y="484.0" font-size="12" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">• A voice call gets one timeslot in every frame 1–17. Frame 18 never carries speech.</text>
-<text x="60.0" y="506.0" font-size="12" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">• Each traffic slot carries 60 ms of speech: 17 slots × 60 ms = 1.02 s, exactly one multiframe.</text>
-<text x="60.0" y="528.0" font-size="12" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">• So my decoder must know which timeslot and which frame number every burst belongs to.</text>
+<text x="20.0" y="28.0" font-size="21" fill="#1b1b1b" font-weight="700" text-anchor="start" dominant-baseline="central">Fig. 2  How TETRA chops time: four nested boxes</text>
+<rect x="60.0" y="92.0" width="16.7" height="30.0" fill="url(#hatch)" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="76.7" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="93.3" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="110.0" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="126.7" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="143.3" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="160.0" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="176.7" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="193.3" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="210.0" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="226.7" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="243.3" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="260.0" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="276.7" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="293.3" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="310.0" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="326.7" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="343.3" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="360.0" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="376.7" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="393.3" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="410.0" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="426.7" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="443.3" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="460.0" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="476.7" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="493.3" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="510.0" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="526.7" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="543.3" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="560.0" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="576.7" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="593.3" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="610.0" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="626.7" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="643.3" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="660.0" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="676.7" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="693.3" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="710.0" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="726.7" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="743.3" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="760.0" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="776.7" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="793.3" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="810.0" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="826.7" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="843.3" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="860.0" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="876.7" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="893.3" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="910.0" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="926.7" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="943.3" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="960.0" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="976.7" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="993.3" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="1010.0" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="1026.7" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<rect x="1043.3" y="92.0" width="16.7" height="30.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1"/>
+<polyline points="60.0,122.0 60.0,196.0" fill="none" stroke="#bdbdbd" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="76.7,122.0 1060.0,196.0" fill="none" stroke="#bdbdbd" stroke-width="1" stroke-linejoin="round"/>
+<rect x="60.0" y="196.0" width="55.6" height="40.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.1"/>
+<text x="87.8" y="216.0" font-size="14.5" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central">FN 1</text>
+<rect x="115.6" y="196.0" width="55.6" height="40.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.1"/>
+<text x="143.3" y="216.0" font-size="14.5" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central">FN 2</text>
+<rect x="171.1" y="196.0" width="55.6" height="40.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.1"/>
+<text x="198.9" y="216.0" font-size="14.5" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central">FN 3</text>
+<rect x="226.7" y="196.0" width="55.6" height="40.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.1"/>
+<text x="254.4" y="216.0" font-size="14.5" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central">FN 4</text>
+<rect x="282.2" y="196.0" width="55.6" height="40.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.1"/>
+<text x="310.0" y="216.0" font-size="14.5" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central">FN 5</text>
+<rect x="337.8" y="196.0" width="55.6" height="40.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.1"/>
+<text x="365.6" y="216.0" font-size="14.5" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central">FN 6</text>
+<rect x="393.3" y="196.0" width="55.6" height="40.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.1"/>
+<text x="421.1" y="216.0" font-size="14.5" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central">FN 7</text>
+<rect x="448.9" y="196.0" width="55.6" height="40.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.1"/>
+<text x="476.7" y="216.0" font-size="14.5" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central">FN 8</text>
+<rect x="504.4" y="196.0" width="55.6" height="40.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.1"/>
+<text x="532.2" y="216.0" font-size="14.5" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central">FN 9</text>
+<rect x="560.0" y="196.0" width="55.6" height="40.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.1"/>
+<text x="587.8" y="216.0" font-size="14.5" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central">FN 10</text>
+<rect x="615.6" y="196.0" width="55.6" height="40.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.1"/>
+<text x="643.3" y="216.0" font-size="14.5" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central">FN 11</text>
+<rect x="671.1" y="196.0" width="55.6" height="40.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.1"/>
+<text x="698.9" y="216.0" font-size="14.5" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central">FN 12</text>
+<rect x="726.7" y="196.0" width="55.6" height="40.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.1"/>
+<text x="754.4" y="216.0" font-size="14.5" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central">FN 13</text>
+<rect x="782.2" y="196.0" width="55.6" height="40.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.1"/>
+<text x="810.0" y="216.0" font-size="14.5" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central">FN 14</text>
+<rect x="837.8" y="196.0" width="55.6" height="40.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.1"/>
+<text x="865.6" y="216.0" font-size="14.5" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central">FN 15</text>
+<rect x="893.3" y="196.0" width="55.6" height="40.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.1"/>
+<text x="921.1" y="216.0" font-size="14.5" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central">FN 16</text>
+<rect x="948.9" y="196.0" width="55.6" height="40.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.1"/>
+<text x="976.7" y="216.0" font-size="14.5" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central">FN 17</text>
+<rect x="1004.4" y="196.0" width="55.6" height="40.0" fill="#ffffff" stroke="#a3312a" stroke-width="1.6"/>
+<text x="1032.2" y="216.0" font-size="14.5" fill="#a3312a" font-weight="700" text-anchor="middle" dominant-baseline="central">FN 18</text>
+<text x="1060.0" y="254.0" font-size="14.5" fill="#a3312a" font-weight="400" text-anchor="end" dominant-baseline="central">frame 18: control frame, never speech</text>
+<polyline points="60.0,236.0 60.0,318.0" fill="none" stroke="#bdbdbd" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="115.6,236.0 1060.0,318.0" fill="none" stroke="#bdbdbd" stroke-width="1" stroke-linejoin="round"/>
+<rect x="60.0" y="318.0" width="250.0" height="44.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.1"/>
+<text x="185.0" y="340.0" font-size="15.5" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central">TN 1  (control: MCCH)</text>
+<rect x="310.0" y="318.0" width="250.0" height="44.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.1"/>
+<text x="435.0" y="340.0" font-size="15.5" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central">TN 2</text>
+<rect x="560.0" y="318.0" width="250.0" height="44.0" fill="#ffffff" stroke="#a3312a" stroke-width="1.6"/>
+<text x="685.0" y="340.0" font-size="15.5" fill="#a3312a" font-weight="700" text-anchor="middle" dominant-baseline="central">TN 3  (a call)</text>
+<rect x="810.0" y="318.0" width="250.0" height="44.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.1"/>
+<text x="935.0" y="340.0" font-size="15.5" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central">TN 4</text>
+<polyline points="560.0,362.0 60.0,440.0" fill="none" stroke="#bdbdbd" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="810.0,362.0 1060.0,440.0" fill="none" stroke="#bdbdbd" stroke-width="1" stroke-linejoin="round"/>
+<rect x="60.0" y="440.0" width="1000.0" height="44.0" fill="#ffffff" stroke="#a3312a" stroke-width="1.6"/>
+<text x="560.0" y="462.0" font-size="15.5" fill="#a3312a" font-weight="400" text-anchor="middle" dominant-baseline="central">one burst: training sequence in the middle, data on either side (Fig. 3)</text>
+<rect x="58.0" y="54.0" width="357.0" height="28.0" fill="#ffffff" stroke="none" stroke-width="0"/>
+<text x="60.0" y="68.0" font-size="17" fill="#1b1b1b" font-weight="700" text-anchor="start" dominant-baseline="central">Hyperframe</text>
+<text x="210.0" y="68.0" font-size="14.5" fill="#666666" font-weight="400" text-anchor="start" dominant-baseline="central">60 multiframes = 61.2 s</text>
+<rect x="58.0" y="158.0" width="312.0" height="28.0" fill="#ffffff" stroke="none" stroke-width="0"/>
+<text x="60.0" y="172.0" font-size="17" fill="#1b1b1b" font-weight="700" text-anchor="start" dominant-baseline="central">Multiframe</text>
+<text x="210.0" y="172.0" font-size="14.5" fill="#666666" font-weight="400" text-anchor="start" dominant-baseline="central">18 frames = 1.02 s</text>
+<rect x="58.0" y="280.0" width="348.0" height="28.0" fill="#ffffff" stroke="none" stroke-width="0"/>
+<text x="60.0" y="294.0" font-size="17" fill="#1b1b1b" font-weight="700" text-anchor="start" dominant-baseline="central">Frame</text>
+<text x="210.0" y="294.0" font-size="14.5" fill="#666666" font-weight="400" text-anchor="start" dominant-baseline="central">4 timeslots = 56.67 ms</text>
+<rect x="58.0" y="402.0" width="447.0" height="28.0" fill="#ffffff" stroke="none" stroke-width="0"/>
+<text x="60.0" y="416.0" font-size="17" fill="#1b1b1b" font-weight="700" text-anchor="start" dominant-baseline="central">Timeslot</text>
+<text x="210.0" y="416.0" font-size="14.5" fill="#666666" font-weight="400" text-anchor="start" dominant-baseline="central">510 bits = 255 symbols = 14.17 ms</text>
+<text x="60.0" y="528.0" font-size="15" fill="#1b1b1b" font-weight="400" text-anchor="start" dominant-baseline="central">•  The main carrier keeps TN 1 for the control channel (MCCH): SYNC, SYSINFO, signalling.</text>
+<text x="60.0" y="554.0" font-size="15" fill="#1b1b1b" font-weight="400" text-anchor="start" dominant-baseline="central">•  A voice call gets one timeslot in every frame 1–17. Frame 18 never carries speech.</text>
+<text x="60.0" y="580.0" font-size="15" fill="#1b1b1b" font-weight="400" text-anchor="start" dominant-baseline="central">•  Each traffic slot carries 60 ms of speech: 17 slots × 60 ms = 1.02 s, exactly one multiframe.</text>
+<text x="60.0" y="606.0" font-size="15" fill="#1b1b1b" font-weight="400" text-anchor="start" dominant-baseline="central">•  So the decoder must know which timeslot and which frame number every burst belongs to.</text>
 </svg>

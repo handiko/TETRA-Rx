@@ -4,8 +4,9 @@
 
 [Code repo here](https://github.com/handiko/TETRA-Rx)
 
----
 ![](tetra.png)
+
+---
 
 ## Why I did this
 
@@ -54,7 +55,7 @@ Here's the whole receiver on one page:
 
 ![The whole receiver: RTL-SDR, front end, burst finders, decoding chains, the two Python blocks, audio and console](tetra_pe_big_picture.svg)
 
-Green boxes are stock blocks, coral ones are my two Python blocks, grey ones are displays. Solid arrows carry samples; dashed arrows carry messages (one per burst or per event). The rest of this story walks through it top to bottom.
+Plain boxes are stock blocks, double-bordered ones are my two Python blocks, and boxes with a little screen icon are displays. Solid arrows carry samples, dashed arrows carry messages (one per burst or per event), and dotted arrows are GRC variable updates. A dashed frame groups the symbols that live inside one GRC block. The rest of this story walks through it top to bottom.
 
 ---
 
@@ -375,7 +376,7 @@ The flag is one bit in SYSINFO's "BS service details", and what it really says i
 tags_to_pdu :error: SOB tag received during burst 13332 at offset 34300000, previous burst dropped (1 tags total)
 ```
 
-That's the new full-slot cutter. A correlator false hit (or a second real tag) arrived while it was still collecting its 484 bits, so it dropped that cut and started again. My flowgraph already has a little snippet that silences exactly this message from the three original cutters, because it's harmless; I simply forgot to add the fourth one. In the six minutes of log I kept, it happened 19 times, against more than 4,000 good full-slot bursts. Lesson: **when you add a block, check whether its siblings had special treatment.**
+That's the new full-slot cutter. A correlator false hit (or a second real tag) arrived while it was still collecting its 484 bits, so it dropped that cut and started again. My flowgraph already has a little snippet that silences exactly this message from the three original cutters, because it's harmless; I simply forgot to add the fourth one. In the six minutes of log I kept, it happened 19 times, against more than 4,000 good full-slot bursts. Lesson: **when you add a block, check whether its siblings had special treatment.** (The fourth cutter is in the snippet now.)
 
 ---
 
@@ -454,12 +455,13 @@ On the GUI:
 
 A few notes:
 
+- **Retuning while running**: the Soapy source's Frequency Correction is `ppm + 0*rf_fc` on purpose. SoapySDR resets the ppm correction on every retune, and the dummy term makes GRC re-apply it. With the Osmocom RTL-SDR source, plain `ppm` is fine.
 - **To play a recording**: disable the RTL-SDR source, enable File Source, Rational Resampler and Throttle, and set `rf_fc` to the recording's centre (for my gqrx file, 390.6e6).
 - **"No SYNC decoded yet"**: check frequency, ppm, gain, and the polarity chooser, in that order.
 - **SYNC fine but no SYSINFO for a long time**: the cell key isn't confirmed yet (it needs two identical copies), or you're tuned to a secondary carrier that carries little broadcast traffic.
 - **Voice "good" stays near 0 % on every timeslot**: something is wrong before the speech decoder. Check the TCH/S ref line has a recent reference, then try the other `polarity` on the voice block. (On my live cell, the default `polarity = −1` gave 98–99 %.)
 - **Voice "good" near 100 % but it sounds like noise**: that call is almost certainly encrypted. Encryption happens before the channel coding, so the CRC still passes. Nothing to fix.
-- **`tags_to_pdu :error: SOB tag received during burst`** now and then: harmless (Part 7). Add `self.cut_tch` to the `quiet_cutters` snippet to silence it.
+- **`tags_to_pdu :error: SOB tag received during burst`**: harmless (Part 7). The current flowgraph silences it; older copies didn't include the fourth cutter in the `quiet_cutters` snippet.
 
 ---
 
@@ -467,7 +469,6 @@ A few notes:
 
 There's a lot of room for improvement!
 
-- **Silence the fourth cutter**: add `self.cut_tch` to the `quiet_cutters` snippet.
 - **Tell clear calls from encrypted ones**: MAC-RESOURCE messages carry an encryption-mode field for the signalling inside them. Whether that's a reliable hint about the voice in the same call is worth finding out; if it is, the console could flag an encrypted timeslot before I even listen.
 - **Gentler auto switching**: a 2-second pause in a conversation currently prints "no call heard" and may hop to another busy timeslot. A little hold time on the current slot would make it follow one conversation better.
 - **A TCH test mode in `tetra_testgen.py`**, using real ETSI-coded frames, so the voice path can be regression-tested at my desk.

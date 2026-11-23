@@ -1,75 +1,120 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 470" width="1100" height="470" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif" role="img" aria-label="TETRA control-channel decoding with stock blocks: descramble, de-interleave, de-puncture, Viterbi, CRC">
-<title>TETRA control-channel decoding with stock blocks: descramble, de-interleave, de-puncture, Viterbi, CRC</title>
-<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3d3d3a"/></marker><marker id="ahc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#A32D2D"/></marker><marker id="aht" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0F6E56"/></marker><marker id="ahb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1d4ed8"/></marker><marker id="aha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#B45309"/></marker><marker id="ahg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#15803d"/></marker><marker id="ahr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#B91C1C"/></marker><marker id="ahm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6b6b66"/></marker><marker id="ahp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6D28D9"/></marker></defs>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 700" width="1100" height="700" font-family="Helvetica, Arial, 'Liberation Sans', 'DejaVu Sans', sans-serif" role="img" aria-label="Descramble, de-interleave, de-puncture, Viterbi, CRC: one stock block per layer">
+<title>Descramble, de-interleave, de-puncture, Viterbi, CRC: one stock block per layer</title>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9.5" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,1 L10,5 L0,9 z" fill="#1b1b1b"/></marker><marker id="o" viewBox="0 0 10 10" refX="9.5" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0,1 L10,5 L0,9" fill="none" stroke="#1b1b1b" stroke-width="1.4"/></marker><marker id="r" viewBox="0 0 10 10" refX="9.5" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,1 L10,5 L0,9 z" fill="#a3312a"/></marker><marker id="or" viewBox="0 0 10 10" refX="9.5" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0,1 L10,5 L0,9" fill="none" stroke="#a3312a" stroke-width="1.4"/></marker><pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="7" stroke="#9a9a9a" stroke-width="1.6"/></pattern></defs>
 <rect width="100%" height="100%" fill="#ffffff"/>
-<text x="30.0" y="22.0" font-size="15" fill="#2b2b29" font-weight="700" text-anchor="start" dominant-baseline="central">Undoing the transmitter's armour, one stock block per layer</text>
-<rect x="30.0" y="60.0" width="180.0" height="80.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
-<text x="120.0" y="84.0" font-size="13" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">Multiply Const</text>
-<text x="120.0" y="101.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">× ±1 scrambler</text>
-<text x="120.0" y="116.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">(soft descramble)</text>
-<rect x="244.0" y="60.0" width="180.0" height="80.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
-<text x="334.0" y="84.0" font-size="13" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">Trellis Permutation</text>
-<text x="334.0" y="101.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">un-shuffle the</text>
-<text x="334.0" y="116.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">block interleaver</text>
-<path d="M212.0 100.0 L242.0 100.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
-<rect x="458.0" y="60.0" width="180.0" height="80.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
-<text x="548.0" y="84.0" font-size="13" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">Deinterleave 3 →</text>
-<text x="548.0" y="101.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">Interleave 8</text>
-<text x="548.0" y="116.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">+ Null Source</text>
-<path d="M426.0 100.0 L456.0 100.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
-<rect x="672.0" y="60.0" width="180.0" height="80.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
-<text x="762.0" y="84.0" font-size="13" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">Viterbi Combo</text>
-<text x="762.0" y="101.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">K = 5, rate 1/4</text>
-<text x="762.0" y="116.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">mother code</text>
-<path d="M640.0 100.0 L670.0 100.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
-<rect x="886.0" y="60.0" width="180.0" height="80.0" rx="8" fill="#F8E6E4" stroke="#A32D2D" stroke-width="1.3"/>
-<text x="976.0" y="84.0" font-size="13" fill="#A32D2D" font-weight="700" text-anchor="middle" dominant-baseline="central">EPB 1</text>
-<text x="976.0" y="101.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">CRC-16 check</text>
-<text x="976.0" y="116.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">then parse</text>
-<path d="M854.0 100.0 L884.0 100.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
-<text x="30.0" y="166.0" font-size="11" fill="#2b2b29" font-weight="700" text-anchor="start" dominant-baseline="central">BSCH (SYNC)</text>
-<text x="227.0" y="166.0" font-size="10" fill="#6b6b66" font-weight="600" text-anchor="middle" dominant-baseline="central">120 soft</text>
-<text x="441.0" y="166.0" font-size="10" fill="#6b6b66" font-weight="600" text-anchor="middle" dominant-baseline="central">120 soft</text>
-<text x="655.0" y="166.0" font-size="10" fill="#6b6b66" font-weight="600" text-anchor="middle" dominant-baseline="central">320 soft</text>
-<text x="869.0" y="166.0" font-size="10" fill="#6b6b66" font-weight="600" text-anchor="middle" dominant-baseline="central">80 bits</text>
-<text x="30.0" y="190.0" font-size="11" fill="#2b2b29" font-weight="700" text-anchor="start" dominant-baseline="central">SCH/HD, BNCH</text>
-<text x="227.0" y="190.0" font-size="10" fill="#6b6b66" font-weight="600" text-anchor="middle" dominant-baseline="central">216 soft</text>
-<text x="441.0" y="190.0" font-size="10" fill="#6b6b66" font-weight="600" text-anchor="middle" dominant-baseline="central">216 soft</text>
-<text x="655.0" y="190.0" font-size="10" fill="#6b6b66" font-weight="600" text-anchor="middle" dominant-baseline="central">576 soft</text>
-<text x="869.0" y="190.0" font-size="10" fill="#6b6b66" font-weight="600" text-anchor="middle" dominant-baseline="central">144 bits</text>
-<text x="976.0" y="166.0" font-size="10" fill="#6b6b66" font-weight="600" text-anchor="middle" dominant-baseline="central">60 + 16 CRC + 4 tail</text>
-<text x="976.0" y="190.0" font-size="10" fill="#6b6b66" font-weight="600" text-anchor="middle" dominant-baseline="central">124 + 16 CRC + 4 tail</text>
-<text x="1070.0" y="214.0" font-size="9" fill="#6b6b66" font-weight="400" text-anchor="end" dominant-baseline="central">numbers between boxes = what flows on that arrow, per block</text>
-<text x="30.0" y="254.0" font-size="12" fill="#2b2b29" font-weight="700" text-anchor="start" dominant-baseline="central">De-puncturing, the part I liked most:</text>
-<text x="30.0" y="276.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">The coder makes 8 bits for every 2 data bits, then the transmitter throws 5 away and sends 3 ("rate 2/3").</text>
-<text x="30.0" y="296.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">I put the 3 received soft bits back in their seats and fill the 5 empty ones with 0.0, which to a soft Viterbi means "no idea".</text>
-<rect x="60.0" y="318.0" width="56.0" height="40.0" rx="4" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.2"/>
-<text x="88.0" y="338.0" font-size="11" fill="#1d4ed8" font-weight="700" text-anchor="middle" dominant-baseline="central">rx 1</text>
-<text x="88.0" y="370.0" font-size="9" fill="#6b6b66" font-weight="400" text-anchor="middle" dominant-baseline="central">mother 1</text>
-<rect x="124.0" y="318.0" width="56.0" height="40.0" rx="4" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.2"/>
-<text x="152.0" y="338.0" font-size="11" fill="#1d4ed8" font-weight="700" text-anchor="middle" dominant-baseline="central">rx 2</text>
-<text x="152.0" y="370.0" font-size="9" fill="#6b6b66" font-weight="400" text-anchor="middle" dominant-baseline="central">mother 2</text>
-<rect x="188.0" y="318.0" width="56.0" height="40.0" rx="4" fill="#F1F1EE" stroke="#6b6b66" stroke-width="1.2"/>
-<text x="216.0" y="338.0" font-size="11" fill="#6b6b66" font-weight="700" text-anchor="middle" dominant-baseline="central">0.0</text>
-<text x="216.0" y="370.0" font-size="9" fill="#6b6b66" font-weight="400" text-anchor="middle" dominant-baseline="central">mother 3</text>
-<rect x="252.0" y="318.0" width="56.0" height="40.0" rx="4" fill="#F1F1EE" stroke="#6b6b66" stroke-width="1.2"/>
-<text x="280.0" y="338.0" font-size="11" fill="#6b6b66" font-weight="700" text-anchor="middle" dominant-baseline="central">0.0</text>
-<text x="280.0" y="370.0" font-size="9" fill="#6b6b66" font-weight="400" text-anchor="middle" dominant-baseline="central">mother 4</text>
-<rect x="316.0" y="318.0" width="56.0" height="40.0" rx="4" fill="#E6ECFB" stroke="#1d4ed8" stroke-width="1.2"/>
-<text x="344.0" y="338.0" font-size="11" fill="#1d4ed8" font-weight="700" text-anchor="middle" dominant-baseline="central">rx 3</text>
-<text x="344.0" y="370.0" font-size="9" fill="#6b6b66" font-weight="400" text-anchor="middle" dominant-baseline="central">mother 5</text>
-<rect x="380.0" y="318.0" width="56.0" height="40.0" rx="4" fill="#F1F1EE" stroke="#6b6b66" stroke-width="1.2"/>
-<text x="408.0" y="338.0" font-size="11" fill="#6b6b66" font-weight="700" text-anchor="middle" dominant-baseline="central">0.0</text>
-<text x="408.0" y="370.0" font-size="9" fill="#6b6b66" font-weight="400" text-anchor="middle" dominant-baseline="central">mother 6</text>
-<rect x="444.0" y="318.0" width="56.0" height="40.0" rx="4" fill="#F1F1EE" stroke="#6b6b66" stroke-width="1.2"/>
-<text x="472.0" y="338.0" font-size="11" fill="#6b6b66" font-weight="700" text-anchor="middle" dominant-baseline="central">0.0</text>
-<text x="472.0" y="370.0" font-size="9" fill="#6b6b66" font-weight="400" text-anchor="middle" dominant-baseline="central">mother 7</text>
-<rect x="508.0" y="318.0" width="56.0" height="40.0" rx="4" fill="#F1F1EE" stroke="#6b6b66" stroke-width="1.2"/>
-<text x="536.0" y="338.0" font-size="11" fill="#6b6b66" font-weight="700" text-anchor="middle" dominant-baseline="central">0.0</text>
-<text x="536.0" y="370.0" font-size="9" fill="#6b6b66" font-weight="400" text-anchor="middle" dominant-baseline="central">mother 8</text>
-<text x="592.0" y="330.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">Deinterleave (3 outputs) splits the received bits,</text>
-<text x="592.0" y="348.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">Interleave (8 inputs) rebuilds the mother bits; inputs 2, 3, 5, 6, 7</text>
-<text x="592.0" y="366.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">come from a Null Source. Two stock blocks, no Python.</text>
-<text x="30.0" y="408.0" font-size="11" fill="#6b6b66" font-weight="400" text-anchor="start" dominant-baseline="central">Why the CRC needs Python: TETRA's CRC-16 covers 76 or 140 bits. The stock CRC blocks only work on whole bytes.</text>
-<text x="30.0" y="428.0" font-size="11" fill="#6b6b66" font-weight="400" text-anchor="start" dominant-baseline="central">The FSM is written out as next-state / output tables in tetra_fec, so there is no generator-polynomial bit-order to get wrong.</text>
+<text x="20.0" y="28.0" font-size="21" fill="#1b1b1b" font-weight="700" text-anchor="start" dominant-baseline="central">Fig. 7  Undoing the transmitter’s armour, one stock block per layer</text>
+<text x="20.0" y="64.0" font-size="17" fill="#1b1b1b" font-weight="700" text-anchor="start" dominant-baseline="central">(a) The decoding chain (BSCH and SCH/HD use the same blocks, different sizes)</text>
+<text x="36.0" y="180.0" font-size="20" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central" font-family="'Times New Roman', Times, 'Liberation Serif', 'DejaVu Serif', serif" font-style="italic">s[n]</text>
+<polyline points="60.0,180.0 118.0,180.0" fill="none" stroke="#1b1b1b" stroke-width="1.3" marker-end="url(#a)"/>
+<circle cx="134.0" cy="180.0" r="16.00" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.4"/>
+<line x1="124.1" y1="170.1" x2="143.9" y2="189.9" stroke="#1b1b1b" stroke-width="1.3"/>
+<line x1="124.1" y1="189.9" x2="143.9" y2="170.1" stroke="#1b1b1b" stroke-width="1.3"/>
+<polyline points="134.0,246.0 134.0,198.0" fill="none" stroke="#1b1b1b" stroke-width="1.3" marker-end="url(#a)"/>
+<text x="134.0" y="264.0" font-size="18" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central" font-family="'Times New Roman', Times, 'Liberation Serif', 'DejaVu Serif', serif" font-style="italic">c[n] = ±1</text>
+<text x="134.0" y="286.0" font-size="14.5" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central" font-style="italic">Multiply Const</text>
+<polyline points="150.0,180.0 190.0,180.0" fill="none" stroke="#1b1b1b" stroke-width="1.3" marker-end="url(#a)"/>
+<rect x="192.0" y="152.0" width="72.0" height="56.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.4"/>
+<text x="228.0" y="180.0" font-size="20" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central" font-family="'Times New Roman', Times, 'Liberation Serif', 'DejaVu Serif', serif" font-style="italic">Π<tspan baseline-shift="super" font-size="72%">−1</tspan></text>
+<text x="228.0" y="226.0" font-size="14.5" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central" font-style="italic">Trellis</text>
+<text x="228.0" y="244.0" font-size="14.5" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central" font-style="italic">Permutation</text>
+<polyline points="264.0,180.0 318.0,180.0" fill="none" stroke="#1b1b1b" stroke-width="1.3" marker-end="url(#a)"/>
+<rect x="320.0" y="140.0" width="50.0" height="80.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.4"/>
+<text x="345.0" y="180.0" font-size="14.5" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central">1:3</text>
+<rect x="548.0" y="108.0" width="64.0" height="144.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.4"/>
+<text x="592.0" y="180.0" font-size="14.5" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central">8:1</text>
+<polyline points="370.0,153.3 440.0,153.3 440.0,117.0 546.0,117.0" fill="none" stroke="#1b1b1b" stroke-width="1.3" stroke-linejoin="round"/>
+<polyline points="544.0,117.0 547.0,117.0" fill="none" stroke="#1b1b1b" stroke-width="1.3" marker-end="url(#a)"/>
+<polyline points="370.0,180.0 462.0,180.0 462.0,135.0 546.0,135.0" fill="none" stroke="#1b1b1b" stroke-width="1.3" stroke-linejoin="round"/>
+<polyline points="544.0,135.0 547.0,135.0" fill="none" stroke="#1b1b1b" stroke-width="1.3" marker-end="url(#a)"/>
+<polyline points="370.0,206.7 484.0,206.7 484.0,189.0 546.0,189.0" fill="none" stroke="#1b1b1b" stroke-width="1.3" stroke-linejoin="round"/>
+<polyline points="544.0,189.0 547.0,189.0" fill="none" stroke="#1b1b1b" stroke-width="1.3" marker-end="url(#a)"/>
+<polyline points="516.0,153.0 516.0,284.0" fill="none" stroke="#1b1b1b" stroke-width="1.3" stroke-linejoin="round"/>
+<polyline points="516.0,153.0 547.0,153.0" fill="none" stroke="#1b1b1b" stroke-width="1.3" marker-end="url(#a)"/>
+<circle cx="516.0" cy="171.0" r="3.4" fill="#1b1b1b"/>
+<polyline points="516.0,171.0 547.0,171.0" fill="none" stroke="#1b1b1b" stroke-width="1.3" marker-end="url(#a)"/>
+<circle cx="516.0" cy="207.0" r="3.4" fill="#1b1b1b"/>
+<polyline points="516.0,207.0 547.0,207.0" fill="none" stroke="#1b1b1b" stroke-width="1.3" marker-end="url(#a)"/>
+<circle cx="516.0" cy="225.0" r="3.4" fill="#1b1b1b"/>
+<polyline points="516.0,225.0 547.0,225.0" fill="none" stroke="#1b1b1b" stroke-width="1.3" marker-end="url(#a)"/>
+<circle cx="516.0" cy="243.0" r="3.4" fill="#1b1b1b"/>
+<polyline points="516.0,243.0 547.0,243.0" fill="none" stroke="#1b1b1b" stroke-width="1.3" marker-end="url(#a)"/>
+<rect x="494.0" y="284.0" width="44.0" height="34.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.4"/>
+<text x="516.0" y="301.0" font-size="19" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central" font-family="'Times New Roman', Times, 'Liberation Serif', 'DejaVu Serif', serif" font-style="italic">0</text>
+<text x="486.0" y="301.0" font-size="14.5" fill="#666666" font-weight="400" text-anchor="end" dominant-baseline="central" font-style="italic">Null Source</text>
+<text x="555.0" y="117.0" font-size="11.5" fill="#666666" font-weight="400" text-anchor="start" dominant-baseline="central">1</text>
+<text x="555.0" y="135.0" font-size="11.5" fill="#666666" font-weight="400" text-anchor="start" dominant-baseline="central">2</text>
+<text x="555.0" y="153.0" font-size="11.5" fill="#666666" font-weight="400" text-anchor="start" dominant-baseline="central">3</text>
+<text x="555.0" y="171.0" font-size="11.5" fill="#666666" font-weight="400" text-anchor="start" dominant-baseline="central">4</text>
+<text x="555.0" y="189.0" font-size="11.5" fill="#666666" font-weight="400" text-anchor="start" dominant-baseline="central">5</text>
+<text x="555.0" y="207.0" font-size="11.5" fill="#666666" font-weight="400" text-anchor="start" dominant-baseline="central">6</text>
+<text x="555.0" y="225.0" font-size="11.5" fill="#666666" font-weight="400" text-anchor="start" dominant-baseline="central">7</text>
+<text x="555.0" y="243.0" font-size="11.5" fill="#666666" font-weight="400" text-anchor="start" dominant-baseline="central">8</text>
+<text x="345.0" y="126.0" font-size="14.5" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central" font-style="italic">Deinterleave</text>
+<text x="580.0" y="94.0" font-size="14.5" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central" font-style="italic">Interleave</text>
+<rect x="300.0" y="74.0" width="330.0" height="262.0" fill="none" stroke="#666666" stroke-width="1.0" stroke-dasharray="5 4"/>
+<text x="465.0" y="352.0" font-size="14.5" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central" font-style="italic">de-puncture: 3 received → 8 mother bits</text>
+<polyline points="612.0,180.0 650.0,180.0" fill="none" stroke="#1b1b1b" stroke-width="1.3" marker-end="url(#a)"/>
+<rect x="652.0" y="146.0" width="150.0" height="68.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.4"/>
+<text x="727.0" y="170.6" font-size="16.5" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central">Viterbi</text>
+<text x="727.0" y="190.3" font-size="14.5" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central">K = 5, rate 1/4</text>
+<text x="727.0" y="232.0" font-size="14.5" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central" font-style="italic">Viterbi Combo</text>
+<polyline points="802.0,180.0 850.0,180.0" fill="none" stroke="#1b1b1b" stroke-width="1.3" marker-end="url(#a)"/>
+<rect x="852.0" y="146.0" width="150.0" height="68.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.4"/>
+<rect x="856.0" y="150.0" width="142.0" height="60.0" fill="none" stroke="#1b1b1b" stroke-width="0.9"/>
+<text x="927.0" y="170.6" font-size="16.5" fill="#1b1b1b" font-weight="700" text-anchor="middle" dominant-baseline="central">CRC-16</text>
+<text x="927.0" y="190.3" font-size="14.5" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central">then parse</text>
+<polyline points="1002.0,180.0 1076.0,180.0" fill="none" stroke="#1b1b1b" stroke-width="1.25" stroke-dasharray="6 4" marker-end="url(#o)"/>
+<text x="20.0" y="400.0" font-size="15" fill="#1b1b1b" font-weight="400" text-anchor="start" dominant-baseline="central"></text>
+<text x="170.0" y="398.0" font-size="14" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central">soft in</text>
+<text x="291.0" y="398.0" font-size="14" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central">deinterleaved</text>
+<text x="625.0" y="398.0" font-size="14" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central">mother code</text>
+<text x="826.0" y="398.0" font-size="14" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central">decoded</text>
+<text x="1040.0" y="398.0" font-size="14" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central">info + CRC + tail</text>
+<text x="20.0" y="426.0" font-size="15" fill="#1b1b1b" font-weight="700" text-anchor="start" dominant-baseline="central">BSCH (SYNC)</text>
+<text x="170.0" y="426.0" font-size="15" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central">120</text>
+<text x="291.0" y="426.0" font-size="15" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central">120</text>
+<text x="625.0" y="426.0" font-size="15" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central">320</text>
+<text x="826.0" y="426.0" font-size="15" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central">80</text>
+<text x="1040.0" y="426.0" font-size="15" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central">60 + 16 + 4</text>
+<text x="20.0" y="452.0" font-size="15" fill="#1b1b1b" font-weight="700" text-anchor="start" dominant-baseline="central">SCH/HD, BNCH</text>
+<text x="170.0" y="452.0" font-size="15" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central">216</text>
+<text x="291.0" y="452.0" font-size="15" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central">216</text>
+<text x="625.0" y="452.0" font-size="15" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central">576</text>
+<text x="826.0" y="452.0" font-size="15" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central">144</text>
+<text x="1040.0" y="452.0" font-size="15" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central">124 + 16 + 4</text>
+<text x="20.0" y="500.0" font-size="17" fill="#1b1b1b" font-weight="700" text-anchor="start" dominant-baseline="central">(b) De-puncturing: put the 3 survivors back in their seats</text>
+<rect x="40.0" y="528.0" width="58.0" height="44.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.3"/>
+<text x="69.0" y="550.0" font-size="14.5" fill="#1b1b1b" font-weight="700" text-anchor="middle" dominant-baseline="central">rx 1</text>
+<text x="69.0" y="586.0" font-size="13" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central">mother 1</text>
+<rect x="108.0" y="528.0" width="58.0" height="44.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.3"/>
+<text x="137.0" y="550.0" font-size="14.5" fill="#1b1b1b" font-weight="700" text-anchor="middle" dominant-baseline="central">rx 2</text>
+<text x="137.0" y="586.0" font-size="13" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central">mother 2</text>
+<rect x="176.0" y="528.0" width="58.0" height="44.0" fill="url(#hatch)" stroke="#1b1b1b" stroke-width="1.3"/>
+<rect x="188.0" y="540.0" width="34.0" height="20.0" fill="#ffffff" stroke="none" stroke-width="0"/>
+<text x="205.0" y="550.0" font-size="14.5" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central">0.0</text>
+<text x="205.0" y="586.0" font-size="13" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central">mother 3</text>
+<rect x="244.0" y="528.0" width="58.0" height="44.0" fill="url(#hatch)" stroke="#1b1b1b" stroke-width="1.3"/>
+<rect x="256.0" y="540.0" width="34.0" height="20.0" fill="#ffffff" stroke="none" stroke-width="0"/>
+<text x="273.0" y="550.0" font-size="14.5" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central">0.0</text>
+<text x="273.0" y="586.0" font-size="13" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central">mother 4</text>
+<rect x="312.0" y="528.0" width="58.0" height="44.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.3"/>
+<text x="341.0" y="550.0" font-size="14.5" fill="#1b1b1b" font-weight="700" text-anchor="middle" dominant-baseline="central">rx 3</text>
+<text x="341.0" y="586.0" font-size="13" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central">mother 5</text>
+<rect x="380.0" y="528.0" width="58.0" height="44.0" fill="url(#hatch)" stroke="#1b1b1b" stroke-width="1.3"/>
+<rect x="392.0" y="540.0" width="34.0" height="20.0" fill="#ffffff" stroke="none" stroke-width="0"/>
+<text x="409.0" y="550.0" font-size="14.5" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central">0.0</text>
+<text x="409.0" y="586.0" font-size="13" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central">mother 6</text>
+<rect x="448.0" y="528.0" width="58.0" height="44.0" fill="url(#hatch)" stroke="#1b1b1b" stroke-width="1.3"/>
+<rect x="460.0" y="540.0" width="34.0" height="20.0" fill="#ffffff" stroke="none" stroke-width="0"/>
+<text x="477.0" y="550.0" font-size="14.5" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central">0.0</text>
+<text x="477.0" y="586.0" font-size="13" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central">mother 7</text>
+<rect x="516.0" y="528.0" width="58.0" height="44.0" fill="url(#hatch)" stroke="#1b1b1b" stroke-width="1.3"/>
+<rect x="528.0" y="540.0" width="34.0" height="20.0" fill="#ffffff" stroke="none" stroke-width="0"/>
+<text x="545.0" y="550.0" font-size="14.5" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central">0.0</text>
+<text x="545.0" y="586.0" font-size="13" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central">mother 8</text>
+<text x="600.0" y="534.0" font-size="15" fill="#1b1b1b" font-weight="400" text-anchor="start" dominant-baseline="central">The coder makes 8 bits for every 2 data bits; the transmitter</text>
+<text x="600.0" y="556.0" font-size="15" fill="#1b1b1b" font-weight="400" text-anchor="start" dominant-baseline="central">throws 5 away and sends 3 ("rate 2/3"). The empty seats get</text>
+<text x="600.0" y="578.0" font-size="15" fill="#1b1b1b" font-weight="400" text-anchor="start" dominant-baseline="central">0.0, which to a soft Viterbi means "no idea".</text>
+<text x="20.0" y="640.0" font-size="14.5" fill="#666666" font-weight="400" text-anchor="start" dominant-baseline="central">Why the CRC needs Python: TETRA’s CRC-16 covers 76 or 140 bits; the stock CRC blocks only work on whole bytes.</text>
+<text x="20.0" y="664.0" font-size="14.5" fill="#666666" font-weight="400" text-anchor="start" dominant-baseline="central">The code’s state machine is written out as next-state and output tables in tetra_fec, so there is no generator-polynomial bit order to get wrong.</text>
 </svg>

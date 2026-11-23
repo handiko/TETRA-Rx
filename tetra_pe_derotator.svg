@@ -1,67 +1,91 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" width="1100" height="500" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif" role="img" aria-label="The 4th-power derotator: removing leftover carrier rotation from pi/4-DQPSK phase steps">
-<title>The 4th-power derotator: removing leftover carrier rotation from pi/4-DQPSK phase steps</title>
-<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3d3d3a"/></marker><marker id="ahc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#A32D2D"/></marker><marker id="aht" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0F6E56"/></marker><marker id="ahb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1d4ed8"/></marker><marker id="aha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#B45309"/></marker><marker id="ahg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#15803d"/></marker><marker id="ahr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#B91C1C"/></marker><marker id="ahm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6b6b66"/></marker><marker id="ahp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6D28D9"/></marker></defs>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 724" width="1100" height="724" font-family="Helvetica, Arial, 'Liberation Sans', 'DejaVu Sans', sans-serif" role="img" aria-label="The 4th-power derotator: four phase steps, a leftover rotation, raise to the 4th power, six stock blocks">
+<title>The 4th-power derotator: four phase steps, a leftover rotation, raise to the 4th power, six stock blocks</title>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9.5" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,1 L10,5 L0,9 z" fill="#1b1b1b"/></marker><marker id="o" viewBox="0 0 10 10" refX="9.5" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0,1 L10,5 L0,9" fill="none" stroke="#1b1b1b" stroke-width="1.4"/></marker><marker id="r" viewBox="0 0 10 10" refX="9.5" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,1 L10,5 L0,9 z" fill="#a3312a"/></marker><marker id="or" viewBox="0 0 10 10" refX="9.5" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0,1 L10,5 L0,9" fill="none" stroke="#a3312a" stroke-width="1.4"/></marker><pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="7" stroke="#9a9a9a" stroke-width="1.6"/></pattern></defs>
 <rect width="100%" height="100%" fill="#ffffff"/>
-<text x="30.0" y="22.0" font-size="15" fill="#2b2b29" font-weight="700" text-anchor="start" dominant-baseline="central">The 4th-power trick: one rotation, four symbols, no loop</text>
-<text x="170.0" y="62.0" font-size="12" fill="#2b2b29" font-weight="700" text-anchor="middle" dominant-baseline="central">The four phase steps (ideal)</text>
-<circle cx="170.0" cy="230.0" r="105.0" fill="none" stroke="#c9c9c4" stroke-width="1.0"/>
-<path d="M51.0 230.0 L289.0 230.0" fill="none" stroke="#d6d6d1" stroke-width="1"/>
-<path d="M170.0 111.0 L170.0 349.0" fill="none" stroke="#d6d6d1" stroke-width="1"/>
-<circle cx="244.2" cy="155.8" r="7.0" fill="#0F6E56" stroke="#0F6E56" stroke-width="1.2"/>
-<text x="244.2" y="141.8" font-size="11" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">+45° = 00</text>
-<circle cx="95.8" cy="155.8" r="7.0" fill="#0F6E56" stroke="#0F6E56" stroke-width="1.2"/>
-<text x="95.8" y="141.8" font-size="11" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">+135° = 01</text>
-<circle cx="244.2" cy="304.2" r="7.0" fill="#0F6E56" stroke="#0F6E56" stroke-width="1.2"/>
-<text x="244.2" y="290.2" font-size="11" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">−45° = 10</text>
-<circle cx="95.8" cy="304.2" r="7.0" fill="#0F6E56" stroke="#0F6E56" stroke-width="1.2"/>
-<text x="95.8" y="290.2" font-size="11" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">−135° = 11</text>
-<text x="170.0" y="369.0" font-size="11" fill="#6b6b66" font-weight="400" text-anchor="middle" dominant-baseline="central">each symbol turns the phase by one of these</text>
-<text x="170.0" y="386.0" font-size="11" fill="#6b6b66" font-weight="400" text-anchor="middle" dominant-baseline="central">two bits per symbol</text>
-<text x="450.0" y="62.0" font-size="12" fill="#2b2b29" font-weight="700" text-anchor="middle" dominant-baseline="central">With a leftover tuning error</text>
-<circle cx="450.0" cy="230.0" r="105.0" fill="none" stroke="#c9c9c4" stroke-width="1.0"/>
-<path d="M331.0 230.0 L569.0 230.0" fill="none" stroke="#d6d6d1" stroke-width="1"/>
-<path d="M450.0 111.0 L450.0 349.0" fill="none" stroke="#d6d6d1" stroke-width="1"/>
-<circle cx="507.2" cy="141.9" r="7.0" fill="#B91C1C" stroke="#B91C1C" stroke-width="1.2"/>
-<circle cx="361.9" cy="172.8" r="7.0" fill="#B91C1C" stroke="#B91C1C" stroke-width="1.2"/>
-<circle cx="538.1" cy="287.2" r="7.0" fill="#B91C1C" stroke="#B91C1C" stroke-width="1.2"/>
-<circle cx="392.8" cy="318.1" r="7.0" fill="#B91C1C" stroke="#B91C1C" stroke-width="1.2"/>
-<text x="450.0" y="369.0" font-size="11" fill="#6b6b66" font-weight="400" text-anchor="middle" dominant-baseline="central">every step is turned by the same extra θ</text>
-<text x="450.0" y="386.0" font-size="11" fill="#6b6b66" font-weight="400" text-anchor="middle" dominant-baseline="central">(here θ = 12°: about 600 Hz at 18 kBd)</text>
-<text x="730.0" y="62.0" font-size="12" fill="#2b2b29" font-weight="700" text-anchor="middle" dominant-baseline="central">Raise every step to the 4th power</text>
-<circle cx="730.0" cy="230.0" r="105.0" fill="none" stroke="#c9c9c4" stroke-width="1.0"/>
-<path d="M611.0 230.0 L849.0 230.0" fill="none" stroke="#d6d6d1" stroke-width="1"/>
-<path d="M730.0 111.0 L730.0 349.0" fill="none" stroke="#d6d6d1" stroke-width="1"/>
-<circle cx="659.7" cy="308.0" r="7.0" fill="#B91C1C" stroke="#B91C1C" stroke-width="1.2"/>
-<text x="649.7" y="294.0" font-size="11" fill="#B91C1C" font-weight="700" text-anchor="middle" dominant-baseline="central">180° + 4θ</text>
-<circle cx="625.0" cy="230.0" r="7.0" fill="#0F6E56" stroke="#0F6E56" stroke-width="1.2"/>
-<text x="619.0" y="216.0" font-size="11" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">−1</text>
-<text x="730.0" y="369.0" font-size="11" fill="#6b6b66" font-weight="400" text-anchor="middle" dominant-baseline="central">4 × (±45°, ±135°) = ±180°: data vanishes</text>
-<text x="730.0" y="386.0" font-size="11" fill="#6b6b66" font-weight="400" text-anchor="middle" dominant-baseline="central">what is left is 4θ, the same for all</text>
-<path d="M285.0 230.0 L335.0 230.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
-<path d="M565.0 230.0 L615.0 230.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
-<rect x="880.0" y="52.0" width="195.0" height="48.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
-<text x="977.5" y="68.0" font-size="12" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">Multiply ×4</text>
-<text x="977.5" y="84.0" font-size="10" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">z⁴</text>
-<rect x="880.0" y="114.0" width="195.0" height="48.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
-<text x="977.5" y="130.0" font-size="12" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">Moving Average 128</text>
-<text x="977.5" y="146.0" font-size="10" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">average of −z⁴, 7 ms</text>
-<path d="M977.0 100.0 L977.0 112.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
-<rect x="880.0" y="176.0" width="195.0" height="48.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
-<text x="977.5" y="192.0" font-size="12" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">Complex to Arg</text>
-<text x="977.5" y="208.0" font-size="10" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">= 4θ</text>
-<path d="M977.0 162.0 L977.0 174.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
-<rect x="880.0" y="238.0" width="195.0" height="48.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
-<text x="977.5" y="254.0" font-size="12" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">Multiply Const −¼</text>
-<text x="977.5" y="270.0" font-size="10" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">→ −θ</text>
-<path d="M977.0 224.0 L977.0 236.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
-<rect x="880.0" y="300.0" width="195.0" height="48.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
-<text x="977.5" y="316.0" font-size="12" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">Phase Mod</text>
-<text x="977.5" y="332.0" font-size="10" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">e^(−jθ)</text>
-<path d="M977.0 286.0 L977.0 298.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
-<rect x="880.0" y="362.0" width="195.0" height="48.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
-<text x="977.5" y="378.0" font-size="12" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">Multiply</text>
-<text x="977.5" y="394.0" font-size="10" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">steps × e^(−jθ)</text>
-<path d="M977.0 348.0 L977.0 360.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
-<text x="30.0" y="448.0" font-size="11" fill="#6b6b66" font-weight="400" text-anchor="start" dominant-baseline="central">Why not a Costas loop? A loop can lock a quarter-turn wrong and stay there. This is feed-forward: it simply measures and corrects,</text>
-<text x="30.0" y="467.0" font-size="11" fill="#6b6b66" font-weight="400" text-anchor="start" dominant-baseline="central">every symbol. Its limit: the leftover must stay under ±45° per symbol (±2.25 kHz), which is the FLL's job. Beyond that it picks the wrong quadrant.</text>
+<text x="20.0" y="28.0" font-size="21" fill="#1b1b1b" font-weight="700" text-anchor="start" dominant-baseline="central">Fig. 5  The 4th-power trick: one rotation, four symbols, no loop</text>
+<text x="20.0" y="64.0" font-size="17" fill="#1b1b1b" font-weight="700" text-anchor="start" dominant-baseline="central">(a) What the phase steps look like</text>
+<text x="175.0" y="98.0" font-size="16.5" fill="#1b1b1b" font-weight="700" text-anchor="middle" dominant-baseline="central">The four steps (ideal)</text>
+<line x1="57.0" y1="235.0" x2="293.0" y2="235.0" stroke="#bdbdbd" stroke-width="1"/>
+<line x1="175.0" y1="117.0" x2="175.0" y2="353.0" stroke="#bdbdbd" stroke-width="1"/>
+<circle cx="175.0" cy="235.0" r="92.00" fill="none" stroke="#bdbdbd" stroke-width="1"/>
+<text x="175.0" y="371.0" font-size="14.5" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central">each step turns the phase by one of</text>
+<text x="175.0" y="391.0" font-size="14.5" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central">these: two bits per symbol</text>
+<circle cx="240.1" cy="169.9" r="7.00" fill="#1b1b1b" stroke="#1b1b1b" stroke-width="1"/>
+<text x="254.1" y="153.9" font-size="14.5" fill="#1b1b1b" font-weight="400" text-anchor="start" dominant-baseline="central">+45° = 00</text>
+<circle cx="109.9" cy="169.9" r="7.00" fill="#1b1b1b" stroke="#1b1b1b" stroke-width="1"/>
+<text x="95.9" y="153.9" font-size="14.5" fill="#1b1b1b" font-weight="400" text-anchor="end" dominant-baseline="central">+135° = 01</text>
+<circle cx="109.9" cy="300.1" r="7.00" fill="#1b1b1b" stroke="#1b1b1b" stroke-width="1"/>
+<text x="95.9" y="316.1" font-size="14.5" fill="#1b1b1b" font-weight="400" text-anchor="end" dominant-baseline="central">−135° = 11</text>
+<circle cx="240.1" cy="300.1" r="7.00" fill="#1b1b1b" stroke="#1b1b1b" stroke-width="1"/>
+<text x="254.1" y="316.1" font-size="14.5" fill="#1b1b1b" font-weight="400" text-anchor="start" dominant-baseline="central">−45° = 10</text>
+<text x="545.0" y="98.0" font-size="16.5" fill="#1b1b1b" font-weight="700" text-anchor="middle" dominant-baseline="central">With a leftover tuning error</text>
+<line x1="427.0" y1="235.0" x2="663.0" y2="235.0" stroke="#bdbdbd" stroke-width="1"/>
+<line x1="545.0" y1="117.0" x2="545.0" y2="353.0" stroke="#bdbdbd" stroke-width="1"/>
+<circle cx="545.0" cy="235.0" r="92.00" fill="none" stroke="#bdbdbd" stroke-width="1"/>
+<text x="545.0" y="371.0" font-size="14.5" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central">every step turned by the same extra θ</text>
+<text x="545.0" y="391.0" font-size="14.5" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central">(here θ = 12°, about 600 Hz)</text>
+<circle cx="610.1" cy="169.9" r="7.00" fill="#ffffff" stroke="#ffffff" stroke-width="1"/>
+<circle cx="479.9" cy="169.9" r="7.00" fill="#ffffff" stroke="#ffffff" stroke-width="1"/>
+<circle cx="479.9" cy="300.1" r="7.00" fill="#ffffff" stroke="#ffffff" stroke-width="1"/>
+<circle cx="610.1" cy="300.1" r="7.00" fill="#ffffff" stroke="#ffffff" stroke-width="1"/>
+<circle cx="610.1" cy="169.9" r="7.00" fill="#ffffff" stroke="#666666" stroke-width="1.2"/>
+<circle cx="595.1" cy="157.8" r="7.00" fill="#a3312a" stroke="#a3312a" stroke-width="1"/>
+<circle cx="479.9" cy="169.9" r="7.00" fill="#ffffff" stroke="#666666" stroke-width="1.2"/>
+<circle cx="467.8" cy="184.9" r="7.00" fill="#a3312a" stroke="#a3312a" stroke-width="1"/>
+<circle cx="479.9" cy="300.1" r="7.00" fill="#ffffff" stroke="#666666" stroke-width="1.2"/>
+<circle cx="494.9" cy="312.2" r="7.00" fill="#a3312a" stroke="#a3312a" stroke-width="1"/>
+<circle cx="610.1" cy="300.1" r="7.00" fill="#ffffff" stroke="#666666" stroke-width="1.2"/>
+<circle cx="622.2" cy="285.1" r="7.00" fill="#a3312a" stroke="#a3312a" stroke-width="1"/>
+<text x="618.0" y="144.9" font-size="20" fill="#a3312a" font-weight="400" text-anchor="middle" dominant-baseline="central" font-family="'Times New Roman', Times, 'Liberation Serif', 'DejaVu Serif', serif" font-style="italic">θ</text>
+<text x="915.0" y="98.0" font-size="16.5" fill="#1b1b1b" font-weight="700" text-anchor="middle" dominant-baseline="central">Raised to the 4th power</text>
+<line x1="797.0" y1="235.0" x2="1033.0" y2="235.0" stroke="#bdbdbd" stroke-width="1"/>
+<line x1="915.0" y1="117.0" x2="915.0" y2="353.0" stroke="#bdbdbd" stroke-width="1"/>
+<circle cx="915.0" cy="235.0" r="92.00" fill="none" stroke="#bdbdbd" stroke-width="1"/>
+<text x="915.0" y="371.0" font-size="14.5" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central">4 × (±45°, ±135°) = 180°: data gone,</text>
+<text x="915.0" y="391.0" font-size="14.5" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central">what is left is 4θ, the same for all</text>
+<circle cx="823.0" cy="235.0" r="7.00" fill="#1b1b1b" stroke="#1b1b1b" stroke-width="1"/>
+<circle cx="823.0" cy="235.0" r="7.00" fill="#ffffff" stroke="#666666" stroke-width="1.2"/>
+<circle cx="853.4" cy="303.4" r="7.00" fill="#a3312a" stroke="#a3312a" stroke-width="1"/>
+<text x="841.4" y="325.4" font-size="18" fill="#a3312a" font-weight="400" text-anchor="end" dominant-baseline="central" font-family="'Times New Roman', Times, 'Liberation Serif', 'DejaVu Serif', serif" font-style="italic">180° + 4θ</text>
+<polyline points="307.0,235.0 413.0,235.0" fill="none" stroke="#1b1b1b" stroke-width="1.3" marker-end="url(#a)"/>
+<polyline points="677.0,235.0 783.0,235.0" fill="none" stroke="#1b1b1b" stroke-width="1.3" marker-end="url(#a)"/>
+<text x="20.0" y="432.0" font-size="17" fill="#1b1b1b" font-weight="700" text-anchor="start" dominant-baseline="central">(b) Six stock blocks, feed-forward</text>
+<text x="44.0" y="488.0" font-size="20" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central" font-family="'Times New Roman', Times, 'Liberation Serif', 'DejaVu Serif', serif" font-style="italic">d[n]</text>
+<polyline points="70.0,488.0 982.0,488.0" fill="none" stroke="#1b1b1b" stroke-width="1.3" marker-end="url(#a)"/>
+<circle cx="112.0" cy="488.0" r="3.4" fill="#1b1b1b"/>
+<polyline points="112.0,488.0 112.0,580.0" fill="none" stroke="#1b1b1b" stroke-width="1.3" stroke-linejoin="round"/>
+<polyline points="112.0,580.0 138.0,580.0" fill="none" stroke="#1b1b1b" stroke-width="1.3" marker-end="url(#a)"/>
+<rect x="140.0" y="556.0" width="74.0" height="48.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.4"/>
+<text x="177.0" y="580.0" font-size="20" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central" font-family="'Times New Roman', Times, 'Liberation Serif', 'DejaVu Serif', serif" font-style="italic">(·)<tspan baseline-shift="super" font-size="72%">4</tspan></text>
+<polyline points="214.0,580.0 248.0,580.0" fill="none" stroke="#1b1b1b" stroke-width="1.3" marker-end="url(#a)"/>
+<rect x="250.0" y="556.0" width="130.0" height="48.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.4"/>
+<text x="315.0" y="580.0" font-size="19" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central" font-family="'Times New Roman', Times, 'Liberation Serif', 'DejaVu Serif', serif" font-style="italic">−<tspan baseline-shift="super" font-size="72%">1</tspan>⁄<tspan baseline-shift="sub" font-size="72%">128</tspan> Σ</text>
+<polyline points="380.0,580.0 424.0,580.0" fill="none" stroke="#1b1b1b" stroke-width="1.3" marker-end="url(#a)"/>
+<rect x="426.0" y="556.0" width="84.0" height="48.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.4"/>
+<text x="468.0" y="580.0" font-size="20" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central" font-family="'Times New Roman', Times, 'Liberation Serif', 'DejaVu Serif', serif" font-style="italic">arg(·)</text>
+<polyline points="510.0,580.0 554.0,580.0" fill="none" stroke="#1b1b1b" stroke-width="1.3" marker-end="url(#a)"/>
+<rect x="556.0" y="556.0" width="84.0" height="48.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.4"/>
+<text x="598.0" y="580.0" font-size="20" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central" font-family="'Times New Roman', Times, 'Liberation Serif', 'DejaVu Serif', serif" font-style="italic">× −¼</text>
+<polyline points="640.0,580.0 684.0,580.0" fill="none" stroke="#1b1b1b" stroke-width="1.3" marker-end="url(#a)"/>
+<rect x="686.0" y="556.0" width="96.0" height="48.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.4"/>
+<text x="734.0" y="580.0" font-size="20" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central" font-family="'Times New Roman', Times, 'Liberation Serif', 'DejaVu Serif', serif" font-style="italic">e<tspan baseline-shift="super" font-size="72%">jφ</tspan></text>
+<polyline points="782.0,580.0 998.0,580.0" fill="none" stroke="#1b1b1b" stroke-width="1.3" stroke-linejoin="round"/>
+<polyline points="998.0,580.0 998.0,506.0" fill="none" stroke="#1b1b1b" stroke-width="1.3" marker-end="url(#a)"/>
+<circle cx="998.0" cy="488.0" r="16.00" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.4"/>
+<line x1="988.1" y1="478.1" x2="1007.9" y2="497.9" stroke="#1b1b1b" stroke-width="1.3"/>
+<line x1="988.1" y1="497.9" x2="1007.9" y2="478.1" stroke="#1b1b1b" stroke-width="1.3"/>
+<polyline points="1014.0,488.0 1076.0,488.0" fill="none" stroke="#1b1b1b" stroke-width="1.3" marker-end="url(#a)"/>
+<text x="1090.0" y="456.0" font-size="18" fill="#1b1b1b" font-weight="400" text-anchor="end" dominant-baseline="central" font-family="'Times New Roman', Times, 'Liberation Serif', 'DejaVu Serif', serif" font-style="italic">d[n] e<tspan baseline-shift="super" font-size="72%">−jθ</tspan></text>
+<text x="900.0" y="472.0" font-size="14" fill="#666666" font-weight="400" text-anchor="end" dominant-baseline="central">every step, still rotated by θ</text>
+<text x="532.0" y="562.0" font-size="16" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central" font-family="'Times New Roman', Times, 'Liberation Serif', 'DejaVu Serif', serif" font-style="italic">4θ</text>
+<text x="662.0" y="562.0" font-size="16" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central" font-family="'Times New Roman', Times, 'Liberation Serif', 'DejaVu Serif', serif" font-style="italic">−θ</text>
+<text x="177.0" y="620.0" font-size="14.5" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central" font-style="italic">Multiply</text>
+<text x="315.0" y="620.0" font-size="14.5" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central" font-style="italic">Moving Average</text>
+<text x="468.0" y="620.0" font-size="14.5" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central" font-style="italic">Complex to Arg</text>
+<text x="598.0" y="620.0" font-size="14.5" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central" font-style="italic">Multiply Const</text>
+<text x="734.0" y="620.0" font-size="14.5" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central" font-style="italic">Phase Mod</text>
+<text x="1022.0" y="518.0" font-size="14.5" fill="#666666" font-weight="400" text-anchor="start" dominant-baseline="central" font-style="italic">Multiply</text>
+<text x="315.0" y="640.0" font-size="14" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central">128 symbols ≈ 7 ms</text>
+<text x="20.0" y="684.0" font-size="15" fill="#1b1b1b" font-weight="400" text-anchor="start" dominant-baseline="central">Why not a Costas loop? A loop can lock a quarter-turn wrong and stay there. This has no memory and no lock state: it measures and corrects.</text>
+<text x="20.0" y="708.0" font-size="15" fill="#1b1b1b" font-weight="400" text-anchor="start" dominant-baseline="central">Its limit: the leftover must stay under ±45° per symbol (±2.25 kHz), which is the FLL’s job.</text>
 </svg>

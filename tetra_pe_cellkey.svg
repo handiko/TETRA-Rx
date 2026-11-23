@@ -1,45 +1,95 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 470" width="1100" height="470" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif" role="img" aria-label="The cell key loop: the cell broadcasts the key that unlocks the rest of its channels">
-<title>The cell key loop: the cell broadcasts the key that unlocks the rest of its channels</title>
-<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3d3d3a"/></marker><marker id="ahc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#A32D2D"/></marker><marker id="aht" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0F6E56"/></marker><marker id="ahb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1d4ed8"/></marker><marker id="aha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#B45309"/></marker><marker id="ahg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#15803d"/></marker><marker id="ahr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#B91C1C"/></marker><marker id="ahm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6b6b66"/></marker><marker id="ahp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6D28D9"/></marker></defs>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 640" width="1100" height="640" font-family="Helvetica, Arial, 'Liberation Sans', 'DejaVu Sans', sans-serif" role="img" aria-label="The cell key loop: BSCH, SYNC, cell key, Message Pair to Var, descramblers">
+<title>The cell key loop: BSCH, SYNC, cell key, Message Pair to Var, descramblers</title>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9.5" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,1 L10,5 L0,9 z" fill="#1b1b1b"/></marker><marker id="o" viewBox="0 0 10 10" refX="9.5" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0,1 L10,5 L0,9" fill="none" stroke="#1b1b1b" stroke-width="1.4"/></marker><marker id="r" viewBox="0 0 10 10" refX="9.5" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,1 L10,5 L0,9 z" fill="#a3312a"/></marker><marker id="or" viewBox="0 0 10 10" refX="9.5" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0,1 L10,5 L0,9" fill="none" stroke="#a3312a" stroke-width="1.4"/></marker><pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="7" stroke="#9a9a9a" stroke-width="1.6"/></pattern></defs>
 <rect width="100%" height="100%" fill="#ffffff"/>
-<text x="30.0" y="22.0" font-size="15" fill="#2b2b29" font-weight="700" text-anchor="start" dominant-baseline="central">The cell tells me its own key</text>
-<rect x="30.0" y="60.0" width="220.0" height="84.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
-<text x="140.0" y="86.0" font-size="13" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">BSCH chain</text>
-<text x="140.0" y="103.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">scrambled with a FIXED key (0)</text>
-<text x="140.0" y="118.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">so anyone can read it</text>
-<rect x="300.0" y="60.0" width="230.0" height="84.0" rx="8" fill="#F8E6E4" stroke="#A32D2D" stroke-width="1.3"/>
-<text x="415.0" y="86.0" font-size="13" fill="#A32D2D" font-weight="700" text-anchor="middle" dominant-baseline="central">EPB 1: SYNC PDU</text>
-<text x="415.0" y="103.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">MCC 510 · MNC 1234 · CC 60</text>
-<text x="415.0" y="118.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">two identical CRC-good copies</text>
-<rect x="580.0" y="60.0" width="230.0" height="84.0" rx="8" fill="#ffffff" stroke="#6b6b66" stroke-width="1.3"/>
-<text x="695.0" y="86.0" font-size="13" fill="#6b6b66" font-weight="700" text-anchor="middle" dominant-baseline="central">Cell key (30 bits)</text>
-<text x="695.0" y="103.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">MCC&lt;&lt;20 | MNC&lt;&lt;6 | CC</text>
-<text x="695.0" y="118.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">= 0x1FE134BC</text>
-<rect x="860.0" y="60.0" width="210.0" height="84.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
-<text x="965.0" y="93.5" font-size="13" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">Message Pair to Var</text>
-<text x="965.0" y="110.5" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">writes variable cell_key</text>
-<path d="M250.0 102.0 L298.0 102.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
-<path d="M530.0 102.0 L578.0 102.0" fill="none" stroke="#A32D2D" stroke-width="1.6" stroke-dasharray="6 4" marker-end="url(#ahc)"/>
-<path d="M810.0 102.0 L858.0 102.0" fill="none" stroke="#A32D2D" stroke-width="1.6" stroke-dasharray="6 4" marker-end="url(#ahc)"/>
-<rect x="700.0" y="220.0" width="300.0" height="70.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
-<text x="850.0" y="246.5" font-size="12" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">hd_scr = scr_pm(cell_key, 216)</text>
-<text x="850.0" y="263.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">GRC callback re-programs Multiply Const</text>
-<path d="M965.0 144.0 L965.0 218.0" fill="none" stroke="#0F6E56" stroke-width="1.4" marker-end="url(#aht)"/>
-<rect x="370.0" y="220.0" width="270.0" height="70.0" rx="8" fill="#E3F2EC" stroke="#0F6E56" stroke-width="1.3"/>
-<text x="505.0" y="246.5" font-size="13" fill="#0F6E56" font-weight="700" text-anchor="middle" dominant-baseline="central">SCH/HD descrambler</text>
-<text x="505.0" y="263.5" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">now matches this cell</text>
-<path d="M700.0 255.0 L642.0 255.0" fill="none" stroke="#0F6E56" stroke-width="1.4" marker-end="url(#aht)"/>
-<rect x="30.0" y="220.0" width="280.0" height="70.0" rx="8" fill="#F8E6E4" stroke="#A32D2D" stroke-width="1.3"/>
-<text x="170.0" y="246.5" font-size="13" fill="#A32D2D" font-weight="700" text-anchor="middle" dominant-baseline="central">SYSINFO, ACCESS-DEFINE</text>
-<text x="170.0" y="263.5" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">finally pass their CRC</text>
-<path d="M370.0 255.0 L312.0 255.0" fill="none" stroke="#3d3d3a" stroke-width="1.4" marker-end="url(#ah)"/>
-<rect x="700.0" y="340.0" width="300.0" height="64.0" rx="8" fill="#F8E6E4" stroke="#A32D2D" stroke-width="1.3"/>
-<text x="850.0" y="363.5" font-size="13" fill="#A32D2D" font-weight="700" text-anchor="middle" dominant-baseline="central">EPB 2: TCH/S decoder</text>
-<text x="850.0" y="380.5" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="middle" dominant-baseline="central">own 432-bit scrambler, same key</text>
-<path d="M1030.0 144.0 L1030.0 372.0 L1002.0 372.0" fill="none" stroke="#0F6E56" stroke-width="1.4" marker-end="url(#aht)"/>
-<text x="30.0" y="340.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">• Before the first SYNC: cell_key = 0, the SCH/HD chain decodes garbage and the CRC rejects it. That is normal.</text>
-<text x="30.0" y="362.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">• The two-copy rule matters: a 16-bit CRC on random correlator hits passes about once in 65,000.</text>
-<text x="30.0" y="384.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central"></text>
-<text x="30.0" y="384.0" font-size="11" fill="#2b2b29" font-weight="400" text-anchor="start" dominant-baseline="central">• Retuning (tetra_freq or fine_hz) resets the cell picture, so a new cell gets a new key.</text>
-<text x="30.0" y="440.0" font-size="11" fill="#6b6b66" font-weight="400" text-anchor="start" dominant-baseline="central" font-style="italic">Scrambler: 32-bit LFSR, taps 32 26 23 22 16 12 11 10 8 7 5 4 2 1, loaded with (key &lt;&lt; 2) | 3 (EN 300 392-2 cl. 8.2.5).</text>
+<text x="20.0" y="28.0" font-size="21" fill="#1b1b1b" font-weight="700" text-anchor="start" dominant-baseline="central">Fig. 8  The cell tells me its own key</text>
+<rect x="24.0" y="82.0" width="196.0" height="68.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.4"/>
+<text x="122.0" y="97.2" font-size="16.5" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central">BSCH chain</text>
+<text x="122.0" y="116.9" font-size="14.5" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central">descrambled with key 0:</text>
+<text x="122.0" y="135.7" font-size="14.5" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central">anyone can read it</text>
+<polyline points="220.0,116.0 268.0,116.0" fill="none" stroke="#1b1b1b" stroke-width="1.25" stroke-dasharray="6 4" marker-end="url(#o)"/>
+<rect x="270.0" y="70.0" width="270.0" height="92.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.4"/>
+<rect x="274.0" y="74.0" width="262.0" height="84.0" fill="none" stroke="#1b1b1b" stroke-width="0.9"/>
+<text x="405.0" y="97.2" font-size="16.5" fill="#1b1b1b" font-weight="700" text-anchor="middle" dominant-baseline="central">Cell info</text>
+<text x="405.0" y="116.9" font-size="14.5" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central">SYNC: MCC 510, MNC 1234, CC 60</text>
+<text x="405.0" y="135.7" font-size="14.5" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central">wait for two identical CRC-good copies</text>
+<polyline points="540.0,116.0 594.0,116.0" fill="none" stroke="#1b1b1b" stroke-width="1.25" stroke-dasharray="6 4" marker-end="url(#o)"/>
+<text x="567.0" y="100.0" font-size="14" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central">key</text>
+<rect x="596.0" y="82.0" width="206.0" height="68.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.4"/>
+<text x="699.0" y="106.6" font-size="16.5" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central">Message Pair to Var</text>
+<text x="699.0" y="126.3" font-size="14.5" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central">writes variable cell_key</text>
+<polyline points="802.0,116.0 874.0,116.0" fill="none" stroke="#1b1b1b" stroke-width="1.3" stroke-dasharray="1.5 3.5" stroke-linecap="round" marker-end="url(#a)"/>
+<rect x="876.0" y="76.0" width="200.0" height="80.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.4"/>
+<rect x="880.0" y="80.0" width="192.0" height="72.0" fill="none" stroke="#1b1b1b" stroke-width="0.9"/>
+<text x="976.0" y="97.2" font-size="16.5" fill="#1b1b1b" font-weight="700" text-anchor="middle" dominant-baseline="central">TCH/S voice</text>
+<text x="976.0" y="116.9" font-size="14.5" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central">own 432-bit scrambler,</text>
+<text x="976.0" y="135.7" font-size="14.5" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central">same key</text>
+<text x="280.0" y="224.0" font-size="22" fill="#a3312a" font-weight="400" text-anchor="middle" dominant-baseline="central" font-family="'Times New Roman', Times, 'Liberation Serif', 'DejaVu Serif', serif" font-style="italic">key = MCC ≪ 20  |  MNC ≪ 6  |  CC</text>
+<text x="280.0" y="258.0" font-size="19" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central" font-family="'Times New Roman', Times, 'Liberation Serif', 'DejaVu Serif', serif" font-style="italic">= 510 ≪ 20 | 1234 ≪ 6 | 60 = 0x1FE134BC</text>
+<text x="280.0" y="292.0" font-size="14.5" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central">chicken and egg: every channel except the BSCH</text>
+<text x="280.0" y="312.0" font-size="14.5" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central">is scrambled with this key</text>
+<polyline points="699.0,150.0 699.0,196.0" fill="none" stroke="#1b1b1b" stroke-width="1.3" stroke-dasharray="1.5 3.5" stroke-linecap="round" marker-end="url(#a)"/>
+<rect x="548.0" y="198.0" width="528.0" height="168.0" fill="none" stroke="#666666" stroke-width="1.0" stroke-dasharray="5 4"/>
+<text x="812.0" y="381.0" font-size="14.5" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central" font-style="italic">GRC variable hd_scr = scr_pm(cell_key, 216), recomputed on every new key</text>
+<rect x="600.0" y="300.0" width="46.0" height="36.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.2"/>
+<text x="623.0" y="318.0" font-size="14.5" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central" font-family="'Times New Roman', Times, 'Liberation Serif', 'DejaVu Serif', serif" font-style="italic">b₃₁</text>
+<rect x="646.0" y="300.0" width="46.0" height="36.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.2"/>
+<text x="669.0" y="318.0" font-size="14.5" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central" font-family="'Times New Roman', Times, 'Liberation Serif', 'DejaVu Serif', serif" font-style="italic">b₃₀</text>
+<rect x="692.0" y="300.0" width="46.0" height="36.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.2"/>
+<text x="715.0" y="318.0" font-size="14.5" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central" font-family="'Times New Roman', Times, 'Liberation Serif', 'DejaVu Serif', serif" font-style="italic">b₂₉</text>
+<rect x="738.0" y="300.0" width="46.0" height="36.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.2"/>
+<text x="761.0" y="318.0" font-size="14.5" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central" font-family="'Times New Roman', Times, 'Liberation Serif', 'DejaVu Serif', serif">…</text>
+<rect x="784.0" y="300.0" width="46.0" height="36.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.2"/>
+<text x="807.0" y="318.0" font-size="14.5" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central" font-family="'Times New Roman', Times, 'Liberation Serif', 'DejaVu Serif', serif" font-style="italic">b₂</text>
+<rect x="830.0" y="300.0" width="46.0" height="36.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.2"/>
+<text x="853.0" y="318.0" font-size="14.5" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central" font-family="'Times New Roman', Times, 'Liberation Serif', 'DejaVu Serif', serif" font-style="italic">b₁</text>
+<rect x="876.0" y="300.0" width="46.0" height="36.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.2"/>
+<text x="899.0" y="318.0" font-size="14.5" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central" font-family="'Times New Roman', Times, 'Liberation Serif', 'DejaVu Serif', serif" font-style="italic">b₀</text>
+<circle cx="761.0" cy="246.0" r="14.00" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.4"/>
+<line x1="752.0" y1="246.0" x2="770.0" y2="246.0" stroke="#1b1b1b" stroke-width="1.4"/>
+<line x1="761.0" y1="237.0" x2="761.0" y2="255.0" stroke="#1b1b1b" stroke-width="1.4"/>
+<line x1="623.0" y1="300.0" x2="623.0" y2="276.0" stroke="#1b1b1b" stroke-width="1.0"/>
+<line x1="669.0" y1="300.0" x2="669.0" y2="276.0" stroke="#1b1b1b" stroke-width="1.0"/>
+<line x1="715.0" y1="300.0" x2="715.0" y2="276.0" stroke="#1b1b1b" stroke-width="1.0"/>
+<line x1="807.0" y1="300.0" x2="807.0" y2="276.0" stroke="#1b1b1b" stroke-width="1.0"/>
+<line x1="853.0" y1="300.0" x2="853.0" y2="276.0" stroke="#1b1b1b" stroke-width="1.0"/>
+<line x1="899.0" y1="300.0" x2="899.0" y2="276.0" stroke="#1b1b1b" stroke-width="1.0"/>
+<line x1="623.0" y1="276.0" x2="899.0" y2="276.0" stroke="#1b1b1b" stroke-width="1.0"/>
+<line x1="761.0" y1="276.0" x2="761.0" y2="260.0" stroke="#1b1b1b" stroke-width="1.0"/>
+<polyline points="747.0,246.0 578.0,246.0 578.0,318.0" fill="none" stroke="#1b1b1b" stroke-width="1.2" stroke-linejoin="round"/>
+<polyline points="578.0,318.0 599.0,318.0" fill="none" stroke="#1b1b1b" stroke-width="1.2" marker-end="url(#a)"/>
+<text x="761.0" y="220.0" font-size="13.5" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central">taps 32 26 23 22 16 12 11 10 8 7 5 4 2 1</text>
+<polyline points="922.0,318.0 948.0,318.0" fill="none" stroke="#1b1b1b" stroke-width="1.2" marker-end="url(#a)"/>
+<rect x="950.0" y="300.0" width="82.0" height="36.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.4"/>
+<text x="991.0" y="318.0" font-size="17" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central" font-family="'Times New Roman', Times, 'Liberation Serif', 'DejaVu Serif', serif" font-style="italic">1 − 2b</text>
+<text x="761.0" y="352.0" font-size="14" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central">start: (key ≪ 2) | 3</text>
+<polyline points="1032.0,318.0 1062.0,318.0 1062.0,420.0 150.0,420.0" fill="none" stroke="#1b1b1b" stroke-width="1.3" stroke-linejoin="round"/>
+<polyline points="150.0,420.0 150.0,482.0" fill="none" stroke="#1b1b1b" stroke-width="1.3" marker-end="url(#a)"/>
+<text x="1050.0" y="440.0" font-size="19" fill="#1b1b1b" font-weight="400" text-anchor="end" dominant-baseline="central" font-family="'Times New Roman', Times, 'Liberation Serif', 'DejaVu Serif', serif" font-style="italic">c[n]</text>
+<text x="40.0" y="500.0" font-size="20" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central" font-family="'Times New Roman', Times, 'Liberation Serif', 'DejaVu Serif', serif" font-style="italic">s[n]</text>
+<polyline points="64.0,500.0 132.0,500.0" fill="none" stroke="#1b1b1b" stroke-width="1.3" marker-end="url(#a)"/>
+<circle cx="150.0" cy="500.0" r="16.00" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.4"/>
+<line x1="140.1" y1="490.1" x2="159.9" y2="509.9" stroke="#1b1b1b" stroke-width="1.3"/>
+<line x1="140.1" y1="509.9" x2="159.9" y2="490.1" stroke="#1b1b1b" stroke-width="1.3"/>
+<text x="150.0" y="532.0" font-size="14.5" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central" font-style="italic">Multiply Const</text>
+<polyline points="166.0,500.0 214.0,500.0" fill="none" stroke="#1b1b1b" stroke-width="1.3" marker-end="url(#a)"/>
+<rect x="216.0" y="474.0" width="66.0" height="52.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.4"/>
+<text x="249.0" y="500.0" font-size="20" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central" font-family="'Times New Roman', Times, 'Liberation Serif', 'DejaVu Serif', serif" font-style="italic">Π<tspan baseline-shift="super" font-size="72%">−1</tspan></text>
+<polyline points="282.0,500.0 318.0,500.0" fill="none" stroke="#1b1b1b" stroke-width="1.3" marker-end="url(#a)"/>
+<rect x="320.0" y="474.0" width="136.0" height="52.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.4"/>
+<text x="388.0" y="500.0" font-size="16.5" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central">de-puncture</text>
+<polyline points="456.0,500.0 492.0,500.0" fill="none" stroke="#1b1b1b" stroke-width="1.3" marker-end="url(#a)"/>
+<rect x="494.0" y="474.0" width="110.0" height="52.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.4"/>
+<text x="549.0" y="500.0" font-size="16.5" fill="#1b1b1b" font-weight="400" text-anchor="middle" dominant-baseline="central">Viterbi</text>
+<polyline points="604.0,500.0 640.0,500.0" fill="none" stroke="#1b1b1b" stroke-width="1.3" marker-end="url(#a)"/>
+<rect x="642.0" y="470.0" width="140.0" height="60.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.4"/>
+<rect x="646.0" y="474.0" width="132.0" height="52.0" fill="none" stroke="#1b1b1b" stroke-width="0.9"/>
+<text x="712.0" y="500.0" font-size="16.5" fill="#1b1b1b" font-weight="700" text-anchor="middle" dominant-baseline="central">CRC-16</text>
+<polyline points="782.0,500.0 836.0,500.0" fill="none" stroke="#1b1b1b" stroke-width="1.25" stroke-dasharray="6 4" marker-end="url(#o)"/>
+<text x="842.0" y="490.0" font-size="15" fill="#1b1b1b" font-weight="700" text-anchor="start" dominant-baseline="central">SYSINFO, ACCESS-DEFINE</text>
+<text x="842.0" y="512.0" font-size="15" fill="#1b1b1b" font-weight="400" text-anchor="start" dominant-baseline="central">now pass their CRC</text>
+<rect x="92.0" y="448.0" width="708.0" height="104.0" fill="none" stroke="#666666" stroke-width="1.0" stroke-dasharray="5 4"/>
+<text x="455.0" y="566.0" font-size="14.5" fill="#666666" font-weight="400" text-anchor="middle" dominant-baseline="central" font-style="italic">SCH/HD chain (Fig. 7)</text>
+<text x="20.0" y="596.0" font-size="14.5" fill="#1b1b1b" font-weight="400" text-anchor="start" dominant-baseline="central">•  Before the first good SYNC, cell_key = 0: the SCH/HD chain decodes garbage and the CRC rejects it. That is normal.</text>
+<text x="20.0" y="620.0" font-size="14.5" fill="#1b1b1b" font-weight="400" text-anchor="start" dominant-baseline="central">•  Two identical copies, because a 16-bit CRC on random correlator hits passes about once in 65,000.</text>
 </svg>

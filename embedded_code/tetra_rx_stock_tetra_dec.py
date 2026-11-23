@@ -13,9 +13,15 @@ This block does only what no stock block can:
   * publishing the cell's scrambling key (message pair 'cell_key') so that a stock
     Message Pair to Var block re-programs the SCH/HD descrambler for this cell
   * publishing a TDMA time reference ('tdma') for the TCH/S decoder's timeslot tracking
+  * the MCCH neighbour-cell list: MAC-RESOURCE / MAC-FRAG / MAC-END (with fragment
+    reassembly per timeslot), basic-link LLC, and the MLE PDU D-NWRK-BROADCAST.
+    Only MLE broadcast information is decoded; PDUs of every other protocol (MM, CMCE,
+    SNDCP) are counted and skipped, never parsed.
 
 Inputs  (message): 'bsch'     - u8 PDUs of 80 decoded bits  (60 info + 16 CRC + 4 tail)
                    'hd'       - u8 PDUs of 144 decoded bits (124 info + 16 CRC + 4 tail)
+                   'schf'     - u8 PDUs of 288 decoded bits (268 info + 16 CRC + 4 tail),
+                                full-slot signalling (SCH/F) from NTS1 bursts
                    'bsch_raw' - the raw 120-soft-bit PDUs straight from cut_bsch. Only their
                                 rx_time is used: it gives the absolute bit position of each sync
                                 burst. The BSCH chain is strictly 1 PDU in -> 1 PDU out, in order,
@@ -57,6 +63,129 @@ SERVICES = ((11, 'registration mandatory'), (10, 'de-registration mandatory'), (
 OPT_FIELD = {0: 'even-multiframe TS_COMMON_FRAMES', 1: 'odd-multiframe TS_COMMON_FRAMES',
              2: 'default access code A', 3: 'extended services broadcast'}
 MAC_TYPE = {0: 'MAC-RESOURCE', 1: 'MAC-FRAG/END', 2: 'broadcast', 3: 'MAC-U-SIGNAL/D-BLCK'}
+
+# ---------------------------------------------------------------- MAC / LLC / MLE (EN 300 392-2)
+# Field layouts cross-checked against osmo-tetra (MAC-RESOURCE, MAC-FRAG/END, LLC) and the
+# sq5bpf fork (D-NWRK-BROADCAST, neighbour cell information).
+CC_TAG = 266                                   # NTS1 / NTS2 tag position in the slot
+ADDR_LEN = {1: 24, 2: 10, 3: 24, 4: 24, 5: 34, 6: 30, 7: 34}     # MAC address type -> bits
+LLC_HDR = {0: 6, 1: 5, 2: 4, 3: 5, 4: 6, 5: 5, 6: 4, 7: 5}       # basic-link PDU types -> header bits
+LLC_NAME = {0: 'BL-ADATA', 1: 'BL-DATA', 2: 'BL-UDATA', 3: 'BL-ACK'}
+MLE_PD = {1: 'MM', 2: 'CMCE', 4: 'SNDCP', 5: 'MLE', 6: 'management', 7: 'test'}
+MLE_PDUT = {0: 'D-NEW-CELL', 1: 'D-PREPARE-FAIL', 2: 'D-NWRK-BROADCAST', 3: 'D-NWRK-BROADCAST-EXT',
+            4: 'D-RESTORE-ACK', 5: 'D-RESTORE-FAIL', 6: 'D-CHANNEL-RESPONSE'}
+FRAG_MAX_AGE = 2.0                             # s: an unfinished fragment chain is dropped after this
+NB_EXPIRE = 600.0                              # s: a neighbour not re-announced for this long is dropped
+
+
+def mac_len(ind):
+    """MAC length indication -> octets, or 'frag' / 'stolen', or None (reserved)"""
+    if ind in (0, 0x3b, 0x3c, 0x3d):
+        return None
+    if ind <= 0x3a:
+        return ind                             # pi/4-DQPSK: Y2 = Z2 = 1 octet
+    return 'stolen' if ind == 0x3e else 'frag'
+
+
+def strip_fill(b, start, end):
+    """Fill bits are a 1 followed by 0s at the end of a PDU: return the end without them"""
+    i = end - 1
+    while i > start and b[i] == 0:
+        i -= 1
+    return i if i > start and b[i] == 1 else end
+
+
+def chan_alloc_len(b, q):
+    """Length of a channel allocation element (only needed to find where the TM-SDU starts)"""
+    p = q
+    p += 2 + 4                                 # allocation type, timeslot
+    ul_dl = bits_uint(b, p, 2); p += 2
+    p += 1 + 1 + 12                            # CLCH permission, cell change, carrier number
+    if b[p]:
+        p += 1 + 10                            # extended carrier numbering
+    else:
+        p += 1
+    mon = bits_uint(b, p, 2); p += 2
+    if mon == 0:
+        p += 2
+    if ul_dl == 0:                             # augmented channel allocation
+        p += 2 + 3 + 3 + 3 + 3 + 3 + 4 + 5
+        nap = bits_uint(b, p, 2); p += 2
+        if nap == 1:
+            p += 11
+        p += 4
+        for _ in range(2):
+            p += 1 + (16 if b[p] else 0)
+        p += 1
+    return p - q
+
+
+def llc_fcs(bits):
+    crc = 0xFFFFFFFF
+    if len(bits) < 32:
+        crc = (crc << (32 - len(bits))) & 0xFFFFFFFF
+    for x in bits:
+        bit = (int(x) ^ (crc >> 31)) & 1
+        crc = (crc << 1) & 0xFFFFFFFF
+        if bit:
+            crc ^= 0x04C11DB7
+    return (~crc) & 0xFFFFFFFF
+
+
+def carrier_hz(band, carrier, offset):
+    return band * 100e6 + carrier * 25e3 + OFFSET_HZ[offset]
+
+
+def parse_nwrk(b):
+    """D-NWRK-BROADCAST (after the 3-bit PD and 3-bit PDU type). Raises IndexError if short."""
+    p = 6
+    d = {'resel': bits_uint(b, p, 16), 'load': bits_uint(b, p + 16, 2), 'time': False, 'cells': []}
+    p += 18
+    if b[p]:                                   # O-bit: optional elements follow
+        p += 1
+        if b[p]:                               # TETRA network time present
+            p += 1 + 48
+            d['time'] = True
+        else:
+            p += 1
+        if b[p]:                               # neighbour cells present
+            p += 1
+            n = bits_uint(b, p, 3); p += 3
+            for _ in range(n):
+                c, used = parse_nci(b, p)
+                p += used
+                d['cells'].append(c)
+        else:
+            p += 1
+    if p > len(b):
+        raise IndexError('D-NWRK-BROADCAST longer than its TL-SDU')
+    return d
+
+
+def parse_nci(b, q):
+    """One 'neighbour cell information for CA' element -> (dict, bits used)"""
+    p = q
+    c = {'id': bits_uint(b, p, 5), 'resel_types': bits_uint(b, p + 5, 2), 'synced': b[p + 7],
+         'load': bits_uint(b, p + 8, 2), 'carrier': bits_uint(b, p + 10, 12)}
+    p += 22
+    if b[p]:                                   # O-bit
+        p += 1
+        for name, width in (('ext', 10), ('mcc', 10), ('mnc', 14), ('la', 14), ('txpwr', 3),
+                            ('rxlev', 4), ('subscr', 16), ('service', 12), ('timeshare', 5),
+                            ('fn_offset', 6)):
+            if b[p]:
+                v = bits_uint(b, p + 1, width)
+                if name == 'ext':
+                    c['band'], c['offset'] = v >> 6, (v >> 4) & 3
+                    c['duplex'], c['reverse'] = (v >> 1) & 7, v & 1
+                else:
+                    c[name] = v
+                p += 1 + width
+            else:
+                p += 1
+    else:
+        p += 1
+    return c, p - q
 
 
 def crc_ok(bits):
@@ -132,12 +261,14 @@ class blk(gr.basic_block):
         self.message_port_register_in(pmt.intern('bsch'))
         self.message_port_register_in(pmt.intern('hd'))
         self.message_port_register_in(pmt.intern('bsch_raw'))
+        self.message_port_register_in(pmt.intern('schf'))
         self.message_port_register_out(pmt.intern('cell'))
         self.message_port_register_out(pmt.intern('tdma'))
         self.message_port_register_out(pmt.intern('out'))
         self.set_msg_handler(pmt.intern('bsch'), self._on_bsch)
         self.set_msg_handler(pmt.intern('hd'), self._on_hd)
         self.set_msg_handler(pmt.intern('bsch_raw'), self._on_bsch_raw)
+        self.set_msg_handler(pmt.intern('schf'), self._on_schf)
         # raw <-> decoded BSCH matching by sequence number (never reset: the chain stays 1:1)
         self._n_raw = 0
         self._n_dec = 0
@@ -162,7 +293,16 @@ class blk(gr.basic_block):
         self.si_cand = None
         self.acc_def = {}
         self.mac_cnt = {}
-        self.n = dict(bsch=0, bsch_ok=0, hd=0, hd_ok=0)
+        self.n = dict(bsch=0, bsch_ok=0, hd=0, hd_ok=0, f=0, f_ok=0, fcs_bad=0, frag_lost=0, nwrk_bad=0)
+        self.frag = {}              # timeslot -> {'bits': [...], 't': wall time}
+        self.pd_cnt = {}            # TL-SDU protocol counts (only MLE is parsed)
+        self.nwrk = None            # serving-cell part of the last D-NWRK-BROADCAST
+        self.nwrk_n = 0
+        self.nwrk_t = None
+        self.nb = {}                # neighbour cell id -> (entry dict, last seen)
+        self.nb_cand = {}           # neighbour cell id -> entry waiting for a second identical copy
+        self._mq = []               # MAC blocks waiting to be put back in time order
+        self._mq_newest = None
         self.t0 = time.time()
 
     # ------------------------------------------------------------ helpers
@@ -276,6 +416,8 @@ class blk(gr.basic_block):
             b = b[:124]
             mt = bits_uint(b, 0, 2)
             name = MAC_TYPE[mt]
+            if mt in (0, 1):
+                self._mac_queue(pmt.car(msg), b, 124)
             if mt == 2:
                 bt = bits_uint(b, 2, 2)
                 name = {0: 'SYSINFO', 1: 'ACCESS-DEFINE'}.get(bt, 'broadcast type %d' % bt)
@@ -302,6 +444,199 @@ class blk(gr.basic_block):
             if self.show_pdus and name not in ('SYSINFO', 'ACCESS-DEFINE'):
                 self._emit('%s %s %s' % (self._stamp(), name, ''.join(str(x) for x in b[:40])))
 
+    # ------------------------------------------------------------ SCH/F (full-slot signalling)
+    def _on_schf(self, msg):
+        with self._mtx:
+            self._check_retune()
+            b = self._bits(msg)
+            self.n['f'] += 1
+            if self.key is None or len(b) < 284 or not crc_ok(b[:284]):
+                return                         # voice bursts land here too and fail the CRC
+            self.n['f_ok'] += 1
+            b = b[:268]
+            mt = bits_uint(b, 0, 2)
+            name = 'SCH/F ' + MAC_TYPE[mt]
+            self.mac_cnt[name] = self.mac_cnt.get(name, 0) + 1
+            if mt in (0, 1):
+                self._mac_queue(pmt.car(msg), b, 268)
+
+    def _mac_queue(self, meta, b, end):
+        """Blocks 1 and 2 of a burst come from two cutters 16 bits apart and can arrive swapped.
+        Their rx_time says where they really were, so hold each block for one slot and hand
+        them to the MAC layer in true time order (a MAC-END must follow its MAC-RESOURCE)."""
+        bit = self._abs_bit(meta)
+        if bit is None:
+            self._mac_block(b, end, 0)
+            return
+        self._mq.append((bit, end, b, time.time()))
+        self._mq_newest = bit if self._mq_newest is None else max(self._mq_newest, bit)
+        self._mq_flush(False)
+
+    def _mq_flush(self, by_age):
+        self._mq.sort(key=lambda e: e[0])
+        now = time.time()
+        while self._mq and (self._mq[0][0] <= self._mq_newest - 300 or (by_age and now - self._mq[0][3] > 0.5)):
+            bit, end, b, _ = self._mq.pop(0)
+            self._mac_block(b, end, self._slot_from_bit(bit))
+
+    def _slot_of(self, meta):
+        """Timeslot of a decoded block, from the rx_time its cutter stamped (0 = unknown)"""
+        return self._slot_from_bit(self._abs_bit(meta))
+
+    def _slot_from_bit(self, bit):
+        ref = self.tdma_ref
+        if bit is None or ref is None:
+            return 0
+        k = int(round((bit - CC_TAG - ref[2]) / 510.0))
+        return (ref[0] - 1 + k) % 4 + 1
+
+    # ------------------------------------------------------------ MAC layer
+    def _mac_block(self, b, end, slot):
+        """Walk the MAC PDUs of one decoded block (124 or 268 bits)"""
+        now = time.time()
+        for s in [s for s, f in self.frag.items() if now - f['t'] > FRAG_MAX_AGE]:
+            del self.frag[s]
+            self.n['frag_lost'] += 1
+        p = 0
+        try:
+            while p + 16 <= end:
+                mt = bits_uint(b, p, 2)
+                if mt == 0:
+                    p = self._mac_resource(b, p, end, slot, now)
+                elif mt == 1:
+                    p = self._mac_frag_end(b, p, end, slot, now)
+                else:
+                    return                     # broadcast / U-SIGNAL: handled elsewhere or ignored
+                if p is None:
+                    return
+        except IndexError:
+            return
+
+    def _mac_resource(self, b, p, end, slot, now):
+        q = p + 2
+        fill = b[q]; q += 2                    # fill-bit flag, position of grant
+        enc = bits_uint(b, q, 2); q += 3       # encryption mode, random-access flag
+        ln = mac_len(bits_uint(b, q, 6)); q += 6
+        atype = bits_uint(b, q, 3); q += 3
+        if atype == 0 or ln is None:
+            return None                        # null PDU: nothing more in this block
+        q += ADDR_LEN[atype]
+        q += 1 + (4 if b[q] else 0)            # power control
+        q += 1 + (8 if b[q] else 0)            # slot granting
+        if b[q]:                               # channel allocation
+            if enc:
+                return None
+            q += 1 + chan_alloc_len(b, q + 1)
+        else:
+            q += 1
+        stop = end if ln in ('frag', 'stolen') else min(end, p + 8 * ln)
+        if fill:
+            stop = strip_fill(b, q, stop)
+        if not enc and stop > q:
+            sdu = list(b[q:stop])
+            if ln == 'frag':
+                self.frag[slot] = {'bits': sdu, 't': now}
+            else:
+                self._llc(sdu)
+        return None if ln in ('frag', 'stolen') else p + 8 * ln
+
+    def _mac_frag_end(self, b, p, end, slot, now):
+        is_end = b[p + 2]
+        fill = b[p + 3]
+        if not is_end:                         # MAC-FRAG fills the rest of the block
+            stop = strip_fill(b, p + 4, end) if fill else end
+            f = self.frag.get(slot)
+            if f is not None:
+                f['bits'] += list(b[p + 4:stop]); f['t'] = now
+            return None
+        q = p + 5                              # header, fill flag, position of grant
+        ln = mac_len(bits_uint(b, q, 6)); q += 6
+        if not isinstance(ln, int):
+            return None
+        q += 1 + (8 if b[q] else 0)            # slot granting
+        if b[q]:
+            q += 1 + chan_alloc_len(b, q + 1)
+        else:
+            q += 1
+        stop = min(end, p + 8 * ln)
+        if fill:
+            stop = strip_fill(b, q, stop)
+        f = self.frag.pop(slot, None)
+        if f is not None:
+            self._llc(f['bits'] + list(b[q:stop]))
+        return p + 8 * ln
+
+    # ------------------------------------------------------------ LLC and MLE
+    def _llc(self, sdu):
+        if len(sdu) < 4:
+            return
+        t = bits_uint(sdu, 0, 4)
+        hdr = LLC_HDR.get(t)
+        if hdr is None:                        # advanced-link types: not used for broadcasts
+            return
+        tl = sdu[hdr:]
+        if t >= 4:                             # basic link with FCS
+            if len(tl) < 32:
+                return
+            fcs, tl = bits_uint(tl, len(tl) - 32, 32), tl[:-32]
+            if fcs != llc_fcs(tl):
+                self.n['fcs_bad'] += 1
+                return
+        if len(tl) < 6:
+            return
+        pd = bits_uint(tl, 0, 3)
+        name = MLE_PD.get(pd, 'PD %d' % pd)
+        if pd == 5:
+            name = MLE_PDUT.get(bits_uint(tl, 3, 3), 'MLE type %d' % bits_uint(tl, 3, 3))
+        self.pd_cnt[name] = self.pd_cnt.get(name, 0) + 1
+        if pd == 5 and bits_uint(tl, 3, 3) == 2:
+            self._nwrk(tl)
+        # every other protocol (MM, CMCE, SNDCP, ...) is only counted, never parsed
+
+    def _nwrk(self, tl):
+        try:
+            d = parse_nwrk(tl)
+        except IndexError:
+            self.n['nwrk_bad'] += 1
+            return
+        now = time.time()
+        self.nwrk, self.nwrk_t = d, now
+        self.nwrk_n += 1
+        for c in d['cells']:
+            entry = tuple(sorted(c.items()))
+            known = self.nb.get(c['id'])
+            if known is not None and known[0] == entry:
+                self.nb[c['id']] = (entry, now)
+            elif self.nb_cand.get(c['id']) == entry:   # second identical copy: accept
+                del self.nb_cand[c['id']]
+                self.nb[c['id']] = (entry, now)
+                self._emit('%s NEIGHBOUR %s' % (self._stamp(), self._fmt_nb(dict(entry))))
+            else:
+                self.nb_cand[c['id']] = entry
+
+    def _fmt_nb(self, c):
+        if 'band' in c:
+            band, off = c['band'], c['offset']
+        elif self.si:
+            band, off = self.si['band'], self.si['offset']
+        else:
+            band = off = None
+        dl = carrier_hz(band, c['carrier'], off) if band is not None else None
+        s = 'cell %2d: carrier %4d' % (c['id'], c['carrier'])
+        s += ('  DL %.4f MHz' % (dl / 1e6)) if dl else '  DL ? (no SYSINFO yet)'
+        if 'duplex' in c and dl:
+            dup = DUPLEX_KHZ.get(c['duplex'], {}).get(band)
+            if dup is not None:
+                s += '  UL %.4f MHz' % ((dl + (1 if c['reverse'] else -1) * dup * 1e3) / 1e6)
+        if 'mcc' in c or 'mnc' in c:
+            s += '  MCC %s MNC %s' % (c.get('mcc', '-'), c.get('mnc', '-'))
+        if 'la' in c:
+            s += '  LA %d' % c['la']
+        s += '  load %s  synchronised %s' % (CELL_LOAD[c['load']], 'yes' if c['synced'] else 'no')
+        if 'rxlev' in c:
+            s += '  RXLEV_ACCESS_MIN %d dBm' % (-125 + 5 * c['rxlev'])
+        return s
+
     # ------------------------------------------------------------ status panel (own thread)
     def start(self):
         self._stop_ev.clear()
@@ -318,6 +653,7 @@ class blk(gr.basic_block):
         while not self._stop_ev.wait(self.stats_every):
             with self._mtx:
                 self._check_retune()
+                self._mq_flush(True)
                 txt = self._status(time.time())
             _say(txt)
 
@@ -361,13 +697,26 @@ class blk(gr.basic_block):
         for v in self.acc_def.values():
             L.append(' Access def.  : ' + v)
         if self.mac_cnt:
-            L.append(' Half-slot PDUs: ' + ', '.join('%s %d' % kv for kv in sorted(self.mac_cnt.items(), key=lambda kv: -kv[1])))
-        L.append(' Decoder      : BSCH cuts %d (CRC ok %d)   half-slot cuts %d (CRC ok %d)' % (
-            self.n['bsch'], self.n['bsch_ok'], self.n['hd'], self.n['hd_ok']))
+            L.append(' MAC PDUs     : ' + ', '.join('%s %d' % kv for kv in sorted(self.mac_cnt.items(), key=lambda kv: -kv[1])))
+        if self.pd_cnt:
+            L.append(' Signalling   : ' + ', '.join('%s %d' % kv for kv in sorted(self.pd_cnt.items(), key=lambda kv: -kv[1]))
+                     + '   (only MLE broadcasts are decoded)')
+        for cid in [i for i, (e, t) in self.nb.items() if now - t > NB_EXPIRE]:
+            del self.nb[cid]
+        if self.nwrk is not None:
+            L.append(' Neighbours   : %d cell(s) from %d D-NWRK-BROADCAST, last %.0f s ago; serving cell: '
+                     'reselect params 0x%04X, load %s' % (len(self.nb), self.nwrk_n, now - self.nwrk_t,
+                                                          self.nwrk['resel'], CELL_LOAD[self.nwrk['load']]))
+            for cid in sorted(self.nb):
+                L.append('                ' + self._fmt_nb(dict(self.nb[cid][0])))
+        elif c is not None:
+            L.append(' Neighbours   : no D-NWRK-BROADCAST heard yet (the cell sends it every so often on the MCCH)')
+        L.append(' Decoder      : BSCH cuts %d (CRC ok %d)   half-slot cuts %d (CRC ok %d)   full-slot cuts %d (CRC ok %d)' % (
+            self.n['bsch'], self.n['bsch_ok'], self.n['hd'], self.n['hd_ok'], self.n['f'], self.n['f_ok']))
         if self.n['bsch'] == 0:
             L.append(' NOTE         : no sync training sequence seen - not TETRA, not locked, too weak, or wrong polarity')
         elif self.n['bsch_ok'] == 0:
             L.append(' NOTE         : y seen but no BSCH passes CRC - SNR too low, ppm far off, or wrong polarity')
-        L.append(' (half-slot cuts include correlator false hits on random data; a low CRC-ok ratio there is normal)')
+        L.append(' (cuts include correlator false hits and, for full slots, every voice burst: a low CRC-ok ratio there is normal)')
         L.append(bar)
         return '\n'.join(L)
