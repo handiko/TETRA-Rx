@@ -486,3 +486,6 @@ There's a lot of room for improvement!
 - **ETSI**, for EN 300 392-2 (the air interface) and EN 300 395-2 (the speech codec), with reference C code that made `tetra_dec.dll` possible.
 - **osmo-tetra** (Harald Welte, Sylvain Munaut, Dieter Spaar and others), whose code I used to cross-check the training sequences and burst offsets.
 - The TETRA base stations around me, for transmitting nonstop and never once getting bored of telling me who they are.
+
+## Other SDR Receiver Project(s)
+- [DMR Voice Receiver](https://handiko.github.io/DMR-Voice-Receiver/)
