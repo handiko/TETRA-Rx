@@ -489,3 +489,4 @@ There's a lot of room for improvement!
 
 ## Other SDR Receiver Project(s)
 - [DMR Voice Receiver](https://handiko.github.io/DMR-Voice-Receiver/)
+- [GPS L1 C/A Receiver](https://handiko.github.io/GPS-L1-CA-Rx/)
