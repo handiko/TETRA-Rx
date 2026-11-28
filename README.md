@@ -487,7 +487,4 @@ There's a lot of room for improvement!
 - **osmo-tetra** (Harald Welte, Sylvain Munaut, Dieter Spaar and others), whose code I used to cross-check the training sequences and burst offsets.
 - The TETRA base stations around me, for transmitting nonstop and never once getting bored of telling me who they are.
 
-## Other SDR Receiver Project
-- [DMR Voice Receiver](https://handiko.github.io/DMR-Voice-Receiver/)
-- [GPS L1 C/A Receiver](https://handiko.github.io/GPS-L1-CA-Rx/)
-- [GNU Radio LoRa APRS  Rx](https://handiko.github.io/LoRa-APRS-RX-GNU-Radio/)
+__[GNU RADIO PROJECT INDEX](https://handiko.github.io/GNU-Radio-Projects-Index/)__
